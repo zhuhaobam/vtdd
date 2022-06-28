@@ -56,14 +56,15 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "commit-msg": "commitlint -E GIT_PARAMS"
     }
   },
   "lint-staged": {
     "*.{js,jsx,vue,ts,tsx}": [
       "npm run lint",
       "prettier --write",
-      "git add"
+      "git add ."
     ]
   },
   "husky-desc": "git提交lint检查，只检查暂存区",
