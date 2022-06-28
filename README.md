@@ -5,6 +5,18 @@
 - rollup-plugin-visualizer build 自动打开 stats.html
 - http://localhost:3200/\_\_inspect/ dev 访问
 
+# husky git提交内容格式化和检查，提交commit检查
+
+- "husky官网": "https://typicode.github.io/husky/#/"
+- Install husky
+  - npm install husky --save-dev
+- Enable Git hooks
+  - npx husky install
+- To automatically have Git hooks enabled after install, edit package.json
+  - "prepare": "husky install"
+- 提交前检查文件格式
+  - npx husky add .husky/pre-commit 'npx lint-staged'
+
 # 初步的实现
 
 - 代码格式化

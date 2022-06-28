@@ -2,7 +2,6 @@
   "name": "vtdd",
   "private": true,
   "version": "0.0.0",
-  "husky官网": "https://typicode.github.io/husky/#/",
   "scripts": {
     "dev": "vite",
     "prod": "vite --mode production",
