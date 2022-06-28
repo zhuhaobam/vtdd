@@ -1,7 +1,12 @@
+# Ignore node_modules
+node_modules
+
+# Ignore stats.html
+stats.html
+
+# Ignore some folders
 .husky
 .idea
 .vscode
 locales
 dist
-node_modules
-stats.html

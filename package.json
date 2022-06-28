@@ -2,13 +2,15 @@
   "name": "vtdd",
   "private": true,
   "version": "0.0.0",
+  "husky官网": "https://typicode.github.io/husky/#/",
   "scripts": {
     "dev": "vite",
     "prod": "vite --mode production",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
-    "prettier": "prettier --write ."
+    "prettier": "prettier --write .",
+    "prepare": "husky install"
   },
   "dependencies": {
     "@vueuse/components": "^8.7.5",
@@ -37,6 +39,8 @@
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.1.0",
     "eslint-plugin-vue": "^9.1.1",
+    "husky": "^8.0.1",
+    "lint-staged": "^13.0.3",
     "mockjs": "^1.1.0",
     "prettier": "^2.7.1",
     "rollup-plugin-visualizer": "^5.6.0",
@@ -57,7 +61,7 @@
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "commit-msg": "commitlint -E GIT_PARAMS"
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
   "lint-staged": {
