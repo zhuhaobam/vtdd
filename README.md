@@ -7,6 +7,15 @@
 
 # husky git提交内容格式化和检查，提交commit检查
 
+## npm 下载包准备
+
+- npm i -D @commitlint/cli @commitlint/config-conventional husky  lint-staged
+- commitlint 参考1 https://blog.csdn.net/m0_37602317/article/details/122081365
+- commitlint 参考2 https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+
+
+## husky 操作
+
 - "husky官网": "https://typicode.github.io/husky/#/"
 - Install husky
   - npm install husky --save-dev
@@ -16,6 +25,11 @@
   - "prepare": "husky install"
 - 提交前检查文件格式
   - npx husky add .husky/pre-commit 'npx lint-staged'
+  - npx husky add .husky/commit-msg 'npx --no -- commitlint --edit $1'
+- 如果你想去掉（卸载）husky
+  - 找到当前项目的.git目录，删除里面的husky文件
+  - 将package.json里面的husky lint-staged两个包卸载，并把script的prepare命令去掉，并删除husky lint-staged两个节点
+  - 删除项目根目录的.husky文件
 
 # 初步的实现
 
