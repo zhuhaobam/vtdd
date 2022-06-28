@@ -1,0 +1,50 @@
+{
+  "compilerOptions": {
+    "target": "esnext",
+    "useDefineForClassFields": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "strict": true,
+    "jsx": "preserve",
+    "jsxFactory": "h",
+    "jsxFragmentFactory": "Fragment",
+    "sourceMap": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "esModuleInterop": true,
+    "lib": ["esnext", "dom"],
+    "skipLibCheck": true,
+    // 如果指定了types，只有被列出来的包才会被包含进来
+    "types": [
+      // import.meta.globEager
+      "vite/client",
+      "element-plus/global",
+      "unplugin-icons/types/vue",
+      "@intlify/vite-plugin-vue-i18n/client",
+      "pinia-plugin-persist"
+    ],
+    "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
+    "paths": {
+      // 路径映射，相对于baseUrl
+      "@/*": ["src/*"],
+      "@mock/*": ["src/mock/*"],
+      "@plugins/*": ["src/plugins/*"],
+      "@assets/*": ["src/assets/*"],
+      "@views/*": ["src/views/*"],
+      "@components/*": ["src/components/*"],
+      "@utils/*": ["src/utils/*"]
+    }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.vue",
+    "./auto-imports.d.ts",
+    "./components.d.ts",
+    "./unocss.config.ts"
+  ],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}

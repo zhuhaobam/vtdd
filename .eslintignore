@@ -1,0 +1,7 @@
+node_modules
+dist
+.idea
+.vscode
+src/plugins/devicePixelRatio.ts
+src/plugins/cookiesStorage.ts
+src/utils/http.ts

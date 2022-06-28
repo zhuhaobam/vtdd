@@ -1,0 +1,25 @@
+env:
+  browser: true
+  node: true
+  es2021: true
+extends:
+  - eslint:recommended
+  - plugin:@typescript-eslint/recommended
+  - plugin:prettier/recommended
+  - ./.eslintrc-auto-import.json
+parser: vue-eslint-parser
+parserOptions:
+    parser: '@typescript-eslint/parser'
+# "rules"总是“赢” "extends"
+rules:
+  no-var: error  #禁止使用var
+  no-debugger: error #禁止使用debugger
+  prettier/prettier: warn
+  '@typescript-eslint/no-explicit-any': off # 新增这句话，关闭any报错
+  '@typescript-eslint/no-this-alias': off
+plugins:
+  - vue
+  - '@typescript-eslint'
+  - prettier
+  - import
+
