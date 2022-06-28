@@ -30,6 +30,8 @@ import vueJsx from '@vitejs/plugin-vue-jsx'
 import viteCompression from 'vite-plugin-compression'
 // 打包分析,可视化并分析构建包，查看哪些模块占用空间大小，以及模块的依赖关系
 import visualizer from 'rollup-plugin-visualizer'
+// Inspect 查看组件自动依赖效果
+import Inspect from 'vite-plugin-inspect'
 
 // __dirname 获取当前文件所属目录的绝对路径,给定的路径序列从右到左处理，每个后续的 path 会被追加到前面，直到构建绝对路径
 const pathResolve = (dir: string) => resolve(__dirname, '.', dir)
@@ -51,7 +53,7 @@ export default defineConfig(({ mode, command }) => {
       vue(),
       vueJsx(),
       Unocss({
-        configFile: pathResolve('./unocss.config.ts')
+        configFile: pathResolve('src/unocss.config.ts')
       }),
       // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
       VueI18n({
@@ -127,7 +129,7 @@ export default defineConfig(({ mode, command }) => {
         // Filepath to generate corresponding .d.ts file. 【生成相应的.d.ts文件路径】
         // Defaults to './auto-imports.d.ts' when `typescript` is installed locally. 【当typescript安装到本地默认为./auto-imports.d.ts】
         // Set `false` to disable. 【设置为false禁用】
-        dts: './auto-import.d.ts'
+        dts: 'src/auto-import.d.ts'
       }),
       Components({
         // filters for transforming targets 【过滤要转换的目标】
@@ -146,7 +148,7 @@ export default defineConfig(({ mode, command }) => {
         // generate `components.d.ts` global declarations,
         // also accepts a path for custom filename
         // default: `true` if package typescript is installed
-        dts: './components.d.ts',
+        dts: 'src/components.d.ts',
         // resolvers for custom components 【自定义组件解析器】
         resolvers: [
           ElementPlusResolver(),
@@ -202,7 +204,9 @@ export default defineConfig(({ mode, command }) => {
       visualizer({
         // 打包后自动打开分析报告
         open: true
-      })
+      }),
+      // Inspect 查看组件自动依赖效果
+      Inspect()
     ],
     // 选项可以选择需要或不需要进行预编译的依赖的名称，Vite 则会根据该选项来确定是否对该依赖进行预编译。
     // optimizeDeps: {
@@ -219,6 +223,16 @@ export default defineConfig(({ mode, command }) => {
         { find: '@utils', replacement: pathResolve('src/utils') },
         { find: '@types', replacement: pathResolve('src/types') }
       ]
+    },
+    // 全局scss
+    css: {
+      preprocessorOptions: {
+        scss: {
+          // 避免出现: build时的 @charset 必须在第一行的警告
+          charset: false,
+          additionalData: '@use "@/styles/globalstyle.scss" as *;'
+        }
+      }
     },
     build: {
       outDir: 'dist',

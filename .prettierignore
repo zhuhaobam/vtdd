@@ -12,4 +12,5 @@ locales
 **/*.sh
 
 /public/*
+stats.html
 

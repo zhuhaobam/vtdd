@@ -1,5 +1,10 @@
 # vtdd vite + ts + dd
 
+# 自动分析
+
+- rollup-plugin-visualizer build 自动打开 stats.html
+- http://localhost:3200/\_\_inspect/ dev 访问
+
 # 初步的实现
 
 - 代码格式化
