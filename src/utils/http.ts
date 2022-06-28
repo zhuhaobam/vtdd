@@ -49,7 +49,7 @@ class AxiosHttpRequest implements BaseType {
     const config = {
       baseURL: this.baseURL,
       timeout: this.timeout,
-      headers: {},
+      headers: {}
     }
     return config
   }
@@ -108,28 +108,27 @@ class AxiosHttpRequest implements BaseType {
         const code = res.data.code || 200
         if (code === 200) {
           return Promise.resolve(res.data)
-        } else {
-          // 获取错误信息
-          let msg = res.data.msg || ''
-          switch (code) {
-            case '401':
-              msg = '认证失败，无法访问系统资源'
-              break
-            case '403':
-              msg = '当前操作没有权限'
-              break
-            case '404':
-              msg = '访问资源不存在'
-              break
-            case 'default':
-              msg = '系统未知错误，请反馈给管理员'
-              break
-            default:
-              return '未知错误，请联系管理员'
-          }
-          ElMessage.error(msg)
-          return Promise.reject(res.data)
         }
+        // 获取错误信息
+        let msg = res.data.msg || ''
+        switch (code) {
+          case '401':
+            msg = '认证失败，无法访问系统资源'
+            break
+          case '403':
+            msg = '当前操作没有权限'
+            break
+          case '404':
+            msg = '访问资源不存在'
+            break
+          case 'default':
+            msg = '系统未知错误，请反馈给管理员'
+            break
+          default:
+            return '未知错误，请联系管理员'
+        }
+        ElMessage.error(msg)
+        return Promise.reject(res.data)
       },
       (error: any) => {
         console.log('err' + error)
@@ -143,7 +142,7 @@ class AxiosHttpRequest implements BaseType {
         }
         ElMessage.error({
           message,
-          duration: 5 * 1000,
+          duration: 5 * 1000
         })
         return Promise.reject(error)
       }

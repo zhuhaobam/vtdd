@@ -1,7 +1,6 @@
-node_modules
-dist
+.husky
 .idea
 .vscode
-src/plugins/devicePixelRatio.ts
-src/plugins/cookiesStorage.ts
-src/utils/http.ts
+locales
+dist
+node_modules

@@ -3,33 +3,31 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
-    component: () => import('@views/HomeView.vue'),
+    component: () => import('@views/HomeView.vue')
   },
   {
     path: '/about',
     name: 'about',
-    component: () => import('@views/AboutView.vue'),
+    component: () => import('@views/AboutView.vue')
   },
   {
     path: '/first',
     name: 'first',
-    component: () => import('@views/starport/first.vue'),
+    component: () => import('@/views/starport/FirstStarport.vue')
   },
   {
     path: '/second',
     name: 'second',
-    component: () => import('@views/starport/second.vue'),
-  },
+    component: () => import('@/views/starport/SecondStarport.vue')
+  }
 ]
 
 const router = createRouter({
   history: createWebHistory(),
-  routes,
+  routes
 })
 
 router.beforeEach((to: any, from: any, next: () => void) => {
-  console.log('router 路由守卫：', to, from)
-
   next()
 })
 

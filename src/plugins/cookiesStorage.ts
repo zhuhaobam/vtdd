@@ -16,6 +16,6 @@ const cookiesStorage: Storage = {
   },
   removeItem: function (key: string): void {
     throw new Error('Function not implemented.')
-  },
+  }
 }
 export default cookiesStorage

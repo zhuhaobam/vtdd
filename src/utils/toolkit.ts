@@ -45,5 +45,5 @@ function deepClone(source: { [x: string]: any; constructor?: any }) {
 
 export default {
   param2Obj,
-  deepClone,
+  deepClone
 }

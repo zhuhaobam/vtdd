@@ -21,11 +21,11 @@ export default [
               phone: /^1[0-9]{10}$/,
               regin: '@region',
               url: '@url',
-              date: Random.date('yyyy-MM-dd'),
-            },
-          ],
-        }),
+              date: Random.date('yyyy-MM-dd')
+            }
+          ]
+        })
       }
-    },
-  },
+    }
+  }
 ] as MockMethod[]

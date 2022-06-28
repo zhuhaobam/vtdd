@@ -51,13 +51,13 @@ export default defineConfig(({ mode, command }) => {
       vue(),
       vueJsx(),
       Unocss({
-        configFile: pathResolve('./unocss.config.ts'),
+        configFile: pathResolve('./unocss.config.ts')
       }),
       // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n
       VueI18n({
         runtimeOnly: true,
         compositionOnly: true,
-        include: [pathResolve('locales/**')],
+        include: [pathResolve('locales/**')]
       }),
       viteMockServe({
         mockPath: './src/mock/source', // 解析，路径可根据实际变动
@@ -66,7 +66,7 @@ export default defineConfig(({ mode, command }) => {
         injectCode: ` import { setupProdMockServer } from './src/mock';
         setupProdMockServer(); `,
         watchFiles: true, // 监听文件内容变更
-        injectFile: pathResolve('src/main.ts'), //  在main.ts注册后需要在此处注入，否则可能报找不到setupProdMockServer的错误
+        injectFile: pathResolve('src/main.ts') //  在main.ts注册后需要在此处注入，否则可能报找不到setupProdMockServer的错误
       }),
       AutoImport({
         // targets to transform 【要转换的目标】
@@ -74,7 +74,7 @@ export default defineConfig(({ mode, command }) => {
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
           /\.vue$/,
           /\.vue\?vue/, // .vue
-          /\.md$/, // .md
+          /\.md$/ // .md
         ],
         // global imports to register 【全局导入注册】
         // 引入 vue3 api[*import { ref, torefs, nextTick, onMounted..... } from 'vue'*]
@@ -85,7 +85,7 @@ export default defineConfig(({ mode, command }) => {
           'vue-i18n',
           'vue/macros',
           // '@vueuse/head',
-          '@vueuse/core',
+          '@vueuse/core'
           // custom 【自定义】
           // {
           // "@vueuse/components": [
@@ -112,29 +112,29 @@ export default defineConfig(({ mode, command }) => {
           // eslintrc是用来解决eslint报错问题的配置项。当enabled为true时，会根据filepath生成一个eslint的配置文件。这个文件需要引入到eslint的配置文件中
           enabled: false, // Default `false`
           filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
-          globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
+          globalsPropValue: true // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
         resolvers: [
           // 自动导入 Element Plus 相关函数，如：ElMessage, ElMessageBox... (带样式)，自动导入 Element Plus 组件
           ElementPlusResolver(),
           // 自动导入图标组件，Icon解析器
           IconsResolver({
-            prefix: 'Icon',
-          }),
+            prefix: 'Icon'
+          })
         ],
         // Auto import for all module exports under directories 【目录下的所有模块自动导入】
         dirs: ['src/store'],
         // Filepath to generate corresponding .d.ts file. 【生成相应的.d.ts文件路径】
         // Defaults to './auto-imports.d.ts' when `typescript` is installed locally. 【当typescript安装到本地默认为./auto-imports.d.ts】
         // Set `false` to disable. 【设置为false禁用】
-        dts: './auto-import.d.ts',
+        dts: './auto-import.d.ts'
       }),
       Components({
         // filters for transforming targets 【过滤要转换的目标】
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
           /\.vue$/,
-          /\.vue\?vue/,
+          /\.vue\?vue/
         ],
         exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
         // relative paths to the directory to search for components. 【相对路径下的目录搜索组件】
@@ -159,9 +159,9 @@ export default defineConfig(({ mode, command }) => {
           // },
           // 自动注册图标组件，Icon解析器，i-carbon-*,i-twemoji-*, @iconify-json/carbon 是 carbon 的图标库, @iconify-json/twemoji 是 twemoji 的图标库
           IconsResolver({
-            enabledCollections: ['carbon', 'myself', 'twemoji'],
-          }),
-        ],
+            enabledCollections: ['carbon', 'myself', 'twemoji']
+          })
+        ]
         // 全局注册组件的类型
         // 一些库可能会注册一些全局组件供您在任何地方使用（例如 Vue Router 提供<RouterLink>和<RouterView>）。
         // 由于它们是全局可用的，因此此插件无需导入它们。但是，这些通常不是 TypeScript 友好的，您可能需要手动注册它们的类型。
@@ -184,8 +184,8 @@ export default defineConfig(({ mode, command }) => {
           // <el-icon :size="30" color="red">
           //   <el-icon><i-myself-color /></el-icon>
           // </el-icon>
-          myself: FileSystemIconLoader('./src/assets/icons', svg => svg.replace(/^<svg /, '<svg fill="currentColor" ')),
-        },
+          myself: FileSystemIconLoader('./src/assets/icons', svg => svg.replace(/^<svg /, '<svg fill="currentColor" '))
+        }
       }),
       //  optimizeDeps.include 使用插件处理，处理获得依赖优化选项在package.json
       PkgConfig(),
@@ -197,12 +197,12 @@ export default defineConfig(({ mode, command }) => {
         deleteOriginFile: false, // 压缩后是否删除原文件
         threshold: 10240, // 压缩前最小文件大小
         algorithm: 'gzip', // 压缩算法
-        ext: '.gz', // 文件类型
+        ext: '.gz' // 文件类型
       }),
       visualizer({
         // 打包后自动打开分析报告
-        open: true,
-      }),
+        open: true
+      })
     ],
     // 选项可以选择需要或不需要进行预编译的依赖的名称，Vite 则会根据该选项来确定是否对该依赖进行预编译。
     // optimizeDeps: {
@@ -217,7 +217,8 @@ export default defineConfig(({ mode, command }) => {
         { find: '@views', replacement: pathResolve('src/views') },
         { find: '@components', replacement: pathResolve('src/components') },
         { find: '@utils', replacement: pathResolve('src/utils') },
-      ],
+        { find: '@types', replacement: pathResolve('src/types') }
+      ]
     },
     build: {
       outDir: 'dist',
@@ -226,14 +227,14 @@ export default defineConfig(({ mode, command }) => {
       minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
       rollupOptions: {
         input: {
-          main: pathResolve('index.html'),
+          main: pathResolve('index.html')
         },
         output: {
           chunkFileNames: 'static/js/[name]-[hash].js',
           entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]',
-        },
-      },
+          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+        }
+      }
     },
     // https://vitejs.dev/config/index.html#server-proxy
     server: {
@@ -243,9 +244,9 @@ export default defineConfig(({ mode, command }) => {
         '/api': {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, ''),
-        },
-      },
-    },
+          rewrite: path => path.replace(/^\/api/, '')
+        }
+      }
+    }
   }
 })

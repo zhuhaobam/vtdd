@@ -12,23 +12,23 @@ import cookiesStorage from '@plugins/cookiesStorage'
 const useStarportStore = defineStore('starport', {
   state: () => {
     return {
-      images: [],
+      images: []
     }
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: cookiesStorage, paths: ['images'] }],
+    strategies: [{ storage: cookiesStorage, paths: ['images'] }]
   },
   getters: {
     getImages(state: { images: string[] }): string[] {
       return state.images
-    },
+    }
   },
   actions: {
     setImages(value: string[]) {
       this.images = value
-    },
-  },
+    }
+  }
 })
 // 导出pinia
 export { useStarportStore }

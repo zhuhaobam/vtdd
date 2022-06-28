@@ -21,7 +21,7 @@ const install = (app: App) => {
     legacy: false,
     locale,
     globalInjection: true,
-    messages,
+    messages
   })
 
   app.use(i18n)

@@ -1,5 +1,10 @@
+.husky
+.idea
+.vscode
+locales
 /dist/*
 .local
+
 .output.js
 /node_modules/**
 
@@ -7,3 +12,4 @@
 **/*.sh
 
 /public/*
+

@@ -34,23 +34,23 @@ class DevicePixelRatio {
 
   // 监听页面缩放
   _watch() {
-    const t = this
-    t._addHandler(window, 'resize', function () {
+    const self = this
+    self._addHandler(window, 'resize', function () {
       // 注意这个方法是解决全局有两个window.resize
       // 重新校正
-      t._correct()
+      self._correct()
     })
   }
 
   // 初始化页面比例
   init() {
-    const t = this
-    if (t._getSystem()) {
+    const self = this
+    if (self._getSystem()) {
       // 判断设备，目前只在windows系统下校正浏览器缩放比例
       // 初始化页面校正浏览器缩放比例
-      t._correct()
+      self._correct()
       // 开启监听页面缩放
-      t._watch()
+      self._watch()
     }
   }
 }

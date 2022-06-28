@@ -28,7 +28,7 @@
                     :class="{
                       'i-carbon-sun': mode === 'light',
                       'i-carbon-moon': mode === 'moon',
-                      'i-carbon-cafe': mode === 'cafe',
+                      'i-carbon-cafe': mode === 'cafe'
                     }"
                   />
                 </el-icon>
@@ -71,11 +71,11 @@ const mode = useColorMode({
   modes: {
     light: 'light',
     moon: 'moon',
-    cafe: 'cafe',
-  },
+    cafe: 'cafe'
+  }
 })
 const { next } = useCycleList(['light', 'moon', 'cafe'], {
-  initialValue: mode,
+  initialValue: mode
 })
 </script>
 
