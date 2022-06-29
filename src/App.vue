@@ -79,7 +79,7 @@ const { next } = useCycleList(['light', 'moon', 'cafe'], {
 })
 </script>
 
-<style scoped>
+<style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -93,7 +93,7 @@ html {
 }
 
 html a {
-  color: green;
+  color: $red-color;
 }
 
 html.moon {

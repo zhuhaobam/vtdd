@@ -8,8 +8,11 @@ import { setupProdMockServer } from '@/mock'
 import { createPinia } from 'pinia'
 import piniaPersist from 'pinia-plugin-persist'
 
-// router
+// 路由router
 import router from '@/router'
+
+// 动态路由router
+import './router/dynamicRouting'
 
 import './styles/main.css'
 import 'uno.css'

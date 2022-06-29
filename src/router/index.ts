@@ -24,15 +24,13 @@ const routes: Array<RouteRecordRaw> = [
 
 const router = createRouter({
   history: createWebHistory(),
-  routes
-})
-
-router.beforeEach((to: any, from: any, next: () => void) => {
-  next()
-})
-
-router.afterEach(() => {
-  close()
+  routes,
+  scrollBehavior(to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    }
+    return { top: 0 }
+  }
 })
 
 export default router
