@@ -62,3 +62,23 @@
 - Vue Language Features (Volar)
 - EditoerConfig for VS Code
 - UnoCss
+
+# 提交规范
+
+## <type>(<scope>): <subject>
+
+### type
+
+- feat: 新功能
+- fix: 修复问题
+- docs: 修改文档
+- style: 修改代码格式，不影响代码逻辑
+- refactor: 重构代码，理论上不影响现有功能
+- perf: 提升性能
+- test: 增加修改测试用例
+- chore: 修改工具相关（包括但不限于文档、代码生成等）
+- deps: 升级依赖
+
+### scope
+
+> 修改文件的范围（包括但不限于 doc, middleware, proxy, core, config）
