@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(image, index) in images" :key="image" ml-30>
-      <Starport :port="'my-id' + index" style="height: 120px; width: 120px">
+      <Starport :port="'my-id' + index" style="width: 120px; height: 120px">
         <my-component :index="index" />
       </Starport>
     </div>

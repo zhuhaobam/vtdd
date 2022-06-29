@@ -87,9 +87,9 @@ const { next } = useCycleList(['light', 'moon', 'cafe'], {
 }
 
 html {
-  color: rgba(0, 0, 0, 0.8);
   border-color: #ede7da;
-  background: #0f1112 url(@assets/sun.png) repeat fixed;
+  background: #0f1112 url('@assets/sun.png') repeat fixed;
+  color: rgb(0 0 0 / 80%);
 }
 
 html a {
@@ -97,9 +97,9 @@ html a {
 }
 
 html.moon {
-  color: #ebf4f1;
   border-color: #0f1112;
-  background: #0f1112 url(@assets/moon.png) repeat fixed;
+  background: #0f1112 url('@assets/moon.png') repeat fixed;
+  color: #ebf4f1;
 }
 
 html.moon a {
@@ -107,8 +107,8 @@ html.moon a {
 }
 
 html.cafe {
-  color: #433422;
   border-color: #e0ce9e;
-  background: #e0ce9e url(@assets/cafe.png) repeat fixed;
+  background: #e0ce9e url('@assets/cafe.png') repeat fixed;
+  color: #433422;
 }
 </style>

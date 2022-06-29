@@ -14,7 +14,6 @@ import router from '@/router'
 // 动态路由router
 import './router/dynamicRouting'
 
-import './styles/main.css'
 import 'uno.css'
 
 //  Vue 跨路由组件共享

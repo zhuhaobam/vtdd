@@ -10,5 +10,6 @@ locales
 **/*.sh
 /public/*
 stats.html
+index.html
 package.json
 
