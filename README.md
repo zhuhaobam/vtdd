@@ -1,27 +1,31 @@
 # vtdd vite + ts + dd
 
 # 地址
+
 ## github
+
 `https://github.com/zhuhaobam/vtdd`
+
 ## gitee
+
 `https://gitee.com/zhline/vtdd`
 
 # 自动分析
 
-- rollup-plugin-visualizer build 自动打开 stats.html
-- http://localhost:3200/\_\_inspect/ dev 访问
+- rollup-plugin-visualizer npm run build 自动打开 stats.html
+- `http://localhost:3200/\_\_inspect/` npm run dev 后可访问
 
 # husky git 提交内容格式化和检查，提交 commit 检查
 
 ## npm 下载包准备
 
 - npm i -D @commitlint/cli @commitlint/config-conventional husky lint-staged
-- commitlint 参考 1 https://blog.csdn.net/m0_37602317/article/details/122081365
-- commitlint 参考 2 https://github.com/conventional-changelog/commitlint/#what-is-commitlint
+- commitlint 参考 1 `https://blog.csdn.net/m0_37602317/article/details/122081365`
+- commitlint 参考 2 `https://github.com/conventional-changelog/commitlint/#what-is-commitlint`
 
 ## husky 操作
 
-- "husky 官网": "https://typicode.github.io/husky/#/"
+- "husky 官网": `https://typicode.github.io/husky/#/`
 - Install husky
   - npm install husky --save-dev
 - Enable Git hooks
@@ -54,6 +58,7 @@
 - ts
 - mock
 - pinia
+- pinia 本地存储
 - i18
 - unocss
 - starport
@@ -88,3 +93,65 @@
 ### scope
 
 > 修改文件的范围（包括但不限于 doc, middleware, proxy, core, config）
+
+# vscode setting.json
+
+```
+
+{
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true,
+    "source.fixAll.stylelint": true
+  },
+  "eslint.alwaysShowStatus": true,
+  "eslint.validate": [
+    "javascript",
+    "typescript",
+    "typescriptreact",
+    "javascriptreact",
+    "jsx",
+    "html",
+    "vue"
+  ],
+  "[html]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "stylelint.validate": ["vue", "less", "css", "html", "scss", "sass"],
+  "eslint.options": {
+    "overrideConfig": {
+      "env": {
+        "browser": true,
+        "es6": true
+      },
+      "parserOptions": {
+        "ecmaVersion": 2019,
+        "sourceType": "module",
+        "ecmaFeatures": {
+          "jsx": true
+        }
+      },
+      "rules": {
+        "no-debugger": "off"
+      }
+    }
+  },
+  "[vue]": {
+    "editor.defaultFormatter": "Vue.volar"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[jsonc]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "esbenp.prettier-vscode"
+  },
+  "settingsSync.ignoredExtensions": [
+
+  ],
+  "window.zoomLevel": 2
+}
+
+
+```
