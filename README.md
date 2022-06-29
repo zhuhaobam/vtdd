@@ -65,7 +65,7 @@
 
 # 提交规范
 
-## <type>(<scope>): <subject>
+## `<type>(<scope>): <subject>`
 
 ### type
 
