@@ -1,5 +1,11 @@
 # vtdd vite + ts + dd
 
+# 地址
+## github
+`https://github.com/zhuhaobam/vtdd`
+## gitee
+`https://gitee.com/zhline/vtdd`
+
 # 自动分析
 
 - rollup-plugin-visualizer build 自动打开 stats.html
