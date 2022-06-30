@@ -9,7 +9,8 @@ import cookiesStorage from '@plugins/cookiesStorage'
 // actions 相当于 methods
 // getters 相当于 computed( computed是vue的计算属性，是根据依赖关系进行缓存的计算，只有在它的相关依赖发生改变时才会进行更新
 
-const useStarportStore = defineStore('starport', {
+// 导出pinia
+export const useStarportStore = defineStore('starport', {
   state: () => {
     return {
       images: []
@@ -30,5 +31,3 @@ const useStarportStore = defineStore('starport', {
     }
   }
 })
-// 导出pinia
-export { useStarportStore }

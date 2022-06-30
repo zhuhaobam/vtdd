@@ -1,7 +1,7 @@
 import http from '@utils/http.js'
-export const getArticle = () => {
+export const onLogin = () => {
   return http.request({
-    url: '/getArticle',
+    url: '/onlogin',
     method: 'get'
   })
 }

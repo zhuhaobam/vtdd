@@ -1,3 +1,4 @@
+# CSS 检测器
 plugins:
   - stylelint-scss
   - stylelint-order

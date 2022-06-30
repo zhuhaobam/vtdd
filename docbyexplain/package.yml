@@ -1,0 +1,95 @@
+
+  name: vtdd
+  private: true
+  version: 0.0.0
+  scripts:
+    dev: vite # 本地开发配置启动
+    prod: vite --mode production # 本地正式配置启动
+    build: vue-tsc --noEmit && vite build # 为生产环境构建打包
+    preview: vite preview  # 本地预览生产构建产物
+    lint: eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx # 代码检查
+    prettier: prettier --write . # 代码格式化
+    stylelint: stylelint src/**/*.vue,less,css,scss,sass --fix # 样式检查
+    checklint: npm-run-all lint prettier stylelint # lint，prettier，stylelint集合命令执行
+    prepare: husky install # 准备好husky （git hook工具）
+
+  dependencies:
+    @vueuse/components: ^8.7.5 # 这是VueUse的扩展，为可组合函数启用无渲染组件。【https://vueuse.org/guide/components.html#usage】
+    @vueuse/core: ^8.7.5 # 基于(Composition API 组合式API) 的实用程序的集合。【https://vueuse.org/functions.html】
+    axios: ^0.27.2 # Axios 是一个基于Promise 的HTTP 客户端【https://github.com/axios/axios】【https://axios-http.com/】-promise【https://javascript.info/promise-basics】
+    element-plus: ^2.2.6 #  Vue.js 3.0 UI 库
+    js-cookie: ^3.0.1
+    lodash-es: ^4.17.21 # 工具函数库
+    pinia: ^2.0.14 # Pinia 是 Vue 的存储库，它允许您跨组件/页面共享状态。【https://pinia.vuejs.org/introduction.html】
+    pinia-plugin-persist: ^1.0.0 # 在 sessionStorage 或其他存储中持久保存 VueJs Pinia 状态数据。【https://seb-l.github.io/pinia-plugin-persist/】
+    prism-theme-vars: ^0.2.3 # 使用 CSS 变量的可定制 Prism.js 主题。【https://github.com/antfu/prism-theme-vars】
+    vue: ^3.2.25 # 用于构建现代 Web UI 的渐进式 JavaScript 框架。
+    vue-i18n: ^9.1.10 # Vue.js 的国际化插件
+    vue-router: ^4.0.16 # 这是 Vue Router 4 的存储库（适用于 Vue 3）
+    vue-starport: ^0.3.0 # 组件并不会跨路由共享【https://github.com/antfu/vue-starport/blob/main/README.zh-Hans.md】
+
+  devDependencies:
+    @commitlint/cli: ^17.0.3 # 制定git commit提交规范
+    @commitlint/config-conventional: ^17.0.3 # git commit提交规范配置
+    @iconify-json/carbon: ^1.1.6 # iconify-json carbon图标库。【http://icon-sets.iconify.design/carbon】
+    @iconify-json/twemoji: ^1.1.5 # iconify-json twemoji图标库。【http://icon-sets.iconify.design/twemoji】
+    @intlify/vite-plugin-vue-i18n: ^3.4.0 # i18n 资源预编译。【https://www.npmjs.com/package/@intlify/vite-plugin-vue-i18n】
+    @types/js-cookie: ^3.0.2 # js-cookie的类型定义。【https://github.com/js-cookie/js-cookie】
+    @types/lodash-es: ^4.17.6 # 工具函数库类型定义。
+    @typescript-eslint/eslint-plugin: ^5.29.0 # 一个为 TypeScript 代码库提供 lint 规则的 ESLint 插件。
+    @typescript-eslint/parser: ^5.29.0 # ESLint的解析器，用于解析typescript，从而检查和规范Typescript代码。
+    @vitejs/plugin-vue: ^2.3.3 # vite工具插件。
+    @vitejs/plugin-vue-jsx: ^1.3.10 # 通过 HMR 提供 Vue 3 JSX 和 TSX 支持。
+    @vue/compiler-sfc: ^3.2.37 # @vitejs/plugin-vue需要@vue/compiler-sfc作为对等依赖项。
+    eslint: ^8.18.0 # ESLint负责代码风格定义。
+    eslint-config-prettier: ^8.5.0 # 关闭所有不必要或可能与Prettier冲突的规则此配置仅关闭规则。
+    eslint-plugin-prettier: ^4.1.0 # Prettier先格式化 （默认是先eslint格式化，再Prettier格式化）
+    eslint-plugin-vue: ^9.1.1 # 支持vue规则。
+    husky: ^8.0.1 # git hook工具，需要使用scripts下面给的命令prepare安装配置。【https://github.com/typicode/husky】
+    # lint-staged能够让lint只检测暂存区的文件。
+    # git commit时触发pre-commit钩子，运行lint-staged命令，对*.js,jsx,vue,ts,tsx执行eslint命令。eslint要提前配置好。
+    # lint-staged过滤文件采用glob模式。
+    lint-staged: ^13.0.3  # 【https://github.com/okonet/lint-staged】
+    mockjs: ^1.1.0 # 生成随机数据，拦截 Ajax 请求。【http://mockjs.com/】
+    npm-run-all: ^4.1.5 # 为了使用scripts下面给的命令checklint，执行多个组合命令。
+    postcss: ^8.3.3 # peerDependencies
+    postcss-html: ^1.4.1 # peerDependencies
+    prettier: ^2.7.1 # Prettier负责根据ESLint定义的风格进行自动格式化。
+    rollup": ^2.75.7 # peerDependencies
+    rollup-plugin-visualizer: ^5.6.0 # 可视化并分析您的 Rollup 捆绑包以查看哪些模块占用了空间。【https://github.com/btd/rollup-plugin-visualizer】
+    sass: ^1.53.0 # 提供对sass可执行文件的访问权限
+    stylelint: ^14.9.1 # 一个强大的现代 linter，可帮助您避免错误并在您的样式中强制执行约定。
+    stylelint-config-idiomatic-order: ^8.1.0 # 配置都properties-order配置了逻辑属性
+    stylelint-config-prettier-scss: ^0.0.1 # 关闭所有不必要或可能与 Prettier 冲突的 CSS 和 SCSS 规则（扩展stylelint-config-prettier）。这使您可以使用自己喜欢的可共享配置，而不会在使用 Prettier 时妨碍其风格选择。
+    stylelint-config-recommended-vue: ^1.4.0 # Stylelint推荐的可共享 Vue 配置。
+    stylelint-config-standard-scss: ^4.0.0 # Stylelint 的标准可共享 SCSS 配置。
+    stylelint-order: ^5.0.0 # Stylelint的与订单相关的linting规则插件包。每个规则都支持自动修复 ( stylelint --fix)。
+    stylelint-scss: ^4.2.0 # Stylelint 的 SCSS 特定linting规则的集合（以插件的形式）。【https://github.com/stylelint-scss/stylelint-scss】
+    typescript: ^4.7.4 # TypeScript是一种用于应用程序级 JavaScript 的语言。TypeScript 为 JavaScript 添加了可选类型，TypeScript 编译为可读的、基于标准的 JavaScript。
+    unocss: ^0.42.0 # 即时按需原子 CSS 引擎。
+    unplugin-auto-import: ^0.9.1 # 自动导入 Vite、Webpack、Rollup 和 esbuild 的 API。支持 TypeScript。由unplugin提供支持
+    unplugin-icons: ^0.14.5 # 普遍按需访问数千个图标作为组件。
+    unplugin-vue-components: ^0.20.1 # Vue 的按需组件自动导入。
+    vite: ^2.9.12 # 一种新型的前端构建工具
+    vite-plugin-compression: ^0.5.1 # 使用 gzip 或者 brotli 来压缩资源.
+    vite-plugin-inspect: ^0.5.0 # 检查 Vite 插件的中间状态。对调试和创作插件很有用。【https://github.com/antfu/vite-plugin-inspect】
+    vite-plugin-mock: ^2.9.6 #  提供本地和生产模拟服务。【https://github.com/vbenjs/vite-plugin-mock/blob/HEAD/README.zh_CN.md】
+    vite-plugin-optimize-persist: ^0.1.2 # 在vite动态引入资源都记录【 package.json】下来，下次插件告知vite这些资源进行预构建。
+    vite-plugin-package-config: ^0.1.1 # vite从你的 package.json字段扩展 Vite 配置。
+    vue-global-api: ^0.4.1 # 全局使用 Vue Composition API
+    vue-tsc: ^0.38.2 # vue-tsc --noEmit && vite build基于 IDE 插件Volar的 Vue 3 命令行类型检查工具。
+
+  husky:
+    hooks:
+      pre-commit: lint-staged # git提交lint检查，只检查暂存区，触发 git commit *****
+      commit-msg: commitlint -E HUSKY_GIT_PARAMS # git提交lint检查，校验commit时添加的备注信息是否符合我们要求的规范
+
+
+  lint-staged:  # git提交lint检查，只检查暂存区
+    *.js,jsx,vue,ts,tsx: [
+      npm run lint
+      prettier --write
+      git add .
+    ]
+
+

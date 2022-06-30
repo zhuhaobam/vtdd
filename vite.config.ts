@@ -18,7 +18,9 @@ import VueI18n from '@intlify/vite-plugin-vue-i18n'
 // http://icon-sets.iconify.design/carbon/
 import Icons from 'unplugin-icons/vite'
 import IconsResolver from 'unplugin-icons/resolver'
-import { FileSystemIconLoader } from '@iconify/utils/lib/loader/node-loaders'
+import { FileSystemIconLoader } from 'unplugin-icons/loaders'
+// 路由的图标自定义
+import { createSvgIconsPlugin } from 'vite-plugin-svg-icons'
 // https://uno.antfu.me/?s=text
 import Unocss from 'unocss/vite'
 // 优化依赖自动化插件
@@ -39,18 +41,20 @@ const pathResolve = (dir: string) => resolve(__dirname, '.', dir)
 // https://vitejs.dev/config/
 export default defineConfig(({ mode, command }) => {
   // 根据当前工作目录中的“mode”加载env文件。
-  // 将第三个参数设置为 '' 以加载所有 env，而不考虑 `VITE_` 前缀。
+  // 将第三个参数设置为 '' 以加载所有 env，而不考虑 `VTDD_` 前缀。
   const env = loadEnv(mode, process.cwd(), '')
-  const { VITE_APP_BASE, VITE_APP_PORT, VITE_APP_ENV_PREFIX, VTDD_DEV_MOCK, VTDD_PROD_MOCK } = env
+  const { VITE_APP_PORT, VITE_APP_ENV_PREFIX, VTDD_APP_BASE, VTDD_APP_BASE_API, VTDD_DEV_MOCK, VTDD_PROD_MOCK } = env
   const port: number = parseInt(VITE_APP_PORT)
   const devMock = Boolean(VTDD_DEV_MOCK)
   const prodMock = Boolean(VTDD_PROD_MOCK)
   return {
-    base: VITE_APP_BASE, // 空字符串或./（用于嵌入式部署），目前使用/
+    base: VTDD_APP_BASE, // 空字符串或./（用于嵌入式部署），目前使用/
     envPrefix: VITE_APP_ENV_PREFIX, // 以VTDD_开头的环境变量envPrefix将通过导入暴露给您的客户端源代码。元环境。import.meta.env.VTDD_***
     // 用户将向项目添加插件devDependencies并使用plugins数组选项对其进行配置。
     plugins: [
-      vue(),
+      vue({
+        include: [/\.vue$/, /\.md$/]
+      }),
       vueJsx(),
       Unocss({
         configFile: pathResolve('src/unocss.config.ts')
@@ -70,14 +74,16 @@ export default defineConfig(({ mode, command }) => {
         watchFiles: true, // 监听文件内容变更
         injectFile: pathResolve('src/main.ts') //  在main.ts注册后需要在此处注入，否则可能报找不到setupProdMockServer的错误
       }),
+      // SvgIcon封装默认前缀icon,这里对应icons目录下面的svg
+      createSvgIconsPlugin({
+        // 指定需要缓存的图标文件夹
+        iconDirs: [pathResolve('src/assets/icons')],
+        // 指定symbolId格式
+        symbolId: 'icon-[dir]-[name]'
+      }),
       AutoImport({
         // targets to transform 【要转换的目标】
-        include: [
-          /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
-          /\.vue$/,
-          /\.vue\?vue/, // .vue
-          /\.md$/ // .md
-        ],
+        // include: [],
         // global imports to register 【全局导入注册】
         // 引入 vue3 api[*import { ref, torefs, nextTick, onMounted..... } from 'vue'*]
         imports: [
@@ -136,13 +142,14 @@ export default defineConfig(({ mode, command }) => {
         include: [
           /\.[tj]sx?$/, // .ts, .tsx, .js, .jsx
           /\.vue$/,
-          /\.vue\?vue/
+          /\.vue\?vue/, // .vue
+          /\.md$/ // .md
         ],
         exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
         // relative paths to the directory to search for components. 【相对路径下的目录搜索组件】
         dirs: ['src/components'],
         // valid file extensions for components. 【组件的有效文件扩展名】
-        extensions: ['vue'],
+        extensions: ['vue', 'md'],
         // search for subdirectories 【搜索子目录】
         deep: true,
         // generate `components.d.ts` global declarations,
@@ -184,7 +191,7 @@ export default defineConfig(({ mode, command }) => {
           // 这里是存放svg图标的文件地址，myself是自定义图标库的名称
           // 给svg文件设置fill="currentColor"属性，使图标的颜色具有适应性
           // <el-icon :size="30" color="red">
-          //   <el-icon><i-myself-color /></el-icon>
+          //   <i-myself-color />
           // </el-icon>
           myself: FileSystemIconLoader('./src/assets/icons', svg => svg.replace(/^<svg /, '<svg fill="currentColor" '))
         }
@@ -221,7 +228,10 @@ export default defineConfig(({ mode, command }) => {
         { find: '@views', replacement: pathResolve('src/views') },
         { find: '@components', replacement: pathResolve('src/components') },
         { find: '@utils', replacement: pathResolve('src/utils') },
-        { find: '@types', replacement: pathResolve('src/types') }
+        { find: '@types', replacement: pathResolve('src/types') },
+        { find: '@router', replacement: pathResolve('src/router') },
+        { find: '@store', replacement: pathResolve('src/store') },
+        { find: '@apis', replacement: pathResolve('src/apis') }
       ]
     },
     // 全局scss
@@ -255,10 +265,10 @@ export default defineConfig(({ mode, command }) => {
       host: '0.0.0.0',
       port,
       proxy: {
-        '/api': {
+        [VTDD_APP_BASE_API]: {
           target: 'http://jsonplaceholder.typicode.com',
           changeOrigin: true,
-          rewrite: path => path.replace(/^\/api/, '')
+          rewrite: path => path.replace(new RegExp('^' + VTDD_APP_BASE_API), '')
         }
       }
     }

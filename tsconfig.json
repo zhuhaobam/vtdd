@@ -21,6 +21,7 @@
       "element-plus/global",
       "unplugin-icons/types/vue",
       "@intlify/vite-plugin-vue-i18n/client",
+      "vite-plugin-svg-icons/client",
       "pinia-plugin-persist"
     ],
     "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
@@ -33,7 +34,10 @@
       "@views/*": ["src/views/*"],
       "@components/*": ["src/components/*"],
       "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"]
+      "@types/*": ["src/types/*"],
+      "@router/*": ["src/router/*"],
+      "@store/*": ["src/store/*"],
+      "@apis/*": ["src/apis/*"]
     }
   },
   "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue"],
