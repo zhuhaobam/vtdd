@@ -1,0 +1,3 @@
+# This loads nvm.sh and sets the correct PATH before running hook
+export NVM_DIR="$HOME/.nvs"
+[ -s "$NVM_DIR/nvs.sh" ] && \. "$NVM_DIR/nvs.sh"

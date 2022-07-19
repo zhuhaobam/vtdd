@@ -16,30 +16,38 @@
     "skipLibCheck": true,
     // 如果指定了types，只有被列出来的包才会被包含进来
     "types": [
-      // import.meta.globEager
       "vite/client",
-      "element-plus/global",
       "unplugin-icons/types/vue",
       "@intlify/vite-plugin-vue-i18n/client",
       "vite-plugin-svg-icons/client",
-      "pinia-plugin-persist"
+      "pinia-plugin-persist",
+      "vite-plugin-pages/client",
+      "vite-plugin-vue-layouts/client"
     ],
     "baseUrl": "./", // 解析非相对模块的基地址，默认是当前目录
     "paths": {
       // 路径映射，相对于baseUrl
       "@/*": ["src/*"],
-      "@mock/*": ["src/mock/*"],
-      "@plugins/*": ["src/plugins/*"],
+      "@apis/*": ["src/apis/*"],
       "@assets/*": ["src/assets/*"],
-      "@views/*": ["src/views/*"],
       "@components/*": ["src/components/*"],
-      "@utils/*": ["src/utils/*"],
-      "@types/*": ["src/types/*"],
+      "@directive/*": ["src/directive/*"],
+      "@viteplugins/*": ["vite/plugins/*"],
       "@router/*": ["src/router/*"],
       "@store/*": ["src/store/*"],
-      "@apis/*": ["src/apis/*"]
+      "@styles/*": ["src/styles/*"],
+      "@types/*": ["src/types/*"],
+      "@utils/*": ["src/utils/*"],
+      "@views/*": ["src/views/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.vue"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

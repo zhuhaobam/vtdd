@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import cookiesStorage from '@plugins/cookiesStorage'
+import cookiesStorage from '@utils/cookiesStorage'
 
 // 创建store,命名规则： useXxxxStore
 // 参数1：store的唯一表示

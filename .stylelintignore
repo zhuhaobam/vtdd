@@ -12,5 +12,6 @@ index.html
 .idea
 .vscode
 locales
+vite
 dist
 *.html

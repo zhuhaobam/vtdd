@@ -1,5 +1,4 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
-import { ElMessage } from 'element-plus'
 
 // 接口类型和方法
 interface BaseType {
@@ -127,7 +126,7 @@ class AxiosHttpRequest implements BaseType {
           default:
             return '未知错误，请联系管理员'
         }
-        ElMessage.error(msg)
+        // ElMessage.error(msg)
         return Promise.reject(res.data)
       },
       (error: any) => {
@@ -140,10 +139,10 @@ class AxiosHttpRequest implements BaseType {
         } else if (message.includes('Request failed with status code')) {
           message = '系统接口' + message.substr(message.length - 3) + '异常'
         }
-        ElMessage.error({
-          message,
-          duration: 5 * 1000
-        })
+        // ElMessage.error({
+        //   message,
+        //   duration: 5 * 1000
+        // })
         return Promise.reject(error)
       }
     )

@@ -6,7 +6,17 @@
 location /good {
   alias   /usr/local/wwwroot/vuestatic/good/; # 注意这里
   index  index.html index.htm;
-  try_files $uri $uri/ /bi/index.html; #解决页面刷新404问题
+  try_files $uri $uri/ /good/index.html; #解决页面刷新404问题
+}
+
+```
+
+```
+本地
+ location /good {
+    alias   html/good/; # 注意这里
+    index  index.html index.htm;
+    try_files $uri $uri/ /good/index.html; #解决页面刷新404问题
 }
 
 ```

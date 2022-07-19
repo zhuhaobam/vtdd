@@ -1,4 +1,6 @@
 /// <reference types="vite/client" />
+/// <reference types="vite-plugin-pages/client" />
+/// <reference types="vite-plugin-vue-layouts/client" />
 // 用于 TypeScript 的智能感知
 
 declare module '*.vue' {
