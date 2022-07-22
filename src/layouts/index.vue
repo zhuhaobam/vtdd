@@ -1,40 +1,43 @@
 <template>
-  <n-config-provider :theme="theme" :theme-overrides="themeOverrides">
-    <n-global-style />
-    <n-layout style="height: 100vh">
-      <n-layout-header
+  <n-layout style="height: 100vh">
+    <n-layout-header bordered position="absolute">
+      <AppHeader />
+    </n-layout-header>
+    <n-layout position="absolute" style="top: 64px; bottom: 64px" has-sider>
+      <n-layout-sider
+        v-show="collapsed"
+        content-style="padding: 24px;background-color: purple;"
+        :native-scrollbar="false"
         bordered
-        position="absolute"
-        :class="[appStore.collapsed ? 'w-sidebar--collapsed' : 'w-sidebar']"
       >
-        <AppHeader />
-      </n-layout-header>
-      <n-layout position="absolute" style="top: 64px; bottom: 64px" has-sider>
-        <n-layout-sider content-style="padding: 24px;" :native-scrollbar="false" bordered>
-          <SideBar />
-        </n-layout-sider>
-        <n-layout content-style="padding: 24px;" :native-scrollbar="false">
-          <AppMain />
-        </n-layout>
+        <SideBar />
+      </n-layout-sider>
+      <n-layout content-style="padding: 24px;" :native-scrollbar="false">
+        <RouterView v-slot="{ Component }">
+          <component :is="Component" />
+        </RouterView>
       </n-layout>
-      <n-layout-footer position="absolute" style="height: 64px; padding: 24px" bordered> 城府路 </n-layout-footer>
     </n-layout>
-  </n-config-provider>
+    <n-layout-footer
+      position="absolute"
+      style="height: 64px; padding: 24px; background-color: blanchedalmond"
+      bordered
+      text-center
+    >
+      {{ t('foo') }}
+    </n-layout-footer>
+  </n-layout>
 </template>
 
 <script lang="ts" setup>
 import AppHeader from './components/header/index.vue'
 import SideBar from './components/sidebar/index.vue'
-import AppMain from './components/AppMain.vue'
 import { useAppStore } from '@store/app'
 
-// 主题变量
-import { useThemeStore } from '@store/theme'
 import { storeToRefs } from 'pinia'
-const themeStore = useThemeStore()
+const { t } = useI18n()
 const appStore = useAppStore()
-
-const { theme, themeOverrides } = storeToRefs(themeStore)
+const { collapsed } = storeToRefs(appStore)
 </script>
 
 <style lang="scss" scoped>

@@ -1,10 +1,7 @@
 <template>
   <div>
-    [dashboard - analysis]
-    <div>{{ $t('toggle-language') }}</div>
-    <el-icon :size="30" color="red">
-      <i-myself-color />
-    </el-icon>
+    <div>{{ t('toggle-language') }}</div>
+    <i-myself-color w10 h10 color="red" />
     <n-space mb-2>
       <n-button id="undo" title="撤销" @click="changeUndo()">↩️</n-button>
       <n-button id="redo" title="还原" @click="changeRedo()">↪️</n-button>
@@ -12,7 +9,7 @@
       <n-button
         id="m-stylus"
         title="Stylus"
-        :type="modeModal === 'stylus' ? 'primary' : ''"
+        :type="modeModal === 'stylus' ? 'primary' : undefined"
         dashed
         @click="changeMode('stylus')"
         >✍️</n-button
@@ -20,31 +17,42 @@
       <n-button
         id="m-eraser"
         title="Eraser"
-        :type="modeModal === 'eraseLine' ? 'primary' : ''"
+        :type="modeModal === 'eraseLine' ? 'primary' : undefined"
         dashed
         @click="changeMode('eraseLine')"
         >⚪️</n-button
       >
-      <n-button id="m-draw" title="笔" :type="modeModal === 'draw' ? 'primary' : ''" dashed @click="changeMode('draw')"
-        >✏️
+      <n-button
+        id="m-draw"
+        title="笔"
+        :type="modeModal === 'draw' ? 'primary' : undefined"
+        dashed
+        @click="changeMode('draw')"
+      >
+        ✏️
       </n-button>
       <n-button
         id="m-line"
         title="直线"
-        :type="modeModal === 'line' ? 'primary' : ''"
+        :type="modeModal === 'line' ? 'primary' : undefined"
         pl-6
         pr-6
         dashed
         @click="changeMode('line')"
         >⁄</n-button
       >
-      <n-button id="m-arrow" title="箭头" :type="modeModal === 'arrow' ? 'primary' : ''" dashed @click="changeModeA()"
+      <n-button
+        id="m-arrow"
+        title="箭头"
+        :type="modeModal === 'arrow' ? 'primary' : undefined"
+        dashed
+        @click="changeModeA()"
         >↗
       </n-button>
       <n-button
         id="m-rect"
         title="长方形"
-        :type="modeModal === 'rectangle' ? 'primary' : ''"
+        :type="modeModal === 'rectangle' ? 'primary' : undefined"
         pl-6
         pr-6
         dashed
@@ -54,7 +62,7 @@
       <n-button
         id="m-ellipse"
         title="椭圆"
-        :type="modeModal === 'ellipse' ? 'primary' : ''"
+        :type="modeModal === 'ellipse' ? 'primary' : undefined"
         pl-4
         pr-8
         dashed
@@ -71,13 +79,18 @@
         :actions="['confirm']"
         @confirm="handleUpdateColorValue"
       />
-      <n-button data-color="#000000" :type="colorModal === 'dark' ? 'primary' : ''" dashed @click="changeColor('dark')"
-        >​⚫️​
+      <n-button
+        data-color="#000000"
+        :type="colorModal === 'dark' ? 'primary' : undefined"
+        dashed
+        @click="changeColor('dark')"
+      >
+        ​⚫️​
       </n-button>
       <n-button
         data-color="#ed153d"
         title="Red"
-        :type="colorModal === 'red' ? 'primary' : ''"
+        :type="colorModal === 'red' ? 'primary' : undefined"
         dashed
         @click="changeColor('red')"
         >​🔴​</n-button
@@ -85,7 +98,7 @@
       <n-button
         data-color="#ed9a26"
         title="Orange"
-        :type="colorModal === 'orange' ? 'primary' : ''"
+        :type="colorModal === 'orange' ? 'primary' : undefined"
         dashed
         @click="changeColor('orange')"
         >​🟠​​</n-button
@@ -93,7 +106,7 @@
       <n-button
         data-color="#ede215"
         title="Yellow"
-        :type="colorModal === 'yellow' ? 'primary' : ''"
+        :type="colorModal === 'yellow' ? 'primary' : undefined"
         dashed
         @click="changeColor('yellow')"
         >​​🟡​​</n-button
@@ -101,7 +114,7 @@
       <n-button
         data-color="#30bd20"
         title="Green"
-        :type="colorModal === 'green' ? 'primary' : ''"
+        :type="colorModal === 'green' ? 'primary' : undefined"
         dashed
         @click="changeColor('green')"
         >​🟢​​</n-button
@@ -109,7 +122,7 @@
       <n-button
         data-color="#2656bf"
         title="Blue"
-        :type="colorModal === 'blue' ? 'primary' : ''"
+        :type="colorModal === 'blue' ? 'primary' : undefined"
         dashed
         @click="changeColor('blue')"
         >​​🔵​​</n-button
@@ -117,7 +130,7 @@
       <n-button
         data-color="#c24aed"
         title="Purple"
-        :type="colorModal === 'purple' ? 'primary' : ''"
+        :type="colorModal === 'purple' ? 'primary' : undefined"
         dashed
         @click="changeColor('purple')"
         >​🟣​​</n-button
@@ -125,7 +138,7 @@
       <n-button
         data-color="#bf6b26"
         title="Brown"
-        :type="colorModal === 'brown' ? 'primary' : ''"
+        :type="colorModal === 'brown' ? 'primary' : undefined"
         dashed
         @click="changeColor('brown')"
         >​​🟤​</n-button
@@ -144,21 +157,27 @@
       />
       <n-button
         title="Solid"
-        :type="dasharrayModal === 'solid' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : ''"
+        :type="
+          dasharrayModal === 'solid' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
+        "
         dashed
         @click="changeSolid()"
         >—</n-button
       >
       <n-button
         title="Dashed"
-        :type="dasharrayModal === 'dashed' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : ''"
+        :type="
+          dasharrayModal === 'dashed' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
+        "
         dashed
         @click="changeDasharray()"
         >┅
       </n-button>
       <n-button
         title="Dotted"
-        :type="dasharrayModal === 'dotted' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : ''"
+        :type="
+          dasharrayModal === 'dotted' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
+        "
         dashed
         @click="changeDotted()"
         >⋯</n-button
@@ -207,6 +226,7 @@
 <script setup lang="ts">
 import { onLogin } from '@apis/app'
 import { Brush, Drauu, DrawingMode, EventsMap, Options, Point, createDrauu } from 'drauu'
+const { t } = useI18n()
 let drauu: Drauu
 onMounted(() => {
   onLogin().then((res: any) => {

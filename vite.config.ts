@@ -1,7 +1,5 @@
 import { defineConfig, loadEnv } from 'vite'
 
-import generateSitemap from 'vite-ssg-sitemap'
-
 // 提取插件放入其他ts文件
 import createVitePlugins from './vite/plugins'
 import { resolve } from 'path'
@@ -21,11 +19,19 @@ export default defineConfig(({ mode, command }) => {
     // 以VTDD_开头的环境变量envPrefix将通过导入暴露给您的客户端源代码。元环境。import.meta.env.VTDD_***
     envPrefix: VITE_APP_ENV_PREFIX,
     // 用户将向项目添加插件devDependencies并使用plugins数组选项对其进行配置。
-    plugins: [...createVitePlugins(env, command === 'build')],
+    plugins: [
+      ...createVitePlugins(env, command === 'build')
+      // 打包分析,可视化并分析构建包，查看哪些模块占用空间大小，以及模块的依赖关系
+      // import visualizer from 'rollup-plugin-visualizer'
+      // visualizer({
+      //   // 打包后自动打开分析报告
+      //   open: true
+      // })
+    ],
     // 选项可以选择需要或不需要进行预编译的依赖的名称，Vite 则会根据该选项来确定是否对该依赖进行预编译。
-    // optimizeDeps: {
-    //   include: ['vue', 'vue-router', 'pinia', 'axios']
-    // },
+    optimizeDeps: {
+      include: ['vue', 'vue-router', 'pinia', 'axios', '@vueuse/core', 'drauu']
+    },
     resolve: {
       alias: [
         { find: '@', replacement: pathResolve('src') },
@@ -52,30 +58,22 @@ export default defineConfig(({ mode, command }) => {
         }
       }
     },
-    build: {
-      outDir: 'dist',
-      assetsDir: 'assets', // 指定静态资源存放路径
-      sourcemap: false, // 是否构建source map 文件
-      minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
-      rollupOptions: {
-        input: {
-          main: pathResolve('index.html')
-        },
-        output: {
-          chunkFileNames: 'static/js/[name]-[hash].js',
-          entryFileNames: 'static/js/[name]-[hash].js',
-          assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
-        }
-      }
-    },
-    // https://github.com/antfu/vite-ssg
-    ssgOptions: {
-      script: 'async',
-      formatting: 'minify',
-      onFinished() {
-        generateSitemap()
-      }
-    },
+    // build: {
+    //   outDir: 'dist',
+    //   assetsDir: 'assets', // 指定静态资源存放路径
+    //   sourcemap: false, // 是否构建source map 文件
+    //   minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
+    //   rollupOptions: {
+    //     input: {
+    //       main: pathResolve('index.html')
+    //     },
+    //     output: {
+    //       chunkFileNames: 'static/js/[name]-[hash].js',
+    //       entryFileNames: 'static/js/[name]-[hash].js',
+    //       assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+    //     }
+    //   }
+    // },
     // https://vitejs.dev/config/index.html#server-proxy
     server: {
       host: '0.0.0.0',

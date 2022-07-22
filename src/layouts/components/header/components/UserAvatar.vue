@@ -1,5 +1,5 @@
 <template>
-  <n-dropdown :options="options" @select="handleSelect">
+  <n-dropdown @select="handleSelect">
     <div class="avatar">
       <img :src="getAssetsFile('cafe.png')" />
       <n-gradient-text type="danger"> 名字 </n-gradient-text>
@@ -8,16 +8,7 @@
 </template>
 
 <script lang="ts" setup>
-import SvgIcon from '@components/SvgIcon/index.vue'
 import getAssetsFile from '@utils/assets-kit'
-
-const options = [
-  {
-    label: '退出登录',
-    key: 'logout',
-    icon: h(SvgIcon, null, { default: () => h(SvgIcon, { name: 'color' }) })
-  }
-]
 
 function handleSelect(key: string) {
   if (key === 'logout') {

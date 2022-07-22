@@ -1,5 +1,4 @@
 import { defineStore } from 'pinia'
-import cookiesStorage from '@utils/cookiesStorage'
 
 // 创建store,命名规则： useXxxxStore
 // 参数1：store的唯一表示
@@ -18,7 +17,7 @@ export const useStarportStore = defineStore('starport', {
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: cookiesStorage, paths: ['images'] }]
+    strategies: [{ storage: localStorage, paths: ['images'] }]
   },
   getters: {
     getImages(state: { images: string[] }): string[] {

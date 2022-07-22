@@ -1,6 +1,35 @@
+title: haoku
+starport: starport
+foo: Copyright © 2022 Anthony Zhu
+ci1: Qinyuan Spring•Changsha
+ci11: In late autumn, I stood alone at the head of Orange Islet, the Xiangjiang River flowing northward.
+ci12: All mountains had become red, and row upon row of trees looked dyed;
+ci13: The river was clear and bright, big ships rushing forward.
+ci14: Eagles cleaved the sky, fish swimming in the clear water, all creatures competing for freedom in frosty weather.
+ci15: Facing the vast universe I melancholy sighed, who should dominate the ups and downs of this vast land?
+ci16: Recalling the extraordinary years of the past, I used to roam here with lots of my schoolmates.
+ci17: We students were just in the prime of our youth;
+ci18: Filled with the scholar’s enthusiasm, we were passionate and energetic.
+ci19: Commenting on state affairs by writing articles of criticism or praise, we regarded those warlords and bureaucrats as dirt.
+ci110: Do you still remember that the waves we made almost blocked the speeding boat when swimming in the middle of the river?
+ci2: Qinyuanchun, Xue
 toggle-language: EngLish
 home: Home
 about: About
 starport1: Starport1
 starport2: Starport2
 miaoshu: fresh
+button:
+  about: About
+  back: Back
+  go: GO
+  home: Home
+  toggle_dark: Toggle dark mode
+  toggle_langs: Change languages
+intro:
+  desc: Opinionated Vite Starter Template
+  dynamic-route: Demo of dynamic route
+  hi: Hi, {name}!
+  aka: Also known as
+  whats-your-name: What's your name?
+not-found: Not found

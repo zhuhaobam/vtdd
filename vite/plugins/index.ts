@@ -3,7 +3,6 @@ import createRestart from './vite-restart'
 import createJsx from './vite-jsx'
 import createSvgIcons from './vite-svg-icons'
 import createVueI18n from './vite-vue-i18n'
-import createHtml from './vite-html'
 import createAutoImport from './auto-import'
 import createUnocss from './vite-unocss'
 import createVueComponents from './vue-components'
@@ -13,8 +12,8 @@ import createMock from './vite-mock'
 import createLayouts from './vite-vue-layouts'
 import createPages from './vite-pages'
 import createCompression from './vite-compression'
-import createVisualizer from './rollup-visualizer'
 import createInspect from './vite-inspect'
+import createMySelf from './vite-myself'
 import type { PluginOption } from 'vite'
 
 export default function createVitePlugins(env: any, isBuild = false) {
@@ -29,7 +28,6 @@ export default function createVitePlugins(env: any, isBuild = false) {
   vitePlugins.push(createSvgIcons())
   vitePlugins.push(createVueI18n())
   vitePlugins.push(createUnocss())
-  // vitePlugins.push(createHtml(env))
   vitePlugins.push(createAutoImport())
   vitePlugins.push(createVueComponents())
   vitePlugins.push(createIcons())
@@ -37,8 +35,8 @@ export default function createVitePlugins(env: any, isBuild = false) {
   vitePlugins.push(createMock(env))
   vitePlugins.push(createLayouts())
   vitePlugins.push(createPages())
+  vitePlugins.push(createMySelf())
   isBuild && vitePlugins.push(createCompression())
-  vitePlugins.push(createVisualizer())
   vitePlugins.push(createInspect())
   return vitePlugins
 }

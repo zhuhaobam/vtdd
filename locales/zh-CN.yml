@@ -1,6 +1,35 @@
+title: 好酷
+starport: 星港
+foo: 版权 © 2022 竹子
+ci1: 沁园春·长沙
+ci11: 独立寒秋，湘江北去，橘子洲头。
+ci12: 看万山红遍，层林尽染；
+ci13: 漫江碧透，百舸争流。
+ci14: 鹰击长空，鱼翔浅底，万类霜天竞自由。
+ci15: 怅寥廓，问苍茫大地，谁主沉浮？
+ci16: 携来百侣曾游，忆往昔峥嵘岁月稠。
+ci17: 恰同学少年，风华正茂；
+ci18: 书生意气，挥斥方遒。
+ci19: 指点江山，激扬文字，粪土当年万户侯。
+ci110: 曾记否，到中流击水，浪遏飞舟？
+ci2: 沁园春·雪
 toggle-language: 中文
 home: 首页
 about: 关于
 starport1: 星港1
 starport2: 星港2
 miaoshu: 更新
+button:
+  about: 关于
+  back: 返回
+  go: 确定
+  home: 首页
+  toggle_dark: 切换深色模式
+  toggle_langs: 切换语言
+intro:
+  desc: 固执己见的 Vite 项目模板
+  dynamic-route: 动态路由演示
+  hi: 你好，{name}
+  aka: 也叫
+  whats-your-name: 输入你的名字
+not-found: 未找到页面

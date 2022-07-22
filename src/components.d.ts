@@ -3,6 +3,8 @@
 // Read more: https://github.com/vuejs/core/pull/3399
 import '@vue/runtime-core'
 
+export {}
+
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     'IAntDesign:menuFoldOutlined': typeof import('~icons/ant-design/menu-fold-outlined')['default']
@@ -30,8 +32,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     Starport: typeof import('vue-starport')['Starport']
     StarportCarrier: typeof import('vue-starport')['StarportCarrier']
+    StarportComponet: typeof import('./components/StarportComponet/index.vue')['default']
     SvgIcon: typeof import('./components/SvgIcon/index.vue')['default']
   }
 }
-
-export {}

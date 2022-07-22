@@ -1,4 +1,5 @@
 import { defineStore } from 'pinia'
+import cookiesStorage from '@utils/cookiesStorage'
 
 // 创建store,命名规则： useXxxxStore
 // 参数1：store的唯一表示
@@ -41,7 +42,7 @@ export const useThemeStore = defineStore('theme', {
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['theme', 'themeOverrides'] }]
+    strategies: [{ storage: cookiesStorage, paths: ['theme', 'themeOverrides'] }]
   },
   getters: {
     getTheme(): GlobalTheme | null {
