@@ -223,7 +223,7 @@
     <n-h2>海淀桥</n-h2>
   </div>
 </template>
-<script setup lang="ts">
+<script setup lang="ts" name="dashboardAnalysis">
 import { onLogin } from '@apis/app'
 import { Brush, Drauu, DrawingMode, EventsMap, Options, Point, createDrauu } from 'drauu'
 const { t } = useI18n()
@@ -332,3 +332,10 @@ function down() {
   document.body.removeChild(elem)
 }
 </script>
+<route lang="yaml">
+meta:
+  title: analysis
+  icon: lang
+  keepAlive: true
+  sort: 2
+</route>

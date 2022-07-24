@@ -1,9 +1,7 @@
 import { App } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { useLocalStorage } from '@vueuse/core'
-
-const storage = useLocalStorage('site_locale', 'zh-CN')
-const locale = storage.value
+import { useAppStore } from '@store/app'
+import { storeToRefs } from 'pinia'
 
 const localPathPrefix = '../../locales/'
 
@@ -17,9 +15,11 @@ const messages = Object.fromEntries(
 )
 
 const install = (app: App) => {
+  const appStore = useAppStore()
+  const { locale } = storeToRefs(appStore)
   const i18n = createI18n({
     legacy: false,
-    locale,
+    locale: locale.value,
     globalInjection: true,
     messages
   })

@@ -1,5 +1,11 @@
 title: haoku
+dashboard: dashboard
+analysis: analysis
+workbench: workbench
 starport: starport
+head: head
+headinfo: headinfo
+color: color
 foo: Copyright © 2022 Anthony Zhu
 ci1: Qinyuan Spring•Changsha
 ci11: In late autumn, I stood alone at the head of Orange Islet, the Xiangjiang River flowing northward.

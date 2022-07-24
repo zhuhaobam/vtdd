@@ -1,8 +1,3 @@
-<script setup lang="ts">
-const starportIndex = ref(1)
-const { t } = useI18n()
-</script>
-
 <template>
   <div>
     <div>
@@ -21,3 +16,14 @@ const { t } = useI18n()
     </div>
   </div>
 </template>
+<script setup lang="ts" name="starportHead">
+const starportIndex = ref(1)
+const { t } = useI18n()
+</script>
+<route lang="yaml">
+meta:
+  title: head
+  icon: sun
+  keepAlive: true
+  sort: 5
+</route>

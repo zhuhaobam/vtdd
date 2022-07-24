@@ -5,21 +5,6 @@
       <MenuCollapse />
     </n-space>
     <n-space flex items-center>
-      <RouterLink flex items-center to="/" :title="t('button.home')">
-        <n-icon size="20" color="#333">
-          <div i-carbon-campsite />
-        </n-icon>
-      </RouterLink>
-      <RouterLink flex items-center to="/startport/head" :title="t('button.home')">
-        <n-icon size="20" color="#333">
-          <div i-carbon-campsite />
-        </n-icon>
-      </RouterLink>
-      <RouterLink flex items-center to="/startport/headinfo" :title="t('button.about')">
-        <n-icon size="20" color="#333">
-          <div i-carbon-dicom-overlay />
-        </n-icon>
-      </RouterLink>
       <n-icon
         flex
         items-center
@@ -57,12 +42,15 @@ import LightDark from './components/LightDark.vue'
 import FullScreen from './components/FullScreen.vue'
 import UserAvatar from './components/UserAvatar.vue'
 import UserLogo from './components/UserLogo.vue'
+import { useAppStore } from '@store/app'
+const appStore = useAppStore()
 const { t, availableLocales, locale } = useI18n()
-
 const toggleLocales = () => {
   // change to some real logic
   const locales = availableLocales
-  locale.value = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  const localeValue = locales[(locales.indexOf(locale.value) + 1) % locales.length]
+  locale.value = localeValue
+  appStore.setLocale(localeValue)
 }
 const isDark = useDark()
 const toggleDark = useToggle(isDark)

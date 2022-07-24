@@ -3,7 +3,6 @@
     <StarportCarrier>
       <RouterView />
     </StarportCarrier>
-    <n-global-style />
   </n-config-provider>
 </template>
 

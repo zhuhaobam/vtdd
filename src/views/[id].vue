@@ -1,13 +1,16 @@
-<script setup lang="ts" name="PageId">
+<template>
+  <div>AAAAAAAAAA</div>
+</template>
+<script setup lang="ts" name="id">
 const props = defineProps<{
   id: string
 }>()
 const index = computed(() => +props.id)
 </script>
-
-<template>
-  <div>AAAAAAAAAA</div>
-</template>
 <route lang="yaml">
-name: PageId
+meta:
+  title: 文章
+  icon: color
+  sort: 100
+  hidden: true
 </route>
