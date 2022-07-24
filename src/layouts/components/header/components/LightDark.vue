@@ -1,8 +1,8 @@
 <template>
   <div>
     <n-switch v-model:value="themebool" :rail-style="railStyle" @update:value="handleChange">
-      <template #checked> 浅色 </template>
-      <template #unchecked> 深色 </template>
+      <template #checked> {{ $t('light') }} </template>
+      <template #unchecked> {{ $t('dark') }} </template>
       <template #checked-icon>
         <svg-icon name="sun" color="red" />
       </template>

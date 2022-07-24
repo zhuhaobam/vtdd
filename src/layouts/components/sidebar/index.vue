@@ -4,13 +4,15 @@
   </div>
 </template>
 <script lang="ts" setup>
-import { useAppStore } from '@store/app'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import { generatorMenu } from '@utils/router'
+import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
-const { t } = useI18n({ useScope: 'global' })
 const appStore = useAppStore()
+const { locale } = storeToRefs(appStore)
+
+const { t } = useI18n({ useScope: 'global' })
 
 function sortRoute(a: any, b: any) {
   return (a.meta?.sort || 0) - (b.meta?.sort || 0)
@@ -21,11 +23,11 @@ const routes = generatedRoutes.map(v => {
   return currentMenu
 })
 const menuOptions = ref<any[]>([])
-const { locale } = storeToRefs(appStore)
 watch(
   locale,
   (newVal, oldVal) => {
     menuOptions.value = generatorMenu(t, routes)
+    console.log('###', menuOptions.value)
   },
   { immediate: true, deep: true }
 )

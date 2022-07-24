@@ -12,6 +12,8 @@ const routes = generatedRoutes.map(v => {
   return currentMenu
 })
 
+console.log('***', routes)
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.VTDD_APP_BASE),
   routes: routes

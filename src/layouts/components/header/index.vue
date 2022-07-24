@@ -9,7 +9,7 @@
         flex
         items-center
         size="24"
-        color="#333"
+        color="red"
         :depth="2"
         style="cursor: pointer"
         :title="t('button.toggle_dark')"
@@ -21,7 +21,7 @@
         flex
         items-center
         size="24"
-        color="#333"
+        color="red"
         :depth="2"
         style="cursor: pointer"
         :title="t('button.toggle_langs')"

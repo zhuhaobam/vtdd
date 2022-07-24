@@ -1,5 +1,5 @@
 <template>
-  <n-config-provider :locale="zhCN" :date-locale="dateZhCN" :theme="theme" :theme-overrides="themeOverrides">
+  <n-config-provider :locale="localeLRef" :date-locale="localeLDRef" :theme="theme" :theme-overrides="themeOverrides">
     <StarportCarrier>
       <RouterView />
     </StarportCarrier>
@@ -10,7 +10,41 @@
 import DevicePixelRatio from '@utils/devicePixelRatio'
 import { useThemeStore } from '@store/theme'
 import { storeToRefs } from 'pinia'
-import { zhCN, dateZhCN } from 'naive-ui'
+import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
+import { useAppStore } from '@store/app'
+const appStore = useAppStore()
+const { locale } = storeToRefs(appStore)
+interface localeType {
+  l: NLocale
+  dl: NDateLocale
+}
+interface localeMapType {
+  en: localeType
+  'zh-CN': localeType
+}
+const localeMap: localeMapType = {
+  en: {
+    l: enUS,
+    dl: dateEnUS
+  },
+  'zh-CN': {
+    l: zhCN,
+    dl: dateZhCN
+  }
+}
+const localeLRef = ref<NLocale>()
+const localeLDRef = ref<NDateLocale>()
+watch(
+  locale,
+  (newVal, oldVal) => {
+    const key = locale.value
+    const localeT: localeType = key === 'en' ? localeMap.en : localeMap['zh-CN']
+    localeLRef.value = localeT.l
+    localeLDRef.value = localeT.dl
+  },
+  { immediate: true, deep: true }
+)
+
 const themeStore = useThemeStore()
 const { theme, themeOverrides } = storeToRefs(themeStore)
 onMounted(() => {

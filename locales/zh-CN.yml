@@ -6,6 +6,10 @@ starport: 星港
 head: 头部
 headinfo: 头部信息
 color: 颜色
+light: 浅色
+dark: 深色
+fullscreen: 全屏
+exitscreen: 退出全屏
 foo: 版权 © 2022 竹子
 ci1: 沁园春·长沙
 ci11: 独立寒秋，湘江北去，橘子洲头。
