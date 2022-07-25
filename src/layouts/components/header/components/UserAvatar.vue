@@ -2,7 +2,7 @@
   <n-dropdown @select="handleSelect">
     <div class="avatar">
       <img :src="getAssetsFile('cafe.png')" />
-      <n-gradient-text type="danger"> 名字 </n-gradient-text>
+      <n-gradient-text w-15 type="danger"> {{ $t('name') }} </n-gradient-text>
     </div>
   </n-dropdown>
 </template>

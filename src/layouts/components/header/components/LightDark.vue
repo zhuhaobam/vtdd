@@ -4,10 +4,10 @@
       <template #checked> {{ $t('light') }} </template>
       <template #unchecked> {{ $t('dark') }} </template>
       <template #checked-icon>
-        <svg-icon name="sun" color="red" />
+        <div i="carbon-sun" />
       </template>
       <template #unchecked-icon>
-        <svg-icon name="moon" color="red" />
+        <div i="carbon-moon" />
       </template>
     </n-switch>
   </div>

@@ -57,7 +57,7 @@ export function filterRouter(routerMap: Array<any>) {
  * render 图标
  * */
 export function renderIcon(icon: string) {
-  return () => h(SvgIcon, { name: icon, size: 60, color: 'red' }, { default: () => h(icon) })
+  return () => h(SvgIcon, { name: icon, size: 16 }, { default: () => h(icon) })
 }
 /**
  * render RouterLink

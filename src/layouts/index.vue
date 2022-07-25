@@ -1,7 +1,7 @@
 <template>
   <n-layout style="height: 100vh">
     <n-layout-header bordered position="absolute">
-      <AppHeader />
+      <AppHeader pr-5 />
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px" has-sider>
       <n-layout-sider :native-scrollbar="false" bordered>

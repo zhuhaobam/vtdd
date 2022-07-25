@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <div>secondfloor->haododo</div>
+  <div>secondfloor->youdodo</div>
 </template>
 <script setup lang="ts" name="firstSecondYoudodo">
 // default
