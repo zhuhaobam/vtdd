@@ -6,6 +6,12 @@ starport: starport
 head: head
 headinfo: headinfo
 color: color
+first: first
+second: second
+third: third
+youdodo: youdodo
+anmial: anmial
+flower: flower
 light: light
 dark: dark
 fullscreen: fullscreen

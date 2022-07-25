@@ -1,5 +1,9 @@
 <template>
   <div>
+    <div>
+      vite-plugin-vue-setup-extend包的name="firstSecond"决定了路由层级，你细看我写的first到third目录页面就能揣摩出来，结合我的路由处理
+    </div>
+    <div>script setup lang="ts" name="firstSecond"</div>
     <div>{{ t('toggle-language') }}</div>
     <i-myself-color w10 h10 color="red" />
     <n-space mb-2>

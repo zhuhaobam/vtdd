@@ -25,7 +25,7 @@ export function generatorMenu(t: any, ro: Array<any>) {
   return filterRouter(ro).map(itemx => {
     const item = cloneDeep(itemx)
     const lena = item.children?.length || 0
-    const info = lena === 0 ? item : item.children[0]
+    const info = lena === 1 ? item.children[0] : item
     const currentMenu = {
       ...info,
       path: item.path,

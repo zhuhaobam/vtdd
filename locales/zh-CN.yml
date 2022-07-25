@@ -6,6 +6,12 @@ starport: 星港
 head: 头部
 headinfo: 头部信息
 color: 颜色
+first: 第一层
+second: 第二层
+third: 第三层
+youdodo: youdodo页面
+anmial: anmial页面
+flower: flower页面
 light: 浅色
 dark: 深色
 fullscreen: 全屏

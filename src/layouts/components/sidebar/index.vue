@@ -26,8 +26,8 @@ const menuOptions = ref<any[]>([])
 watch(
   locale,
   (newVal, oldVal) => {
+    console.log(routes)
     menuOptions.value = generatorMenu(t, routes)
-    console.log('###', menuOptions.value)
   },
   { immediate: true, deep: true }
 )
