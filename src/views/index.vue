@@ -3,6 +3,7 @@
 // default
 </script>
 <route lang="yaml">
+redirect: /dashboard/analysis
 meta:
   title: index
   icon: color

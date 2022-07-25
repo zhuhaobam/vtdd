@@ -9,11 +9,11 @@ export default function createPages() {
     // 自动读取src/views下的vue文件，生成路由信息，默认路由路径'/‘
     dirs: [{ dir: pathResolve('../../src/views'), baseRoute: '/' }],
     // 异步方式加载路由组件
-    importMode: 'async',
+    importMode: 'async'
     // 遍历路由信息，给默认路由加一个redirect
-    extendRoute(route) {
-      // 【参考src/views下面index.vue文件】给vite.config.ts中vite-plugin-pages配置Pages下extendRoute重定向首页使用
-      if (route.path === '/') return { ...route, redirect: '/dashboard/analysis' }
-    }
+    // extendRoute(route) {
+    //   // 【参考src/views下面index.vue文件】给vite.config.ts中vite-plugin-pages配置Pages下extendRoute重定向首页使用
+    //   if (route.path === '/') return { ...route, redirect: '/dashboard/analysis' }
+    // }
   })
 }

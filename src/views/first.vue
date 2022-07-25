@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  first RouterView =>
+  / first RouterView
   <RouterView />
 </template>
 <script setup lang="ts" name="first">

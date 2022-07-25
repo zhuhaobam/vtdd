@@ -2,13 +2,13 @@
 <template>
   <div>secondfloor->haododo</div>
 </template>
-<script setup lang="ts" name="firstSecondYoudodo">
+<script setup lang="ts" name="firstHaododo">
 // default
 </script>
 <route lang="yaml">
 meta:
-  title: youdodo
+  title: haododo
   icon: moon
   keepAlive: true
-  sort: 300
+  sort: 50
 </route>

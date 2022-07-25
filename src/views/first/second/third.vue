@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  third RouterView
+  / third RouterView
   <RouterView />
 </template>
 <script setup lang="ts" name="firstSecondThird">

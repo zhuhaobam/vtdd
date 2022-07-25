@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  second RouterView =>
+  / second RouterView
   <RouterView />
 </template>
 <script setup lang="ts" name="firstSecond">
@@ -8,7 +8,7 @@
 </script>
 <route lang="yaml">
 meta:
-  sort: 1
+  sort: 21
   title: second
   icon: gitee
 </route>
