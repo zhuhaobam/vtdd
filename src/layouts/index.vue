@@ -1,10 +1,18 @@
 <template>
-  <n-layout style="height: 100vh">
+  <n-layout style="height: 100vh" :position="'static'" has-sider>
     <n-layout-header bordered position="absolute">
       <AppHeader pr-5 />
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px" has-sider>
-      <n-layout-sider :native-scrollbar="false" bordered>
+      <n-layout-sider
+        :position="'static'"
+        :collapsed="collapsed"
+        collapse-mode="width"
+        :native-scrollbar="false"
+        bordered
+        @collapse="collapsed = true"
+        @expand="collapsed = false"
+      >
         <SideBar />
       </n-layout-sider>
       <n-layout content-style="padding: 24px;" :native-scrollbar="false">
