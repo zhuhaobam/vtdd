@@ -229,7 +229,7 @@
 </template>
 <script setup lang="ts" name="dashboardAnalysis">
 import { onLogin } from '@apis/app'
-import { Brush, Drauu, DrawingMode, EventsMap, Options, Point, createDrauu } from 'drauu'
+import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
 const { t } = useI18n()
 let drauu: Drauu
 onMounted(() => {

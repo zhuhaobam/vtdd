@@ -10,7 +10,7 @@
 import DevicePixelRatio from '@utils/devicePixelRatio'
 import { useThemeStore } from '@store/theme'
 import { storeToRefs } from 'pinia'
-import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
+import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale } from 'naive-ui'
 import { useAppStore } from '@store/app'
 const appStore = useAppStore()
 const { locale } = storeToRefs(appStore)

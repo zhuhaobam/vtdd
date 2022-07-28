@@ -1,11 +1,10 @@
 <template>
-  <div>AAAAAAAAAA</div>
+  <div>AAAAAAAAAA{{ props.id }}</div>
 </template>
 <script setup lang="ts" name="id">
 const props = defineProps<{
   id: string
 }>()
-const index = computed(() => +props.id)
 </script>
 <route lang="yaml">
 meta:

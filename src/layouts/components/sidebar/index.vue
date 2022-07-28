@@ -56,8 +56,6 @@ watch(
   { immediate: true, deep: true }
 )
 
-// 是否使用手风琴模式
-const accordion = ref(true)
 const currentRoute = useRoute()
 // 获取当前打开的子菜单
 const matched = currentRoute.matched

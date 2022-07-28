@@ -1,11 +1,11 @@
 <template>
   <div>
     <n-h1 prefix="bar" align-text type="info">
-      <n-text type="info"> 工作台水印 </n-text>
+      <n-text type="info"> {{ $t('workbench-watermark') }} </n-text>
     </n-h1>
     <div>
       <n-watermark
-        content="水印"
+        :content="$t('watermark')"
         cross
         selectable
         :font-size="16"
@@ -20,25 +20,16 @@
           <n-table :bordered="false" :single-line="false">
             <thead>
               <tr>
-                <th>复盘</th>
-                <th>赋能</th>
-                <th>协同</th>
-                <th>...</th>
-                <th>串联</th>
+                <th>{{ $t('fupan') }}</th>
+                <th>{{ $t('fupan') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>拉通</td>
-                <td>打通</td>
-                <td>树立</td>
-                <td>...</td>
-                <td>履约</td>
+                <td>{{ $t('fupan') }}</td>
+                <td>{{ $t('fupan') }}</td>
               </tr>
               <tr>
-                <td>...</td>
-                <td>...</td>
-                <td>...</td>
                 <td>...</td>
                 <td>...</td>
               </tr>

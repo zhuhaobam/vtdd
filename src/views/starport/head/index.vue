@@ -1,8 +1,8 @@
 <template>
   <div>
     <div>
-      <Starport port="donghua" style="height: 160px; width: 160px" pl-20>
-        <starport-componet :index="starportIndex" style="height: 160px; width: 160px" />
+      <Starport port="donghua" style="width: 160px; height: 160px" pl-20>
+        <starport-componet :index="starportIndex" style="width: 160px; height: 160px" />
       </Starport>
     </div>
     <div overflow-hidden w-full h-full transition-all duration-900 relative select-none>

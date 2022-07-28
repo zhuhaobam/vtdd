@@ -1,7 +1,7 @@
 <template>
   <n-layout style="height: 100vh" :position="'static'" has-sider>
     <n-layout-header bordered position="absolute">
-      <AppHeader pr-5 />
+      <Header v-model:collapsed="collapsed" :inverted="false" />
     </n-layout-header>
     <n-layout position="absolute" style="top: 64px; bottom: 64px" has-sider>
       <n-layout-sider
@@ -28,7 +28,7 @@
 </template>
 
 <script lang="ts" setup>
-import AppHeader from './components/header/index.vue'
+import Header from './components/header/index.vue'
 import SideBar from './components/sidebar/index.vue'
 import { useAppStore } from '@store/app'
 

@@ -13,8 +13,10 @@ overrides:
   - files:
       - '*.vue'
       - '**/*.vue'
-    rules: { unit-allowed-list: [em, rem, px, s, %] }
+    rules: { unit-allowed-list: [em, rem, px, s, %, vh, deg] }
 rules:
+  selector-class-pattern: ['^([a-z][a-z0-9]*)(-[a-z0-9]+)*$', { 'message': 'Expected class selector to be kebab-case' }]
+  scss/dollar-variable-pattern: ^\$_?[a-z]+[\\w-]*$
   at-rule-empty-line-before: [always, { ignoreAtRules: [else] }]
   block-opening-brace-space-before: always
   block-closing-brace-newline-after: [always, { ignoreAtRules: [if else] }]

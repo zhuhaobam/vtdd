@@ -38,4 +38,3 @@ const images: any[] = [
 const src = ref(images[index.value])
 const counter = ref(Math.round(Math.random() * 100))
 </script>
-<style lang="scss" scoped></style>

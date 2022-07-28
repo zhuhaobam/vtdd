@@ -23,12 +23,13 @@ function handleSelect(key: string) {
   display: flex;
   align-items: center;
   cursor: pointer;
+
   img {
     width: 100%;
     width: 35px;
     height: 35px;
-    border-radius: 50%;
     margin-right: 10px;
+    border-radius: 50%;
   }
 }
 </style>

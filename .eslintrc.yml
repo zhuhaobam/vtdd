@@ -25,7 +25,7 @@ plugins:
 # "rules"总是“赢” "extends"
 rules:
   '@typescript-eslint/ban-ts-ignore': off
-  '@typescript-eslint/no-unused-vars': off
+  '@typescript-eslint/no-unused-vars': ['error', { vars: 'all', args: 'none', ignoreRestSiblings: true }]
   '@typescript-eslint/explicit-function-return-type': off
   '@typescript-eslint/no-explicit-any': off
   '@typescript-eslint/no-var-requires': off
@@ -38,7 +38,7 @@ rules:
   '@typescript-eslint/no-this-alias': ['error', { 'allowDestructuring': false, 'allowedNames': ['self'] }]
   no-var: error
   prettier/prettier: ['error', { trailingComma: 'none', singleQuote: true, semi: false, endOfLine: 'auto' }]
-  vue/multi-word-component-names: ['error', { ignores: ['index','[...all]','[id]'] }]
+  vue/multi-word-component-names: ['error', { ignores: ['index', '[...all]', '[id]'] }]
   no-undef: off
   # 禁止出现console
   no-console: off

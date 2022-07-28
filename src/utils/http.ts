@@ -109,7 +109,7 @@ class AxiosHttpRequest implements BaseType {
           return Promise.resolve(res.data)
         }
         // 获取错误信息
-        let msg = res.data.msg || ''
+        let msg = res.data?.msg || ''
         switch (code) {
           case '401':
             msg = '认证失败，无法访问系统资源'
@@ -127,6 +127,7 @@ class AxiosHttpRequest implements BaseType {
             return '未知错误，请联系管理员'
         }
         // ElMessage.error(msg)
+        console.log(msg)
         return Promise.reject(res.data)
       },
       (error: any) => {

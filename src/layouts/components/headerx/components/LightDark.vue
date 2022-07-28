@@ -13,7 +13,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="lightDark">
+<script lang="ts" setup>
 import { CSSProperties } from 'vue'
 import { darkTheme } from 'naive-ui'
 import { useThemeStore } from '@store/theme'
