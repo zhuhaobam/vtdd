@@ -4,7 +4,7 @@
     <!--顶部菜单-->
     <!--左侧菜单-->
     <div class="layout-header-left">
-      <MyLogo :collapsed="props.collapsed" />
+      <HeadLogo :collapsed="props.collapsed" />
       <!-- 菜单收起 -->
       <div
         class="ml-1 layout-header-trigger layout-header-trigger-min"
@@ -24,22 +24,7 @@
         </n-icon>
       </div>
       <!-- 面包屑 -->
-      <n-breadcrumb>
-        <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
-          <n-breadcrumb-item>
-            <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
-              <span class="link-text">
-                <component :is="routeItem.meta.icon" v-if="routeItem.meta.icon" />
-                {{ $t(routeItem.meta?.title || 'not-found') }}
-              </span>
-            </n-dropdown>
-            <span v-else class="link-text">
-              <component :is="routeItem.meta.icon" v-if="routeItem.meta.icon" />
-              {{ $t(routeItem.meta?.title || 'not-found') }}
-            </span>
-          </n-breadcrumb-item>
-        </template>
-      </n-breadcrumb>
+      <HeadBreadcrumb />
     </div>
     <div class="layout-header-right">
       <div class="layout-header-trigger layout-header-trigger-min">
@@ -67,29 +52,7 @@
       <LightDark />
       <!-- 个人中心 -->
       <div class="layout-header-trigger layout-header-trigger-min">
-        <n-dropdown
-          trigger="hover"
-          :options="[
-            {
-              label: '个人设置',
-              key: 1
-            },
-            {
-              label: '退出登录',
-              key: 2
-            }
-          ]"
-          @select="avatarSelect"
-        >
-          <div class="avatar">
-            <n-avatar round>
-              {{ $t('name') }}
-              <template #icon>
-                <img :src="getAssetsFile('cafe.png')" />
-              </template>
-            </n-avatar>
-          </div>
-        </n-dropdown>
+        <HeadCenter />
       </div>
     </div>
   </div>
@@ -97,11 +60,11 @@
 
 <script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
-import SvgIcon from '@components/SvgIcon/index.vue'
-import { useRouter, useRoute, RouteLocationMatched } from 'vue-router'
+import { useRouter, useRoute } from 'vue-router'
 import { useAppStore } from '@store/app'
-import getAssetsFile from '@utils/assets-kit'
-import MyLogo from './components/MyLogo.vue'
+import HeadLogo from './components/HeadLogo.vue'
+import HeadCenter from './components/HeadCenter.vue'
+import HeadBreadcrumb from './components/HeadBreadcrumb.vue'
 const props = defineProps({
   collapsed: {
     type: Boolean
@@ -114,7 +77,7 @@ const appStore = useAppStore()
 const router = useRouter()
 const currentRoute = useRoute()
 const { isFullscreen, toggle } = useFullscreen()
-const { t, availableLocales, locale } = useI18n()
+const { availableLocales, locale } = useI18n()
 const toggleLocales = () => {
   // change to some real logic
   const locales = availableLocales
@@ -123,67 +86,11 @@ const toggleLocales = () => {
   appStore.setLocale(localeValue)
 }
 
-const generator: any = (routerMap: RouteLocationMatched[]) => {
-  return routerMap.map(item => {
-    const currentMenu = {
-      ...item,
-      label: t((item.meta.title as string) || 'not-found'),
-      icon: renderIcon((item.meta.icon as string) || ''),
-      key: item.name,
-      disabled: item.path === '/'
-    }
-    // 是否有子菜单，并递归处理
-    if (item.children && item.children.length > 0) {
-      // Recursion
-      currentMenu.children = generator(item.children, currentMenu)
-    }
-    return currentMenu
-  })
-}
-/**
- * render 图标
- * */
-function renderIcon(icon: string) {
-  return () => h(SvgIcon, { name: icon, size: 16 }, { default: () => h(icon) })
-}
 // 刷新页面
 const reloadPage = () => {
   router.push({
     path: '/redirect' + unref(currentRoute).fullPath
   })
-}
-
-//头像下拉菜单
-const avatarSelect = (key: number) => {
-  switch (key) {
-    case 1:
-      router.push({ name: 'Setting' })
-      break
-    case 2:
-      console.log(2)
-      break
-    default:
-      console.log('default')
-  }
-}
-
-const breadcrumbList = ref<RouteLocationMatched[]>([])
-watch(
-  locale,
-  (newVal, oldVal) => {
-    breadcrumbList.value = generator(currentRoute.matched).filter((x: any) => x.name)
-  },
-  { immediate: true, deep: true }
-)
-watch(
-  () => currentRoute.fullPath,
-  () => {
-    breadcrumbList.value = generator(currentRoute.matched).filter((x: any) => x.name)
-  }
-)
-
-const dropdownSelect = (key: any) => {
-  router.push({ name: key })
 }
 </script>
 
@@ -240,7 +147,7 @@ const dropdownSelect = (key: any) => {
   &-right {
     display: flex;
     align-items: center;
-    margin-right: 20px;
+    margin-right: 0px;
 
     .avatar {
       display: flex;

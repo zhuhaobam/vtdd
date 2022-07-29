@@ -35,7 +35,7 @@ export function generatorMenu(t: any, ro: Array<any>) {
     if ((info.children?.length || 0) > 0) {
       currentMenu.children = generatorMenu(t, info.children)
       currentMenu.component = item.component
-      currentMenu.label = t(info.meta?.title || 'not-found')
+      currentMenu.label = t(info.meta?.title)
     } else {
       currentMenu.label = renderRouterLink({ name: info.name, label: t(info.meta?.title || 'not-found') })
     }

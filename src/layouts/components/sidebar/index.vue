@@ -1,11 +1,13 @@
 <template>
   <div>
     <n-menu
+      accordion
+      :style="'width: ' + collapsed ? 272 : 48 + 'px'"
       :options="menuOptions"
       :inverted="inverted"
       :mode="'vertical'"
       :collapsed="collapsed"
-      :collapsed-width="64"
+      :collapsed-width="48"
       :collapsed-icon-size="22"
       :indent="24"
       :expanded-keys="state.openKeys"

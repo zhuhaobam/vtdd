@@ -5,7 +5,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="myLogo">
+<script lang="ts" setup name="HeadLogo">
 import getAssetsFile from '@utils/assets-kit'
 const props = defineProps({
   collapsed: {
