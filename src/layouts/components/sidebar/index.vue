@@ -8,7 +8,7 @@
       :collapsed-width="64"
       :collapsed-icon-size="22"
       :indent="24"
-      :expanded-keys="openKeys"
+      :expanded-keys="state.openKeys"
       :value="getSelectedKeys"
       @update:value="clickMenuItem"
       @update:expanded-keys="menuExpanded"
@@ -61,7 +61,7 @@ const currentRoute = useRoute()
 const matched = currentRoute.matched
 const router = useRouter()
 const selectedKeys = ref<string>(currentRoute.name as string)
-const beforeOpenKeys = matched && matched.length ? matched.map(item => item.name) : []
+const beforeOpenKeys: string[] = matched && matched.length ? matched.map(item => item.name as string) : []
 const getOpenKeys = beforeOpenKeys.filter(x => x)
 const state = reactive({
   openKeys: getOpenKeys
@@ -74,7 +74,7 @@ watch(
   () => currentRoute.fullPath,
   () => {
     const matched = currentRoute.matched
-    state.openKeys = matched.map(item => item.name)
+    state.openKeys = matched.map(item => item.name as string)
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
   }

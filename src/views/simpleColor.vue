@@ -9,4 +9,5 @@ meta:
   title: color
   icon: color
   sort: 7
+  alwaysShow: false
 </route>

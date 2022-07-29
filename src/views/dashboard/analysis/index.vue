@@ -342,4 +342,5 @@ meta:
   icon: lang
   keepAlive: true
   sort: 2
+  alwaysShow: false
 </route>

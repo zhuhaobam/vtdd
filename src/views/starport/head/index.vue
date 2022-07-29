@@ -26,4 +26,5 @@ meta:
   icon: sun
   keepAlive: true
   sort: 5
+  alwaysShow: false
 </route>

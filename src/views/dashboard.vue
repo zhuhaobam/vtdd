@@ -10,4 +10,5 @@ meta:
   sort: 1
   title: dashboard
   icon: gitee
+  alwaysShow: false
 </route>

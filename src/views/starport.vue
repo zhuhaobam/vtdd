@@ -10,4 +10,5 @@ meta:
   sort: 4
   title: starport
   icon: github
+  alwaysShow: false
 </route>

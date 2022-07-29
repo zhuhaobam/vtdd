@@ -12,4 +12,5 @@ meta:
   icon: color
   sort: 100
   hidden: true
+  alwaysShow: false
 </route>

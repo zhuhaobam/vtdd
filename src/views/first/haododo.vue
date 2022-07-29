@@ -11,4 +11,5 @@ meta:
   icon: moon
   keepAlive: true
   sort: 50
+  alwaysShow: false
 </route>

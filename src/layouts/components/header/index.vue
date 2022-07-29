@@ -30,12 +30,12 @@
             <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
               <span class="link-text">
                 <component :is="routeItem.meta.icon" v-if="routeItem.meta.icon" />
-                {{ $t(routeItem.meta.title) }}
+                {{ $t(routeItem.meta?.title || 'not-found') }}
               </span>
             </n-dropdown>
             <span v-else class="link-text">
               <component :is="routeItem.meta.icon" v-if="routeItem.meta.icon" />
-              {{ $t(routeItem.meta.title) }}
+              {{ $t(routeItem.meta?.title || 'not-found') }}
             </span>
           </n-breadcrumb-item>
         </template>
@@ -95,7 +95,7 @@
   </div>
 </template>
 
-<script lang="ts" setup name="header">
+<script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
 import SvgIcon from '@components/SvgIcon/index.vue'
 import { useRouter, useRoute, RouteLocationMatched } from 'vue-router'
@@ -127,7 +127,7 @@ const generator: any = (routerMap: RouteLocationMatched[]) => {
   return routerMap.map(item => {
     const currentMenu = {
       ...item,
-      label: t((item.meta.title as string) || ''),
+      label: t((item.meta.title as string) || 'not-found'),
       icon: renderIcon((item.meta.icon as string) || ''),
       key: item.name,
       disabled: item.path === '/'

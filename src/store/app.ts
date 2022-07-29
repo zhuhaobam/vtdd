@@ -15,15 +15,12 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     enabled: true,
-    strategies: [
-      { storage: localStorage, paths: ['collapsed'] },
-      { storage: localStorage, paths: ['locale'] }
-    ]
+    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale'] }]
   },
   getters: {},
   actions: {
-    toggleCollapsed() {
-      this.collapsed = !this.collapsed
+    setToggleCollapsed(collapsed: boolean) {
+      this.collapsed = collapsed
     },
     setLocale(locale: string) {
       this.locale = locale

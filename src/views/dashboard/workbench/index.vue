@@ -65,4 +65,5 @@ meta:
   icon: moon
   keepAlive: true
   sort: 3
+  alwaysShow: false
 </route>

@@ -13,7 +13,6 @@ const messages = Object.fromEntries(
     return [key.slice(localPathPrefix.length, yaml ? -5 : -4), value.default]
   })
 )
-
 const install = (app: App) => {
   const appStore = useAppStore()
   const { locale } = storeToRefs(appStore)

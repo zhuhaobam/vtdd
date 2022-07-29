@@ -30,4 +30,5 @@ meta:
   icon: color
   keepAlive: true
   sort: 6
+  alwaysShow: false
 </route>

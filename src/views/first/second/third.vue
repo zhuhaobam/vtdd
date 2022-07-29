@@ -11,4 +11,5 @@ meta:
   sort: 1
   title: third
   icon: gitee
+  alwaysShow: false
 </route>

@@ -64,7 +64,7 @@ const generator: any = (routerMap: RouteLocationMatched[]) => {
   return routerMap.map(item => {
     const currentMenu = {
       ...item,
-      label: t((item.meta.title as string) || ''),
+      label: t((item.meta.title as string) || 'not-found'),
       icon: renderIcon((item.meta.icon as string) || ''),
       key: item.name,
       disabled: item.path === '/'
