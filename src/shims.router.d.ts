@@ -8,4 +8,7 @@ declare module 'vue-router' {
     layout?: boolean
     hidden?: boolean
   }
+  interface RouteLocationMatched {
+    icon?: string
+  }
 }
