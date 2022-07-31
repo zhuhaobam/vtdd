@@ -147,7 +147,7 @@ const reloadPage = () => {
   &-right {
     display: flex;
     align-items: center;
-    margin-right: 0px;
+    margin-right: 0;
 
     .avatar {
       display: flex;

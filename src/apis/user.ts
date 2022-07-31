@@ -1,4 +1,4 @@
-import http from '@utils/http.js'
+import http from '@/utils/http/axios.js'
 
 /**
  * @description: 获取用户信息

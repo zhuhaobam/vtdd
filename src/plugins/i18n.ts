@@ -1,3 +1,7 @@
+/**
+ * @description 国际化资源加载，刷新保持功能
+ *
+ **/
 import { App } from 'vue'
 import { createI18n } from 'vue-i18n'
 import { useAppStore } from '@store/app'

@@ -32,7 +32,7 @@ const { theme } = storeToRefs(themeStore)
 const { t } = useI18n({ useScope: 'global' })
 
 function sortRoute(a: any, b: any) {
-  return (a.meta?.sort || 0) - (b.meta?.sort || 0)
+  return (a.meta?.sort ?? 0) - (b.meta?.sort ?? 0)
 }
 generatedRoutes.sort(sortRoute)
 const routes = generatedRoutes.map(v => {

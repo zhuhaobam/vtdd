@@ -1,9 +1,9 @@
 import { defineStore } from 'pinia'
 
 interface IAppStore {
-  collapsed: boolean
-  locale: string
-  title: string
+  collapsed: boolean // 菜单处理
+  locale: string // 国际化
+  title: string // 动态标题
 }
 
 // 导出pinia

@@ -1,4 +1,8 @@
 import axios, { AxiosInstance, AxiosRequestConfig } from 'axios'
+import { AxiosAdapter } from 'axios'
+import cacheAdapterEnhancer from './cacheAdapterEnhancer'
+import retryAdapterEnhancer from './retryAdapterEnhancer'
+import throttleAdapterEnhancer from './throttleAdapterEnhancer'
 
 // 接口类型和方法
 interface BaseType {
@@ -20,27 +24,14 @@ interface AxiosRequestType {
   cancelToken?: any
 }
 
-// 取消重复请求
-const CancelToken = axios.CancelToken
-// 用于存储每个请求的取消函数以及对应标识
-const sources: any = []
-
-// 取消函数
-const removeSource = (config: any) => {
-  for (const item in sources) {
-    if (sources[item].umet === config.url + '&' + config.method) {
-      sources[item].cancel('已取消重复请求，请勿重复请求')
-      sources.splice(item, 1)
-    }
-  }
-}
-
 class AxiosHttpRequest implements BaseType {
   baseURL: string
   timeout: number
+  adapter: AxiosAdapter
   constructor() {
     this.baseURL = import.meta.env.VTDD_APP_BASE_API
     this.timeout = 1500
+    this.adapter = retryAdapterEnhancer(throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter!)))
   }
 
   // 配置参数
@@ -48,6 +39,7 @@ class AxiosHttpRequest implements BaseType {
     const config = {
       baseURL: this.baseURL,
       timeout: this.timeout,
+      adapter: this.adapter,
       headers: {}
     }
     return config
@@ -58,12 +50,6 @@ class AxiosHttpRequest implements BaseType {
     // 请求拦截
     instance.interceptors.request.use(
       (config: AxiosRequestType) => {
-        // 取消重复请求
-        removeSource(config)
-        config.cancelToken = new CancelToken(c => {
-          // 将取消函数存起来
-          sources.push({ umet: config.url + '&' + config.method, cancel: c })
-        })
         // 添加全局的loading..
         // 请求头携带token
         // config.headers['Authorization'] = 'Bearer ' + 'token666'
@@ -109,7 +95,7 @@ class AxiosHttpRequest implements BaseType {
           return Promise.resolve(res.data)
         }
         // 获取错误信息
-        let msg = res.data?.msg || ''
+        let msg = res.data?.msg ?? ''
         switch (code) {
           case '401':
             msg = '认证失败，无法访问系统资源'

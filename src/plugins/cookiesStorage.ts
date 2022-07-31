@@ -1,3 +1,7 @@
+/**
+ * @description 配合pinia-persist，扩展cookie存储功能
+ *
+ **/
 import Cookies from 'js-cookie'
 
 const cookiesStorage: Storage = {

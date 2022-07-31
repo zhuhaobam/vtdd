@@ -56,7 +56,7 @@
   </div>
 </template>
 <script setup lang="ts" name="dashboardWorkbench">
-import getAssetsFile from '@utils/assets-kit'
+import getAssetsFile from '@plugins/assets-kit'
 const show = ref(false)
 </script>
 <route lang="yaml">

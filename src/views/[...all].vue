@@ -1,15 +1,26 @@
 <template>
-  <div>Path 404</div>
+  <n-result status="404" :title="'404' + $t('not-found')" :description="$t('description')" size="huge">
+    <template #footer>
+      <n-button @click="router.replace('/')">{{ $t('back-home') }} →</n-button>
+    </template>
+  </n-result>
 </template>
+
 <script setup lang="ts" name="notFound">
-// default
+import { useRouter } from 'vue-router'
+const router = useRouter()
 </script>
 <route lang="yaml">
 meta:
   layout: false
-  title: 页面丢失
+  title: not-found
   icon: color
   sort: 200
   hidden: true
   alwaysShow: false
 </route>
+<style scoped>
+.n-result {
+  margin: 20vh auto 0;
+}
+</style>

@@ -19,7 +19,7 @@ import router from '@router/index'
 import StarportPlugin from 'vue-starport'
 
 //  I18n【注册】
-import i18n from '@utils/i18n'
+import i18n from '@plugins/i18n'
 
 import { createApp } from 'vue'
 createApp(App)

@@ -24,13 +24,13 @@
 
 <script lang="ts" setup name="HeadCenter">
 import { useRouter } from 'vue-router'
-import getAssetsFile from '@utils/assets-kit'
+import getAssetsFile from '@plugins/assets-kit'
 const router = useRouter()
 //头像下拉菜单
 const avatarSelect = (key: number) => {
   switch (key) {
     case 1:
-      router.push({ name: 'Setting' })
+      router.push({ name: 'setting' })
       break
     case 2:
       console.log(2)
