@@ -4,6 +4,7 @@ interface IAppStore {
   collapsed: boolean // 菜单处理
   locale: string // 国际化
   title: string // 动态标题
+  reload: boolean // 动态刷新
 }
 
 // 导出pinia
@@ -12,12 +13,13 @@ export const useAppStore = defineStore('app', {
     return {
       collapsed: false,
       locale: 'zh-CN',
-      title: ''
+      title: '',
+      reload: false
     }
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title'] }]
+    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title', 'reload'] }]
   },
   getters: {},
   actions: {
@@ -31,6 +33,9 @@ export const useAppStore = defineStore('app', {
     setTitle(t: any, title: string) {
       this.title = title
       document.title = t(title) + ' - ' + t(import.meta.env.VTDD_APP_TITLE)
+    },
+    setReload() {
+      this.reload = !this.reload
     }
   }
 })

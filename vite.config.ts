@@ -45,7 +45,6 @@ export default defineConfig(({ mode, command }) => {
         { find: '@styles', replacement: pathResolve('src/styles') },
         { find: '@types', replacement: pathResolve('src/types') },
         { find: '@utils', replacement: pathResolve('src/utils') },
-        { find: '@plugins', replacement: pathResolve('src/plugins') },
         { find: '@views', replacement: pathResolve('src/views') }
       ]
     },

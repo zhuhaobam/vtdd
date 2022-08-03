@@ -20,7 +20,7 @@
       <!-- 刷新 -->
       <div class="mr-1 layout-header-trigger layout-header-trigger-min" @click="reloadPage">
         <n-icon size="18">
-          <i-myself-color />
+          <i-ant-design:reload-outlined />
         </n-icon>
       </div>
       <!-- 面包屑 -->
@@ -60,7 +60,6 @@
 
 <script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
-import { useRouter, useRoute } from 'vue-router'
 import { useAppStore } from '@store/app'
 import HeadLogo from './components/HeadLogo.vue'
 import HeadCenter from './components/HeadCenter.vue'
@@ -74,8 +73,6 @@ const props = defineProps({
   }
 })
 const appStore = useAppStore()
-const router = useRouter()
-const currentRoute = useRoute()
 const { isFullscreen, toggle } = useFullscreen()
 const { availableLocales, locale } = useI18n()
 const toggleLocales = () => {
@@ -85,12 +82,9 @@ const toggleLocales = () => {
   locale.value = localeValue
   appStore.setLocale(localeValue)
 }
-
 // 刷新页面
 const reloadPage = () => {
-  router.push({
-    path: '/redirect' + unref(currentRoute).fullPath
-  })
+  appStore.setReload()
 }
 </script>
 

@@ -1,13 +1,13 @@
 <template>
   <n-config-provider :locale="localeLRef" :date-locale="localeLDRef" :theme="theme" :theme-overrides="themeOverrides">
     <StarportCarrier>
-      <RouterView />
+      <RouterView v-if="isRouterAlive" />
     </StarportCarrier>
   </n-config-provider>
 </template>
 
 <script setup lang="ts">
-import DevicePixelRatio from '@plugins/devicePixelRatio'
+import DevicePixelRatio from '@/plugins/devicePixelRatio'
 import { useThemeStore } from '@store/theme'
 import { storeToRefs } from 'pinia'
 import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale } from 'naive-ui'
@@ -48,6 +48,22 @@ onMounted(() => {
   // 校正windows页面在系统进行缩放后导致页面被放大的问题，通常放大比例是125%、150%
   DevicePixelRatio.init()
 })
+
+// 局部组件刷新
+const isRouterAlive = ref(true)
+const reloadMethod = () => {
+  console.log('app reload')
+  isRouterAlive.value = false
+  nextTick(() => {
+    isRouterAlive.value = true
+  })
+}
+watch(
+  () => appStore.reload,
+  () => {
+    reloadMethod()
+  }
+)
 </script>
 
 <style lang="scss">

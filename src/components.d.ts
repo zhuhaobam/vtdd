@@ -9,6 +9,7 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     'IAntDesign:menuFoldOutlined': typeof import('~icons/ant-design/menu-fold-outlined')['default']
     'IAntDesign:menuUnfoldOutlined': typeof import('~icons/ant-design/menu-unfold-outlined')['default']
+    'IAntDesign:reloadOutlined': typeof import('~icons/ant-design/reload-outlined')['default']
     IAntDesignFullscreenExitOutlined: typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     IAntDesignFullscreenOutlined: typeof import('~icons/ant-design/fullscreen-outlined')['default']
     IMyselfColor: typeof import('~icons/myself/color')['default']
@@ -28,7 +29,6 @@ declare module '@vue/runtime-core' {
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
     NMenu: typeof import('naive-ui')['NMenu']
-    NMessageProvider: typeof import('naive-ui')['NMessageProvider']
     NResult: typeof import('naive-ui')['NResult']
     NSpace: typeof import('naive-ui')['NSpace']
     NSwitch: typeof import('naive-ui')['NSwitch']

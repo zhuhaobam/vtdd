@@ -3,7 +3,7 @@
   <div>secondfloor->haododo</div>
 </template>
 <script setup lang="ts" name="firstHaododo">
-// default
+// test
 </script>
 <route lang="yaml">
 meta:

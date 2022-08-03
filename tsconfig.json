@@ -38,7 +38,6 @@
       "@styles/*": ["src/styles/*"],
       "@types/*": ["src/types/*"],
       "@utils/*": ["src/utils/*"],
-      "@plugins/*": ["src/plugins/*"],
       "@views/*": ["src/views/*"]
     }
   },

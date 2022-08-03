@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 const { t } = useI18n()
-interface Props {
+type Props = {
   index: number
 }
 const props = withDefaults(defineProps<Props>(), {
