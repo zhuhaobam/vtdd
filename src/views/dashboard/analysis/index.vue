@@ -228,20 +228,19 @@
   </div>
 </template>
 <script setup lang="ts" name="dashboardAnalysis">
-import { onLogin, onTry } from '@apis/app'
+// import { onLogin, onTry, onTest } from '@apis/app'
+import { onTry } from '@apis/app'
 import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
 const { t } = useI18n()
 let drauu: Drauu
 onMounted(() => {
-  onLogin().then((res: any) => {
-    console.log(1, res)
-  })
-  onLogin().then((res: any) => {
-    console.log(2, res)
-  })
-  onTry().then((res: any) => {
-    console.log(3, res)
-  })
+  onTry()
+    .then((res: any) => {
+      console.log('onTry', res.data)
+    })
+    .catch((error: any) => {
+      console.log('onTry', error)
+    })
   drauu = createDrauu({
     el: '#svg',
     brush: {

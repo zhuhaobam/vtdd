@@ -2,7 +2,7 @@
 .idea
 .vscode
 locales
-mock
+/mock/*
 /dist/*
 .local
 .output.js

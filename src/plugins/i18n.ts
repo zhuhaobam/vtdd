@@ -7,24 +7,33 @@ import { createI18n } from 'vue-i18n'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 
-const localPathPrefix = '../../locales/'
-
+// const localPathPrefix = '../../locales/'
 // import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
-const messages = Object.fromEntries(
-  Object.entries(import.meta.glob<{ default: any }>('../../locales/*.y(a)?ml', { eager: true })).map(([key, value]) => {
-    const yaml = key.endsWith('.yaml')
-    return [key.slice(localPathPrefix.length, yaml ? -5 : -4), value.default]
-  })
-)
+// const messages = Object.fromEntries(
+//   Object.entries(import.meta.glob<{ default: any }>('../../locales/*.y(a)?ml', { eager: true })).map(([key, value]) => {
+//     const yaml = key.endsWith('.yaml')
+//     return [key.slice(localPathPrefix.length, yaml ? -5 : -4), value.default]
+//   })
+// )
+export function loadLang() {
+  const modules: Record<string, any> = import.meta.glob('../../locales/*.y(a)?ml', { eager: true })
+  const langs: Record<string, any> = {}
+  for (const key in modules) {
+    langs[key] = modules[key].default
+  }
+  return langs
+}
+
 const install = (app: App) => {
   const appStore = useAppStore()
   const { locale } = storeToRefs(appStore)
   const i18n = createI18n({
-    legacy: false,
-    locale: locale.value,
+    // legacy: false,
     globalInjection: true,
-    messages
+    locale: locale.value,
+    fallbackLocale: 'zh-cn',
+    messages: loadLang()
   })
 
   app.use(i18n)

@@ -12,6 +12,6 @@ index.html
 .idea
 .vscode
 locales
-mock
+/mock/*
 dist
 docbyexplain
