@@ -6,8 +6,9 @@
 // test
 </script>
 <route lang="yaml">
+label: haododo
 meta:
-  title: haododo
+  breadcrumb: haododo
   icon: moon
   keepAlive: true
   sort: 50

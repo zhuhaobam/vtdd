@@ -58,22 +58,22 @@ export default defineConfig(({ mode, command }) => {
         }
       }
     },
-    // build: {
-    //   outDir: 'dist',
-    //   assetsDir: 'assets', // 指定静态资源存放路径
-    //   sourcemap: false, // 是否构建source map 文件
-    //   minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
-    //   rollupOptions: {
-    //     input: {
-    //       main: pathResolve('index.html')
-    //     },
-    //     output: {
-    //       chunkFileNames: 'static/js/[name]-[hash].js',
-    //       entryFileNames: 'static/js/[name]-[hash].js',
-    //       assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
-    //     }
-    //   }
-    // },
+    build: {
+      //   outDir: 'dist',
+      //   assetsDir: 'assets', // 指定静态资源存放路径
+      //   sourcemap: false, // 是否构建source map 文件
+      //   minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
+      rollupOptions: {
+        input: {
+          main: pathResolve('index.html')
+        }
+        //     output: {
+        //       chunkFileNames: 'static/js/[name]-[hash].js',
+        //       entryFileNames: 'static/js/[name]-[hash].js',
+        //       assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+        //     }
+      }
+    },
     // https://vitejs.dev/config/index.html#server-proxy
     server: {
       host: '0.0.0.0',

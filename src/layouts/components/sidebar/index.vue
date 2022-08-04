@@ -20,16 +20,15 @@
 <script lang="ts" setup>
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
-import { generatorMenu } from '@utils/router'
+import { keyLabelAdjustment, primaryAdjustment, filterHiddenRoutes } from '@utils/router'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
+const { t } = useI18n({ useScope: 'global' })
 const themeStore = useThemeStore()
 const appStore = useAppStore()
 const { locale, collapsed } = storeToRefs(appStore)
 const { theme } = storeToRefs(themeStore)
-
-const { t } = useI18n({ useScope: 'global' })
 
 function sortRoute(a: any, b: any) {
   return (a.meta?.sort ?? 0) - (b.meta?.sort ?? 0)
@@ -43,7 +42,9 @@ const menuOptions = ref<any[]>([])
 watch(
   locale,
   (newVal, oldVal) => {
-    menuOptions.value = generatorMenu(t, routes)
+    const filterRoutes = filterHiddenRoutes(routes)
+    const primaryRoutes = primaryAdjustment(filterRoutes)
+    menuOptions.value = keyLabelAdjustment(primaryRoutes, t)
   },
   { immediate: true, deep: true }
 )

@@ -6,8 +6,9 @@
 // default
 </script>
 <route lang="yaml">
+label: youdodo
 meta:
-  title: youdodo
+  breadcrumb: youdodo
   icon: moon
   keepAlive: true
   sort: 300

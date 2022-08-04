@@ -6,7 +6,7 @@
     "dev": "vite",
     "prod": "vite --mode production",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview",
+    "preview": "vite preview --port 8080",
     "lint": "eslint src --fix --ext .ts,.tsx,.vue,.js,.jsx",
     "prettier": "prettier --write .",
     "stylelint": "stylelint src/**/*.{vue,less,css,scss,sass} --fix",

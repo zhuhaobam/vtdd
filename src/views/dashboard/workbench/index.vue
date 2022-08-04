@@ -61,8 +61,9 @@ const show = ref(false)
 console.log('..........' + new Date())
 </script>
 <route lang="yaml">
+label: workbench
 meta:
-  title: workbench
+  breadcrumb: analysis
   icon: moon
   keepAlive: true
   sort: 3

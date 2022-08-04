@@ -2,13 +2,14 @@
 <template>
   <RouterView />
 </template>
-<script setup lang="ts" name="dashboard">
+<script setup lang="ts" name="dashboardGood">
 // default
 </script>
 <route lang="yaml">
+label: dashboard
 meta:
+  breadcrumb: analysis
   sort: 1
-  title: dashboard
   icon: gitee
   alwaysShow: false
 </route>

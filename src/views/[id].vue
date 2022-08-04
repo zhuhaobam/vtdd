@@ -7,8 +7,8 @@ const props = defineProps<{
 }>()
 </script>
 <route lang="yaml">
+label: article
 meta:
-  title: 文章
   icon: color
   sort: 100
   hidden: true

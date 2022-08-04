@@ -11,10 +11,9 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 </script>
 <route lang="yaml">
+label: not-found
 meta:
   layout: false
-  title: not-found
-  icon: color
   sort: 200
   hidden: true
   alwaysShow: false

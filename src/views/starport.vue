@@ -6,9 +6,10 @@
 // default
 </script>
 <route lang="yaml">
+label: starport
 meta:
+  breadcrumb: analysis
   sort: 4
-  title: starport
   icon: github
   alwaysShow: false
 </route>

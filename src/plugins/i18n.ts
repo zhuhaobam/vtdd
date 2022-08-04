@@ -7,7 +7,7 @@ import { createI18n } from 'vue-i18n'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 
-// const localPathPrefix = '../../locales/'
+const localPathPrefix = '../../locales/'
 // import i18n resources
 // https://vitejs.dev/guide/features.html#glob-import
 // const messages = Object.fromEntries(
@@ -20,7 +20,9 @@ export function loadLang() {
   const modules: Record<string, any> = import.meta.glob('../../locales/*.y(a)?ml', { eager: true })
   const langs: Record<string, any> = {}
   for (const key in modules) {
-    langs[key] = modules[key].default
+    const yaml = key.endsWith('.yaml')
+    const keyName = key.slice(localPathPrefix.length, yaml ? -5 : -4)
+    langs[keyName] = modules[key].default
   }
   return langs
 }
@@ -32,7 +34,7 @@ const install = (app: App) => {
     // legacy: false,
     globalInjection: true,
     locale: locale.value,
-    fallbackLocale: 'zh-cn',
+    fallbackLocale: 'zh-CN',
     messages: loadLang()
   })
 

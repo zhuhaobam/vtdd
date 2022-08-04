@@ -7,9 +7,10 @@
 // default
 </script>
 <route lang="yaml">
+label: third
 meta:
+  breadcrumb: third
   sort: 1
-  title: third
   icon: gitee
   alwaysShow: false
 </route>

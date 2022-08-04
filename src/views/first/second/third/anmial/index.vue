@@ -1,12 +1,13 @@
 <template>
   <div>thirdfloor->anmial</div>
 </template>
-<script setup lang="ts" name="firstSecondThirdFlowerAnmial">
+<script setup lang="ts" name="firstSecondThirdAnmial">
 // default
 </script>
 <route lang="yaml">
+label: anmial
 meta:
-  title: anmial
+  breadcrumb: anmial
   icon: moon
   keepAlive: true
   sort: 300

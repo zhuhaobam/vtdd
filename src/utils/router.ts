@@ -4,52 +4,69 @@ import SvgIcon from '@components/SvgIcon/index.vue'
 // 浅拷贝 Object.assign({}, this.person)
 // 深拷贝 lodash-es cloneDeep
 
-export function filterAsyncRoutes(routes: RouteRecordRaw[], permList: string[], prefix = ''): RouteRecordRaw[] {
-  const mirrorRoutes: RouteRecordRaw[] = []
-  routes.forEach(route => {
-    const mirrorObjects: RouteRecordRaw = cloneDeep<RouteRecordRaw>(route)
-    const path = mirrorObjects.path.charAt(0) === '/' ? mirrorObjects.path : `${prefix}${mirrorObjects.path}`
-    if (mirrorObjects.meta?.noPerm) {
-      mirrorRoutes.push(mirrorObjects)
-    } else if (permList.includes(path)) {
-      if (mirrorObjects.children) {
-        mirrorObjects.children = filterAsyncRoutes(mirrorObjects.children, permList, `${prefix}${mirrorObjects.path}/`)
-      }
-      mirrorRoutes.push(mirrorObjects)
-    }
-  })
-  return mirrorRoutes
-}
-
-export function generatorMenu(t: any, ro: Array<any>) {
-  return filterRouter(ro).map(itemx => {
-    const item = cloneDeep(itemx)
-    const lena = item.children?.length || 0
-    const info = lena === 1 ? item.children[0] : item
-    const currentMenu = {
+/**
+ * setupLayouts函数后的路由进行初级合并处理
+ * [由于setupLayouts函数将一级路由放置到children[0]中，
+ * 现将路由从children[0]中取出，并将children[0]外的component，path合并回去]
+ * @param routes
+ */
+export function primaryAdjustment(routes: RouteRecordRaw[]) {
+  return routes.map(vx => {
+    const v = cloneDeep(vx)
+    const hasChildren = (v.children?.length ?? 0) > 0
+    const info = hasChildren ? v.children![0] : v
+    const result: RouteRecordRaw = {
       ...info,
-      path: item.path,
-      key: info.name,
-      icon: renderIcon(info.meta?.icon)
+      path: v.path
     }
-    if ((info.children?.length || 0) > 0) {
-      currentMenu.children = generatorMenu(t, info.children)
-      currentMenu.component = item.component
-      currentMenu.label = t(info.meta?.title)
-    } else {
-      currentMenu.label = renderRouterLink({ name: info.name, label: t(info.meta?.title || 'not-found') })
-    }
-    return currentMenu
+    result.component = v.component
+    return result
   })
 }
 
 /**
- * 排除Router
- * */
-export function filterRouter(routerMap: Array<any>) {
-  return routerMap.filter(item => {
-    const info = (item.children?.length || 0) === 0 ? item : item.children[0]
+ * 隐藏过滤
+ * @param routes
+ * @param permList
+ * @param prefix
+ * @returns
+ */
+export function filterHiddenRoutes(routes: RouteRecordRaw[]): RouteRecordRaw[] {
+  return routes.filter(vx => {
+    const v = cloneDeep(vx)
+    const hasChildren = (v.children?.length ?? 0) > 0
+    const info = hasChildren ? v.children![0] : v
     return (info.meta?.hidden || false) !== true
+  })
+}
+
+/**
+ * keyLabel和图标处理
+ * @param routes
+ * @returns
+ */
+export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any) {
+  return routes.map(vx => {
+    const info = cloneDeep(vx)
+    const hasChildren = (info.children?.length ?? 0) > 0
+    const result: RouteRecordRaw = {
+      ...info,
+      key: info.name
+    }
+    const hasMeta = (info?.meta ?? '') !== ''
+    const hasIcon = (info.meta?.icon ?? '') !== ''
+    if (hasMeta && hasIcon) {
+      const icon = info.meta!.icon!
+      result.icon = renderIcon(icon)
+    }
+    if (hasChildren) {
+      result.component = info.component
+      result.children = keyLabelAdjustment(info.children!, t)
+    } else {
+      result.component = info.component
+      result.label = renderRouterLink({ name: info.name as string, label: t(info.label as string) })
+    }
+    return result
   })
 }
 

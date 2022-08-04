@@ -188,7 +188,7 @@
       >
       <n-button title="Download" @click="down()">📥</n-button>
     </n-space>
-    <svg id="svg" w-full flex-auto z-10 h100 border style="touch-action: none"></svg>
+    <svg id="svg" w-full flex-auto z-10 h150 border style="touch-action: none"></svg>
     <n-h2>海淀桥</n-h2>
     <n-h2>海淀桥</n-h2>
     <n-h2>海淀桥</n-h2>
@@ -229,18 +229,18 @@
 </template>
 <script setup lang="ts" name="dashboardAnalysis">
 // import { onLogin, onTry, onTest } from '@apis/app'
-import { onTry } from '@apis/app'
+// import { onTry } from '@apis/app'
 import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
 const { t } = useI18n()
 let drauu: Drauu
 onMounted(() => {
-  onTry()
-    .then((res: any) => {
-      console.log('onTry', res.data)
-    })
-    .catch((error: any) => {
-      console.log('onTry', error)
-    })
+  // onTry()
+  //   .then((res: any) => {
+  //     console.log('onTry', res.data)
+  //   })
+  //   .catch((error: any) => {
+  //     console.log('onTry', error)
+  //   })
   drauu = createDrauu({
     el: '#svg',
     brush: {
@@ -342,8 +342,9 @@ function down() {
 }
 </script>
 <route lang="yaml">
+label: analysis
 meta:
-  title: analysis
+  breadcrumb: analysis
   icon: lang
   keepAlive: true
   sort: 2

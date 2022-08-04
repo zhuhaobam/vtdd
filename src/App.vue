@@ -14,28 +14,29 @@ import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale } from 'naive-ui'
 import { useAppStore } from '@store/app'
 const appStore = useAppStore()
 const { locale } = storeToRefs(appStore)
-const localeMap = new Map<
-  string,
-  {
+
+const localeMap: {
+  [key: string]: {
     l: NLocale
     dl: NDateLocale
   }
->()
-localeMap.set('en', {
-  l: enUS,
-  dl: dateEnUS
-})
-localeMap.set('zh-CN', {
-  l: zhCN,
-  dl: dateZhCN
-})
+} = {
+  en: {
+    l: enUS,
+    dl: dateEnUS
+  },
+  'zh- CN': {
+    l: zhCN,
+    dl: dateZhCN
+  }
+}
+
 const localeLRef = ref<NLocale>()
 const localeLDRef = ref<NDateLocale>()
 watch(
   locale,
   (newVal, oldVal) => {
-    const key = locale.value
-    const localeT = localeMap.get(key)
+    const localeT = localeMap[locale.value]
     localeLRef.value = localeT?.l
     localeLDRef.value = localeT?.dl
   },

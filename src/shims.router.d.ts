@@ -2,13 +2,41 @@ export {}
 import 'vue-router'
 declare module 'vue-router' {
   interface RouteMeta {
-    title?: string
     icon?: string
     sort?: number
     layout?: boolean
+    // 隐藏
     hidden?: boolean
+    // 不用检查权限，但是子需要重复这一过程
+    noPerm?: boolean
+    breadcrumb?: string
   }
+
+  /**
+   * currentRoute.matched
+   */
   interface RouteLocationMatched {
     icon?: string
+  }
+
+  /**
+   * 自定义补充扩展 - 路由 - 类型字段
+   */
+  interface _RouteRecordBase {
+    key: string | any
+    label: VNode<
+      RendererNode,
+      RendererElement,
+      {
+        [key: string]: any
+      }
+    >
+    icon?: VNode<
+      RendererNode,
+      RendererElement,
+      {
+        [key: string]: any
+      }
+    >
   }
 }
