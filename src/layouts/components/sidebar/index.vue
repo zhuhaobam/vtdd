@@ -30,10 +30,6 @@ const appStore = useAppStore()
 const { locale, collapsed } = storeToRefs(appStore)
 const { theme } = storeToRefs(themeStore)
 
-function sortRoute(a: any, b: any) {
-  return (a.meta?.sort ?? 0) - (b.meta?.sort ?? 0)
-}
-generatedRoutes.sort(sortRoute)
 const routes = generatedRoutes.map(v => {
   const currentMenu = v?.meta?.layout === false ? v : setupLayouts([v])[0]
   return currentMenu

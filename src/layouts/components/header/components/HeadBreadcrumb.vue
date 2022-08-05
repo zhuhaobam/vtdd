@@ -18,9 +18,9 @@
 </template>
 
 <script lang="ts" setup name="HeadBreadcrumb">
-import SvgIcon from '@components/SvgIcon/index.vue'
 import { useRouter, useRoute, RouteLocationMatched } from 'vue-router'
 import { useAppStore } from '@store/app'
+import { renderIcon } from '@utils/render'
 const appStore = useAppStore()
 const router = useRouter()
 const currentRoute = useRoute()
@@ -43,12 +43,6 @@ const generator: any = (routerMap: RouteLocationMatched[]) => {
     currentMenu.props = { default: currentMenu.props }
     return currentMenu
   })
-}
-/**
- * render 图标
- * */
-function renderIcon(icon: string) {
-  return () => h(SvgIcon, { name: icon, size: 16 }, { default: () => h(icon) })
 }
 
 const breadcrumbList = ref<RouteLocationMatched[]>([])
