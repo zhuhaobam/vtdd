@@ -11,8 +11,8 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 </script>
 <route lang="yaml">
-label: not-found
 meta:
+  breadcrumb: not-found
   layout: false
   sort: 200
   hidden: true

@@ -16,7 +16,14 @@ declare module 'vue-router' {
    * currentRoute.matched
    */
   interface RouteLocationMatched {
-    icon?: string
+    key: string | any
+    icon?: VNode<
+      RendererNode,
+      RendererElement,
+      {
+        [key: string]: any
+      }
+    >
   }
 
   /**

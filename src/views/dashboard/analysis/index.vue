@@ -342,7 +342,6 @@ function down() {
 }
 </script>
 <route lang="yaml">
-label: analysis
 meta:
   breadcrumb: analysis
   icon: lang

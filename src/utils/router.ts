@@ -49,23 +49,19 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
   routes.sort(sortRoute)
   return routes.map(vx => {
     const info = cloneDeep(vx)
-    const hasChildren = (info.children?.length ?? 0) > 0
     const result: RouteRecordRaw = {
       ...info,
       key: info.name
     }
-    const hasMeta = (info?.meta ?? '') !== ''
-    const hasIcon = (info.meta?.icon ?? '') !== ''
-    if (hasMeta && hasIcon) {
-      const icon = info.meta!.icon!
-      result.icon = renderIcon(icon)
+    result.component = info.component
+    if (info.meta?.icon) {
+      result.icon = renderIcon(info.meta.icon)
     }
-    if (hasChildren) {
-      result.component = info.component
-      result.children = keyLabelAdjustment(info.children!, t)
+    if (info.children?.length) {
+      result.children = keyLabelAdjustment(info.children, t)
+      result.label = t(info.meta?.breadcrumb as string)
     } else {
-      result.component = info.component
-      result.label = renderRouterLink(info.name as string, t(info.label as string))
+      result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
     }
     return result
   })

@@ -5,7 +5,6 @@
 // default
 </script>
 <route lang="yaml">
-label: anmial
 meta:
   breadcrumb: anmial
   icon: moon

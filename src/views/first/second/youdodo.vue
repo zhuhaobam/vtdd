@@ -6,7 +6,6 @@
 // default
 </script>
 <route lang="yaml">
-label: youdodo
 meta:
   breadcrumb: youdodo
   icon: moon

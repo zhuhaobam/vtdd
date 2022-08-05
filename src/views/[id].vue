@@ -3,12 +3,12 @@
 </template>
 <script setup lang="ts" name="id">
 const props = defineProps<{
-  id: string
+  id: string | any
 }>()
 </script>
 <route lang="yaml">
-label: article
 meta:
+  breadcrumb: article
   icon: color
   sort: 100
   hidden: true

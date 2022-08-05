@@ -21,11 +21,9 @@ const starportIndex = ref(1)
 const { t } = useI18n()
 </script>
 <route lang="yaml">
-label: head
 meta:
-  breadcrumb: analysis
+  breadcrumb: head
   icon: sun
-  keepAlive: true
   sort: 5
   alwaysShow: false
 </route>

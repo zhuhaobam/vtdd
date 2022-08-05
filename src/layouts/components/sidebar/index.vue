@@ -34,12 +34,12 @@ const routes = generatedRoutes.map(v => {
   const currentMenu = v?.meta?.layout === false ? v : setupLayouts([v])[0]
   return currentMenu
 })
+const filterRoutes = filterHiddenRoutes(routes)
+const primaryRoutes = primaryAdjustment(filterRoutes)
 const menuOptions = ref<any[]>([])
 watch(
   locale,
   (newVal, oldVal) => {
-    const filterRoutes = filterHiddenRoutes(routes)
-    const primaryRoutes = primaryAdjustment(filterRoutes)
     menuOptions.value = keyLabelAdjustment(primaryRoutes, t)
   },
   { immediate: true, deep: true }

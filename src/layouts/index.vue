@@ -16,9 +16,7 @@
         <SideBar />
       </n-layout-sider>
       <n-layout content-style="padding: 24px;" :native-scrollbar="false">
-        <RouterView v-slot="{ Component }">
-          <component :is="Component" />
-        </RouterView>
+        <AppMain></AppMain>
       </n-layout>
     </n-layout>
     <n-layout-footer position="absolute" style="height: 64px; padding: 24px" bordered text-center>
@@ -31,8 +29,9 @@
 import AppHeader from './components/header/index.vue'
 import SideBar from './components/sidebar/index.vue'
 import { useAppStore } from '@store/app'
-
 import { storeToRefs } from 'pinia'
+import AppMain from './components/AppMain.vue'
+
 const { t } = useI18n()
 const appStore = useAppStore()
 const { collapsed } = storeToRefs(appStore)

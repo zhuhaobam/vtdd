@@ -3,10 +3,9 @@
 // default
 </script>
 <route lang="yaml">
-label: index
 redirect: /dashboard/analysis
 meta:
-  breadcrumb: analysis
+  breadcrumb: index
   sort: 0
   hidden: true
   alwaysShow: false

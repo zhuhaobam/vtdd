@@ -1,5 +1,7 @@
 import App from './App.vue'
 
+import '@/styles/index.scss'
+
 // 引入unocss的uno.css
 import 'uno.css'
 

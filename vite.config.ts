@@ -54,7 +54,7 @@ export default defineConfig(({ mode, command }) => {
         scss: {
           // 避免出现: build时的 @charset 必须在第一行的警告
           charset: false,
-          additionalData: '@use "@styles/globalstyle.scss" as *;'
+          additionalData: '@use "@styles/variables.scss" as *;'
         }
       }
     },
@@ -84,7 +84,8 @@ export default defineConfig(({ mode, command }) => {
           changeOrigin: true,
           rewrite: path => path.replace(new RegExp('^' + VTDD_APP_BASE_API), '')
         }
-      }
+      },
+      hmr: true
     }
   }
 })

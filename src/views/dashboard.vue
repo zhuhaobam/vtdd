@@ -6,9 +6,8 @@
 // default
 </script>
 <route lang="yaml">
-label: dashboard
 meta:
-  breadcrumb: analysis
+  breadcrumb: dashboard
   sort: 1
   icon: gitee
   alwaysShow: false

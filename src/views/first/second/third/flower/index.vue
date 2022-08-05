@@ -5,7 +5,6 @@
 // default
 </script>
 <route lang="yaml">
-label: flower
 meta:
   breadcrumb: flower
   icon: moon

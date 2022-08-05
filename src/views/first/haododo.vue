@@ -6,7 +6,6 @@
 // test
 </script>
 <route lang="yaml">
-label: haododo
 meta:
   breadcrumb: haododo
   icon: moon

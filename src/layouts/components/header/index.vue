@@ -63,7 +63,7 @@ import LightDark from './components/LightDark.vue'
 import { useAppStore } from '@store/app'
 import HeadLogo from './components/HeadLogo.vue'
 import HeadCenter from './components/HeadCenter.vue'
-import HeadBreadcrumb from './components/HeadBreadcrumb.vue'
+import HeadBreadcrumb from './components/HeadBreadcrumb/index.vue'
 const props = defineProps({
   collapsed: {
     type: Boolean

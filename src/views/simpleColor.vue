@@ -5,9 +5,8 @@
 // default
 </script>
 <route lang="yaml">
-label: color
 meta:
-  breadcrumb: analysis
+  breadcrumb: color
   icon: color
   sort: 7
   alwaysShow: false

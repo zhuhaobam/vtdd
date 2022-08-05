@@ -3,12 +3,16 @@
     trigger="hover"
     :options="[
       {
-        label: '个人设置',
+        label: '个人中心',
         key: 1
       },
       {
-        label: '退出登录',
+        label: '个人设置',
         key: 2
+      },
+      {
+        label: '退出登录',
+        key: 3
       }
     ]"
     @select="avatarSelect"
@@ -24,16 +28,22 @@
 
 <script lang="ts" setup name="HeadCenter">
 import { useRouter } from 'vue-router'
+import { useUserStore } from '@store/user'
 import getAssetsFile from '@/plugins/assets-kit'
+const userStore = useUserStore()
 const router = useRouter()
 //头像下拉菜单
 const avatarSelect = (key: number) => {
   switch (key) {
     case 1:
-      router.push({ name: 'setting' })
+      router.push({ name: 'system-user' })
       break
     case 2:
-      console.log(2)
+      router.push({ name: 'system-setting' })
+      break
+    case 3:
+      userStore.setToken('')
+      router.push({ name: 'login' })
       break
     default:
       console.log('default')

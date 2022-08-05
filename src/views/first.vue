@@ -7,9 +7,8 @@
 // default
 </script>
 <route lang="yaml">
-label: first
 meta:
-  breadcrumb: analysis
+  breadcrumb: first
   sort: 1
   icon: gitee
   alwaysShow: false
