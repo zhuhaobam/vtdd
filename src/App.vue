@@ -29,7 +29,7 @@ const localeMap: {
     l: enUS,
     dl: dateEnUS
   },
-  'zh- CN': {
+  'zh-CN': {
     l: zhCN,
     dl: dateZhCN
   }
