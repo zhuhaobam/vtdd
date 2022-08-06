@@ -33,11 +33,13 @@ export const useAppStore = defineStore('app', {
     },
     // 设置网页标题
     setTitle(t: any, title: string) {
+      console.log('app.ts设置title')
       this.title = title
       document.title = t(title) + ' - ' + t(import.meta.env.VTDD_APP_TITLE)
     },
     // 设置网页标题
     freshTitle(t: any) {
+      console.log('app.ts刷新title')
       document.title = t(this.title) + ' - ' + t(import.meta.env.VTDD_APP_TITLE)
     },
     async setReload() {

@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { cloneDeep } from 'lodash-es'
-import { renderIcon, renderRouterLink } from './render'
+import { renderIcon } from './render'
 // 浅拷贝 Object.assign({}, this.person)
 // 深拷贝 lodash-es cloneDeep
 
@@ -51,7 +51,7 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
     const info = cloneDeep(vx)
     const result: RouteRecordRaw = {
       ...info,
-      key: info.name
+      key: info.meta?.link ? info.meta?.link : info.name
     }
     result.component = info.component
     if (info.meta?.icon) {
@@ -61,7 +61,9 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
       result.children = keyLabelAdjustment(info.children, t)
       result.label = t(info.meta?.breadcrumb as string)
     } else {
-      result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
+      // result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
+      // 菜单那里处理了路由
+      result.label = t(info.meta?.breadcrumb as string)
     }
     return result
   })

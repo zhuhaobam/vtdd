@@ -24,6 +24,7 @@ import { keyLabelAdjustment, primaryAdjustment, filterHiddenRoutes } from '@util
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
+import { MenuOption } from 'naive-ui'
 const { t } = useI18n({ useScope: 'global' })
 const themeStore = useThemeStore()
 const appStore = useAppStore()
@@ -79,7 +80,7 @@ watch(
   }
 )
 // 点击菜单(选中菜单的回调，key 是选中菜单项的 key，item 是菜单项原始数据)
-function clickMenuItem(key: string) {
+function clickMenuItem(key: string, item: MenuOption) {
   if (/http(s)?:/.test(key)) {
     window.open(key)
   } else {

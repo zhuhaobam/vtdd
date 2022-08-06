@@ -12,6 +12,7 @@ starport: 星港
 head: 头部
 headinfo: 头部信息
 color: 颜色
+link: 外部链接
 first: 第一层
 second: 第二层
 third: 第三层

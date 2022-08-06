@@ -58,7 +58,7 @@
 <script setup lang="ts" name="dashboardWorkbench">
 import getAssetsFile from '@/plugins/assets-kit'
 const show = ref(false)
-console.log('..........' + new Date())
+console.log('....workbench......' + new Date())
 </script>
 <route lang="yaml">
 meta:

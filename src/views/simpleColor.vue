@@ -3,6 +3,7 @@
 </template>
 <script setup lang="ts" name="simpleColor">
 // default
+console.log('simpleColor')
 </script>
 <route lang="yaml">
 meta:
