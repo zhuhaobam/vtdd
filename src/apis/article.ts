@@ -1,6 +1,6 @@
 import http from '@/utils/http/axios.js'
-export const getArticle = () => {
-  return http.request({
+export function getArticle<T>() {
+  return http.request<T>({
     url: '/getArticle',
     method: 'get'
   })

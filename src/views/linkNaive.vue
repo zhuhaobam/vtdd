@@ -10,6 +10,6 @@ meta:
   link: https://www.naiveui.com/zh-CN/os-theme/components/menu
   breadcrumb: link
   icon: color
-  sort: 7
+  sort: 7000
   alwaysShow: false
 </route>

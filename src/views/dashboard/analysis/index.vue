@@ -228,19 +228,39 @@
   </div>
 </template>
 <script setup lang="ts" name="dashboardAnalysis">
-// import { onLogin, onTry, onTest } from '@apis/app'
-// import { onTry } from '@apis/app'
+import { MyLogin, MyTest } from '@/apis/apisTypes'
+import { onLogin, onTest } from '@apis/app'
+import { MyResponse } from 'axios'
 import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
 const { t } = useI18n()
 let drauu: Drauu
 onMounted(() => {
-  // onTry()
-  //   .then((res: any) => {
-  //     console.log('onTry', res.data)
-  //   })
-  //   .catch((error: any) => {
-  //     console.log('onTry', error)
-  //   })
+  onLogin<MyResponse<MyLogin>>()
+    .then(res => {
+      console.log('===========GET==============》')
+      console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
+      console.log(JSON.stringify(res))
+      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
+      console.log(JSON.stringify(res.data))
+      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
+      console.log(JSON.stringify(res.data.data))
+    })
+    .catch((error: any) => {
+      console.log('request->onLogin<MyResponse<MyLogin>>->error', error)
+    })
+  onTest<MyResponse<MyTest>>()
+    .then(res => {
+      console.log('===========POST==============》')
+      console.log('===========request->onTest<MyResponse<MyTest>>->res')
+      console.log(JSON.stringify(res))
+      console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res')
+      console.log(JSON.stringify(res.data))
+      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res')
+      console.log(JSON.stringify(res.data.data))
+    })
+    .catch((error: any) => {
+      console.log('request->onTest<MyResponse<MyTest>>->error', error)
+    })
   drauu = createDrauu({
     el: '#svg',
     brush: {

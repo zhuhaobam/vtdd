@@ -17,7 +17,7 @@ export default [
   },
   {
     url: '/api/ontest', // 注意，这里只能是string格式
-    method: 'get',
+    method: 'post',
     response: () => {
       let code = 200
       return {

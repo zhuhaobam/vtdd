@@ -3,8 +3,8 @@ import http from '@/utils/http/axios.js'
 /**
  * @description: 获取用户信息
  */
-export function getUserInfo() {
-  return http.request({
+export function getUserInfo<T>() {
+  return http.request<T>({
     url: '/admin_info',
     method: 'get'
   })
@@ -24,8 +24,8 @@ export function login(params: any) {
 /**
  * @description: 用户登出
  */
-export function logout(params: any) {
-  return http.request({
+export function logout<T>(params: any) {
+  return http.request<T>({
     url: '/login/logout',
     method: 'POST',
     params
