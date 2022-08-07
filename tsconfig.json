@@ -32,6 +32,8 @@
       "@assets/*": ["src/assets/*"],
       "@components/*": ["src/components/*"],
       "@directive/*": ["src/directive/*"],
+      "@enums/*": ["src/enums/*"],
+      "@hooks/*": ["src/hooks/*"],
       "@viteplugins/*": ["vite/plugins/*"],
       "@router/*": ["src/router/*"],
       "@store/*": ["src/store/*"],

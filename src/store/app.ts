@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { createDiscreteApi } from 'naive-ui'
 const { loadingBar } = createDiscreteApi(['loadingBar'])
-
 interface IAppStore {
   collapsed: boolean // 菜单处理
   locale: string // 国际化
@@ -21,7 +20,7 @@ export const useAppStore = defineStore('app', {
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title', 'breadcrumb', 'reload'] }]
+    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title', 'reload'] }]
   },
   getters: {},
   actions: {
@@ -40,7 +39,17 @@ export const useAppStore = defineStore('app', {
     // 设置网页标题
     freshTitle(t: any) {
       console.log('app.ts刷新title')
-      document.title = t(this.title) + ' - ' + t(import.meta.env.VTDD_APP_TITLE)
+      const title = this.title ?? ''
+      document.title = (title === '' ? '' : t(this.title) + ' - ') + t(import.meta.env.VTDD_APP_TITLE)
+    },
+    setLoadingBarStart() {
+      loadingBar.start()
+    },
+    setLoadingBarFinish() {
+      loadingBar.finish()
+    },
+    setLoadingBarError() {
+      loadingBar.error()
     },
     async setReload() {
       loadingBar.start()

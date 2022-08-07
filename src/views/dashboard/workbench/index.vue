@@ -53,6 +53,15 @@
       :image-opacity="0.24"
     />
     <n-switch v-model:value="show" />
+    <n-card title="有good权限">
+      <n-button v-permission="{ action: 'good', effect: 'disabled' }">有good权限</n-button>
+    </n-card>
+    <n-card title="没有权限移除">
+      <n-button v-permission="{ action: 'xxx' }">???</n-button>
+    </n-card>
+    <n-card title="无xxx权限">
+      <n-button v-permission="{ action: 'xxx', effect: 'disabled' }">无xxx权限</n-button>
+    </n-card>
   </div>
 </template>
 <script setup lang="ts" name="dashboardWorkbench">

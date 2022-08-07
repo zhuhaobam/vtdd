@@ -76,6 +76,7 @@ const appStore = useAppStore()
 const { isFullscreen, toggle } = useFullscreen()
 const { availableLocales, locale } = useI18n()
 const toggleLocales = () => {
+  console.log('toggleLocales')
   // change to some real logic
   const locales = availableLocales
   const localeValue = locales[(locales.indexOf(locale.value) + 1) % locales.length]

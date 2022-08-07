@@ -39,6 +39,8 @@ export default defineConfig(({ mode, command }) => {
         { find: '@assets', replacement: pathResolve('src/assets') },
         { find: '@components', replacement: pathResolve('src/components') },
         { find: '@directive', replacement: pathResolve('src/directive') },
+        { find: '@enums', replacement: pathResolve('src/enums') },
+        { find: '@hooks', replacement: pathResolve('src/hooks') },
         { find: '@viteplugins', replacement: pathResolve('vite/plugins') },
         { find: '@router', replacement: pathResolve('src/router') },
         { find: '@store', replacement: pathResolve('src/store') },

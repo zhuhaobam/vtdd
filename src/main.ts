@@ -22,6 +22,7 @@ import StarportPlugin from 'vue-starport'
 
 //  I18n【注册】
 import i18n from '@/plugins/i18n'
+import { permission } from '@directive/permission'
 
 import { createApp } from 'vue'
 createApp(App)
@@ -29,4 +30,5 @@ createApp(App)
   .use(router)
   .use(pinia)
   .use(i18n)
+  .directive('permission', permission)
   .mount('#app')

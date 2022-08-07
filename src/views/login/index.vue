@@ -34,6 +34,7 @@ const { message } = createDiscreteApi(['message'])
 function hasLogin() {
   message.loading('转圈圈...')
   userStore.setToken('ashdyjdgfjjfhkgjfkjhdjfh')
+  userStore.setPermissions(['good', 'simple'])
   // message.info('进入首页')
   router.replace('/')
 }

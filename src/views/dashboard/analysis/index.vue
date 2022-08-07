@@ -237,32 +237,32 @@ let drauu: Drauu
 onMounted(() => {
   onLogin<MyResponse<MyLogin>>()
     .then(res => {
-      console.log('===========GET==============》')
-      console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
-      // console.log(JSON.stringify(res))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
+      // console.log('===========GET==============》')
+      // console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
+      // // console.log(JSON.stringify(res))
+      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
+      // console.log(JSON.stringify(res.data))
+      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
+      // console.log(JSON.stringify(res.data.data))
+      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.other')
+      // console.log(JSON.stringify(res.data.data?.other))
+      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
+      // console.log(JSON.stringify(res.data.data?.permList))
     })
     .catch((error: any) => {
       console.log('request->onLogin<MyResponse<MyLogin>>->error', error)
     })
   onTest<MyResponse<MyTest>>()
     .then(res => {
-      console.log('===========POST==============》')
-      console.log('===========request->onTest<MyResponse<MyTest>>->res')
-      // console.log(JSON.stringify(res))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
+      // console.log('===========POST==============》')
+      // console.log('===========request->onTest<MyResponse<MyTest>>->res')
+      // // console.log(JSON.stringify(res))
+      // console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res.data')
+      // console.log(JSON.stringify(res.data))
+      // console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data')
+      // console.log(JSON.stringify(res.data.data))
+      // console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data?.other')
+      // console.log(JSON.stringify(res.data.data?.other))
     })
     .catch((error: any) => {
       console.log('request->onTest<MyResponse<MyTest>>->error', error)
@@ -370,6 +370,7 @@ function down() {
 <route lang="yaml">
 meta:
   breadcrumb: analysis
+  layout: false
   icon: lang
   keepAlive: true
   sort: 2

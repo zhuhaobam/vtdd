@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { ResultEnum } from '@/enums/httpEnum'
+import { ResultEnum } from '@enums/httpEnum'
 import { getUserInfo, login } from '@apis/user'
 
 export interface IUserState {
@@ -7,7 +7,7 @@ export interface IUserState {
   username: string
   welcome: string
   avatar: string
-  permissions: any[]
+  permissions: string[]
   info: any
 }
 
@@ -37,7 +37,7 @@ export const useUserStore = defineStore('user', {
     getNickname(state: { username: string }): string {
       return state.username
     },
-    getPermissions(state: { permissions: any[] }): [any][] {
+    getPermissions(state: { permissions: string[] }): string[] {
       return state.permissions
     },
     getUserInfo(state: { info: object }): object {

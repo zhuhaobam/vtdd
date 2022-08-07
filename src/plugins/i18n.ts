@@ -37,7 +37,6 @@ const install = (app: App) => {
     fallbackLocale: 'zh-CN',
     messages: loadLang()
   })
-
   app.use(i18n)
 }
 
