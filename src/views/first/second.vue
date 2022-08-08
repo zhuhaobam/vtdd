@@ -9,7 +9,7 @@
 <route lang="yaml">
 meta:
   breadcrumb: second
-  sort: 21
+  sort: 1
   icon: gitee
   alwaysShow: false
 </route>

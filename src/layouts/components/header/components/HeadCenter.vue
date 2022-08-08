@@ -46,7 +46,7 @@ const avatarSelect = (key: number) => {
       router.push({ name: 'login' })
       break
     default:
-      console.log('default')
+      console.log('头像下拉菜单没有匹配')
   }
 }
 </script>

@@ -8,7 +8,7 @@
 <route lang="yaml">
 meta:
   breadcrumb: dashboard
-  sort: 1
+  sort: 2
   icon: gitee
   alwaysShow: false
 </route>

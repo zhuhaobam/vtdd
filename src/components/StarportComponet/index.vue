@@ -23,8 +23,6 @@
 </template>
 
 <script setup lang="ts">
-import { onBeforeRouteLeave } from 'vue-router'
-
 const { t } = useI18n()
 type Props = {
   index: number
@@ -39,33 +37,4 @@ const images: any[] = [
 ]
 const src = ref(images[index.value])
 const counter = ref(Math.round(Math.random() * 100))
-const counter2 = ref(Math.round(Math.random() * 100))
-
-onBeforeRouteLeave(() => {
-  console.log('....StarportComponet.onBeforeRouteLeave.....', counter2.value)
-})
-
-onBeforeMount(() => {
-  console.log('....StarportComponet.onBeforeMount.DOM即将挂载....', counter2.value)
-})
-
-onMounted(() => {
-  console.log('....StarportComponet.onMounted.DOM挂载完毕....', counter2.value)
-})
-
-onBeforeUpdate(() => {
-  console.log('....StarportComponet.onBeforeUpdate.DOM即将更新....', counter2.value)
-})
-
-onUpdated(() => {
-  console.log('....StarportComponet.onUpdated.DOM更新完毕....', counter2.value)
-})
-
-onBeforeUnmount(() => {
-  console.log('....StarportComponet.onBeforeUnmount.即将销毁....', counter2.value)
-})
-
-onUnmounted(() => {
-  console.log('....StarportComponet.onUnmounted.销毁完毕....', counter2.value)
-})
 </script>

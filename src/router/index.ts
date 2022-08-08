@@ -8,7 +8,6 @@ const routesLayouts = generatedRoutes.map(v => {
   const currentMenu = v.meta?.layout !== false ? setupLayouts([v])[0] : v
   return currentMenu
 })
-console.log(routesLayouts)
 // keep-alive缓存支持 `{Keep alive cache support}`
 // 将文件夹的路由展开，为了支持keep-alive `{Expand the route of the folder to support keep alive}`
 const primaryRoutes = primaryKeepAliveAdjustment(routesLayouts)

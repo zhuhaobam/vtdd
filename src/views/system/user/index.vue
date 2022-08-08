@@ -2,7 +2,7 @@
   <div>个人中心</div>
 </template>
 
-<script setup lang="ts" name="user">
+<script setup lang="ts" name="system-user">
 // test
 </script>
 <route lang="yaml">

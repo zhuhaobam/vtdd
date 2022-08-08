@@ -81,11 +81,9 @@ watch(
 )
 // 点击菜单(选中菜单的回调，key 是选中菜单项的 key，item 是菜单项原始数据)
 function clickMenuItem(key: string, item: MenuOption) {
-  // if (/http(s)?:/.test(key)) {
-  //   window.open(key)
-  // } else {
-  //   router.push({ name: key })
-  // }
+  if (/http(s)?:/.test(key)) {
+    window.open(key)
+  }
 }
 
 //展开菜单(keys 是展开菜单项的 key 的数组)

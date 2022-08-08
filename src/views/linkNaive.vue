@@ -3,7 +3,6 @@
 </template>
 <script setup lang="ts" name="linkNaive">
 // default
-console.log('linkNaive')
 </script>
 <route lang="yaml">
 meta:
@@ -11,6 +10,6 @@ meta:
   breadcrumb: link
   layout: false
   icon: color
-  sort: 7000
+  sort: 4
   alwaysShow: false
 </route>

@@ -10,7 +10,7 @@ const props = defineProps<{
 meta:
   breadcrumb: article
   icon: color
-  sort: 100
+  sort: 1
   hidden: true
   alwaysShow: false
 </route>

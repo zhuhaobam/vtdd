@@ -8,7 +8,7 @@
 <route lang="yaml">
 meta:
   breadcrumb: starport
-  sort: 4
+  sort: 6
   icon: github
   alwaysShow: false
 </route>

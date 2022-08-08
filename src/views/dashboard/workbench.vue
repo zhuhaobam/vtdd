@@ -69,17 +69,14 @@
 <script setup lang="ts" name="dashboard-workbench">
 import getAssetsFile from '@/plugins/assets-kit'
 const show = ref(false)
-onMounted(() => {
-  console.log('....workbench......' + new Date())
-})
 // 被包裹组件被激活的状态下触发
 onActivated(() => {
-  console.log('workbench没错我在缓存组件中onActivated')
+  console.log('激活【workbench】===keep-alive===onActivated' + new Date())
 })
 
 // 在被包裹组件停止使用时触发
 onDeactivated(() => {
-  console.log('workbench没错我在缓存组件中onDeactivated')
+  console.log('停止【workbench】===keep-alive===onDeactivated' + new Date())
 })
 </script>
 <route lang="yaml">
@@ -87,6 +84,6 @@ meta:
   breadcrumb: workbench
   icon: moon
   keepAlive: true
-  sort: 3
+  sort: 0
   alwaysShow: false
 </route>

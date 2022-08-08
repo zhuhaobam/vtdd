@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
     <div>
@@ -16,23 +17,14 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="starportHead">
+<script setup lang="ts" name="starport-head">
 const starportIndex = ref(1)
 const { t } = useI18n()
-// 被包裹组件被激活的状态下触发
-onActivated(() => {
-  console.log('a没错我在缓存组件中onActivated')
-})
-
-// 在被包裹组件停止使用时触发
-onDeactivated(() => {
-  console.log('a没错我在缓存组件中onDeactivated')
-})
 </script>
 <route lang="yaml">
 meta:
   breadcrumb: head
   icon: sun
-  sort: 5
+  sort: 1
   alwaysShow: false
 </route>

@@ -21,17 +21,3 @@ export function renderRouterLink(name: string, label: string) {
       { default: () => label }
     )
 }
-
-/**
- * render href
- * */
-export function renderHref(link: string, label: string) {
-  return h('a', { href: link, target: '_blank' }, label)
-}
-
-export function renderHrefOrRouterLink(key: string, label: string) {
-  if (/http(s)?:/.test(key)) {
-    return renderHref(key, label)
-  }
-  return renderRouterLink(key, label)
-}

@@ -9,7 +9,6 @@
 meta:
   breadcrumb: youdodo
   icon: moon
-  keepAlive: true
-  sort: 300
+  sort: 0
   alwaysShow: false
 </route>

@@ -17,13 +17,15 @@ declare module 'vue-router' {
    */
   interface RouteLocationMatched {
     key: string | any
-    icon?: VNode<
-      RendererNode,
-      RendererElement,
-      {
-        [key: string]: any
-      }
-    >
+    icon?:
+      | VNode<
+          RendererNode,
+          RendererElement,
+          {
+            [key: string]: any
+          }
+        >
+      | any
   }
 
   /**
@@ -31,19 +33,22 @@ declare module 'vue-router' {
    */
   interface _RouteRecordBase {
     key: string | any
-    label: VNode<
-      RendererNode,
-      RendererElement,
-      {
-        [key: string]: any
-      }
-    >
+    label:
+      | VNode<
+          RendererNode,
+          RendererElement,
+          {
+            [key: string]: any
+          }
+        >
+      | any
     icon?: VNode<
       RendererNode,
       RendererElement,
-      {
-        [key: string]: any
-      }
+      | {
+          [key: string]: any
+        }
+      | any
     >
   }
 }

@@ -6,7 +6,7 @@
   </n-result>
 </template>
 
-<script setup lang="ts" name="notFound">
+<script setup lang="ts" name="all">
 import { useRouter } from 'vue-router'
 const router = useRouter()
 </script>
@@ -14,7 +14,7 @@ const router = useRouter()
 meta:
   breadcrumb: not-found
   layout: false
-  sort: 200
+  sort: 0
   hidden: true
   alwaysShow: false
 </route>

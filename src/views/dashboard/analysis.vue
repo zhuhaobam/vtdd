@@ -194,8 +194,8 @@
   </div>
 </template>
 <script setup lang="ts" name="dashboard-analysis">
-import { MyLogin, MyTest } from '@/apis/apisTypes'
-import { onLogin, onTest } from '@apis/app'
+import { MyLogin } from '@/apis/apisTypes'
+import { onLogin } from '@apis/app'
 import { MyResponse } from 'axios'
 import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
 const { t } = useI18n()
@@ -203,35 +203,11 @@ let drauu: Drauu
 onMounted(() => {
   onLogin<MyResponse<MyLogin>>()
     .then(res => {
-      // console.log('===========GET==============》')
-      // console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
-      // // console.log(JSON.stringify(res))
-      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
-      // console.log(JSON.stringify(res.data))
-      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
-      // console.log(JSON.stringify(res.data.data))
-      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.other')
-      // console.log(JSON.stringify(res.data.data?.other))
-      // console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      // console.log(JSON.stringify(res.data.data?.permList))
+      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
+      console.log(JSON.stringify(res.data.data?.permList))
     })
     .catch((error: any) => {
       console.log('request->onLogin<MyResponse<MyLogin>>->error', error)
-    })
-  onTest<MyResponse<MyTest>>()
-    .then(res => {
-      // console.log('===========POST==============》')
-      // console.log('===========request->onTest<MyResponse<MyTest>>->res')
-      // // console.log(JSON.stringify(res))
-      // console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res.data')
-      // console.log(JSON.stringify(res.data))
-      // console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data')
-      // console.log(JSON.stringify(res.data.data))
-      // console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data?.other')
-      // console.log(JSON.stringify(res.data.data?.other))
-    })
-    .catch((error: any) => {
-      console.log('request->onTest<MyResponse<MyTest>>->error', error)
     })
   drauu = createDrauu({
     el: '#svg',
@@ -335,12 +311,12 @@ function down() {
 
 // 被包裹组件被激活的状态下触发
 onActivated(() => {
-  console.log('analysis没错我在缓存组件中onActivated')
+  console.log('激活【analysis】===keep-alive===onActivated' + new Date())
 })
 
 // 在被包裹组件停止使用时触发
 onDeactivated(() => {
-  console.log('analysis没错我在缓存组件中onDeactivated')
+  console.log('停止【analysis】===keep-alive===onDeactivated' + new Date())
 })
 </script>
 <route lang="yaml">
@@ -348,6 +324,6 @@ meta:
   breadcrumb: analysis
   icon: lang
   keepAlive: true
-  sort: 2
+  sort: 1
   alwaysShow: false
 </route>

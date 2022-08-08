@@ -9,7 +9,6 @@
 meta:
   breadcrumb: haododo
   icon: moon
-  keepAlive: true
-  sort: 50
+  sort: 0
   alwaysShow: false
 </route>

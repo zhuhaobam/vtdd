@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
     <n-input type="text" placeholder="基本的 Input22222" />
@@ -21,7 +22,7 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="starportHeadInfo">
+<script setup lang="ts" name="starport-headinfo">
 const starportIndex = ref(1)
 const { t } = useI18n()
 </script>
@@ -29,6 +30,6 @@ const { t } = useI18n()
 meta:
   breadcrumb: headinfo
   icon: color
-  sort: 6
+  sort: 0
   alwaysShow: false
 </route>
