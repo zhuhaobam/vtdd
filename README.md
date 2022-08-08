@@ -3,7 +3,7 @@
 [![OSCS Status](https://www.oscs1024.com/platform/badge/zhuhaobam/vtdd.svg?size=large)](https://www.oscs1024.com/project/zhuhaobam/vtdd?ref=badge_large)
 
 
-[![图](https://github.com/zhuhaobam/vtdd/tree/main/docbyexplain/page1.png)]
+[![图](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page1.png)]
 # vtdd vite + ts + dd
 
 # 地址
