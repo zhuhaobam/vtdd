@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
     <div>
       vite-plugin-vue-setup-extend包的name="firstSecond"决定了路由层级，你细看我写的first到third目录页面就能揣摩出来，结合我的路由处理
     </div>
+    <n-input type="text" placeholder="基本的 Input" />
     <div>script setup lang="ts" name="firstSecond"</div>
     <div>{{ t('toggle-language') }}</div>
     <i-myself-color w10 h10 color="red" />
@@ -189,45 +191,9 @@
       <n-button title="Download" @click="down()">📥</n-button>
     </n-space>
     <svg id="svg" w-full flex-auto z-10 h150 border style="touch-action: none"></svg>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
-    <n-h2>海淀桥</n-h2>
   </div>
 </template>
-<script setup lang="ts" name="dashboardAnalysis">
+<script setup lang="ts" name="dashboard-analysis">
 import { MyLogin, MyTest } from '@/apis/apisTypes'
 import { onLogin, onTest } from '@apis/app'
 import { MyResponse } from 'axios'
@@ -366,11 +332,20 @@ function down() {
   elem.click()
   document.body.removeChild(elem)
 }
+
+// 被包裹组件被激活的状态下触发
+onActivated(() => {
+  console.log('analysis没错我在缓存组件中onActivated')
+})
+
+// 在被包裹组件停止使用时触发
+onDeactivated(() => {
+  console.log('analysis没错我在缓存组件中onDeactivated')
+})
 </script>
 <route lang="yaml">
 meta:
   breadcrumb: analysis
-  layout: false
   icon: lang
   keepAlive: true
   sort: 2

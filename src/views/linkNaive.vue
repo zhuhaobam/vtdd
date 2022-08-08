@@ -9,6 +9,7 @@ console.log('linkNaive')
 meta:
   link: https://www.naiveui.com/zh-CN/os-theme/components/menu
   breadcrumb: link
+  layout: false
   icon: color
   sort: 7000
   alwaysShow: false

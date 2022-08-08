@@ -59,7 +59,7 @@ watch(
 const currentRoute = useRoute()
 // 获取当前打开的子菜单
 const matched = currentRoute.matched
-const router = useRouter()
+// const router = useRouter()
 const selectedKeys = ref<string>(currentRoute.name as string)
 const beforeOpenKeys: string[] = matched && matched.length ? matched.map(item => item.name as string) : []
 const getOpenKeys = beforeOpenKeys.filter(x => x)
@@ -81,11 +81,11 @@ watch(
 )
 // 点击菜单(选中菜单的回调，key 是选中菜单项的 key，item 是菜单项原始数据)
 function clickMenuItem(key: string, item: MenuOption) {
-  if (/http(s)?:/.test(key)) {
-    window.open(key)
-  } else {
-    router.push({ name: key })
-  }
+  // if (/http(s)?:/.test(key)) {
+  //   window.open(key)
+  // } else {
+  //   router.push({ name: key })
+  // }
 }
 
 //展开菜单(keys 是展开菜单项的 key 的数组)

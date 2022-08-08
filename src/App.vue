@@ -61,7 +61,8 @@ onMounted(() => {
 })
 router.beforeEach((to, from, next) => {
   appStore.setLoadingBarStart()
-  console.log('路由前置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
+  // console.log('路由前置守卫[App.vue]')
+  // console.log('路由前置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
   appStore.setTitle(t, to.meta?.breadcrumb as string)
   if (to.name !== 'login' && !(userStore.getToken !== '')) {
     next({ name: 'login' })
@@ -71,11 +72,13 @@ router.beforeEach((to, from, next) => {
 })
 router.afterEach((to, from, failure) => {
   appStore.setLoadingBarFinish()
-  console.log('路由后置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
+  // console.log('路由后置守卫[App.vue]')
+  // console.log('路由后置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
 })
 
 router.beforeResolve(async to => {
-  console.log('解析守卫[App.vue]', 'to:' + to.fullPath)
+  // console.log('解析守卫[App.vue]')
+  // console.log('解析守卫[App.vue]', 'to:' + to.fullPath)
   // if (to.meta.requiresCamera) {
   //   try {
   //     await askForCameraPermission()

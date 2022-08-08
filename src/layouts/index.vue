@@ -16,7 +16,7 @@
         <SideBar />
       </n-layout-sider>
       <n-layout content-style="padding: 24px;" :native-scrollbar="false">
-        <AppMain></AppMain>
+        <AppMain />
       </n-layout>
     </n-layout>
     <n-layout-footer position="absolute" style="height: 64px; padding: 24px" bordered text-center>

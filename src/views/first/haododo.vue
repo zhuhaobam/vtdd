@@ -2,7 +2,7 @@
 <template>
   <div>secondfloor->haododo</div>
 </template>
-<script setup lang="ts" name="firstHaododo">
+<script setup lang="ts" name="first-haododo">
 // test
 </script>
 <route lang="yaml">

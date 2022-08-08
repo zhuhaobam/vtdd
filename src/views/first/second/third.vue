@@ -3,7 +3,7 @@
   / third RouterView
   <RouterView />
 </template>
-<script setup lang="ts" name="firstSecondThird">
+<script setup lang="ts" name="first-second-third">
 // default
 </script>
 <route lang="yaml">

@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { cloneDeep } from 'lodash-es'
-import { renderIcon } from './render'
+import { renderIcon, renderRouterLink, renderHref } from './render'
 // 浅拷贝 Object.assign({}, this.person)
 // 深拷贝 lodash-es cloneDeep
 
@@ -41,6 +41,29 @@ export function primaryAdjustment(routes: RouteRecordRaw[]): RouteRecordRaw[] {
 }
 
 /**
+ * 将文件夹的路由展开，为了支持keep-alive `{Expand the route of the folder to support keep alive}`
+ * @param routes
+ * @returns
+ */
+export function primaryKeepAliveAdjustment(routes: RouteRecordRaw[]): RouteRecordRaw[] {
+  return routes.map(vx => {
+    const v = cloneDeep(vx)
+    const hasChildren = (v.children?.length ?? 0) > 0
+    const info = hasChildren ? v.children![0] : v
+    const singlePage = !((info.children?.length ?? 0) > 0)
+    if (!hasChildren || singlePage) {
+      return v
+    }
+    const result: RouteRecordRaw = {
+      ...info,
+      path: v.path
+    }
+    result.component = v.component
+    return result
+  })
+}
+
+/**
  * keyLabel和图标处理
  * @param routes
  * @returns
@@ -61,9 +84,13 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
       result.children = keyLabelAdjustment(info.children, t)
       result.label = t(info.meta?.breadcrumb as string)
     } else {
-      // result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
-      // 菜单那里处理了路由
-      result.label = t(info.meta?.breadcrumb as string)
+      if (/http(s)?:/.test(info.key)) {
+        result.label = renderHref(info.key as string, t(info.meta?.breadcrumb as string))
+      }
+      result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
+
+      // **菜单那里处理了路由
+      // result.label = t(info.meta?.breadcrumb as string)
     }
     return result
   })

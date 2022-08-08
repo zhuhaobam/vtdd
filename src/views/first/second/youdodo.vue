@@ -2,7 +2,7 @@
 <template>
   <div>secondfloor->youdodo</div>
 </template>
-<script setup lang="ts" name="firstSecondYoudodo">
+<script setup lang="ts" name="first-second-youdodo">
 // default
 </script>
 <route lang="yaml">

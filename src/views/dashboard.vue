@@ -2,7 +2,7 @@
 <template>
   <RouterView />
 </template>
-<script setup lang="ts" name="dashboardGood">
+<script setup lang="ts" name="dashboard">
 // default
 </script>
 <route lang="yaml">

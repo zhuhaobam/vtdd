@@ -1,8 +1,10 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
     <n-h1 prefix="bar" align-text type="info">
       <n-text type="info"> {{ $t('workbench-watermark') }} </n-text>
     </n-h1>
+    <n-input type="text" placeholder="基本的 Input2222" />
     <div>
       <n-watermark
         :content="$t('watermark')"
@@ -64,10 +66,21 @@
     </n-card>
   </div>
 </template>
-<script setup lang="ts" name="dashboardWorkbench">
+<script setup lang="ts" name="dashboard-workbench">
 import getAssetsFile from '@/plugins/assets-kit'
 const show = ref(false)
-console.log('....workbench......' + new Date())
+onMounted(() => {
+  console.log('....workbench......' + new Date())
+})
+// 被包裹组件被激活的状态下触发
+onActivated(() => {
+  console.log('workbench没错我在缓存组件中onActivated')
+})
+
+// 在被包裹组件停止使用时触发
+onDeactivated(() => {
+  console.log('workbench没错我在缓存组件中onDeactivated')
+})
 </script>
 <route lang="yaml">
 meta:

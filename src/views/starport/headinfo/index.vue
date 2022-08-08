@@ -1,5 +1,6 @@
 <template>
   <div>
+    <n-input type="text" placeholder="基本的 Input22222" />
     <div>
       <Starport port="donghua" style="width: 120px; height: 120px">
         <starport-componet :index="starportIndex" style="width: 120px; height: 120px" />

@@ -13,6 +13,7 @@ import throttleAdapterEnhancer from './adapter/throttleAdapterEnhancer'
 import hotAxiosRetry from './hot/hotAxiosRetry'
 import { axiosGetObj2Params } from '../tool'
 const { message } = createDiscreteApi(['message'])
+message.info('axios.page')
 class AxiosHttpRequest implements HttpRequesTypeInterface {
   baseURL: string
   timeout: number
@@ -76,7 +77,6 @@ class AxiosHttpRequest implements HttpRequesTypeInterface {
    * @returns 实例
    */
   request<U = any>(options: AxiosRequestConfig): AxiosPromise<U> {
-    message.info('axios.create()')
     const instance = axios.create()
     options = Object.assign(this.getConfigParams(), options)
     hotAxiosRetry(instance, {
