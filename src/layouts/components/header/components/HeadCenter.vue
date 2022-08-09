@@ -3,15 +3,15 @@
     trigger="hover"
     :options="[
       {
-        label: '个人中心',
+        label: $t('page.user'),
         key: 1
       },
       {
-        label: '个人设置',
+        label: $t('page.setting'),
         key: 2
       },
       {
-        label: '退出登录',
+        label: $t('page.logout'),
         key: 3
       }
     ]"
@@ -20,7 +20,7 @@
     <div class="avatar">
       <n-avatar round :src="getAssetsFile('cafe.png')"> Z </n-avatar>
       <n-ellipsis style="width: 50px">
-        {{ $t('name') }}
+        {{ $t('project.default') }}
       </n-ellipsis>
     </div>
   </n-dropdown>

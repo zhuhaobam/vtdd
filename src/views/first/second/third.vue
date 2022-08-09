@@ -8,8 +8,7 @@
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: third
+  breadcrumb: page.first.second.third.third
   sort: 1
-  icon: gitee
-  alwaysShow: false
+  icon: i-ant-design:node-expand-outlined
 </route>

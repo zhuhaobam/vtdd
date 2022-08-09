@@ -7,8 +7,7 @@
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: anmial
-  icon: moon
+  breadcrumb: page.first.second.third.anmial
+  icon: i-carbon:crop-health
   sort: 1
-  alwaysShow: false
 </route>

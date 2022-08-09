@@ -7,10 +7,10 @@
           <div class="logo-wrapper">
             <img :src="getAssetsFile('logo.png')" />
           </div>
-          <div class="title">{{ $t('title') }}</div>
-          <div class="sub-title">{{ $t('description') }}</div>
-          <div class="flex-1 flex justify-center items-center ttppii">{{ $t('description') }}</div>
-          <div class="bottom-wrapper">{{ $t('description') }}</div>
+          <div class="title">{{ $t('login.title') }}</div>
+          <div class="sub-title">{{ $t('login.subtitle') }}</div>
+          <div class="flex-1 flex justify-center items-center ttppii">{{ $t('login.poetry') }}</div>
+          <div class="bottom-wrapper">{{ $t('all.footer') }}</div>
         </div>
       </div>
       <div class="right">
@@ -42,11 +42,10 @@ function hasLogin() {
 <route lang="yaml">
 meta:
   layout: false
-  breadcrumb: login
-  icon: color
+  breadcrumb: page.login
+  icon: gift
   sort: 100
   hidden: true
-  alwaysShow: false
 </route>
 <style lang="scss" scoped>
 @keyframes left-to-right {
@@ -123,6 +122,7 @@ meta:
       }
 
       .ttppii {
+        text-align: center;
         color: #ffffff;
         font-weight: 500;
         font-size: 30px;

@@ -14,6 +14,7 @@ export default function createIcons() {
     customCollections: {
       // 这里是存放svg图标的文件地址，myself是自定义图标库的名称
       // 给svg文件设置fill="currentColor"属性，使图标的颜色具有适应性
+      // import IconColor from '~icons/myself/color'
       myself: FileSystemIconLoader(pathResolve('../../src/assets/icons'), svg =>
         svg.replace(/^<svg /, '<svg fill="currentColor" ')
       )

@@ -15,9 +15,7 @@ onDeactivated(() => {
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: color
-  icon: color
-  keepAlive: true
-  sort: 5
-  alwaysShow: false
+  breadcrumb: page.color
+  icon: i-carbon:color-palette
+  sort: 7
 </route>

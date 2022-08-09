@@ -2,13 +2,12 @@
 <template>
   <div>secondfloor->youdodo</div>
 </template>
-<script setup lang="ts" name="first-second-youdodo">
+<script setup lang="ts" name="first-second-seconddo">
 // default
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: youdodo
-  icon: moon
+  breadcrumb: page.first.second.seconddo
+  icon: i-carbon:crop-health
   sort: 0
-  alwaysShow: false
 </route>

@@ -7,9 +7,8 @@
 <route lang="yaml">
 meta:
   link: https://www.naiveui.com/zh-CN/os-theme/components/menu
-  breadcrumb: link
+  breadcrumb: page.link
   layout: false
-  icon: color
-  sort: 4
-  alwaysShow: false
+  icon: i-carbon:link
+  sort: 8
 </route>

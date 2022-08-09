@@ -17,14 +17,13 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="starport-head">
+<script setup lang="ts" name="starport-onepage">
 const starportIndex = ref(1)
 const { t } = useI18n()
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: head
-  icon: sun
+  breadcrumb: page.starport.onepage
+  icon: i-carbon:condition-point
   sort: 1
-  alwaysShow: false
 </route>

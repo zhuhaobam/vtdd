@@ -8,5 +8,4 @@ meta:
   breadcrumb: index
   sort: 0
   hidden: true
-  alwaysShow: false
 </route>

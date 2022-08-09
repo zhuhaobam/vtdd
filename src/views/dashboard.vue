@@ -7,8 +7,9 @@
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: dashboard
+  breadcrumb: page.dashboard.dashboard
   sort: 2
-  icon: gitee
-  alwaysShow: false
+  icon: i-ant-design:dashboard-filled
+  size: 16
+  breadcrumbSize: 16
 </route>

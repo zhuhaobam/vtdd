@@ -1,10 +1,12 @@
 <template>
   <n-config-provider :locale="localeLRef" :date-locale="localeLDRef" :theme="theme" :theme-overrides="themeOverrides">
-    <n-loading-bar-provider>
-      <StarportCarrier>
-        <router-view />
-      </StarportCarrier>
-    </n-loading-bar-provider>
+    <n-config-provider :hljs="hljs">
+      <n-loading-bar-provider>
+        <StarportCarrier>
+          <router-view />
+        </StarportCarrier>
+      </n-loading-bar-provider>
+    </n-config-provider>
   </n-config-provider>
 </template>
 
@@ -16,6 +18,10 @@ import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale } from 'naive-ui'
 import router from './router'
+import hljs from 'highlight.js/lib/core'
+import javascript from 'highlight.js/lib/languages/javascript'
+
+hljs.registerLanguage('javascript', javascript)
 
 const { t } = useI18n()
 const appStore = useAppStore()

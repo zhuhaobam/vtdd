@@ -8,8 +8,7 @@
 <route lang="yaml">
 meta:
   breadcrumb: setting
-  icon: color
+  icon: gift
   sort: 100
   hidden: true
-  alwaysShow: false
 </route>

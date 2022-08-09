@@ -20,7 +20,7 @@
       </n-layout>
     </n-layout>
     <n-layout-footer position="absolute" style="height: 64px; padding: 24px" bordered text-center>
-      {{ t('foo') }}
+      {{ t('all.footer') }}
     </n-layout-footer>
   </n-layout>
 </template>

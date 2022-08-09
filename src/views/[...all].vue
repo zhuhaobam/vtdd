@@ -1,7 +1,7 @@
 <template>
-  <n-result status="404" :title="'404' + $t('not-found')" :description="$t('description')" size="huge">
+  <n-result status="404" :title="$t('notfound.title')" :description="$t('notfound.subtitle')" size="huge">
     <template #footer>
-      <n-button @click="router.replace('/')">{{ $t('back-home') }} →</n-button>
+      <n-button @click="router.replace('/')">{{ $t('notfound.home') }} →</n-button>
     </template>
   </n-result>
 </template>
@@ -16,7 +16,6 @@ meta:
   layout: false
   sort: 0
   hidden: true
-  alwaysShow: false
 </route>
 <style scoped>
 .n-result {

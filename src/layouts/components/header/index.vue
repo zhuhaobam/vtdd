@@ -10,18 +10,28 @@
         class="ml-1 layout-header-trigger layout-header-trigger-min"
         @click="() => $emit('update:collapsed', !props.collapsed)"
       >
-        <n-icon v-if="props.collapsed" size="18">
-          <i-ant-design:menu-unfold-outlined />
-        </n-icon>
-        <n-icon v-else size="18">
-          <i-ant-design:menu-fold-outlined />
-        </n-icon>
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon v-if="props.collapsed" size="18">
+              <i-ant-design:menu-unfold-outlined />
+            </n-icon>
+            <n-icon v-else size="18">
+              <i-ant-design:menu-fold-outlined />
+            </n-icon>
+          </template>
+          <span>{{ $t(props.collapsed ? 'project.unfold' : 'project.fold') }}</span>
+        </n-tooltip>
       </div>
       <!-- 刷新 -->
       <div class="mr-1 layout-header-trigger layout-header-trigger-min" @click="reloadPage">
-        <n-icon size="18">
-          <i-ant-design:reload-outlined />
-        </n-icon>
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon size="18">
+              <i-ant-design:reload-outlined />
+            </n-icon>
+          </template>
+          <span>{{ $t('project.reload') }}</span>
+        </n-tooltip>
       </div>
       <!-- 面包屑 -->
       <HeadBreadcrumb />
@@ -34,7 +44,7 @@
               <div class="i-carbon-language" />
             </n-icon>
           </template>
-          <span>{{ $t('button.toggle_langs') }}</span>
+          <span>{{ $t('project.toggle_langs') }}</span>
         </n-tooltip>
       </div>
       <!--切换全屏-->
@@ -46,7 +56,7 @@
               <i-ant-design-fullscreen-outlined v-else />
             </n-icon>
           </template>
-          <span>{{ $t(isFullscreen ? 'exitscreen' : 'fullscreen') }}</span>
+          <span>{{ $t(isFullscreen ? 'project.exitscreen' : 'project.fullscreen') }}</span>
         </n-tooltip>
       </div>
       <LightDark />

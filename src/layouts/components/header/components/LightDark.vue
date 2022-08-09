@@ -1,15 +1,20 @@
 <template>
   <div>
-    <n-switch v-model:value="themebool" :rail-style="railStyle" @update:value="handleChange">
-      <template #checked> {{ $t('light') }} </template>
-      <template #unchecked> {{ $t('dark') }} </template>
-      <template #checked-icon>
-        <div i="carbon-sun" />
+    <n-tooltip placement="bottom">
+      <template #trigger>
+        <n-switch v-model:value="themebool" :rail-style="railStyle" @update:value="handleChange">
+          <template #checked> {{ $t('project.light') }} </template>
+          <template #unchecked> {{ $t('project.dark') }} </template>
+          <template #checked-icon>
+            <div i="carbon-sun" />
+          </template>
+          <template #unchecked-icon>
+            <div i="carbon-moon" />
+          </template>
+        </n-switch>
       </template>
-      <template #unchecked-icon>
-        <div i="carbon-moon" />
-      </template>
-    </n-switch>
+      <span>{{ $t(themebool ? 'project.light' : 'project.dark') }}</span>
+    </n-tooltip>
   </div>
 </template>
 

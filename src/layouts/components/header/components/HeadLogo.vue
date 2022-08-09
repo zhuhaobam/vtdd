@@ -1,7 +1,7 @@
 <template>
   <div class="logo">
     <img :src="getAssetsFile('cafe.png')" alt="" :class="{ 'mr-2': !props.collapsed }" />
-    <h2 v-show="!collapsed" class="title">{{ $t('title') }}</h2>
+    <h2 v-show="!collapsed" class="title">{{ $t('project.title') }}</h2>
   </div>
 </template>
 

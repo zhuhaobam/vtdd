@@ -1,36 +1,7 @@
-title: 好酷开始动手
-login: 登录
-setting: 设置
-user: 个人中心
-dashboard: 看板
-analysis: 分析
-workbench: 工作台
-workbench-watermark: 工作台水印
-watermark: 水印
-fupan: 复盘
-starport: 星港
-head: 头部
-headinfo: 头部信息
-color: 颜色
-link: 外部链接naiveui.com
-first: 第一层
-second: 第二层
-third: 第三层
-youdodo: youdodo页面
-haododo: haododo页面
-anmial: anmial页面
-flower: flower页面
-light: 浅色
-dark: 深色
-fullscreen: 全屏
-exitscreen: 退出全屏
-name: 名字就是一串字符串
-foo: 版权 © 2022 竹子
 ci1: 沁园春·长沙
 ci11: 独立寒秋，湘江北去，橘子洲头。
 ci12: 看万山红遍，层林尽染；
 ci13: 漫江碧透，百舸争流。
-ci14: 鹰击长空，鱼翔浅底，万类霜天竞自由。
 ci15: 怅寥廓，问苍茫大地，谁主沉浮？
 ci16: 携来百侣曾游，忆往昔峥嵘岁月稠。
 ci17: 恰同学少年，风华正茂；
@@ -38,25 +9,58 @@ ci18: 书生意气，挥斥方遒。
 ci19: 指点江山，激扬文字，粪土当年万户侯。
 ci110: 曾记否，到中流击水，浪遏飞舟？
 ci2: 沁园春·雪
-toggle-language: 中文
-home: 首页
-about: 关于
-starport1: 星港1
-starport2: 星港2
-miaoshu: 更新
-button:
-  about: 关于
-  back: 返回
-  go: 确定
-  home: 首页
-  toggle_dark: 切换深色模式
-  toggle_langs: 切换语言
-intro:
-  desc: 固执己见的 Vite 项目模板
-  dynamic-route: 动态路由演示
-  hi: 你好，{name}
-  aka: 也叫
-  whats-your-name: 输入你的名字
-not-found: 未找到页面
-back-home: 回到首页
-description: 你需要换种方式
+notfound:
+  title: '404'
+  subtitle: 页面不存在
+  home: 回到首页
+login:
+  title: 好酷
+  subtitle: 好的开始从不满意开始
+  poetry: 鹰击长空，鱼翔浅底，万类霜天竞自由。
+all:
+  footer: 版权 © 2022 竹子
+project:
+  title: 好酷开始动手
+  unfold: 展开
+  fold: 收缩
+  reload: 刷新
+  light: 浅色
+  dark: 深色
+  fullscreen: 全屏
+  exitscreen: 退出全屏
+  toggle_langs: 国际化切换
+  default: 佚名
+page:
+  setting: 个人设置
+  user: 个人中心
+  logout: 退出登录
+  dashboard:
+    dashboard: 看板
+    analysis: 分析
+    workbench: 工作台
+    workbench-watermark: 水印
+    workbench-fupan: 复盘
+  first:
+    first: 第一层
+    firstdo: 第一层页面
+    second:
+      second: 第二层
+      seconddo: 第二层页面
+      third:
+        third: 第三层
+        anmial: 动物
+        flower: 花朵
+  drawing:
+    drawing: 画图
+    drauu: 画图drauu
+  axios:
+    axios: axios库
+    get: get请求
+    post: post请求
+  starport:
+    starport: 星港
+    onepage: 星港一
+    twopage: 星港二
+  login: 登录
+  color: 颜色
+  link: 外部链接naiveui.com

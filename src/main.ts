@@ -24,6 +24,8 @@ import StarportPlugin from 'vue-starport'
 import i18n from '@/plugins/i18n'
 import { permission } from '@directive/permission'
 
+import JsonViewer from 'vue-json-viewer'
+
 import { createApp } from 'vue'
 createApp(App)
   .use(StarportPlugin({ keepAlive: true }))
@@ -31,4 +33,5 @@ createApp(App)
   .use(pinia)
   .use(i18n)
   .directive('permission', permission)
+  .use(JsonViewer)
   .mount('#app')

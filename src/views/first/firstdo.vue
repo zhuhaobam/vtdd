@@ -2,13 +2,12 @@
 <template>
   <div>secondfloor->haododo</div>
 </template>
-<script setup lang="ts" name="first-haododo">
+<script setup lang="ts" name="first-firstdo">
 // test
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: haododo
-  icon: moon
+  breadcrumb: page.first.firstdo
+  icon: i-carbon:crop-health
   sort: 0
-  alwaysShow: false
 </route>

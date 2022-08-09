@@ -17,7 +17,7 @@
       items-center
       justify-center
     >
-      {{ counter }}{{ t('starport') }}
+      {{ counter }}{{ t('page.starport.starport') }}
     </div>
   </div>
 </template>

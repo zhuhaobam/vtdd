@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <n-input type="text" placeholder="基本的 Input22222" />
     <div>
       <Starport port="donghua" style="width: 120px; height: 120px">
         <starport-componet :index="starportIndex" style="width: 120px; height: 120px" />
@@ -12,7 +11,7 @@
       <div>{{ t('ci11') }}</div>
       <div>{{ t('ci12') }}</div>
       <div>{{ t('ci13') }}</div>
-      <div>{{ t('ci14') }}</div>
+      <div>{{ t('login.poetry') }}</div>
       <div>{{ t('ci15') }}</div>
       <div>{{ $t('ci16') }}</div>
       <div>{{ t('ci17') }}</div>
@@ -22,14 +21,13 @@
     </div>
   </div>
 </template>
-<script setup lang="ts" name="starport-headinfo">
+<script setup lang="ts" name="starport-twopage">
 const starportIndex = ref(1)
 const { t } = useI18n()
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: headinfo
-  icon: color
+  breadcrumb: page.starport.twopage
+  icon: i-carbon:condition-point
   sort: 0
-  alwaysShow: false
 </route>

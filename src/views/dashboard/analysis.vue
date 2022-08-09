@@ -1,314 +1,78 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <div>
-      vite-plugin-vue-setup-extend包的name="firstSecond"决定了路由层级，你细看我写的first到third目录页面就能揣摩出来，结合我的路由处理
+    <n-h1 prefix="bar" align-text type="info">
+      <n-text type="info" flex flex-row>
+        <div class="i-ant-design:api-filled"></div>
+        <div class="i-ant-design:dashboard-filled"></div>
+        <div class="i-ant-design:appstore-outlined"></div>
+        <div class="i-ant-design:area-chart-outlined"></div>
+        <div class="i-ant-design:build-filled"></div>
+        <div class="i-ant-design:build-outlined"></div>
+        <div class="i-ant-design:dropbox-outlined"></div>
+        <div class="i-ant-design:node-expand-outlined"></div>
+        <div class="i-carbon:draw"></div>
+        <div class="i-carbon:link"></div>
+        <div class="i-carbon:color-palette"></div>
+        <div class="i-carbon:chart-t-sne"></div>
+        <div class="i-carbon:condition-point"></div>
+        <div class="i-carbon:crop-health"></div>
+      </n-text>
+      <n-code :code="codeIcon" language="javascript" show-line-numbers />
+      @iconify-json/ant-design图标使用之前需要通过页面使用，加载到项目中来
+    </n-h1>
+    <n-h1 prefix="bar" align-text type="info">
+      <n-text type="info">测试keep-alive缓存功能</n-text>
+    </n-h1>
+    <n-input type="text" placeholder="测试keep-alive缓存功能" />
+    <n-h1 prefix="bar" align-text type="warning">
+      <n-text type="warning">注意：</n-text>
+    </n-h1>
+    <div>以下三个vite-plugin的使用可去官方查看为准</div>
+    <n-h1 prefix="bar" align-text type="error">
+      <n-text type="error">一、vite-plugin-pages</n-text>
+    </n-h1>
+    <div>生成扁平路由列表，生成的name为【组件名】或者【文件夹名字-组件名】或者【文件夹名字-文件夹名字-组件名】</div>
+    <div>路由文件里面打印或则debugger一下查看生成信息</div>
+    <n-h1 prefix="bar" align-text type="error">
+      <n-text type="error">二、vite-plugin-vue-layouts</n-text>
+    </n-h1>
+    <div>按配置使用setupLayouts进行布局</div>
+    <div style="overflow: auto">
+      <n-space vertical :size="16">
+        <n-code :code="codeLayouts" language="javascript" show-line-numbers />
+      </n-space>
     </div>
-    <n-input type="text" placeholder="基本的 Input" />
-    <div>script setup lang="ts" name="firstSecond"</div>
-    <div>{{ t('toggle-language') }}</div>
-    <i-myself-color w10 h10 color="red" />
-    <n-space mb-2>
-      <n-button id="undo" title="撤销" @click="changeUndo()">↩️</n-button>
-      <n-button id="redo" title="还原" @click="changeRedo()">↪️</n-button>
-      <n-button id="clear" title="清除" style="font-size: 25px" @click="changeClear()">🗑</n-button>
-      <n-button
-        id="m-stylus"
-        title="Stylus"
-        :type="modeModal === 'stylus' ? 'primary' : undefined"
-        dashed
-        @click="changeMode('stylus')"
-        >✍️</n-button
-      >
-      <n-button
-        id="m-eraser"
-        title="Eraser"
-        :type="modeModal === 'eraseLine' ? 'primary' : undefined"
-        dashed
-        @click="changeMode('eraseLine')"
-        >⚪️</n-button
-      >
-      <n-button
-        id="m-draw"
-        title="笔"
-        :type="modeModal === 'draw' ? 'primary' : undefined"
-        dashed
-        @click="changeMode('draw')"
-      >
-        ✏️
-      </n-button>
-      <n-button
-        id="m-line"
-        title="直线"
-        :type="modeModal === 'line' ? 'primary' : undefined"
-        pl-6
-        pr-6
-        dashed
-        @click="changeMode('line')"
-        >⁄</n-button
-      >
-      <n-button
-        id="m-arrow"
-        title="箭头"
-        :type="modeModal === 'arrow' ? 'primary' : undefined"
-        dashed
-        @click="changeModeA()"
-        >↗
-      </n-button>
-      <n-button
-        id="m-rect"
-        title="长方形"
-        :type="modeModal === 'rectangle' ? 'primary' : undefined"
-        pl-6
-        pr-6
-        dashed
-        @click="changeMode('rectangle')"
-        >⃞</n-button
-      >
-      <n-button
-        id="m-ellipse"
-        title="椭圆"
-        :type="modeModal === 'ellipse' ? 'primary' : undefined"
-        pl-4
-        pr-8
-        dashed
-        @click="changeMode('ellipse')"
-        >⃝</n-button
-      >
-      <n-color-picker
-        pt-4
-        pb-4
-        pl-12
-        pr-12
-        :modes="['hex']"
-        :swatches="['#FFFFFF', '#18A058', '#2080F0', '#F0A020', 'rgba(208, 48, 80, 1)']"
-        :actions="['confirm']"
-        @confirm="handleUpdateColorValue"
-      />
-      <n-button
-        data-color="#000000"
-        :type="colorModal === 'dark' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('dark')"
-      >
-        ​⚫️​
-      </n-button>
-      <n-button
-        data-color="#ed153d"
-        title="Red"
-        :type="colorModal === 'red' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('red')"
-        >​🔴​</n-button
-      >
-      <n-button
-        data-color="#ed9a26"
-        title="Orange"
-        :type="colorModal === 'orange' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('orange')"
-        >​🟠​​</n-button
-      >
-      <n-button
-        data-color="#ede215"
-        title="Yellow"
-        :type="colorModal === 'yellow' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('yellow')"
-        >​​🟡​​</n-button
-      >
-      <n-button
-        data-color="#30bd20"
-        title="Green"
-        :type="colorModal === 'green' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('green')"
-        >​🟢​​</n-button
-      >
-      <n-button
-        data-color="#2656bf"
-        title="Blue"
-        :type="colorModal === 'blue' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('blue')"
-        >​​🔵​​</n-button
-      >
-      <n-button
-        data-color="#c24aed"
-        title="Purple"
-        :type="colorModal === 'purple' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('purple')"
-        >​🟣​​</n-button
-      >
-      <n-button
-        data-color="#bf6b26"
-        title="Brown"
-        :type="colorModal === 'brown' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('brown')"
-        >​​🟤​</n-button
-      >
-      <input
-        v-model="rangeSize"
-        flex
-        items-center
-        h7
-        type="range"
-        min="1"
-        max="10"
-        step="0.5"
-        name="Size"
-        :title="'笔画粗细 ' + rangeSize + ' '"
-      />
-      <n-button
-        title="Solid"
-        :type="
-          dasharrayModal === 'solid' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
-        "
-        dashed
-        @click="changeSolid()"
-        >—</n-button
-      >
-      <n-button
-        title="Dashed"
-        :type="
-          dasharrayModal === 'dashed' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
-        "
-        dashed
-        @click="changeDasharray()"
-        >┅
-      </n-button>
-      <n-button
-        title="Dotted"
-        :type="
-          dasharrayModal === 'dotted' && modeModal !== 'stylus' && modeModal !== 'eraseLine' ? 'primary' : undefined
-        "
-        dashed
-        @click="changeDotted()"
-        >⋯</n-button
-      >
-      <n-button title="Download" @click="down()">📥</n-button>
-    </n-space>
-    <svg id="svg" w-full flex-auto z-10 h150 border style="touch-action: none"></svg>
+    <n-h1 prefix="bar" align-text type="success">
+      <n-text>router/index.ts</n-text>
+    </n-h1>
+    <div style="overflow: auto">
+      <n-space vertical :size="16">
+        <n-code :code="codePages" language="javascript" show-line-numbers />
+      </n-space>
+    </div>
+    <n-h1 prefix="bar" align-text type="success">
+      <n-text>utils/router.ts/primaryKeepAliveAdjustment</n-text>
+    </n-h1>
+    <div style="overflow: auto">
+      <n-space vertical :size="16">
+        <n-code :code="codePagesKeepAlive" language="javascript" show-line-numbers />
+      </n-space>
+    </div>
+    <n-h1 prefix="bar" align-text type="error">
+      <n-text type="error">三、vite-plugin-vue-setup-extend</n-text>
+    </n-h1>
+    <div>
+      结合路由处理name="dashboard-analysis",以便primaryKeepAliveAdjustment方法处理laout后的路由数据，用来支持keep-alive缓存功能
+    </div>
+    <div style="overflow: auto">
+      <n-space vertical :size="16">
+        <n-code :code="codeExtend" language="javascript" show-line-numbers />
+      </n-space>
+    </div>
   </div>
 </template>
 <script setup lang="ts" name="dashboard-analysis">
-import { MyLogin } from '@/apis/apisTypes'
-import { onLogin } from '@apis/app'
-import { MyResponse } from 'axios'
-import { Brush, Drauu, DrawingMode, Options, createDrauu } from 'drauu'
-const { t } = useI18n()
-let drauu: Drauu
-onMounted(() => {
-  onLogin<MyResponse<MyLogin>>()
-    .then(res => {
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
-    })
-    .catch((error: any) => {
-      console.log('request->onLogin<MyResponse<MyLogin>>->error', error)
-    })
-  drauu = createDrauu({
-    el: '#svg',
-    brush: {
-      color: '#000',
-      size: 3,
-      dasharray: undefined
-    }
-  })
-})
-// 切换画笔
-// 'line','draw', 'stylus','reactangle', 'ellipse'
-const modeModal = ref('stylus')
-function changeMode(dm: DrawingMode) {
-  drauu.mode = dm
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.arrowEnd = false
-  modeModal.value = dm
-}
-function changeModeA() {
-  drauu.mode = 'line'
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.arrowEnd = true
-  modeModal.value = 'arrow'
-}
-const colorModal = ref('dark')
-function changeColor(color: string) {
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.color = color
-  colorModal.value = color
-}
-//
-const handleUpdateColorValue = (value: string) => {
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.color = value
-  colorModal.value = 'undefined'
-}
-// 切花画笔粗细
-const rangeSize = ref(3)
-watch(
-  rangeSize,
-  (newVal, oldVal) => {
-    nextTick(() => {
-      const a = drauu.options as Options
-      const b = a.brush as Brush
-      b.size = newVal
-    })
-  },
-  { immediate: true, deep: true }
-)
-// 撤销
-function changeUndo() {
-  drauu.undo()
-}
-// 还原
-function changeRedo() {
-  drauu.redo()
-}
-// 清空
-function changeClear() {
-  drauu.clear()
-}
-const dasharrayModal = ref('solid')
-// 实线
-function changeSolid() {
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.dasharray = undefined
-  dasharrayModal.value = 'solid'
-}
-// 虚线
-function changeDasharray() {
-  const a = drauu.options
-  const b = a.brush as Brush
-  b.dasharray = '4'
-  dasharrayModal.value = 'dasharray'
-}
-// 点线
-function changeDotted() {
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.dasharray = '1 7'
-  dasharrayModal.value = 'dotted'
-}
-// 下载
-function down() {
-  drauu.el!.setAttribute('xmlns', 'http://www.w3.org/2000/svg')
-  const data = drauu.el!.outerHTML || ''
-  const blob = new Blob([data], { type: 'image/svg+xml' })
-  const elem = window.document.createElement('a')
-  elem.href = window.URL.createObjectURL(blob)
-  elem.download = 'drauu.svg'
-  document.body.appendChild(elem)
-  elem.click()
-  document.body.removeChild(elem)
-}
-
 // 被包裹组件被激活的状态下触发
 onActivated(() => {
   console.log('激活【analysis】===keep-alive===onActivated' + new Date())
@@ -318,12 +82,62 @@ onActivated(() => {
 onDeactivated(() => {
   console.log('停止【analysis】===keep-alive===onDeactivated' + new Date())
 })
-</script>
-<route lang="yaml">
+const codeIcon = ref(`<div class="i-ant-design:api-filled"></div>`)
+
+const codePages = ref(`import { createRouter, createWebHistory } from 'vue-router'
+import { setupLayouts } from 'virtual:generated-layouts'
+import generatedRoutes from 'virtual:generated-pages'
+import { primaryKeepAliveAdjustment } from '@/utils/router'
+
+const routesLayouts = generatedRoutes.map(v => {
+  const currentMenu = v.meta?.layout !== false ? setupLayouts([v])[0] : v
+  return currentMenu
+})
+// keep-alive缓存支持 {Keep alive cache support}
+// 将文件夹的路由展开，为了支持keep-alive {Expand the route of the folder to support keep alive}
+const primaryRoutes = primaryKeepAliveAdjustment(routesLayouts)
+
+const router = createRouter({
+  history: createWebHistory(import.meta.env.VTDD_APP_BASE),
+  routes: primaryRoutes
+})
+
+export default router`)
+const codePagesKeepAlive = ref(`/**
+ * 将文件夹的路由展开，为了支持keep-alive '{Expand the route of the folder to support keep alive}''
+ * @param routes
+ * @returns
+ */
+export function primaryKeepAliveAdjustment(routes: RouteRecordRaw[]): RouteRecordRaw[] {
+  return routes.map(vx => {
+    const v = cloneDeep(vx)
+    const hasChildren = (v.children?.length ?? 0) > 0
+    const info = hasChildren ? v.children![0] : v
+    const singlePage = !((info.children?.length ?? 0) > 0)
+    if (!hasChildren || singlePage) {
+      return v
+    }
+    const result: RouteRecordRaw = {
+      ...info,
+      path: v.path
+    }
+    result.component = v.component
+    return result
+  })
+}`)
+const codeLayouts = ref(`<route lang="yaml">
 meta:
   breadcrumb: analysis
   icon: lang
   keepAlive: true
   sort: 1
-  alwaysShow: false
+</route>`)
+const codeExtend = ref(`<script setup lang="ts" name="dashboard-analysis">`)
+</script>
+<route lang="yaml">
+meta:
+  breadcrumb: page.dashboard.analysis
+  icon: i-ant-design:area-chart-outlined
+  keepAlive: true
+  sort: 0
 </route>

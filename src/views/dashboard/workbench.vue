@@ -2,12 +2,12 @@
 <template>
   <div>
     <n-h1 prefix="bar" align-text type="info">
-      <n-text type="info"> {{ $t('workbench-watermark') }} </n-text>
+      <n-text type="info"> 测试keep-alive缓存功能 </n-text>
     </n-h1>
-    <n-input type="text" placeholder="基本的 Input2222" />
+    <n-input type="text" placeholder="测试keep-alive缓存功能" />
     <div>
       <n-watermark
-        :content="$t('watermark')"
+        :content="$t('page.dashboard.workbench-watermark')"
         cross
         selectable
         :font-size="16"
@@ -22,14 +22,14 @@
           <n-table :bordered="false" :single-line="false">
             <thead>
               <tr>
-                <th>{{ $t('fupan') }}</th>
-                <th>{{ $t('fupan') }}</th>
+                <th>{{ $t('page.dashboard.workbench-fupan') }}</th>
+                <th>{{ $t('page.dashboard.workbench-fupan') }}</th>
               </tr>
             </thead>
             <tbody>
               <tr>
-                <td>{{ $t('fupan') }}</td>
-                <td>{{ $t('fupan') }}</td>
+                <td>{{ $t('page.dashboard.workbench-fupan') }}</td>
+                <td>{{ $t('page.dashboard.workbench-fupan') }}</td>
               </tr>
               <tr>
                 <td>...</td>
@@ -81,9 +81,10 @@ onDeactivated(() => {
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: workbench
-  icon: moon
+  breadcrumb: page.dashboard.workbench
+  icon: i-ant-design:appstore-outlined
+  size: 16
+  breadcrumbSize: 16
   keepAlive: true
-  sort: 0
-  alwaysShow: false
+  sort: 1
 </route>
