@@ -25,6 +25,8 @@ import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
+import { useTagsStore } from '@store/tags'
+const tagsStore = useTagsStore()
 const { t } = useI18n({ useScope: 'global' })
 const themeStore = useThemeStore()
 const appStore = useAppStore()
@@ -77,6 +79,7 @@ watch(
     state.openKeys = matched.map(item => item.name as string)
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
+    tagsStore.addTag(matched[matched.length - 1])
   }
 )
 // 点击菜单(选中菜单的回调，key 是选中菜单项的 key，item 是菜单项原始数据)

@@ -4,7 +4,6 @@
     <!--顶部菜单-->
     <!--左侧菜单-->
     <div class="layout-header-left">
-      <HeadLogo :collapsed="props.collapsed" />
       <!-- 菜单收起 -->
       <div
         class="ml-1 layout-header-trigger layout-header-trigger-min"
@@ -71,7 +70,6 @@
 <script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
 import { useAppStore } from '@store/app'
-import HeadLogo from './components/HeadLogo.vue'
 import HeadCenter from './components/HeadCenter.vue'
 import HeadBreadcrumb from './components/HeadBreadcrumb/index.vue'
 const props = defineProps({

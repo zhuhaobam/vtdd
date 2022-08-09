@@ -17,5 +17,5 @@ onDeactivated(() => {
 meta:
   breadcrumb: page.color
   icon: i-carbon:color-palette
-  sort: 7
+  sort: 8000
 </route>

@@ -9,5 +9,5 @@
 meta:
   breadcrumb: page.first.second.third.anmial
   icon: i-carbon:crop-health
-  sort: 1
+  sort: 3111
 </route>

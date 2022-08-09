@@ -9,5 +9,5 @@
 meta:
   breadcrumb: page.first.firstdo
   icon: i-carbon:crop-health
-  sort: 0
+  sort: 30
 </route>

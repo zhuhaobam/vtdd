@@ -103,6 +103,6 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
  * @param b
  * @returns
  */
-function sortRoute(a: any, b: any) {
+export function sortRoute(a: any, b: any) {
   return (a.meta?.sort ?? 0) - (b.meta?.sort ?? 0)
 }

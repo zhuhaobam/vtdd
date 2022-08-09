@@ -307,5 +307,5 @@ meta:
   size: 13
   breadcrumbSize: 13
   keepAlive: true
-  sort: 1
+  sort: 21
 </route>

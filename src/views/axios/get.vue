@@ -68,5 +68,5 @@ const codeGet = ref(`onLogin<MyResponse<MyLogin>>()
 meta:
   breadcrumb: page.axios.get
   icon: i-ant-design:build-outlined
-  sort: 1
+  sort: 70
 </route>

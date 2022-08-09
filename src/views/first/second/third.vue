@@ -9,6 +9,6 @@
 <route lang="yaml">
 meta:
   breadcrumb: page.first.second.third.third
-  sort: 1
+  sort: 311
   icon: i-ant-design:node-expand-outlined
 </route>

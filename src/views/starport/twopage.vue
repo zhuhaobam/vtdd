@@ -29,5 +29,5 @@ const { t } = useI18n()
 meta:
   breadcrumb: page.starport.twopage
   icon: i-carbon:condition-point
-  sort: 0
+  sort: 60
 </route>
