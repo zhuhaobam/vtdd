@@ -24,7 +24,6 @@ export function loadLang() {
     const keyName = key.slice(localPathPrefix.length, yaml ? -5 : -4)
     langs[keyName] = modules[key].default
   }
-  console.log(langs)
   return langs
 }
 

@@ -1,18 +1,20 @@
 <template>
-  <div bg-white p5>
-    <n-tag
-      v-for="tag in tagsStore.tags"
-      :key="tag.path"
-      class="px-15 mx-5 cursor-pointer hover:color-primary"
-      :type="tagsStore.activeTag === tag.path ? 'primary' : 'default'"
-      :closable="tagsStore.tags.length > 1"
-      @click="handleTagClick(tag.path)"
-      @close.stop="tagsStore.removeTag(tag.path)"
-      @contextmenu.prevent="handleContextMenu($event, tag)"
-    >
-      {{ $t(tag.meta.breadcrumb as string) }}
-    </n-tag>
-  </div>
+  <n-scrollbar x-scrollable>
+    <div pt-5 pb8 pl-5 flex flex-nowrap>
+      <n-tag
+        v-for="tag in tagsStore.tags"
+        :key="tag.path"
+        class="mx-3 cursor-pointer hover:color-primary"
+        :type="tagsStore.activeTag === tag.path ? 'primary' : 'default'"
+        :closable="tagsStore.tags.length > 1"
+        @click="handleTagClick(tag.path)"
+        @close.stop="tagsStore.removeTag(tag.path)"
+        @contextmenu.prevent="handleContextMenu($event, tag)"
+      >
+        {{ $t(tag.meta.breadcrumb as string) }}
+      </n-tag>
+    </div>
+  </n-scrollbar>
 </template>
 <script lang="ts" setup>
 import router from '@/router'

@@ -1,8 +1,10 @@
 <template>
-  <div class="logo">
-    <img :src="getAssetsFile('cafe.png')" alt="" :class="{ 'mr-2': !props.collapsed }" />
-    <h2 v-show="!collapsed" class="title">{{ $t('project.title') }}</h2>
-  </div>
+  <router-link h-64 flex flex-row justify-center items-center decoration-none to="/">
+    <img h32 w-auto :src="getAssetsFile('cafe.png')" alt="" :class="{ 'mr-2': !props.collapsed }" />
+    <h2 v-show="!collapsed" ml-10 text-16 font-bold max-w-140 flex-shrink-0 color-primary>
+      {{ $t('project.title') }}
+    </h2>
+  </router-link>
 </template>
 
 <script lang="ts" setup name="HeadLogo">
@@ -13,26 +15,3 @@ const props = defineProps({
   }
 })
 </script>
-
-<style lang="scss" scoped>
-.logo {
-  display: flex;
-  overflow: hidden;
-  height: 64px;
-  align-items: center;
-  justify-content: center;
-  line-height: 64px;
-  white-space: nowrap;
-
-  img {
-    width: auto;
-    height: 32px;
-  }
-
-  .title {
-    width: 200px;
-    margin-top: 0;
-    margin-bottom: 0;
-  }
-}
-</style>

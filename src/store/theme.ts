@@ -44,6 +44,9 @@ export const useThemeStore = defineStore('theme', {
     strategies: [{ storage: localStorage, paths: ['theme', 'themeOverrides'] }]
   },
   getters: {
+    isNullTheme(): boolean {
+      return this.theme === null
+    },
     getTheme(): GlobalTheme | null {
       return this.theme
     }

@@ -16,11 +16,11 @@ import { useThemeStore } from '@store/theme'
 import { useUserStore } from '@store/user'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
-import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale } from 'naive-ui'
+import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
 import router from './router'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
-
+import { darkTheme } from 'naive-ui'
 hljs.registerLanguage('javascript', javascript)
 
 const { t } = useI18n()
@@ -60,7 +60,20 @@ watch(
 )
 
 const themeStore = useThemeStore()
-const { theme, themeOverrides } = storeToRefs(themeStore)
+const theme = ref<GlobalTheme | null>(null)
+const themeOverrides = ref<GlobalThemeOverrides | null>(null)
+if (themeStore.isNullTheme) {
+  themeStore.setTheme(null)
+} else {
+  themeStore.setTheme(darkTheme)
+}
+watch(
+  () => themeStore.theme,
+  (newVal, oldVal) => {
+    theme.value = newVal
+  },
+  { immediate: true, deep: true }
+)
 onMounted(() => {
   // 校正windows页面在系统进行缩放后导致页面被放大的问题，通常放大比例是125%、150%
   DevicePixelRatio.init()

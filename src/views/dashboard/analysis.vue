@@ -2,26 +2,6 @@
 <template>
   <div>
     <n-h1 prefix="bar" align-text type="info">
-      <n-text type="info" flex flex-row>
-        <div class="i-ant-design:api-filled"></div>
-        <div class="i-ant-design:dashboard-filled"></div>
-        <div class="i-ant-design:appstore-outlined"></div>
-        <div class="i-ant-design:area-chart-outlined"></div>
-        <div class="i-ant-design:build-filled"></div>
-        <div class="i-ant-design:build-outlined"></div>
-        <div class="i-ant-design:dropbox-outlined"></div>
-        <div class="i-ant-design:node-expand-outlined"></div>
-        <div class="i-carbon:draw"></div>
-        <div class="i-carbon:link"></div>
-        <div class="i-carbon:color-palette"></div>
-        <div class="i-carbon:chart-t-sne"></div>
-        <div class="i-carbon:condition-point"></div>
-        <div class="i-carbon:crop-health"></div>
-      </n-text>
-      <n-code :code="codeIcon" language="javascript" show-line-numbers />
-      @iconify-json/ant-design图标使用之前需要通过页面使用，加载到项目中来
-    </n-h1>
-    <n-h1 prefix="bar" align-text type="info">
       <n-text type="info">测试keep-alive缓存功能</n-text>
     </n-h1>
     <n-input type="text" placeholder="测试keep-alive缓存功能" />
@@ -82,8 +62,6 @@ onActivated(() => {
 onDeactivated(() => {
   console.log('停止【analysis】===keep-alive===onDeactivated' + new Date())
 })
-const codeIcon = ref(`<div class="i-ant-design:api-filled"></div>`)
-
 const codePages = ref(`import { createRouter, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
@@ -138,6 +116,5 @@ const codeExtend = ref(`<script setup lang="ts" name="dashboard-analysis">`)
 meta:
   breadcrumb: page.dashboard.analysis
   icon: i-ant-design:area-chart-outlined
-  keepAlive: true
   sort: 0
 </route>
