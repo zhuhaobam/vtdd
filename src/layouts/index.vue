@@ -43,23 +43,6 @@
       {{ $t('all.footer') }}
     </n-layout-footer> -->
   </n-layout>
-  <!-- 由于按需加载图标，如果动态设置为menu的icon，这里就预先加载一下吧图标下载下来 -->
-  <n-text v-show="false" type="info" flex flex-row>
-    <div class="i-ant-design:api-filled"></div>
-    <div class="i-ant-design:dashboard-filled"></div>
-    <div class="i-ant-design:appstore-outlined"></div>
-    <div class="i-ant-design:area-chart-outlined"></div>
-    <div class="i-ant-design:build-filled"></div>
-    <div class="i-ant-design:build-outlined"></div>
-    <div class="i-ant-design:dropbox-outlined"></div>
-    <div class="i-ant-design:node-expand-outlined"></div>
-    <div class="i-carbon:draw"></div>
-    <div class="i-carbon:link"></div>
-    <div class="i-carbon:color-palette"></div>
-    <div class="i-carbon:chart-t-sne"></div>
-    <div class="i-carbon:condition-point"></div>
-    <div class="i-carbon:crop-health"></div>
-  </n-text>
 </template>
 
 <script lang="ts" setup name="layoutDefault">
