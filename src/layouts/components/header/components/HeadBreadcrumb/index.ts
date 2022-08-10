@@ -11,7 +11,7 @@ export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: 
         props: item.props ? { default: true } : item.props
       }
       if (item.meta?.icon) {
-        currentMenu.icon = renderAssetsIcon(item.meta.icon as string, item.meta.breadcrumbSize)
+        currentMenu.icon = renderAssetsIcon(item.meta.icon as string)
       }
       // 是否有子菜单，并递归处理
       if (item.children?.length) {

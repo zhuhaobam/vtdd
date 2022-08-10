@@ -11,7 +11,6 @@ declare module 'vue-router' {
     // 不用检查权限，但是子需要重复这一过程
     noPerm?: boolean
     breadcrumb?: string
-    breadcrumbSize?: number
   }
 
   /**
@@ -44,13 +43,15 @@ declare module 'vue-router' {
           }
         >
       | any
-    icon?: VNode<
-      RendererNode,
-      RendererElement,
-      | {
-          [key: string]: any
-        }
+    icon:
+      | VNode<
+          RendererNode,
+          RendererElement,
+          {
+            [key: string]: any
+          }
+        >
       | any
-    >
+    menuRenderIcon?: string
   }
 }

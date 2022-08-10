@@ -3,15 +3,15 @@
     <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
       <n-breadcrumb-item>
         <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
-          <span class="link-text">
+          <div flex items-center justify-center>
             <component :is="routeItem?.icon" v-if="routeItem?.icon" />
             {{ $t(routeItem.meta?.breadcrumb as string) }}
-          </span>
+          </div>
         </n-dropdown>
-        <span v-else class="link-text">
+        <div v-else flex items-center justify-center>
           <component :is="routeItem?.icon" v-if="routeItem?.icon" />
           {{ $t(routeItem.meta?.breadcrumb as string) }}
-        </span>
+        </div>
       </n-breadcrumb-item>
     </template>
   </n-breadcrumb>

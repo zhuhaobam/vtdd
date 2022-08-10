@@ -1,41 +1,55 @@
 <template>
   <n-layout style="height: 100vh" has-sider>
-    <n-layout-sider
-      :inverted="inverted"
-      :collapsed="collapsed"
-      collapse-mode="width"
-      :collapsed-width="80"
-      :width="240"
-      :native-scrollbar="false"
-      bordered
-      @collapse="collapsed = true"
-      @expand="collapsed = false"
-    >
-      <HeadLogo :collapsed="collapsed" />
-    </n-layout-sider>
-    <n-layout position="absolute" style="top: 64px; width: 240px" :native-scrollbar="false" has-sider>
+    <div style="position: relative">
+      <n-layout-sider
+        v-if="logoTheme.visible"
+        :inverted="inverted"
+        :collapsed="collapsed"
+        collapse-mode="width"
+        :native-scrollbar="false"
+        :collapsed-width="menuTheme.collapsedWidth"
+        :width="menuTheme.width"
+        :style="
+          'height:' +
+          logoTheme.height +
+          'px;border-bottom:1px solid  var(--n-border-color);border-right:1px solid  var(--n-border-color);'
+        "
+      >
+        <HeadLogo :style="'height:' + (logoTheme.height - 1) + 'px;'" :collapsed="collapsed" />
+      </n-layout-sider>
       <n-layout-sider
         :inverted="inverted"
         :collapsed="collapsed"
         collapse-mode="width"
-        :collapsed-width="80"
-        :width="240"
+        :collapsed-width="menuTheme.collapsedWidth"
+        :width="menuTheme.width"
         :native-scrollbar="false"
         bordered
-        @collapse="collapsed = true"
-        @expand="collapsed = false"
+        :style="'height: calc(100vh - ' + (logoTheme.visible ? menuTheme.top : 0) + 'px);'"
       >
-        <SideBar />
+        <SideBar
+          :collapsed-width="menuTheme.collapsedWidth"
+          :collapsed-icon-size="menuTheme.collapsedIconSize"
+          :icon-size="menuTheme.iconSize"
+          :indent="menuTheme.indent"
+          :root-indent="menuTheme.rootIndent"
+          :style="'width:' + (collapsed ? menuTheme.collapsedWidth : menuTheme.width) + 'px;'"
+        />
       </n-layout-sider>
-    </n-layout>
+    </div>
     <n-layout>
-      <n-layout-header bordered h64>
+      <n-layout-header bordered :style="'height:' + headerTheme.height + 'px'">
         <AppHeader v-model:collapsed="collapsed" :inverted="inverted" />
       </n-layout-header>
-      <n-layout-header bordered h40>
+      <n-layout-header bordered :style="'height:' + tagTheme.height + 'px'">
         <Tags />
       </n-layout-header>
-      <n-layout position="absolute" content-style="padding: 24px;" style="top: 104px" :native-scrollbar="false">
+      <n-layout
+        position="absolute"
+        content-style="padding: 24px;"
+        :style="'top: ' + mainTheme.top + 'px'"
+        :native-scrollbar="false"
+      >
         <AppMain />
       </n-layout>
     </n-layout>
@@ -55,7 +69,7 @@ import { storeToRefs } from 'pinia'
 import AppMain from './components/AppMain.vue'
 import Tags from './components/tags/index.vue'
 const themeStore = useThemeStore()
-const { theme } = storeToRefs(themeStore)
+const { theme, headerTheme, tagTheme, mainTheme, menuTheme, logoTheme } = storeToRefs(themeStore)
 const appStore = useAppStore()
 const { collapsed } = storeToRefs(appStore)
 watch(

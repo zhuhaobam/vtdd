@@ -11,5 +11,4 @@ meta:
   sort: 2
   icon: i-ant-design:dashboard-filled
   size: 16
-  breadcrumbSize: 16
 </route>

@@ -14,6 +14,7 @@ specifiers:
   '@types/rollup-plugin-visualizer': ^4.2.1
   '@typescript-eslint/eslint-plugin': ^5.31.0
   '@typescript-eslint/parser': ^5.31.0
+  '@vicons/ionicons5': ^0.12.0
   '@vitejs/plugin-vue': 3.0.1
   '@vitejs/plugin-vue-jsx': 2.0.0
   '@vue/compiler-sfc': ^3.2.37
@@ -111,6 +112,7 @@ devDependencies:
   '@types/qs': registry.npmmirror.com/@types/qs/6.9.7
   '@typescript-eslint/eslint-plugin': registry.npmmirror.com/@typescript-eslint/eslint-plugin/5.31.0_d5zwcxr4bwkhmuo464cb3a2puu
   '@typescript-eslint/parser': registry.npmmirror.com/@typescript-eslint/parser/5.31.0_he2ccbldppg44uulnyq4rwocfa
+  '@vicons/ionicons5': registry.npmmirror.com/@vicons/ionicons5/0.12.0
   '@vitejs/plugin-vue': registry.npmmirror.com/@vitejs/plugin-vue/3.0.1_vite@3.0.4+vue@3.2.37
   '@vitejs/plugin-vue-jsx': registry.npmmirror.com/@vitejs/plugin-vue-jsx/2.0.0_vite@3.0.4+vue@3.2.37
   '@vue/compiler-sfc': registry.npmmirror.com/@vue/compiler-sfc/3.2.37
@@ -1620,6 +1622,12 @@ packages:
       '@unocss/transformer-directives': registry.npmmirror.com/@unocss/transformer-directives/0.44.5
       magic-string: registry.npmmirror.com/magic-string/0.26.2
       vite: registry.npmmirror.com/vite/3.0.4_sass@1.54.0
+    dev: true
+
+  registry.npmmirror.com/@vicons/ionicons5/0.12.0:
+    resolution: {integrity: sha512-Iy1EUVRpX0WWxeu1VIReR1zsZLMc4fqpt223czR+Rpnrwu7pt46nbnC2ycO7ItI/uqDLJxnbcMC7FujKs9IfFA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@vicons/ionicons5/-/ionicons5-0.12.0.tgz}
+    name: '@vicons/ionicons5'
+    version: 0.12.0
     dev: true
 
   registry.npmmirror.com/@vitejs/plugin-vue-jsx/2.0.0_vite@3.0.4+vue@3.2.37:

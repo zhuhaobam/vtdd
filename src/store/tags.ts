@@ -1,7 +1,6 @@
 import { defineStore } from 'pinia'
 import { RouteLocationMatched } from 'vue-router'
 import router from '@/router'
-import { sortRoute } from '@/utils/router'
 
 interface ITagsStore {
   tags: RouteLocationMatched[]
@@ -20,14 +19,16 @@ export const useTagsStore = defineStore('tags', {
     enabled: true,
     strategies: [{ storage: localStorage, paths: ['tags', 'activeTag'] }]
   },
-  getters: {},
+  getters: {
+    isEmpty(): boolean {
+      return this.tags.length === 0
+    }
+  },
   actions: {
     setActiveTag(path: string) {
       this.activeTag = path
     },
     setTags(tags: RouteLocationMatched[]) {
-      tags.sort(sortRoute)
-      console.log('tags', tags)
       this.tags = tags
     },
     addTag(tag: RouteLocationMatched) {

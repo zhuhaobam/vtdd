@@ -1,12 +1,20 @@
 <template>
-  <n-config-provider :locale="localeLRef" :date-locale="localeLDRef" :theme="theme" :theme-overrides="themeOverrides">
-    <n-config-provider :hljs="hljs">
-      <n-loading-bar-provider>
-        <StarportCarrier>
-          <router-view />
-        </StarportCarrier>
-      </n-loading-bar-provider>
-    </n-config-provider>
+  <n-config-provider
+    :hljs="hljs"
+    :locale="localeLRef"
+    :date-locale="localeLDRef"
+    :theme="theme"
+    :theme-overrides="themeOverrides"
+    inline-theme-disabled
+  >
+    <!-- <n-theme-editor> -->
+    <n-loading-bar-provider>
+      <StarportCarrier>
+        <router-view />
+      </StarportCarrier>
+    </n-loading-bar-provider>
+    <n-global-style />
+    <!-- </n-theme-editor> -->
   </n-config-provider>
 </template>
 
@@ -62,15 +70,27 @@ watch(
 const themeStore = useThemeStore()
 const theme = ref<GlobalTheme | null>(null)
 const themeOverrides = ref<GlobalThemeOverrides | null>(null)
+const themeOverridesTomplate = {
+  common: {
+    primaryColor: '#18a058',
+    primaryColorSuppl: '#18a058',
+    primaryColorHover: 'blue',
+    successColorHover: '#f0a020',
+    successColorSuppl: '#f0a020'
+  }
+}
 if (themeStore.isNullTheme) {
   themeStore.setTheme(null)
+  themeStore.setThemeOverrides(null)
 } else {
   themeStore.setTheme(darkTheme)
+  themeStore.setThemeOverrides(themeOverridesTomplate)
 }
 watch(
   () => themeStore.theme,
   (newVal, oldVal) => {
     theme.value = newVal
+    themeOverrides.value = themeOverridesTomplate
   },
   { immediate: true, deep: true }
 )

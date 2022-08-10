@@ -1,15 +1,20 @@
 <template>
   <div>
     <n-menu
+      :theme-overrides="menuThemeOverrides"
       accordion
       :options="menuOptions"
       :inverted="inverted"
       :mode="'vertical'"
       :collapsed="collapsed"
-      :collapsed-width="80"
-      :indent="24"
+      :collapsed-width="props.collapsedWidth"
+      :collapsed-icon-size="defultCollapsedIconSize"
+      :icon-size="props.iconSize"
+      :indent="props.indent"
+      :root-indent="props.rootIndent"
       :expanded-keys="state.openKeys"
       :value="getSelectedKeys"
+      :render-icon="renderMenuIcon"
       @update:value="clickMenuItem"
       @update:expanded-keys="menuExpanded"
     />
@@ -24,12 +29,53 @@ import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
 import { useTagsStore } from '@store/tags'
+import { MenuProps } from 'naive-ui'
+import { renderDefaultAssetsIcon } from '@/utils/render'
 const tagsStore = useTagsStore()
 const { t } = useI18n({ useScope: 'global' })
 const themeStore = useThemeStore()
 const appStore = useAppStore()
 const { locale, collapsed } = storeToRefs(appStore)
-const { theme } = storeToRefs(themeStore)
+const { theme, menuTheme } = storeToRefs(themeStore)
+type Props = {
+  collapsedIconSize: number
+  collapsedWidth: number
+  iconSize: number
+  indent: number
+  rootIndent: number
+}
+const props = withDefaults(defineProps<Props>(), {
+  collapsedIconSize: 24,
+  collapsedWidth: 48,
+  iconSize: 20,
+  indent: 32,
+  rootIndent: 32
+})
+
+type MenuPropsOverrides = NonNullable<MenuProps['themeOverrides']>
+const menuThemeOverrides = ref<MenuPropsOverrides>({})
+const defultCollapsedIconSize = ref(0)
+watch(
+  collapsed,
+  (newVal, oldVal) => {
+    if (collapsed.value) {
+      const height =
+        props.collapsedIconSize < menuTheme.value.minHeight
+          ? menuTheme.value.minHeight
+          : props.collapsedIconSize + menuTheme.value.compensate
+      menuThemeOverrides.value = {
+        itemHeight: height + 'px'
+      }
+      defultCollapsedIconSize.value = props.collapsedIconSize
+    } else {
+      menuThemeOverrides.value = {
+        itemHeight: menuTheme.value.minHeight + 'px'
+      }
+      defultCollapsedIconSize.value = menuTheme.value.minHeight
+    }
+  },
+  { immediate: true, deep: true }
+)
 
 const routes = generatedRoutes.map(v => {
   const currentMenu = v?.meta?.layout === false ? v : setupLayouts([v])[0]
@@ -38,6 +84,17 @@ const routes = generatedRoutes.map(v => {
 const filterRoutes = filterHiddenRoutes(routes)
 const primaryRoutes = primaryAdjustment(filterRoutes)
 const menuOptions = ref<any[]>([])
+
+function renderMenuIcon(option: MenuOption) {
+  return h(NIcon, null, {
+    default: () => h(renderDefaultAssetsIcon(option.menuRenderIcon as string))
+  })
+}
+// collapsed-icon-size 24 菜单折叠时图标的大小，如果未设定则使用 icon-size 代替
+// collapsed-width 48 折叠后菜单的宽度
+// icon-size 20  菜单未折叠时图标的大小
+// indent 32 菜单每级的缩进
+// root-indent 32 菜单第一级的缩进，如果没有设定，使用 indent 代替
 watch(
   locale,
   (newVal, oldVal) => {
@@ -57,6 +114,10 @@ watch(
 )
 
 const currentRoute = useRoute()
+// 初始化第一个tag
+if (tagsStore.isEmpty) {
+  tagsStore.addTag(currentRoute.matched[currentRoute.matched.length - 1])
+}
 // 获取当前打开的子菜单
 const matched = currentRoute.matched
 // const router = useRouter()

@@ -305,7 +305,6 @@ meta:
   breadcrumb: page.drawing.drauu
   icon: i-carbon:chart-t-sne
   size: 13
-  breadcrumbSize: 13
   keepAlive: true
   sort: 21
 </route>
