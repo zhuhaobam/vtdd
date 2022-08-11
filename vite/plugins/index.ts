@@ -14,6 +14,7 @@ import createPages from './vite-pages'
 import createCompression from './vite-compression'
 import createInspect from './vite-inspect'
 import createMySelf from './vite-myself'
+import createMD from './vite-plugin-md'
 import type { PluginOption } from 'vite'
 
 export default function createVitePlugins(env: any, isBuild = false) {
@@ -36,6 +37,7 @@ export default function createVitePlugins(env: any, isBuild = false) {
   vitePlugins.push(createLayouts())
   vitePlugins.push(createPages())
   vitePlugins.push(createMySelf())
+  vitePlugins.push(createMD())
   isBuild && vitePlugins.push(createCompression())
   vitePlugins.push(createInspect())
   return vitePlugins

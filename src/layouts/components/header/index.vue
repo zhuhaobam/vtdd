@@ -58,6 +58,16 @@
           <span>{{ $t(isFullscreen ? 'project.exitscreen' : 'project.fullscreen') }}</span>
         </n-tooltip>
       </div>
+      <div class="layout-header-trigger layout-header-trigger-min">
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon size="18" @click="toLock()">
+              <div class="i-ant-design:lock-filled" />
+            </n-icon>
+          </template>
+          <span>{{ $t('project.lock-screen') }}</span>
+        </n-tooltip>
+      </div>
       <LightDark />
       <!-- 个人中心 -->
       <div class="layout-header-trigger layout-header-trigger-min">
@@ -83,12 +93,17 @@ const props = defineProps({
 const appStore = useAppStore()
 const { isFullscreen, toggle } = useFullscreen()
 const { availableLocales, locale } = useI18n()
+
 const toggleLocales = () => {
   // change to some real logic
   const locales = availableLocales
   const localeValue = locales[(locales.indexOf(locale.value) + 1) % locales.length]
   locale.value = localeValue
   appStore.setLocale(localeValue)
+}
+
+const toLock = () => {
+  appStore.setLock(true)
 }
 // 刷新页面
 const reloadPage = () => {

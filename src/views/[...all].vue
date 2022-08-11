@@ -12,7 +12,7 @@ const router = useRouter()
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: not-found
+  breadcrumb: page.not-found
   layout: false
   sort: 0
   hidden: true

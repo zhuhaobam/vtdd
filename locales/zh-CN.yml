@@ -30,6 +30,8 @@ project:
   exitscreen: 退出全屏
   toggle_langs: 国际化切换
   default: 佚名
+  lock-screen: 锁屏
+  sliding-unlocking: 滑动解锁
 page:
   setting: 个人设置
   user: 个人中心
@@ -63,4 +65,14 @@ page:
     twopage: 星港二
   login: 登录
   color: 颜色
+  md: markdown阅读
   link: 外部链接naiveui.com
+  article: 文章
+  not-found: 没有找到
+md:
+  project: 项目
+  gift: 礼物
+  mysql: mysql数据库
+  security: 安全
+  spring: 春天框架
+  springboot: 春天boot框架

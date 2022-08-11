@@ -33,7 +33,11 @@ export const useTagsStore = defineStore('tags', {
     },
     addTag(tag: RouteLocationMatched) {
       this.setActiveTag(tag.path)
-      if (['/404', '/login'].includes(tag.path) || this.tags.some(item => item.path === tag.path)) return
+      if (
+        ['/404', '/login', '/system/user', '/system/setting'].includes(tag.path) ||
+        this.tags.some(item => item.path === tag.path)
+      )
+        return
       this.setTags([...this.tags, tag])
     },
     removeTag(path: string) {

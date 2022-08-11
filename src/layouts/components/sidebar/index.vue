@@ -30,7 +30,7 @@ import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
 import { useTagsStore } from '@store/tags'
 import { MenuProps } from 'naive-ui'
-import { renderDefaultAssetsIcon } from '@/utils/render'
+import { renderAssetsIcon } from '@/utils/render'
 const tagsStore = useTagsStore()
 const { t } = useI18n({ useScope: 'global' })
 const themeStore = useThemeStore()
@@ -87,7 +87,7 @@ const menuOptions = ref<any[]>([])
 
 function renderMenuIcon(option: MenuOption) {
   return h(NIcon, null, {
-    default: () => h(renderDefaultAssetsIcon(option.menuRenderIcon as string))
+    default: () => h(renderAssetsIcon(option.menuRenderIcon as string))
   })
 }
 // collapsed-icon-size 24 菜单折叠时图标的大小，如果未设定则使用 icon-size 代替

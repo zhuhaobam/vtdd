@@ -30,6 +30,8 @@ project:
   exitscreen: exitscreen
   toggle_langs: toggle_langs
   default: yiming
+  lock-screen: lock screen
+  sliding-unlocking: sliding unlocking
 page:
   setting: setting
   user: user
@@ -63,4 +65,15 @@ page:
     twopage: two starport
   login: login
   color: color
+  md: markdown
   link: linknaiveui.com
+  article: article
+  not-found: not-found
+md:
+  project: project
+  gift: gift
+  mysql: mysql database
+  security: security
+  spring: spring framework
+  springboot: springboot framework
+

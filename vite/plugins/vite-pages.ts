@@ -6,6 +6,7 @@ const pathResolve = (dir: string) => resolve(__dirname, '.', dir)
 // https://github.com/hannoeru/vite-plugin-pages  以文件系统为基础的路由
 export default function createPages() {
   return Pages({
+    extensions: ['vue', 'md'],
     // 自动读取src/views下的vue文件，生成路由信息，默认路由路径'/‘
     dirs: [{ dir: pathResolve('../../src/views'), baseRoute: '/' }],
     // 异步方式加载路由组件

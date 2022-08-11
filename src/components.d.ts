@@ -7,9 +7,11 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    'IAntDesign:arrowRightOutlined': typeof import('~icons/ant-design/arrow-right-outlined')['default']
     'IAntDesign:menuFoldOutlined': typeof import('~icons/ant-design/menu-fold-outlined')['default']
     'IAntDesign:menuUnfoldOutlined': typeof import('~icons/ant-design/menu-unfold-outlined')['default']
     'IAntDesign:reloadOutlined': typeof import('~icons/ant-design/reload-outlined')['default']
+    'IAntDesign:unlockFilled': typeof import('~icons/ant-design/unlock-filled')['default']
     IAntDesignFullscreenExitOutlined: typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     IAntDesignFullscreenOutlined: typeof import('~icons/ant-design/fullscreen-outlined')['default']
     IMyselfColor: typeof import('~icons/myself/color')['default']
@@ -36,8 +38,10 @@ declare module '@vue/runtime-core' {
     NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NH1: typeof import('naive-ui')['NH1']
     NIcon: typeof import('naive-ui')['NIcon']
+    NIconWrapper: typeof import('naive-ui')['NIconWrapper']
     NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
+    NLayoutContent: typeof import('naive-ui')['NLayoutContent']
     NLayoutFooter: typeof import('naive-ui')['NLayoutFooter']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
     NLayoutSider: typeof import('naive-ui')['NLayoutSider']
@@ -55,6 +59,7 @@ declare module '@vue/runtime-core' {
     NWatermark: typeof import('naive-ui')['NWatermark']
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
+    ScreenLock: typeof import('./components/ScreenLock/index.vue')['default']
     Starport: typeof import('vue-starport')['Starport']
     StarportCarrier: typeof import('vue-starport')['StarportCarrier']
     StarportComponet: typeof import('./components/StarportComponet/index.vue')['default']

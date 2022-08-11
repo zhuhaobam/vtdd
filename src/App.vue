@@ -16,6 +16,7 @@
     <n-global-style />
     <!-- </n-theme-editor> -->
   </n-config-provider>
+  <ScreenLock :open="lock" @lockOpen="lockOpen()" />
 </template>
 
 <script setup lang="ts">
@@ -34,8 +35,10 @@ hljs.registerLanguage('javascript', javascript)
 const { t } = useI18n()
 const appStore = useAppStore()
 const userStore = useUserStore()
-const { locale } = storeToRefs(appStore)
-
+const { locale, lock } = storeToRefs(appStore)
+const lockOpen = () => {
+  appStore.setLock(false)
+}
 const localeMap: {
   [key: string]: {
     l: NLocale

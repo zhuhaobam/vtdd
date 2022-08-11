@@ -4,47 +4,56 @@ import { NIcon } from 'naive-ui'
 // 动态联网获取图标
 // http://icon-sets.iconify.design/ant-design/
 import { Icon } from '@iconify/vue'
-
 /**
- * render 图标,主要针对面包屑使用
+ * render 图标
+ * 根据前缀识别加载方式,无size
  * */
-export function renderAssetsIcon(icon: string, size?: number) {
+export function renderDefaultAssetsIcon(icon: string) {
+  const len = icon.length
   if (icon.startsWith('i-carbon') || icon.startsWith('i-ant-design')) {
-    return renderIconifyWithIcons(icon.slice(2, icon.length), size)
+    return () => h(Icon, { icon: icon.slice(2, len) })
   }
-  if (icon.startsWith('i-myself')) {
-    return () => h(SvgIcon, { name: icon.slice(9, icon.length), size: size ?? 16 })
-  }
-  return () => h(SvgIcon, { name: icon, size: size ?? 16 })
+  return () => h(SvgIcon, { name: icon.slice(icon.startsWith('i-myself-') ? 9 : 0, len) })
 }
 
 /**
- * render 图标,主要针对菜单使用，默认继承size
+ * render 图标
+ * 根据前缀识别加载方式
  * */
-export function renderDefaultAssetsIcon(icon: string) {
-  if (icon.startsWith('i-carbon') || icon.startsWith('i-ant-design')) {
-    return () => h(Icon, { icon: icon.slice(2, icon.length) })
+export function renderAssetsIcon(icon: string, size?: number) {
+  const len = icon.length
+  if (icon.startsWith('i-carbon:') || icon.startsWith('i-ant-design:')) {
+    return h(Icon, { icon: icon.slice(2, len), style: { fontSize: (size ?? 20) + 'px' } })
   }
-  if (icon.startsWith('i-myself')) {
-    return () => h(SvgIcon, { name: icon.slice(9, icon.length) })
-  }
-  return () => h(SvgIcon, { name: icon })
+  return () =>
+    h(SvgIcon, {
+      name: icon.slice(icon.startsWith('i-myself-') ? 9 : 0, len),
+      size: size ?? 20
+    })
+}
+
+/**
+ * render 图标
+ *  SvgIcon
+ * */
+export function renderSvgIcon(icon: string, size?: number) {
+  return () => h(SvgIcon, { name: icon, size: size ?? 20 })
 }
 
 /**
  * render 图标
  * 联网下载图标
  * */
-export function renderIconifyWithIcons(icon: string, size?: number) {
-  return () => h(Icon, { icon: icon, style: { fontSize: (size ?? 16) + 'px' } })
+export function renderIconifyIconsByNetWork(icon: string, size?: number) {
+  return () => h(Icon, { icon: icon, style: { fontSize: (size ?? 20) + 'px' } })
 }
 
 /**
  * render 图标
- * 这种方式加载图标，需要页面其他地方用过并先执行过
+ * 需要页面提前使用过
  * */
-export function renderNIconWithIcons(icon: string, size?: number) {
-  return () => h(NIcon, { size: size ?? 16 }, { default: () => h('div', { class: icon }) })
+export function renderNIconByAlready(icon: string, size?: number) {
+  return () => h(NIcon, { size: size ?? 20 }, { default: () => h('div', { class: icon }) })
 }
 
 /**

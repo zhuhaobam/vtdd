@@ -6,6 +6,7 @@ interface IAppStore {
   locale: string // 国际化
   title: string // 动态标题
   reload: boolean // 动态刷新
+  lock: boolean // 锁屏
 }
 
 // 导出pinia
@@ -15,12 +16,13 @@ export const useAppStore = defineStore('app', {
       collapsed: false,
       locale: 'zh-CN',
       title: '',
-      reload: true
+      reload: true,
+      lock: false
     }
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title', 'reload'] }]
+    strategies: [{ storage: localStorage, paths: ['collapsed', 'locale', 'title', 'reload', 'lock'] }]
   },
   getters: {},
   actions: {
@@ -29,6 +31,9 @@ export const useAppStore = defineStore('app', {
     },
     setLocale(locale: string) {
       this.locale = locale
+    },
+    setLock(lock: boolean) {
+      this.lock = lock
     },
     // 设置网页标题
     setTitle(t: any, title: string) {

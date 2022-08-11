@@ -8,7 +8,7 @@ const props = defineProps<{
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: article
+  breadcrumb: page.article
   icon: gift
   sort: 1
   hidden: true

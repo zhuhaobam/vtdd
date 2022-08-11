@@ -7,7 +7,7 @@
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: setting
+  breadcrumb: page.setting
   icon: gift
   sort: 100
   hidden: true

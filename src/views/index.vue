@@ -5,7 +5,7 @@
 <route lang="yaml">
 redirect: /dashboard/analysis
 meta:
-  breadcrumb: index
+  breadcrumb: page.index
   sort: 0
   hidden: true
 </route>

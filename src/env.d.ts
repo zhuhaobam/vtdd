@@ -10,6 +10,12 @@ declare module '*.vue' {
   export default component
 }
 
+declare module '*.md' {
+  import type { ComponentOptions } from 'vue'
+  const Component: ComponentOptions
+  export default Component
+}
+
 // 暴露出去的自定义环境变量，用于 TypeScript 的智能感知
 // interface ImportMetaEnv {
 //   readonly VTDD_DESC: string
