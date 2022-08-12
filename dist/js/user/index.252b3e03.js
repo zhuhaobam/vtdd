@@ -1,1 +1,0 @@
-import{d as o,o as t,c as n}from"../.pnpm/.pnpm.b2939809.js";import{b as e}from"../route-block/route-block.2cc84cc1.js";const s=o({name:"system-user"}),c=o({...s,setup(r){return(u,a)=>(t(),n("div",null,"\u4E2A\u4EBA\u4E2D\u5FC3"))}});typeof e=="function"&&e(c);export{c as default};

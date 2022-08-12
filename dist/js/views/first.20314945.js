@@ -1,1 +1,0 @@
-import{d as o,o as n,c as r,f as s,F as a,ag as c,C as _}from"../.pnpm/.pnpm.b2939809.js";import{b as e}from"../route-block/route-block.2cc84cc1.js";const f=c(" / first RouterView "),i=o({name:"first"}),m=o({...i,setup(p){return(u,l)=>{const t=_("RouterView");return n(),r(a,null,[f,s(t)],64)}}});typeof e=="function"&&e(m);export{m as default};
