@@ -1,0 +1,1 @@
+import{d as e,o as n,b as r,C as s}from"../.pnpm/.pnpm.b2939809.js";import{b as o}from"../route-block/route-block.2cc84cc1.js";const a=e({name:"starport"}),c=e({...a,setup(p){return(_,f)=>{const t=s("RouterView");return n(),r(t)}}});typeof o=="function"&&o(c);export{c as default};

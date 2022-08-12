@@ -1,0 +1,1 @@
+import{d as o,o as n,c as a,f as r,F as s,ag as c,C as _}from"../.pnpm/.pnpm.b2939809.js";import{b as e}from"../route-block/route-block.2cc84cc1.js";const u=c(" drauu->folder->RouterView "),f=o({name:"drawing"}),i=o({...f,setup(m){return(p,d)=>{const t=_("RouterView");return n(),a(s,null,[u,r(t)],64)}}});typeof e=="function"&&e(i);export{i as default};
