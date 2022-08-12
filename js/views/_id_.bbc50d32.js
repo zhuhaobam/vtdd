@@ -1,1 +1,0 @@
-import{d as t,o as s,c as a,t as c}from"../.pnpm/.pnpm.b2939809.js";import{b as o}from"../route-block/route-block.2cc84cc1.js";const r=t({name:"id"}),i=t({...r,props:{id:null},setup(e){const n=e;return(p,l)=>(s(),a("div",null,"AAAAAAAAAA"+c(n.id),1))}});typeof o=="function"&&o(i);export{i as default};

@@ -1,1 +1,0 @@
-import{d as o,o as n,c as t}from"../.pnpm/.pnpm.b2939809.js";import{b as e}from"../route-block/route-block.2cc84cc1.js";const a=o({name:"linkNaive"}),c=o({...a,setup(i){return(r,l)=>(n(),t("div",null,"linkNaive"))}});typeof e=="function"&&e(c);export{c as default};
