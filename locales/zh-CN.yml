@@ -69,10 +69,3 @@ page:
   link: 外部链接naiveui.com
   article: 文章
   not-found: 没有找到
-md:
-  project: 项目
-  gift: 礼物
-  mysql: mysql数据库
-  security: 安全
-  spring: 春天框架
-  springboot: 春天boot框架

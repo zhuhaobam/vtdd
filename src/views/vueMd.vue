@@ -5,7 +5,7 @@
         <n-menu
           :options="options"
           style="width: 272px"
-          :default-value="defaultMenuOption?.key"
+          :default-expand-all="true"
           :render-label="renderMenuLabel"
           :render-icon="renderMenuIcon"
           @update:value="handleComponent"
@@ -14,13 +14,18 @@
       <n-layout content-style="padding: 0 ;" :native-scrollbar="false">
         <n-layout-header bordered>
           <h2 flex justify-start items-center ml-24 mr-24>
-            <n-icon-wrapper :size="20" :border-radius="30">
+            <n-icon-wrapper :size="20" :border-radius="30" color="rgba(24, 160, 88, 0.3)" icon-color="#18a058">
               <component :is="defaultMenuOption?.icon" v-if="defaultMenuOption?.icon" />
             </n-icon-wrapper>
-            <span px-5>·</span>{{ $t(defaultMenuOption?.label as string) }}
+            <span px-5>·</span
+            >{{
+              defaultMenuOption?.noi18n === 'yes'
+                ? (defaultMenuOption?.label as string)
+                : $t(defaultMenuOption?.label as string)
+            }}
           </h2>
         </n-layout-header>
-        <n-layout position="absolute" content-style="padding:0;" style="top: 80px" :native-scrollbar="false">
+        <n-layout position="absolute" content-style="padding:0 0 0 24px;" style="top: 80px" :native-scrollbar="false">
           <component :is="newComponent" />
         </n-layout>
       </n-layout>
@@ -28,47 +33,65 @@
   </n-layout>
 </template>
 <script setup lang="ts" name="vueMd">
-import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
-import { sortRoute } from '@/utils/router'
+// import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
+import { renderDefaultAssetsIcon } from '@/utils/render'
 import { MenuOption } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
 const { t } = useI18n()
-const modules: Record<string, any> = import.meta.glob('/src/md/*.md', { eager: true })
 const defaultMenuOption = ref<MenuOption>()
 const newComponent = shallowRef()
 // 生成菜单
 const options = ref<MenuOption[]>()
-const moduleOptions: MenuOption[] = []
-const madeOptions = () => {
-  for (const key in modules) {
-    const frontmatter = modules[key].frontmatter
-    moduleOptions.push({
-      label: frontmatter.title,
-      key: key,
-      icon: renderDefaultAssetsIcon(frontmatter.icon),
-      sort: frontmatter.sort
-    })
+const modulesFiles: Record<string, any> = import.meta.glob('/src/md/**/*.md', { eager: true })
+function madeOptions(levelName: string, level: number, list: Record<string, any>) {
+  const onlyOptions: MenuOption[] = []
+  for (const path in list) {
+    if (path.split('/').length === level && path.slice(0, path.lastIndexOf('/')) === levelName) {
+      const frontmatter = list[path].frontmatter
+      const onlyMenuOption: MenuOption[] = madeOptions(path.slice(0, path.lastIndexOf('.')), level + 1, list)
+      if (onlyMenuOption.length > 0) {
+        onlyOptions.push({
+          label: frontmatter.title,
+          key: path,
+          icon: renderDefaultAssetsIcon(frontmatter.icon),
+          sort: frontmatter.sort,
+          noi18n: frontmatter.noi18n ?? false,
+          children: onlyMenuOption
+        })
+      } else {
+        onlyOptions.push({
+          label: frontmatter.title,
+          key: path,
+          icon: renderDefaultAssetsIcon(frontmatter.icon),
+          sort: frontmatter.sort,
+          noi18n: frontmatter.noi18n ?? false
+        })
+      }
+    }
   }
-  moduleOptions.sort(sortRoute)
-  defaultMenuOption.value = moduleOptions[0]
-  newComponent.value = modules[moduleOptions[0].key as string].default
-  options.value = moduleOptions
+  onlyOptions.sort((a: MenuOption, b: MenuOption) => {
+    return ((a?.sort as number) ?? 0) - ((b?.sort as number) ?? 0)
+  })
+  return onlyOptions
 }
-madeOptions()
+options.value = madeOptions('/src/md', 4, modulesFiles)
+defaultMenuOption.value = options.value[0]
+newComponent.value = modulesFiles[options.value[0].key as string].default
 
 function renderMenuLabel(option: MenuOption) {
-  return h(NEllipsis, null, { default: () => t(option.label as string) })
+  return h(NEllipsis, null, {
+    default: () => (option.noi18n === 'yes' ? (option.label as string) : t(option.label as string))
+  })
 }
 
 function renderMenuIcon(option: MenuOption) {
-  return h(renderSvgIcon('file-markdown-filled'))
+  // return h(renderSvgIcon('file-markdown-filled'))
+  return h(NIcon, option.icon)
 }
-
-// 显示组件
 
 function handleComponent(key: string, item: MenuOption) {
   defaultMenuOption.value = item
-  newComponent.value = modules[key].default
+  newComponent.value = modulesFiles[key].default
 }
 </script>
 <route lang="yaml">

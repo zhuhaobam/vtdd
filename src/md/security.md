@@ -1,7 +1,8 @@
 ---
-title: md.security
+title: Security
+noi18n: yes
 icon: i-myself-springsecurity
-sort: 97
+sort: 55
 ---
 
-# This is {{$t(title)}}
+# This is {{title}}

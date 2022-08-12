@@ -1,7 +1,8 @@
 ---
-title: md.mysql
+title: MySQL
+noi18n: yes
 icon: i-myself-mysql
-sort: 99
+sort: 45
 ---
 
-# This is {{$t(title)}}
+# This is {{title}}

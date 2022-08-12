@@ -1,7 +1,8 @@
 ---
-title: md.springboot
+title: SpringBoot
+noi18n: yes
 icon: i-myself-springboot
-sort: 95
+sort: 50
 ---
 
-# This is {{$t(title)}}
+# This is {{title}}

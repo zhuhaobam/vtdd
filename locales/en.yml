@@ -69,11 +69,3 @@ page:
   link: linknaiveui.com
   article: article
   not-found: not-found
-md:
-  project: project
-  gift: gift
-  mysql: mysql database
-  security: security
-  spring: spring framework
-  springboot: springboot framework
-

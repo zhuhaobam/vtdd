@@ -1,7 +1,6 @@
 ---
-title: md.spring
+title: Spring
+noi18n: yes
 icon: i-myself-spring
-sort: 96
+sort: 40
 ---
-
-# This is {{$t(title)}}
