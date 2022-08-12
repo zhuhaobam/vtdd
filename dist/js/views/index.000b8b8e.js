@@ -1,0 +1,1 @@
+import{d as u}from"../.pnpm/.pnpm.b2939809.js";import{b as e}from"../route-block/route-block.2cc84cc1.js";const t=u({name:"index"}),n=u({...t,setup(o){return(i,s)=>"\u7ED9vite.config.ts\u4E2Dvite-plugin-pages\u914D\u7F6EPages\u4E0BextendRoute\u91CD\u5B9A\u5411\u9996\u9875\u4F7F\u7528"}});typeof e=="function"&&e(n);export{n as default};

@@ -1,0 +1,1 @@
+import"../AppMain.vue_vue_type_script_setup_true_name_appMain_lang/AppMain.vue_vue_type_script_setup_true_name_appMain_lang.927efe64.js";import{_ as i}from"../AppMain.vue_vue_type_script_setup_true_name_appMain_lang/AppMain.vue_vue_type_script_setup_true_name_appMain_lang.927efe64.js";import"../.pnpm/.pnpm.b2939809.js";import"../../assets/index.04b0ada7.js";export{i as default};

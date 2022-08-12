@@ -1,0 +1,1 @@
+import{d as e,o as t,c as r}from"../.pnpm/.pnpm.b2939809.js";import{b as o}from"../route-block/route-block.2cc84cc1.js";const n=e({name:"first-second-third-flower"}),c=e({...n,setup(f){return(s,a)=>(t(),r("div",null,"thirdfloor->flower"))}});typeof o=="function"&&o(c);export{c as default};

@@ -1,0 +1,1 @@
+import{d as e,o as t,c as n}from"../.pnpm/.pnpm.b2939809.js";import{b as o}from"../route-block/route-block.2cc84cc1.js";const c=e({name:"simpleColor"}),r=e({...c,setup(a){return(s,l)=>(t(),n("div",null,"\u989C\u8272"))}});typeof o=="function"&&o(r);export{r as default};
