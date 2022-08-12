@@ -4,7 +4,7 @@
 
 ## 项目在线预览地址
 
-https://zhuhaobam.github.io/vuemd
+https://zhuhaobam.github.io
 
 
 ## 截图
@@ -13,6 +13,8 @@ https://zhuhaobam.github.io/vuemd
 
 
 # 项目地址
+
+## pnpm包管理器
 
 `pnpm run dev`
 
