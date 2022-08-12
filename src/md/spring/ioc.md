@@ -1,7 +1,7 @@
 ---
 title: IOC容器通俗理解
 noi18n: yes
-icon: i-myself-container
+icon: container
 sort: 96
 ---
 

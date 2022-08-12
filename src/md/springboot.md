@@ -1,7 +1,7 @@
 ---
 title: SpringBoot
 noi18n: yes
-icon: i-myself-springboot
+icon: springboot
 sort: 50
 ---
 

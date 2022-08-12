@@ -1,7 +1,7 @@
 ---
 title: Security
 noi18n: yes
-icon: i-myself-springsecurity
+icon: springsecurity
 sort: 55
 ---
 

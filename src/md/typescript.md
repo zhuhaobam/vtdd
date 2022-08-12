@@ -1,7 +1,7 @@
 ---
 title: TypeScript
 noi18n: yes
-icon: i-myself-language-typescript
+icon: language-typescript
 sort: 30
 ---
 

@@ -23,6 +23,6 @@ sort: 20
 ```
 title: md结构适配
 noi18n: yes
-icon: i-myself-language-java
+icon: language-java
 sort: 60
 ```

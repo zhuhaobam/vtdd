@@ -6,6 +6,7 @@
           :options="options"
           style="width: 272px"
           :default-expand-all="true"
+          :value="defaultMenuOption?.key"
           :render-label="renderMenuLabel"
           :render-icon="renderMenuIcon"
           @update:value="handleComponent"
@@ -75,8 +76,18 @@ function madeOptions(levelName: string, level: number, list: Record<string, any>
   return onlyOptions
 }
 options.value = madeOptions('/src/md', 4, modulesFiles)
-defaultMenuOption.value = options.value[0]
-newComponent.value = modulesFiles[options.value[0].key as string].default
+const defaultMd = defaultChildMd(options.value[0])
+defaultMenuOption.value = defaultMd
+
+newComponent.value = modulesFiles[defaultMd.key as string].default
+
+function defaultChildMd(current: MenuOption): MenuOption {
+  const currentChildren = current.children?.length ? current.children : []
+  if ((currentChildren.length ?? 0) > 0) {
+    return defaultChildMd(currentChildren[0])
+  }
+  return current
+}
 
 function renderMenuLabel(option: MenuOption) {
   return h(NEllipsis, null, {

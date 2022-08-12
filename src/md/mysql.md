@@ -1,7 +1,7 @@
 ---
 title: MySQL
 noi18n: yes
-icon: i-myself-mysql
+icon: mysql
 sort: 45
 ---
 
