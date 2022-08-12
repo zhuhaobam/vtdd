@@ -1,0 +1,1 @@
+import{d as e,o as t,j as n}from"./main-cd20fe6b.js";import{b as o}from"./route-block-7ae06361.js";const r=e({name:"simpleColor"}),a=e({...r,setup(c){return(s,l)=>(t(),n("div",null,"\u989C\u8272"))}});typeof o=="function"&&o(a);export{a as default};

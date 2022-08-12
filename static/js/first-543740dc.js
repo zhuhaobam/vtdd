@@ -1,1 +1,0 @@
-import{d as o,o as n,j as r,g as s,R as a,T as c,z as _}from"./main-16bd6d68.js";import{b as e}from"./route-block-7ae06361.js";const i=c(" / first RouterView "),f=o({name:"first"}),m=o({...f,setup(p){return(u,l)=>{const t=_("RouterView");return n(),r(a,null,[i,s(t)],64)}}});typeof e=="function"&&e(m);export{m as default};

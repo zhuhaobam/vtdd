@@ -1,1 +1,0 @@
-import{d as t,o,j as n}from"./main-16bd6d68.js";import{b as e}from"./route-block-7ae06361.js";const s=t({name:"system-setting"}),a=t({...s,setup(c){return(r,u)=>(o(),n("div",null,"\u4E2A\u4EBA\u8BBE\u7F6E"))}});typeof e=="function"&&e(a);export{a as default};

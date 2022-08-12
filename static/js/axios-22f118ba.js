@@ -1,1 +1,0 @@
-import{d as o,o as n,j as a,g as s,R as r,T as c,z as _}from"./main-16bd6d68.js";import{b as e}from"./route-block-7ae06361.js";const i=c(" axios->folder->RouterView "),m=o({name:"axios"}),p=o({...m,setup(f){return(l,u)=>{const t=_("RouterView");return n(),a(r,null,[i,s(t)],64)}}});typeof e=="function"&&e(p);export{p as default};
