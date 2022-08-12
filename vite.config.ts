@@ -61,19 +61,36 @@ export default defineConfig(({ mode, command }) => {
       }
     },
     build: {
-      //   outDir: 'dist',
-      //   assetsDir: 'assets', // 指定静态资源存放路径
-      //   sourcemap: false, // 是否构建source map 文件
-      //   minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
+      // outDir: 'dist',
+      // assetsDir: 'assets', // 指定静态资源存放路径
+      // sourcemap: false, // 是否构建source map 文件
+      // minify: 'esbuild', // boolean | 'terser' | 'esbuild',默认esbuild
+      // rollupOptions: {
+      //   input: {
+      //     main: pathResolve('index.html')
+      //   },
+      //   output: {
+      //     chunkFileNames: 'static/js/[name]-[hash].js',
+      //     entryFileNames: 'static/js/[name]-[hash].js',
+      //     assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
+      //   }
+      // }
+      sourcemap: false,
+      minify: 'esbuild',
+      chunkSizeWarningLimit: 1500,
       rollupOptions: {
-        input: {
-          main: pathResolve('index.html')
+        output: {
+          manualChunks(id) {
+            if (id.includes('node_modules')) {
+              return id.toString().split('node_modules/')[1].split('/')[0].toString()
+            }
+          },
+          chunkFileNames: chunkInfo => {
+            const facadeModuleId = chunkInfo.facadeModuleId ? chunkInfo.facadeModuleId.split('/') : []
+            const fileName = facadeModuleId[facadeModuleId.length - 2] || '[name]'
+            return `js/${fileName}/[name].[hash].js`
+          }
         }
-        //     output: {
-        //       chunkFileNames: 'static/js/[name]-[hash].js',
-        //       entryFileNames: 'static/js/[name]-[hash].js',
-        //       assetFileNames: 'static/[ext]/[name]-[hash].[ext]'
-        //     }
       }
     },
     // https://vitejs.dev/config/index.html#server-proxy

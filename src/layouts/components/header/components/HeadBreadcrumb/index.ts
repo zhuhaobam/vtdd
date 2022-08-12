@@ -1,4 +1,4 @@
-import { renderAssetsIcon } from '@/utils/render'
+import { renderDefaultAssetsIcon } from '@/utils/render'
 import { RouteLocationMatched, RouteRecordRaw } from 'vue-router'
 
 export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: any): RouteLocationMatched[] {
@@ -11,7 +11,7 @@ export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: 
         props: item.props ? { default: true } : item.props
       }
       if (item.meta?.icon) {
-        currentMenu.icon = renderAssetsIcon(item.meta.icon as string)
+        currentMenu.icon = renderDefaultAssetsIcon(item.meta.icon as string)
       }
       // 是否有子菜单，并递归处理
       if (item.children?.length) {
@@ -31,7 +31,7 @@ export function headBreadcrumbRouteRecordRaw(routerMatched: RouteRecordRaw[], t:
         label: t(item.meta?.breadcrumb as string)
       }
       if (item.meta?.icon) {
-        currentMenu.icon = renderAssetsIcon(item.meta.icon as string, item.meta.size)
+        currentMenu.icon = renderDefaultAssetsIcon(item.meta.icon as string)
       }
       // 是否有子菜单，并递归处理
       if (item.children?.length) {

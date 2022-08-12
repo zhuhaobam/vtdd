@@ -36,7 +36,7 @@
 <script setup lang="ts" name="vueMd">
 // import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
 import { renderDefaultAssetsIcon } from '@/utils/render'
-import { MenuOption } from 'naive-ui'
+import { MenuOption, NIcon } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
 const { t } = useI18n()
 const defaultMenuOption = ref<MenuOption>()
@@ -111,4 +111,6 @@ meta:
   icon: file-markdown-filled
   sort: -1
 </route>
-<style lang="scss" scoped></style>
+<style lang="scss" scoped>
+// default
+</style>

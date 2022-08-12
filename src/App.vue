@@ -16,7 +16,7 @@
     <n-global-style />
     <!-- </n-theme-editor> -->
   </n-config-provider>
-  <ScreenLock :open="lock" @lockOpen="lockOpen()" />
+  <ScreenLock :open="lock" @lock-open="lockOpen()" />
 </template>
 
 <script setup lang="ts">

@@ -78,70 +78,6 @@
         :actions="['confirm']"
         @confirm="handleUpdateColorValue"
       />
-      <n-button
-        data-color="#000000"
-        :type="colorModal === 'dark' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('dark')"
-      >
-        ​⚫️​
-      </n-button>
-      <n-button
-        data-color="#ed153d"
-        title="Red"
-        :type="colorModal === 'red' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('red')"
-        >​🔴​</n-button
-      >
-      <n-button
-        data-color="#ed9a26"
-        title="Orange"
-        :type="colorModal === 'orange' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('orange')"
-        >​🟠​​</n-button
-      >
-      <n-button
-        data-color="#ede215"
-        title="Yellow"
-        :type="colorModal === 'yellow' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('yellow')"
-        >​​🟡​​</n-button
-      >
-      <n-button
-        data-color="#30bd20"
-        title="Green"
-        :type="colorModal === 'green' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('green')"
-        >​🟢​​</n-button
-      >
-      <n-button
-        data-color="#2656bf"
-        title="Blue"
-        :type="colorModal === 'blue' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('blue')"
-        >​​🔵​​</n-button
-      >
-      <n-button
-        data-color="#c24aed"
-        title="Purple"
-        :type="colorModal === 'purple' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('purple')"
-        >​🟣​​</n-button
-      >
-      <n-button
-        data-color="#bf6b26"
-        title="Brown"
-        :type="colorModal === 'brown' ? 'primary' : undefined"
-        dashed
-        @click="changeColor('brown')"
-        >​​🟤​</n-button
-      >
       <input
         v-model="rangeSize"
         flex
@@ -217,13 +153,7 @@ function changeModeA() {
   modeModal.value = 'arrow'
 }
 const colorModal = ref('dark')
-function changeColor(color: string) {
-  const a = drauu.options as Options
-  const b = a.brush as Brush
-  b.color = color
-  colorModal.value = color
-}
-//
+
 const handleUpdateColorValue = (value: string) => {
   const a = drauu.options as Options
   const b = a.brush as Brush

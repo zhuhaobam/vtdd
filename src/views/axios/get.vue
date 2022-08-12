@@ -11,30 +11,26 @@
   <n-h1 prefix="bar" align-text type="info">
     <n-text type="info">JSON结果</n-text>
   </n-h1>
-  <json-viewer :value="codeGetThen" :preview-mode="true" :show-array-index="false"></json-viewer>
+  <JsonViewer
+    v-if="codeGetThenReactive"
+    :value="codeGetThenReactive"
+    :expanded="true"
+    :expand-depth="5"
+    theme="light"
+  />
 </template>
 <script setup lang="ts" name="axios-get">
 import { MyLogin } from '@/apis/apisTypes'
 import { onLogin } from '@apis/app'
 import { MyResponse } from 'axios'
-const codeGetThen = ref({})
+import { JsonViewer } from 'vue3-json-viewer'
+import 'vue3-json-viewer/dist/index.css'
+const codeGetThen = ref()
+const codeGetThenReactive = reactive(codeGetThen)
 onMounted(() => {
   onLogin<MyResponse<MyLogin>>()
     .then(res => {
-      console.log('===========GET==============》')
-      console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
-      console.log(JSON.stringify(res))
       codeGetThen.value = res
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
     })
     .catch((error: any) => {
       console.log('request->onLogin<MyResponse<MyLogin>>->error', error)
@@ -42,19 +38,7 @@ onMounted(() => {
 })
 const codeGet = ref(`onLogin<MyResponse<MyLogin>>()
     .then(res => {
-      console.log('===========GET==============》')
-      console.log('===========request->onLogin<MyResponse<MyLogin>>->res')
-      console.log(JSON.stringify(res))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
-      console.log('===========request->onLogin<MyResponse<MyLogin>>【MyLogin】->res.data.data?.permList')
-      console.log(JSON.stringify(res.data.data?.permList))
+      // ... ...
     })
     .catch((error: any) => {
       console.log('request->onLogin<MyResponse<MyLogin>>->error', error)

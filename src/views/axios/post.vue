@@ -11,26 +11,26 @@
   <n-h1 prefix="bar" align-text type="info">
     <n-text type="info">JSON结果</n-text>
   </n-h1>
-  <json-viewer :value="codePostThen" :preview-mode="true" :show-array-index="false"></json-viewer>
+  <JsonViewer
+    v-if="codePostThenReactive"
+    :value="codePostThenReactive"
+    :expanded="true"
+    :expand-depth="5"
+    theme="light"
+  />
 </template>
 <script setup lang="ts" name="axios-post">
 import { MyTest } from '@/apis/apisTypes'
 import { onTest } from '@apis/app'
 import { MyResponse } from 'axios'
-const codePostThen = ref({})
+import { JsonViewer } from 'vue3-json-viewer'
+import 'vue3-json-viewer/dist/index.css'
+const codePostThen = ref()
+const codePostThenReactive = reactive(codePostThen)
 onMounted(() => {
   onTest<MyResponse<MyTest>>()
     .then(res => {
-      console.log('===========POST==============》')
-      console.log('===========request->onTest<MyResponse<MyTest>>->res')
-      console.log(JSON.stringify(res))
       codePostThen.value = res
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
     })
     .catch((error: any) => {
       console.log('request->onTest<MyResponse<MyTest>>->error', error)
@@ -38,15 +38,7 @@ onMounted(() => {
 })
 const codePost = ref(`onTest<MyResponse<MyTest>>()
     .then(res => {
-      console.log('===========POST==============》')
-      console.log('===========request->onTest<MyResponse<MyTest>>->res')
-      console.log(JSON.stringify(res))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyResponse】->res.data')
-      console.log(JSON.stringify(res.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data')
-      console.log(JSON.stringify(res.data.data))
-      console.log('===========request->onTest<MyResponse<MyTest>>【MyTest】->res.data.data?.other')
-      console.log(JSON.stringify(res.data.data?.other))
+      // ... ...
     })
     .catch((error: any) => {
       console.log('request->onTest<MyResponse<MyTest>>->error', error)

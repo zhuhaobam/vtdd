@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { RouteLocationMatched } from 'vue-router'
 import router from '@/router'
+import { cloneDeep } from 'lodash-es'
 
 interface ITagsStore {
   tags: RouteLocationMatched[]
@@ -29,7 +30,8 @@ export const useTagsStore = defineStore('tags', {
       this.activeTag = path
     },
     setTags(tags: RouteLocationMatched[]) {
-      this.tags = tags
+      // 涉及到对象循环引用，这里直接深拷贝一下Circular reference
+      this.tags = cloneDeep(tags)
     },
     addTag(tag: RouteLocationMatched) {
       this.setActiveTag(tag.path)

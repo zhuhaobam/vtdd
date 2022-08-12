@@ -1,6 +1,4 @@
 import { defineStore } from 'pinia'
-import { ResultEnum } from '@enums/httpEnum'
-import { getUserInfo, login } from '@apis/user'
 
 export interface IUserState {
   token: string
@@ -57,42 +55,6 @@ export const useUserStore = defineStore('user', {
     setUserInfo(info: object) {
       this.info = info
     },
-    // 登录
-    async login(userInfo: any) {
-      try {
-        const response = await login(userInfo)
-        if (response.code === ResultEnum.SUCCESS) {
-          this.setToken(response.token)
-          this.setUserInfo(result)
-        }
-        return Promise.resolve(response)
-      } catch (e) {
-        return Promise.reject(e)
-      }
-    },
-
-    // 获取用户信息
-    GetInfo() {
-      return new Promise((resolve, reject) => {
-        getUserInfo()
-          .then((res: unknown) => {
-            const result = res
-            if (result.permissions && result.permissions.length) {
-              const permissionsList = result.permissions
-              this.setPermissions(permissionsList)
-              this.setUserInfo(result)
-            } else {
-              reject(new Error('getInfo: permissionsList must be a non-null array !'))
-            }
-            this.setAvatar(result.avatar)
-            resolve(res)
-          })
-          .catch((error: any) => {
-            reject(error)
-          })
-      })
-    },
-
     // 登出
     async logout() {
       this.setPermissions([])

@@ -106,17 +106,17 @@ function onMouseup(e: MouseEvent) {
 <style lang="scss" scoped>
 .screen-locker {
   position: fixed;
-  left: 0;
-  right: 0;
-  top: 0;
-  bottom: 0;
   z-index: 9999;
-  backdrop-filter: blur(10px);
-  box-shadow: 0 0 20px 5px #0000000f;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
-  flex-direction: column;
+  backdrop-filter: blur(10px);
+  box-shadow: 0 0 20px 5px #0000000f;
 }
 
 .screen-locker-lock {
@@ -133,16 +133,16 @@ function onMouseup(e: MouseEvent) {
   }
 
   60% {
-    /*  opacity: 1;*/
+    /*  opacity: 1; */
     transform: translate3d(0, 25px, 0);
   }
 
   75% {
-    transform: translate3d(0px, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 
   90% {
-    transform: translate3d(0px, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 
   100% {
@@ -152,85 +152,91 @@ function onMouseup(e: MouseEvent) {
 
 @keyframes lock-up {
   0% {
-    transform: translate3d(0, 0px, 0);
+    transform: translate3d(0, 0, 0);
   }
 
   90% {
-    transform: translate3d(0px, -100%, 0);
+    transform: translate3d(0, -100%, 0);
   }
 
   100% {
-    transform: none;
     opacity: 0;
+    transform: none;
   }
 }
 
 .screen-avatar {
-  margin-bottom: 50px;
   display: flex;
-  justify-content: center;
   flex-direction: column;
   align-items: center;
+  justify-content: center;
+  margin-bottom: 50px;
 }
 
 .screen-nickname {
+  margin-top: 10px;
   font-size: 30px;
   font-weight: 400;
-  margin-top: 10px;
 }
 
 .screen-slider {
+  position: relative;
   width: 300px;
   height: 60px;
-  /*background: rgb(72 168 237 / 25%);*/
-  border-radius: 100px;
-  background-image: linear-gradient(to right, rgb(72 168 237 / 25%), rgba(255, 255, 255, 0.4), rgb(72 168 237 / 25%));
+  animation: sun 7s infinite;
+  background-image: linear-gradient(to right, rgb(72 168 237 / 25%), rgb(255 255 255 / 40%), rgb(72 168 237 / 25%));
+
   /* 背景渐变色大小 */
   background-size: 200%;
-  animation: sun 7s infinite;
-  position: relative;
-  box-shadow: 0 0 20px 2px rgba(0, 0, 0, 0.15);
+
+  /* background: rgb(72 168 237 / 25%); */
+  border-radius: 100px;
+  box-shadow: 0 0 20px 2px rgb(0 0 0 / 15%);
 }
 
-.screen-slider:before {
-  content: '';
+.screen-slider::before {
   position: absolute;
-  top: -6px;
-  bottom: -6px;
-  left: -6px;
-  right: -6px;
-  border-radius: 60px;
-  /* 背景渐变色 */
-  background-image: linear-gradient(to right, rgb(72 168 237 / 25%), rgba(255, 255, 255, 0.4), rgb(72 168 237 / 25%));
-  /* 背景渐变色大小 */
-  background-size: 200%;
+
   /* 元素的位置 底层或者顶层  -值表示底层 + 值表示顶层 */
   z-index: -1;
+  top: -6px;
+  right: -6px;
+  bottom: -6px;
+  left: -6px;
+  animation: sun 7s infinite;
+
+  /* 背景渐变色 */
+  background-image: linear-gradient(to right, rgb(72 168 237 / 25%), rgb(255 255 255 / 40%), rgb(72 168 237 / 25%));
+
+  /* 背景渐变色大小 */
+  background-size: 200%;
+  border-radius: 60px;
+  content: '';
+
   /* 设置模糊度 显示发光效果 */
   filter: blur(10px);
   opacity: 0.5;
-  animation: sun 7s infinite;
 }
 
 .screen-slider-button {
+  display: flex;
   width: 50px;
   height: 50px;
-  margin: 5px;
-  border-radius: 50%;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  box-shadow: 0 0 5px 2px rgba(0, 0, 0, 0.15);
+  justify-content: center;
+  margin: 5px;
   backdrop-filter: blur(10px);
+  border-radius: 50%;
+  box-shadow: 0 0 5px 2px rgb(0 0 0 / 15%);
 }
 
 .screen-locker-placeholder {
   position: absolute;
-  left: 50%;
   top: 50%;
-  transform: translate3d(-50%, -50%, 0);
-  pointer-events: none;
+  left: 50%;
   opacity: 0.5;
+  pointer-events: none;
+  transform: translate3d(-50%, -50%, 0);
   user-select: none;
 }
 

@@ -61,14 +61,14 @@ meta:
 .login-container {
   position: relative;
   overflow: hidden;
-  height: 100vh;
   width: 100%;
+  height: 100vh;
 
   .left {
-    display: block;
     position: relative;
-    min-width: 450px;
+    display: block;
     width: 450px;
+    min-width: 450px;
 
     & > img {
       width: 100%;
@@ -77,27 +77,27 @@ meta:
     }
 
     &::after {
-      content: '';
       position: absolute;
+      z-index: 2;
       top: 0;
-      left: 0;
       right: 0;
       bottom: 0;
-      background-color: rgba(0, 0, 0, 0.6);
-      z-index: 2;
+      left: 0;
+      background-color: rgb(0 0 0 / 60%);
+      content: '';
     }
 
     .content-wrapper {
       position: absolute;
+      z-index: 9;
       top: 0;
-      left: 0;
       right: 0;
       bottom: 0;
-      z-index: 9;
+      left: 0;
       display: flex;
       flex-direction: column;
-      justify-content: space-around;
       align-items: center;
+      justify-content: space-around;
 
       .logo-wrapper {
         width: 80px;
@@ -110,9 +110,9 @@ meta:
 
       .title {
         margin-top: 10px;
-        color: #ffffff;
-        font-weight: bold;
+        color: #fff;
         font-size: 24px;
+        font-weight: bold;
       }
 
       .sub-title {
@@ -122,12 +122,12 @@ meta:
       }
 
       .ttppii {
-        text-align: center;
-        color: #ffffff;
-        font-weight: 500;
-        font-size: 30px;
         // text-shadow: 1px 1px 2px #f5f5f5;
         animation: left-to-right 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        color: #fff;
+        font-size: 30px;
+        font-weight: 500;
+        text-align: center;
         text-shadow: 0 0 5px var(--primary-color), 0 0 15px var(--primary-color), 0 0 50px var(--primary-color),
           0 0 150px var(--primary-color);
       }
@@ -141,24 +141,24 @@ meta:
   }
 
   .right {
-    flex: 1;
     display: flex;
-    justify-content: center;
+    flex: 1;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
     background: linear-gradient(to bottom, var(--primary-color));
 
     .form-wrapper {
       width: 50%;
       max-width: 500px;
-      border-radius: 5px;
-      border: 1px solid #f0f0f0;
       padding: 20px;
-      box-shadow: 0px 0px 7px #dddddd;
+      border: 1px solid #f0f0f0;
+      border-radius: 5px;
+      box-shadow: 0 0 7px #ddd;
 
       .form-title {
-        font-size: 26px;
         margin-bottom: 20px;
+        font-size: 26px;
         font-weight: bold;
       }
 
@@ -179,42 +179,43 @@ meta:
 
 .m-login-container {
   position: relative;
+  overflow: hidden;
   height: 100vh;
   max-height: 100vh;
-  overflow: hidden;
   background: linear-gradient(#7a9ad7, #3b5a94, #133064);
 
   // background-image: url(../../assets/img_login_mobile_bg_01.jpg);
+
   .header {
-    height: 25vh;
     display: flex;
+    height: 25vh;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
 
     .the-p {
+      display: flex;
       width: 100px;
       height: 100px;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid #f5f5f5;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
       align-items: center;
+      justify-content: center;
+      border: 1px solid #f5f5f5;
+      background: rgb(255 255 255 / 20%);
+      border-radius: 50%;
       font-size: 56px;
       font-weight: bold;
     }
   }
 
   .top-line {
+    height: 1px;
+    background-color: #fff;
     background-image: linear-gradient(
       to right,
-      rgba(117, 117, 117, 0.9) 25%,
-      rgba(255, 255, 255, 0.3) 50%,
-      rgba(117, 117, 117, 0.9) 75%
+      rgb(117 117 117 / 90%) 25%,
+      rgb(255 255 255 / 30%) 50%,
+      rgb(117 117 117 / 90%) 75%
     );
-    height: 1px;
-    background-color: #ffffff;
   }
 
   .content {
@@ -223,7 +224,7 @@ meta:
     border-radius: 10px;
 
     :deep(.n-input) {
-      background-color: rgba(183, 183, 183, 0);
+      background-color: rgb(183 183 183 / 0%);
     }
 
     :deep(.n-input .n-input__input-el, .n-input .n-input__textarea-el) {
@@ -237,9 +238,9 @@ meta:
 
   .footer {
     position: absolute;
-    left: 10%;
     right: 10%;
     bottom: 10%;
+    left: 10%;
 
     :deep(.n-divider .n-divider__title) {
       color: #c3c3c3;
@@ -247,7 +248,7 @@ meta:
     }
 
     :deep(.n-divider:not(.n-divider--dashed) .n-divider__line) {
-      background-color: rgba(117, 117, 117);
+      background-color: rgb(117 117 117);
     }
   }
 }

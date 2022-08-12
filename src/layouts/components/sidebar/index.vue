@@ -29,7 +29,7 @@ import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
 import { useTagsStore } from '@store/tags'
-import { MenuProps } from 'naive-ui'
+import { MenuProps, NIcon } from 'naive-ui'
 import { renderAssetsIcon } from '@/utils/render'
 const tagsStore = useTagsStore()
 const { t } = useI18n({ useScope: 'global' })

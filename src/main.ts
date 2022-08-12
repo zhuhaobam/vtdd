@@ -24,7 +24,7 @@ import StarportPlugin from 'vue-starport'
 import i18n from '@/plugins/i18n'
 import { permission } from '@directive/permission'
 
-import JsonViewer from 'vue-json-viewer'
+import JsonViewer from 'vue3-json-viewer'
 
 import { createApp } from 'vue'
 createApp(App)

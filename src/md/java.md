@@ -1,7 +1,7 @@
 ---
 title: Java
 noi18n: yes
-icon: language-java 
+icon: language-java
 sort: 35
 ---
 
