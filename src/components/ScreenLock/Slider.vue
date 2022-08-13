@@ -158,6 +158,7 @@ function onMouseup(e: MouseEvent) {
   transform: translate3d(-50%, -50%, 0);
   user-select: none;
 }
+
 @keyframes sun {
   100% {
     /* 背景位置 */

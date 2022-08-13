@@ -6,15 +6,13 @@
 
 https://zhuhaobam.github.io
 
-
 ## 截图
 
 ![英文](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page3.png)
 
-
 # 项目地址
 
-## pnpm包管理器
+## pnpm 包管理器
 
 `pnpm run dev`
 
@@ -25,7 +23,6 @@ https://zhuhaobam.github.io
 ## gitee
 
 `https://gitee.com/zhline/vtdd`
-
 
 # 描述
 

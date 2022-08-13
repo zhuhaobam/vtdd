@@ -39,13 +39,13 @@ const props = defineProps({
   bottom: 0;
   left: 0;
   display: flex;
-  background: #000;
-  color: white;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(10px);
+  background: #000;
   box-shadow: 0 0 20px 5px #0000000f;
+  color: white;
 }
 
 .screen-locker-lock {
@@ -93,21 +93,25 @@ const props = defineProps({
     transform: none;
   }
 }
+
 // -------
+
 .local-time {
   position: absolute;
   bottom: 60px;
   left: 60px;
-  font-family: helvetica;
+
   .time {
     font-size: 70px;
   }
+
   .date {
     font-size: 40px;
   }
+
   .mg {
-    font-size: 20px;
     color: red;
+    font-size: 20px;
     font-weight: bold;
   }
 }
