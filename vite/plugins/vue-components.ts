@@ -32,7 +32,7 @@ export default function createVueComponents() {
     // generate `components.d.ts` global declarations,
     // also accepts a path for custom filename
     // default: `true` if package typescript is installed
-    dts: pathResolve('../../src/components.d.ts'),
+    dts: pathResolve('../../src/dts/components.d.ts'),
     // resolvers for custom components 【自定义组件解析器】
     resolvers: [
       NaiveUiResolver(),

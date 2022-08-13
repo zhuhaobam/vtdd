@@ -65,6 +65,7 @@ page:
     twopage: two starport
   login: login
   color: color
+  virtualScroller: virtualScroller
   md: markdown
   link: linknaiveui.com
   article: article

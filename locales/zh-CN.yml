@@ -65,6 +65,7 @@ page:
     twopage: 星港二
   login: 登录
   color: 颜色
+  virtualScroller: 虚拟滚动条
   md: markdown阅读
   link: 外部链接naiveui.com
   article: 文章

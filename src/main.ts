@@ -1,9 +1,10 @@
 import App from './App.vue'
 
-import '@/styles/index.scss'
-
+import 'normalize.css'
 // 引入unocss的uno.css
 import 'uno.css'
+import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
+import '@/styles/index.scss'
 
 // 路由准备的svg，当然其ta页面也可以使用
 import 'virtual:svg-icons-register'
@@ -24,14 +25,19 @@ import StarportPlugin from 'vue-starport'
 import i18n from '@/plugins/i18n'
 import { permission } from '@directive/permission'
 
+// 页面呈现json
 import JsonViewer from 'vue3-json-viewer'
+
+// 虚拟滚动条
+import { DynamicScroller } from 'vue-virtual-scroller'
 
 import { createApp } from 'vue'
 createApp(App)
-  .use(StarportPlugin({ keepAlive: true }))
   .use(router)
   .use(pinia)
   .use(i18n)
-  .directive('permission', permission)
   .use(JsonViewer)
+  .component('DynamicScroller', DynamicScroller)
+  .use(StarportPlugin({ keepAlive: true }))
+  .directive('permission', permission)
   .mount('#app')

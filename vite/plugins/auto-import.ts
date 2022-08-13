@@ -57,6 +57,6 @@ export default function createAutoImport() {
     // Filepath to generate corresponding .d.ts file. 【生成相应的.d.ts文件路径】
     // Defaults to './auto-imports.d.ts' when `typescript` is installed locally. 【当typescript安装到本地默认为./auto-imports.d.ts】
     // Set `false` to disable. 【设置为false禁用】
-    dts: 'src/auto-import.d.ts'
+    dts: 'src/dts/auto-import.d.ts'
   })
 }
