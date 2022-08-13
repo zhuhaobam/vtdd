@@ -1,5 +1,6 @@
 <template>
   <n-config-provider
+    v-if="!lock"
     :hljs="hljs"
     :locale="localeLRef"
     :date-locale="localeLDRef"
@@ -16,7 +17,7 @@
     <n-global-style />
     <!-- </n-theme-editor> -->
   </n-config-provider>
-  <ScreenLock :open="lock" @lock-open="lockOpen()" />
+  <ScreenLock :open="lock" />
 </template>
 
 <script setup lang="ts">
@@ -36,9 +37,6 @@ const { t } = useI18n()
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { locale, lock } = storeToRefs(appStore)
-const lockOpen = () => {
-  appStore.setLock(false)
-}
 const localeMap: {
   [key: string]: {
     l: NLocale
