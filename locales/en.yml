@@ -67,6 +67,6 @@ page:
   color: color
   virtualScroller: virtualScroller
   md: markdown
-  link: linknaiveui.com
+  link: naiveui.com
   article: article
   not-found: not-found

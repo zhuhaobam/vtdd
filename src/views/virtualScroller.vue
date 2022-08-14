@@ -1,72 +1,77 @@
 <template>
-  <div>颜色</div>
-  <n-button @click="active = !active"> 打开 </n-button>
-  <n-drawer v-model:show="active" :width="450" placement="right" :trap-focus="false" :block-scroll="false">
-    <n-drawer-content :native-scrollbar="false">
-      <template #header>
-        <div class="flex justify-between odd:" style="width: 400px">
-          <span class="opacity-50" style="font-size: 0.875rem">共 {{ play.playListCount }} 首 </span>
-          <n-button type="primary" text @click="handleRestClick"> 清空列表 </n-button>
-        </div>
-      </template>
-      <!--  -->
-      <n-empty v-if="play.playList.length === 0" class="mt-20" description="您还未添加任何歌曲">
-        <template #extra>
-          <n-button text type="primary" @click="handleGoHemeClick"> 去首页发现音乐 </n-button>
+  <div>
+    <div>虚拟滚动条</div>
+    <n-button @click="active = !active"> 打开 </n-button>
+    <div>
+      <LyricByMusic />
+    </div>
+    <n-drawer v-model:show="active" :width="450" placement="right" :trap-focus="false" :block-scroll="false">
+      <n-drawer-content :native-scrollbar="false">
+        <template #header>
+          <div class="flex justify-between odd:" style="width: 400px">
+            <span class="opacity-50" style="font-size: 0.875rem">共 {{ play.playListCount }} 首 </span>
+            <n-button type="primary" text @click="handleRestClick"> 清空列表 </n-button>
+          </div>
         </template>
-      </n-empty>
-      <DynamicScroller class="scroller" :items="play.playList" :min-item-size="45" key-field="id">
-        <template #default="{ item, index }">
-          <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
-            <div
-              :class="'flex justify-between item ' + stripedClass(index)"
-              style="line-height: 3rem"
-              @dblclick="handleDoubleClick(index)"
-            >
-              <div flex overflow-hidden flex-1 items-center pr-2>
-                <n-icon
-                  v-if="+play.currentPlayIndex === index"
-                  pr-2
-                  size="20"
-                  :color="play.playing ? 'green' : 'blue'"
-                  :component="play.playing ? ColorWand : ColorPaletteSharp"
-                />
-                <p class="truncate" style="max-width: 140px">
-                  {{ item.name }}
+        <!--  -->
+        <n-empty v-if="play.playList.length === 0" class="mt-20" description="您还未添加任何歌曲">
+          <template #extra>
+            <n-button text type="primary" @click="handleGoHemeClick"> 去首页发现音乐 </n-button>
+          </template>
+        </n-empty>
+        <DynamicScroller class="scroller" :items="play.playList" :min-item-size="45" key-field="id">
+          <template #default="{ item, index }">
+            <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
+              <div
+                :class="'flex justify-between item ' + stripedClass(index)"
+                style="line-height: 3rem"
+                @dblclick="handleDoubleClick(index)"
+              >
+                <div flex overflow-hidden flex-1 items-center pr-2>
+                  <n-icon
+                    v-if="+play.currentPlayIndex === index"
+                    pr-2
+                    size="20"
+                    :color="play.playing ? 'green' : 'blue'"
+                    :component="play.playing ? ColorWand : ColorPaletteSharp"
+                  />
+                  <p class="truncate" style="max-width: 140px">
+                    {{ item.name }}
+                  </p>
+                  <n-tag
+                    v-if="item.mv !== 0"
+                    size="small"
+                    :color="{
+                      textColor: '#63e2b7',
+                      borderColor: '#63e2b7'
+                    }"
+                    ml-10
+                  >
+                    MV
+                  </n-tag>
+                  <n-tag
+                    v-if="item.fee === 1"
+                    size="small"
+                    :color="{
+                      textColor: '#63e2b7',
+                      borderColor: '#63e2b7'
+                    }"
+                    ml-10
+                  >
+                    VIP
+                  </n-tag>
+                </div>
+                <p class="w-100 truncate">
+                  {{ formateSongsAuthor(item?.ar) }}
                 </p>
-                <n-tag
-                  v-if="item.mv !== 0"
-                  size="small"
-                  :color="{
-                    textColor: '#63e2b7',
-                    borderColor: '#63e2b7'
-                  }"
-                  ml-10
-                >
-                  MV
-                </n-tag>
-                <n-tag
-                  v-if="item.fee === 1"
-                  size="small"
-                  :color="{
-                    textColor: '#63e2b7',
-                    borderColor: '#63e2b7'
-                  }"
-                  ml-10
-                >
-                  VIP
-                </n-tag>
+                <n-time class="pl-4 pt-16 opacity-40" format="mm:ss" :time="item?.dt" />
               </div>
-              <p class="w-100 truncate">
-                {{ formateSongsAuthor(item?.ar) }}
-              </p>
-              <n-time class="pl-4 pt-16 opacity-40" format="mm:ss" :time="item?.dt" />
-            </div>
-          </DynamicScrollerItem>
-        </template>
-      </DynamicScroller>
-    </n-drawer-content>
-  </n-drawer>
+            </DynamicScrollerItem>
+          </template>
+        </DynamicScroller>
+      </n-drawer-content>
+    </n-drawer>
+  </div>
 </template>
 <script setup lang="ts" name="virtualScroller">
 import songs from '@/utils/songs.json'
@@ -128,21 +133,21 @@ const stripedClass = (index: number) => {
 
 :deep(.resize-observer) {
   position: absolute;
+  z-index: -1;
   top: 0;
   left: 0;
-  z-index: -1;
+  display: block;
+  overflow: hidden;
   width: 100%;
   height: 100%;
   border: none;
   background-color: transparent;
-  pointer-events: none;
-  display: block;
-  overflow: hidden;
   opacity: 0;
+  pointer-events: none;
 }
 
 .item {
-  padding: 0px 20px;
+  padding: 0 20px;
   cursor: pointer;
 }
 

@@ -1,5 +1,5 @@
 <template>
-  <div>颜色</div>
+  <div>图片颜色主颜色提取设置为背景</div>
   <div>color.js</div>
   <div flex flex-row justify-center items-center :style="'background-color:' + bg1Color">
     <img object-cover block w-200 h-200 py-100 :src="getAssetsFile('img_login_bg.png')" />

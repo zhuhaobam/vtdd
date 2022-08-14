@@ -29,8 +29,10 @@
 <script lang="ts" setup name="HeadCenter">
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@store/user'
+import { useTagsStore } from '@store/tags'
 import getAssetsFile from '@/plugins/assets-kit'
 const userStore = useUserStore()
+const tagsStore = useTagsStore()
 const router = useRouter()
 //头像下拉菜单
 const avatarSelect = (key: number) => {
@@ -43,6 +45,7 @@ const avatarSelect = (key: number) => {
       break
     case 3:
       userStore.setToken('')
+      tagsStore.clear()
       router.push({ name: 'login' })
       break
     default:

@@ -9,19 +9,13 @@ import {
 } from 'unocss'
 
 export default defineConfig({
-  shortcuts: [
-    ['wh-full', 'w-full h-full'],
-    ['f-c-c', 'flex justify-center items-center'],
-    ['flex-col', 'flex flex-col'],
-    ['absolute-lt', 'absolute left-0 top-0'],
-    ['absolute-lb', 'absolute left-0 bottom-0'],
-    ['absolute-rt', 'absolute right-0 top-0'],
-    ['absolute-rb', 'absolute right-0 bottom-0'],
-    ['absolute-center', 'absolute-lt f-c-c wh-full'],
-    ['text-ellipsis', 'truncate']
+  // 生成CSS实用程序的规则
+  rules: [
+    [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `${color}` })],
+    ['card-shadow', { 'box-shadow': '0 1px 2px -2px #00000029, 0 3px 6px #0000001f, 0 5px 12px 4px #00000017' }]
   ],
+  // 预处理选择器的变体，具有重写CSS对象的能力。
   variants: [
-    // hover:
     matcher => {
       if (matcher.startsWith('hover:')) {
         return {
@@ -33,7 +27,8 @@ export default defineConfig({
       return matcher
     }
   ],
-  rules: [[/^bg-(.+)$/, ([, color]) => ({ 'background-color': `${color}` })]],
+  // 类似于Windi CSS的快捷方式，允许您通过组合现有实用程序来创建新的实用程序。
+  shortcuts: [],
   theme: {
     colors: {
       body: 'var(--n-resize-trigger-color-hover)',
@@ -59,6 +54,7 @@ export default defineConfig({
       'error-active': 'var(--error-color-active)'
     }
   },
+  // 预设
   presets: [
     // 指定预设presetUno
     presetUno(),

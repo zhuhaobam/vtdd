@@ -26,6 +26,10 @@ export const useTagsStore = defineStore('tags', {
     }
   },
   actions: {
+    clear() {
+      this.activeTag = ''
+      this.tags = []
+    },
     setActiveTag(path: string) {
       this.activeTag = path
     },
