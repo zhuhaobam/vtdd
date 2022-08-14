@@ -67,7 +67,7 @@
   </div>
 </template>
 <script setup lang="ts" name="dashboard-workbench">
-import getAssetsFile from '@/plugins/assets-kit'
+import { getAssetsFile } from '@/plugins/assets-kit'
 const show = ref(false)
 // 被包裹组件被激活的状态下触发
 onActivated(() => {

@@ -54,6 +54,7 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     ScreenLock: typeof import('./../components/ScreenLock/index.vue')['default']
     Slider: typeof import('./../components/ScreenLock/Slider.vue')['default']
+    SliderBar: typeof import('./../components/SliderBar.vue')['default']
     Starport: typeof import('vue-starport')['Starport']
     StarportCarrier: typeof import('vue-starport')['StarportCarrier']
     StarportComponet: typeof import('./../components/StarportComponet/index.vue')['default']

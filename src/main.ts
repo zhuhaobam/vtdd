@@ -29,7 +29,7 @@ import { permission } from '@directive/permission'
 import JsonViewer from 'vue3-json-viewer'
 
 // 虚拟滚动条
-import { DynamicScroller } from 'vue-virtual-scroller'
+import VueVirtualScroller from 'vue-virtual-scroller'
 
 import { createApp } from 'vue'
 createApp(App)
@@ -37,7 +37,7 @@ createApp(App)
   .use(pinia)
   .use(i18n)
   .use(JsonViewer)
-  .component('DynamicScroller', DynamicScroller)
+  .use(VueVirtualScroller)
   .use(StarportPlugin({ keepAlive: true }))
   .directive('permission', permission)
   .mount('#app')

@@ -12,7 +12,7 @@
 <script setup lang="ts" name="simpleColor">
 import { ColorExtractor } from '@components/ImageMainColor/index'
 import { prominent } from 'color.js'
-import getAssetsFile from '@/plugins/assets-kit'
+import { getAssetsFile } from '@/plugins/assets-kit'
 const bg1Color = ref<any>('')
 // 使用外部图像时，当然应该在源上启用CORS 。
 // prominent  单一颜色或颜色的调色板

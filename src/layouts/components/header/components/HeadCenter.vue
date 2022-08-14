@@ -30,7 +30,7 @@
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@store/user'
 import { useTagsStore } from '@store/tags'
-import getAssetsFile from '@/plugins/assets-kit'
+import { getAssetsFile } from '@/plugins/assets-kit'
 const userStore = useUserStore()
 const tagsStore = useTagsStore()
 const router = useRouter()

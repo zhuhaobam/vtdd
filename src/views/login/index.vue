@@ -22,7 +22,7 @@
 
 <script setup lang="ts" name="login">
 import { createDiscreteApi } from 'naive-ui'
-import getAssetsFile from '@/plugins/assets-kit'
+import { getAssetsFile } from '@/plugins/assets-kit'
 import { useRouter } from 'vue-router'
 import { useUserStore } from '@store/user'
 const userStore = useUserStore()

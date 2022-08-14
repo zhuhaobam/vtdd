@@ -8,7 +8,7 @@
 </template>
 
 <script lang="ts" setup name="HeadLogo">
-import getAssetsFile from '@/plugins/assets-kit'
+import { getAssetsFile } from '@/plugins/assets-kit'
 const props = defineProps({
   collapsed: {
     type: Boolean
