@@ -1,82 +1,60 @@
 import { defineStore } from 'pinia'
-type CurrentPlaySongType = {
-  tlyric?: string
-  lyric?: string
-  currentPlayLyric?: string
-  isNotLyric?: boolean
-}
-export type playMode = 'order' | 'random' | 'singleLoop'
-
-interface IMusicStore {
-  currentPlaySong: CurrentPlaySongType
-  showMusicDetail?: boolean
-  playMode?: playMode
-  playing?: boolean
-  playWaiting?: boolean
-  playList: any[]
-  currentPlayIndex: number
-}
+import {
+  musicMenuListCombinationType,
+  musicStoretCombinationType,
+  musicMenuType,
+  musicMenuRunType
+} from '@/types/musicType'
 
 // 导出pinia
 export const useMusicStore = defineStore('music', {
-  state: (): IMusicStore => {
+  state: (): musicStoretCombinationType => {
     return {
-      currentPlaySong: {
-        tlyric: '',
-        lyric: '',
-        currentPlayLyric: '',
-        isNotLyric: true
-      },
-      showMusicDetail: false,
-      playMode: 'order',
-      playing: false,
-      playWaiting: true,
-      playList: [],
-      currentPlayIndex: 0
+      count: 0,
+      musicMenuList: [],
+      mapRun: {}
     }
   },
+  persist: {
+    enabled: true,
+    strategies: [{ storage: localStorage, paths: ['count', 'musicMenuList', 'mapRun'] }]
+  },
   getters: {
-    getCurrentPlaySong(state) {
-      return state.playList[state.currentPlayIndex]
+    getCount(state): number {
+      return state.count
+    },
+    getMapRun(state): Map<string, musicMenuRunType> {
+      const mapRun = new Map(Object.entries(state.mapRun))
+      return mapRun
+    },
+    getMusicMenuList(state): musicMenuListCombinationType {
+      return {
+        count: state.count,
+        musicMenuList: state.musicMenuList
+      }
+    },
+    getMusicMenuListSingle(state): musicMenuType[] {
+      return state.musicMenuList
     }
   },
   actions: {
-    setTlyric(value: string) {
-      this.currentPlaySong.tlyric = value
+    setCount(value: number) {
+      this.count = value
     },
-    setLyric(value: string) {
-      this.currentPlaySong.lyric = value
+    setMapRun(value: Map<string, musicMenuRunType>) {
+      this.mapRun = Object.fromEntries(value)
     },
-    setCurrentPlayLyric(value: string) {
-      this.currentPlaySong.currentPlayLyric = value
+    setMusicMenuList(count: number, musicMenuList: musicMenuType[]) {
+      this.count = count
+      this.musicMenuList = musicMenuList
     },
-    setIsNotLyric(value: boolean) {
-      this.currentPlaySong.isNotLyric = value
+    setMusicMenuListSingle(mml: musicMenuListCombinationType) {
+      this.count = mml.count
+      this.musicMenuList = mml.musicMenuList
     },
-    setShowMusicDetail(value: boolean) {
-      this.showMusicDetail = value
-    },
-    // 切换播放模式
-    changePlayMode(mode: playMode) {
-      this.playMode = mode
-    },
-    // 切换播放状态
-    changePlaying(playing: boolean) {
-      this.playing = playing
-    },
-    changeWaiting(waiting: boolean) {
-      this.playWaiting = waiting
-    },
-    setPlayList(playList: any[]) {
-      this.playList = playList
-    },
-    // 切换下一首
-    async toggleNext(index?: number) {
-      return { success: true }
-    },
-    // 切换上一首
-    async togglePrev(index?: number) {
-      return { success: true }
+    destroy() {
+      this.count = 0
+      this.musicMenuList = []
     }
   }
 })

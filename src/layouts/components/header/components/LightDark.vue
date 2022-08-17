@@ -19,13 +19,18 @@
 </template>
 
 <script lang="ts" setup name="lightDark">
+import { useDark, useToggle } from '@vueuse/core'
 import { CSSProperties } from 'vue'
 import { darkTheme } from 'naive-ui'
 import { useThemeStore } from '@store/theme'
 const themeStore = useThemeStore()
+const isDark = useDark()
+const toggleDark = useToggle(isDark)
 const themebool = ref<boolean>(themeStore.getTheme === null)
-
 function handleChange(value: boolean) {
+  if ((value === false && isDark.value === false) || (value === true && isDark.value === true)) {
+    toggleDark()
+  }
   themeStore.setTheme(value ? null : darkTheme)
 }
 
