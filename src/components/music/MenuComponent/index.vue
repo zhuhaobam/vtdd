@@ -76,6 +76,10 @@ import { musicMenuRunType, musicMenuListCombinationType } from '@/types/musicTyp
 import { useMusicStore } from '@store/music'
 import { useFullscreen } from '@vueuse/core'
 import { useFullStore } from '@store/full'
+import { Howler } from 'howler'
+import { createDiscreteApi } from 'naive-ui'
+const { message } = createDiscreteApi(['message'])
+
 const { isFullscreen } = useFullscreen()
 const musicStore = useMusicStore()
 const fullStore = useFullStore()
@@ -115,6 +119,7 @@ watch(
   () => props.active,
   (newVal, oldVal) => {
     if (newVal === true) {
+      // 处理tag栏目的那个全屏功能，需要结合查看layouts文件夹下面的tags文件
       to.value = isFullscreen.value === true && fullStore.getPage === 'inner' ? '#app-main' : undefined
       active.value = true
     }
@@ -128,7 +133,9 @@ const onAfterLeave = () => {
   emit('update:active', false)
 }
 
-// 双击
+/**
+ * 双击 播放、暂停
+ */
 const handleDoubleClick = async (id: string) => {
   const menuMap: Map<string, musicMenuRunType> = menuRun.value
   if (menuMap.get(id) === 'none' || menuMap.get(id) === 'pause') {
@@ -139,11 +146,18 @@ const handleDoubleClick = async (id: string) => {
     musicStore.setMapRun(menuMap)
   }
 }
-// 点击清空
+/**
+ * 点击清空
+ */
 const handleRestClick = () => {
-  musicStore.setMusicMenuList(0, [])
+  // 卸载播放器
+  Howler.unload()
+  // 清空存储
+  musicStore.destroy()
 }
-const handleGoHemeClick = () => {}
+const handleGoHemeClick = () => {
+  message.info('点一点模拟切换按钮再来看看')
+}
 
 const formateSongsAuthor = (ar?: any[]) => {
   const ars = ar ?? []

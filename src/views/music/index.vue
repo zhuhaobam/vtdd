@@ -12,7 +12,10 @@
         <n-button type="success" @click="openMenu"> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
       </template>
       <template #action>
-        <n-input />
+        <n-space>
+          <n-button type="success" @click="changeOneMenu"> 模拟切换音乐菜单【1首】 </n-button>
+          <n-button type="success" @click="changeTwoMenu"> 模拟切换音乐菜单【2首】 </n-button>
+        </n-space>
       </template>
     </n-card>
     <menu-component v-model:active="active" v-model:menu-run="menuRun" :menu-list="musicMenuList" />
@@ -22,6 +25,7 @@
 import { musicMenuListData, musicSrcListData } from './songs'
 import { musicMenuListCombinationType, musicMenuType, musicMenuRunType, musicSrcType } from '@/types/musicType'
 import { useMusicStore } from '@store/music'
+import { Howler } from 'howler'
 const musicStore = useMusicStore()
 
 const musicMenuList = ref<musicMenuListCombinationType>()
@@ -29,41 +33,97 @@ const active = ref<boolean>(false)
 const menuRun = ref<Map<string, musicMenuRunType>>()
 const player = ref<musicSrcType[]>()
 
-const openMenu = async () => {
+const openMenu = () => {
   active.value = true
-  await nextTick()
-  if (musicStore.getCount === 0) {
-    initMenuList()
-    musicStore.setMusicMenuListSingle(musicMenuList.value!)
-    musicStore.setPlayer(player.value!)
-  }
+  console.log('获取历史菜单、播放资源数据【' + musicStore.getCount + '】')
 }
 
+const changeOneMenu = async () => {
+  console.log('changeOneMenu，卸载播放器，清空存储，初始化菜单、菜单状态、播放资源')
+  // 卸载播放器
+  Howler.unload()
+  // 清空存储
+  musicStore.destroy()
+  await nextTick()
+  // 菜单
+  const musicMenuListValue: musicMenuType[] = musicMenuListData() ?? []
+  musicMenuList.value = {
+    count: 1,
+    musicMenuList: [musicMenuListValue[1]]
+  }
+  musicStore.setMusicMenuList(1, [musicMenuListValue[1]])
+  // 菜单状态
+  const menuRunMap = new Map<string, musicMenuRunType>()
+  menuRunMap.set(musicMenuListValue[1].id, 'none')
+  menuRun.value = menuRunMap
+  // 播放资源
+  const musicSrcListValue: musicSrcType[] = musicSrcListData() ?? []
+  player.value = [musicSrcListValue[1]]
+  musicStore.setPlayer(player.value!)
+}
+
+const changeTwoMenu = async () => {
+  console.log('changeTwoMenu，卸载播放器，清空存储，初始化菜单、菜单状态、播放资源')
+  // 卸载播放器
+  Howler.unload()
+  // 清空存储
+  musicStore.destroy()
+  await nextTick()
+  // 菜单
+  const musicMenuListValue: musicMenuType[] = musicMenuListData() ?? []
+  musicMenuList.value = {
+    count: musicMenuListValue.length,
+    musicMenuList: musicMenuListValue
+  }
+  musicStore.setMusicMenuListSingle(musicMenuList.value)
+  // 菜单状态
+  const menuRunMap = new Map<string, musicMenuRunType>()
+  musicMenuListValue.forEach((v: musicMenuType) => {
+    menuRunMap.set(v.id, 'none')
+  })
+  menuRun.value = menuRunMap
+  // 播放资源
+  const musicSrcListValue: musicSrcType[] = musicSrcListData() ?? []
+  player.value = musicSrcListValue
+  musicStore.setPlayer(player.value)
+}
+
+/**
+ * 改变菜单状态播放显示
+ */
 watch(
   () => musicStore.getMapRun,
   (newVal, oldVal) => {
+    console.log('改变菜单状态播放显示')
     const menuRunValue: Map<string, musicMenuRunType> = newVal
     menuRun.value = menuRunValue
-    console.log('改变菜单播放显示')
   }
 )
 
+/**
+ * 如果列表为空，菜单播放显示状态也置为空
+ */
 watch(
   () => musicStore.getMusicMenuList,
   (newVal, oldVal) => {
     if (newVal.count === 0) {
+      console.log('列表为空，运行状态也置为空，列表为空说明列表我在更新中')
       musicMenuList.value = { count: 0, musicMenuList: [] }
       const menuRunMap = new Map<string, musicMenuRunType>()
       menuRun.value = menuRunMap
+    } else {
+      console.log('列表(bu)为空，照旧')
     }
   }
 )
 
 onMounted(() => {
   if (musicStore.getCount > 0) {
+    console.log('onMounted，存储历史菜单、菜单状态、播放资源,回填')
     // 菜单
     const musicMenuListCombinationValue: musicMenuListCombinationType = musicStore.getMusicMenuList
     musicMenuList.value = musicMenuListCombinationValue
+    // 菜单状态
     const menuRunValue: Map<string, musicMenuRunType> = musicStore.getMapRun
     if (menuRunValue.size > 0) {
       menuRun.value = menuRunValue
@@ -74,27 +134,11 @@ onMounted(() => {
       })
       menuRun.value = menuRunMap
     }
-    // 播放器
+    // 播放资
     const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
     player.value = musicPlayerValue
   }
 })
-const initMenuList = async () => {
-  // 菜单
-  const musicMenuListValue: musicMenuType[] = musicMenuListData() ?? []
-  musicMenuList.value = {
-    count: musicMenuListValue.length,
-    musicMenuList: musicMenuListValue
-  }
-  const menuRunMap = new Map<string, musicMenuRunType>()
-  musicMenuListValue.forEach((v: musicMenuType) => {
-    menuRunMap.set(v.id, 'none')
-  })
-  menuRun.value = menuRunMap
-  // 播放器
-  const musicSrcListValue: musicSrcType[] = musicSrcListData() ?? []
-  player.value = musicSrcListValue
-}
 </script>
 <route lang="yaml">
 meta:

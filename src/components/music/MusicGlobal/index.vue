@@ -17,6 +17,7 @@ onMounted(() => {
 watch(
   () => musicStore.getMapRun,
   (newVal, oldVal) => {
+    console.log('改变播放器')
     const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
     const menuRunValue: Map<string, musicMenuRunType> = newVal
     for (const [id, musicMenuRun] of menuRunValue) {
@@ -27,7 +28,6 @@ watch(
         pause(id)
       }
     }
-    console.log('改变播放器')
   }
 )
 
