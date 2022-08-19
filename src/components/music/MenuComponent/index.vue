@@ -140,11 +140,10 @@ const handleDoubleClick = async (id: string) => {
   const menuMap: Map<string, musicMenuRunType> = menuRun.value
   if (menuMap.get(id) === 'none' || menuMap.get(id) === 'pause') {
     menuMap.set(id, 'playing')
-    musicStore.setMapRun(menuMap)
   } else {
     menuMap.set(id, 'pause')
-    musicStore.setMapRun(menuMap)
   }
+  musicStore.setMapRun(menuMap)
 }
 /**
  * 点击清空

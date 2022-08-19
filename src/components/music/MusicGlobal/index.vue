@@ -17,15 +17,19 @@ onMounted(() => {
 watch(
   () => musicStore.getMapRun,
   (newVal, oldVal) => {
-    console.log('改变播放器')
-    const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
-    const menuRunValue: Map<string, musicMenuRunType> = newVal
-    for (const [id, musicMenuRun] of menuRunValue) {
-      if (musicMenuRun === 'playing') {
-        const musicSrc: musicSrcType = musicPlayerValue.find((v: musicSrcType) => v.id === id)!
-        playing(musicSrc)
-      } else if (musicMenuRun === 'pause') {
-        pause(id)
+    console.log('改变播放器' + (newVal.size === 0 ? '【没有运行数据】' : '【有运行数据】'))
+    if (newVal.size === 0) {
+      mapHowlPause.value = new Map<string, globalHowlPauseType>()
+    } else {
+      const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
+      const menuRunValue: Map<string, musicMenuRunType> = newVal
+      for (const [id, musicMenuRun] of menuRunValue) {
+        if (musicMenuRun === 'playing') {
+          const musicSrc: musicSrcType = musicPlayerValue.find((v: musicSrcType) => v.id === id)!
+          playing(musicSrc)
+        } else if (musicMenuRun === 'pause') {
+          pause(id)
+        }
       }
     }
   }
@@ -74,11 +78,19 @@ const playing = (musicSrc: musicSrcType) => {
   if (howlPauseObjOld) {
     const howlOld: Howl = howlPauseObjOld.howl
     const howlId = howlPauseObjOld.howlId
+    console.log('AAAAA', howlOld.state(), howlOld.playing(howlId))
     if (!howlOld.playing(howlId)) {
-      howlOld.play()
-      const seek = howlOld.seek(howlId)
-      console.log('历史播放', howlId, seek)
-      mapHowlPause.value.set(musicSrc.id, { howl: howlOld, howlId: howlId, seek: seek })
+      if (howlOld.state() === 'unloaded') {
+        const howlObj: Howl = newHowl(musicSrc)
+        const howlId = howlObj.play()
+        console.log('历史unload新建播放', howlId, 0)
+        mapHowlPause.value.set(musicSrc.id, { howl: howlObj, howlId: howlId, seek: 0 })
+      } else {
+        howlOld.play()
+        const seek = howlOld.seek(howlId)
+        console.log('历史播放', howlId, seek)
+        mapHowlPause.value.set(musicSrc.id, { howl: howlOld, howlId: howlId, seek: seek })
+      }
     }
   } else {
     const howlObj: Howl = newHowl(musicSrc)
@@ -86,6 +98,7 @@ const playing = (musicSrc: musicSrcType) => {
     console.log('新建播放', howlId, 0)
     mapHowlPause.value.set(musicSrc.id, { howl: howlObj, howlId: howlId, seek: 0 })
   }
+  console.log('播放器缓存大小', mapHowlPause.value.size)
 }
 
 const pause = (id: string) => {

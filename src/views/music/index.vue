@@ -16,16 +16,38 @@
           <n-button type="success" @click="changeOneMenu"> 模拟切换音乐菜单【1首】 </n-button>
           <n-button type="success" @click="changeTwoMenu"> 模拟切换音乐菜单【2首】 </n-button>
         </n-space>
+        <div pt-20>
+          <n-space v-if="(musicMenuList?.count ?? 0) > 0" vertical>
+            <h3>页面播放列表（防抖一秒）</h3>
+            <n-button
+              v-for="(item, index) in musicMenuList?.musicMenuList"
+              :key="index"
+              type="success"
+              @click="handleClick(item.id)"
+            >
+              <div v-if="menuRun?.get(item.id) === 'playing'">
+                <n-icon
+                  pr-2
+                  size="20"
+                  :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
+                />
+              </div>
+              {{ item.name }}
+            </n-button>
+          </n-space>
+        </div>
       </template>
     </n-card>
     <menu-component v-model:active="active" v-model:menu-run="menuRun" :menu-list="musicMenuList" />
   </div>
 </template>
 <script setup lang="ts" name="music">
+import { MusicalNotesOutline } from '@vicons/ionicons5'
 import { musicMenuListData, musicSrcListData } from './songs'
 import { musicMenuListCombinationType, musicMenuType, musicMenuRunType, musicSrcType } from '@/types/musicType'
 import { useMusicStore } from '@store/music'
 import { Howler } from 'howler'
+import { cloneDeep } from 'lodash'
 const musicStore = useMusicStore()
 
 const musicMenuList = ref<musicMenuListCombinationType>()
@@ -87,6 +109,27 @@ const changeTwoMenu = async () => {
   player.value = musicSrcListValue
   musicStore.setPlayer(player.value)
 }
+
+/**
+ * 双击 播放、暂停
+ */
+const handleClick = (id: string) => {
+  // 其它页面可以通过监听store里面的menuRun来对播放进行更改，此处页面有且能更新侧边菜单
+  const menuMap: Map<string, musicMenuRunType> = menuRun.value ?? new Map<string, musicMenuRunType>()
+  if (menuMap.size !== 0) {
+    if (menuMap.get(id) === 'none' || menuMap.get(id) === 'pause') {
+      menuMap.set(id, 'playing')
+    } else {
+      menuMap.set(id, 'pause')
+    }
+    debouncedFn(cloneDeep(menuMap))
+  }
+}
+
+const debouncedFn = useDebounceFn((menuMap: Map<string, musicMenuRunType>) => {
+  console.log('useDebounceFn')
+  musicStore.setMapRun(menuMap)
+}, 1000)
 
 /**
  * 改变菜单状态播放显示
