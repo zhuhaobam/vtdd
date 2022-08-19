@@ -7,6 +7,11 @@
     :trap-focus="false"
     :block-scroll="false"
     :to="to"
+    :style="
+      'background-image: url(' +
+      getAssetsFile('music-bg.webp') +
+      ');background-position:center;background-repeat:no-repeat;background-position: bottom right;background-size: auto 240px;'
+    "
   >
     <n-drawer-content :native-scrollbar="false">
       <template #header>
@@ -27,12 +32,16 @@
               <div flex overflow-hidden flex-1 items-center pr-2>
                 <div v-if="menuRun.get(item.id) === 'playing'">
                   <n-icon
-                    pr-2
+                    mr-4
+                    flex
+                    justify-center
+                    items-center
                     size="20"
+                    color="#18a058"
                     :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
                   />
                 </div>
-                <n-avatar size="small" :src="item.al.picUrl" mr-2 />
+                <n-avatar size="small" :src="item.al.picUrl" mr-6 b-rd-5 />
                 <p class="truncate" style="max-width: 140px">
                   {{ item.name }}
                 </p>
@@ -62,7 +71,7 @@
               <p class="w-100 truncate">
                 {{ formateSongsAuthor(item.ar) }}
               </p>
-              <n-time class="pl-4 pt-16 opacity-40" format="mm:ss" :time="item.dt" />
+              <div pl-2 flex items-center><n-time class="opacity-40" format="mm:ss" :time="item.dt" /></div>
             </div>
           </DynamicScrollerItem>
         </template>
@@ -71,6 +80,7 @@
   </n-drawer>
 </template>
 <script setup lang="ts">
+import { getAssetsFile } from '@/plugins/assets-kit'
 import { MusicalNotesOutline } from '@vicons/ionicons5'
 import { musicMenuRunType, musicMenuListCombinationType } from '@/types/musicType'
 import { useMusicStore } from '@store/music'

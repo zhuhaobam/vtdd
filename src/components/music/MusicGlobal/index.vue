@@ -10,6 +10,7 @@ import { Howl, Howler } from 'howler'
 import dayjs from 'dayjs'
 const musicStore = useMusicStore()
 const mapHowlPause = ref<Map<string, globalHowlPauseType>>(new Map<string, globalHowlPauseType>())
+const mapHowlPauseStepTimeAssert = ref<Map<string, number>>(new Map<string, number>())
 onMounted(() => {
   Howler.unload()
   musicStore.destroy()
@@ -20,6 +21,7 @@ watch(
     console.log('改变播放器' + (newVal.size === 0 ? '【没有运行数据】' : '【有运行数据】'))
     if (newVal.size === 0) {
       mapHowlPause.value = new Map<string, globalHowlPauseType>()
+      mapHowlPauseStepTimeAssert.value = new Map<string, number>()
     } else {
       const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
       const menuRunValue: Map<string, musicMenuRunType> = newVal
@@ -43,7 +45,10 @@ const newHowl = (musicSrc: musicSrcType): Howl => {
       console.log('onplay')
       const durationV = Math.round(howlObj.duration() || 0)
       console.log(musicSrc.name[0] + '[' + musicSrc.id + ']时长:' + dayjs(durationV * 1000).format('mm:ss'))
-      step(musicSrc.name[0], musicSrc.id)
+      const stepTime: number | undefined = mapHowlPauseStepTimeAssert.value.get(musicSrc.id)
+      if (stepTime) {
+        step(musicSrc.name[0], musicSrc.id, stepTime)
+      }
     },
     onload: function () {
       console.log('onload')
@@ -78,7 +83,6 @@ const playing = (musicSrc: musicSrcType) => {
   if (howlPauseObjOld) {
     const howlOld: Howl = howlPauseObjOld.howl
     const howlId = howlPauseObjOld.howlId
-    console.log('AAAAA', howlOld.state(), howlOld.playing(howlId))
     if (!howlOld.playing(howlId)) {
       if (howlOld.state() === 'unloaded') {
         const howlObj: Howl = newHowl(musicSrc)
@@ -98,6 +102,7 @@ const playing = (musicSrc: musicSrcType) => {
     console.log('新建播放', howlId, 0)
     mapHowlPause.value.set(musicSrc.id, { howl: howlObj, howlId: howlId, seek: 0 })
   }
+  mapHowlPauseStepTimeAssert.value.set(musicSrc.id, new Date().getTime())
   console.log('播放器缓存大小', mapHowlPause.value.size)
 }
 
@@ -115,17 +120,21 @@ const pause = (id: string) => {
   }
 }
 
-const step = (name: string, id: string) => {
-  const howlPauseObjOld: globalHowlPauseType | undefined = mapHowlPause.value?.get(id)
-  if (howlPauseObjOld?.howl) {
-    const howlOld: Howl = howlPauseObjOld.howl
-    const howlId = howlPauseObjOld.howlId
-    if (howlOld.playing(howlId)) {
-      const seekV = Math.round(howlOld.seek(howlId) || 0)
-      console.log(name + '[' + id + ']进度:' + dayjs(seekV * 1000).format('mm:ss'))
-      setTimeout(() => {
-        step(name, id)
-      }, 5000)
+const step = (name: string, id: string, date: number) => {
+  const stepTimeAssert: number | undefined = mapHowlPauseStepTimeAssert.value.get(id)
+  // stepTimeAssert && stepTimeAssert === date 断言因为暂停和播放导致的历史step还在运行，历史step没有及时的停下自我调用
+  if (stepTimeAssert && stepTimeAssert === date) {
+    const howlPauseObjOld: globalHowlPauseType | undefined = mapHowlPause.value?.get(id)
+    if (howlPauseObjOld?.howl) {
+      const howlOld: Howl = howlPauseObjOld.howl
+      const howlId = howlPauseObjOld.howlId
+      if (howlOld.playing(howlId)) {
+        const seekV = Math.round(howlOld.seek(howlId) || 0)
+        console.log(date + name + '[' + id + ']进度:' + dayjs(seekV * 1000).format('mm:ss'))
+        setTimeout(() => {
+          step(name, id, date)
+        }, 5000)
+      }
     }
   }
 }
