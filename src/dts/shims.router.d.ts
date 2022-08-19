@@ -4,6 +4,7 @@ declare module 'vue-router' {
     icon?: string
     sort?: number
     size?: number
+    padding?: number
     layout?: boolean
     // 隐藏
     hidden?: boolean

@@ -1,5 +1,5 @@
 <template>
-  <n-layout style="height: calc(100vh - 153px)">
+  <n-layout style="height: calc(100vh - 105px)">
     <n-layout position="absolute" has-sider>
       <n-layout-sider content-style="padding: 0;" :native-scrollbar="false" bordered>
         <n-menu

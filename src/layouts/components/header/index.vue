@@ -50,7 +50,7 @@
       <div class="layout-header-trigger layout-header-trigger-min">
         <n-tooltip placement="bottom">
           <template #trigger>
-            <n-icon size="18" @click="toggle()">
+            <n-icon size="18" @click="full">
               <i-ant-design-fullscreen-exit-outlined v-if="isFullscreen" />
               <i-ant-design-fullscreen-outlined v-else />
             </n-icon>
@@ -80,6 +80,7 @@
 <script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
 import { useAppStore } from '@store/app'
+import { useFullStore } from '@store/full'
 import HeadCenter from './components/HeadCenter.vue'
 import HeadBreadcrumb from './components/HeadBreadcrumb/index.vue'
 const props = defineProps({
@@ -91,8 +92,14 @@ const props = defineProps({
   }
 })
 const appStore = useAppStore()
+const fullStore = useFullStore()
 const { isFullscreen, toggle } = useFullscreen()
 const { availableLocales, locale } = useI18n()
+
+const full = () => {
+  toggle()
+  fullStore.setPage('all')
+}
 
 const toggleLocales = () => {
   // change to some real logic

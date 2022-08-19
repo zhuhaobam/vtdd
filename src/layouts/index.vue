@@ -42,11 +42,12 @@
         <AppHeader v-model:collapsed="collapsed" :inverted="inverted" />
       </n-layout-header>
       <n-layout-header bordered :style="'height:' + tagTheme.height + 'px'">
-        <Tags />
+        <Tags @full-screen-do="fullScreenDo" />
       </n-layout-header>
       <n-layout
+        ref="amRef"
         position="absolute"
-        content-style="padding: 24px;"
+        content-style="padding: 0px;"
         :style="'top: ' + mainTheme.top + 'px'"
         :native-scrollbar="false"
       >
@@ -63,15 +64,29 @@
 import AppHeader from './components/header/index.vue'
 import HeadLogo from './components/header/components/HeadLogo.vue'
 import SideBar from './components/sidebar/index.vue'
+import { useFullStore } from '@store/full'
 import { useThemeStore } from '@store/theme'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import AppMain from './components/AppMain.vue'
 import Tags from './components/tags/index.vue'
+import { useFullscreen } from '@vueuse/core'
+const amRef = ref<HTMLElement | null>(null)
+const { toggle, enter, isFullscreen } = useFullscreen(amRef)
+const fullStore = useFullStore()
 const themeStore = useThemeStore()
 const { theme, headerTheme, tagTheme, mainTheme, menuTheme, logoTheme } = storeToRefs(themeStore)
 const appStore = useAppStore()
 const { collapsed } = storeToRefs(appStore)
+
+const fullScreenDo = () => {
+  if (isFullscreen.value === true) {
+    enter()
+  } else {
+    toggle()
+  }
+  fullStore.setPage('inner')
+}
 watch(
   collapsed,
   (newVal, oldVal) => {

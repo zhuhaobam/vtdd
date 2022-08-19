@@ -11,7 +11,9 @@
     <!-- <n-theme-editor> -->
     <n-loading-bar-provider>
       <StarportCarrier>
-        <router-view />
+        <music-global>
+          <router-view />
+        </music-global>
       </StarportCarrier>
     </n-loading-bar-provider>
     <n-global-style />

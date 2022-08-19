@@ -3,7 +3,8 @@ import {
   musicMenuListCombinationType,
   musicStoretCombinationType,
   musicMenuType,
-  musicMenuRunType
+  musicMenuRunType,
+  musicSrcType
 } from '@/types/musicType'
 
 // 导出pinia
@@ -12,20 +13,24 @@ export const useMusicStore = defineStore('music', {
     return {
       count: 0,
       musicMenuList: [],
-      mapRun: {}
+      mapRun: {},
+      player: []
     }
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['count', 'musicMenuList', 'mapRun'] }]
+    strategies: [{ storage: localStorage, paths: ['count', 'musicMenuList', 'mapRun', 'player'] }]
   },
   getters: {
     getCount(state): number {
       return state.count
     },
     getMapRun(state): Map<string, musicMenuRunType> {
-      const mapRun = new Map(Object.entries(state.mapRun))
+      const mapRun = new Map(Object.entries(Object.assign({}, state.mapRun)))
       return mapRun
+    },
+    getPlayer(state): musicSrcType[] {
+      return state.player
     },
     getMusicMenuList(state): musicMenuListCombinationType {
       return {
@@ -44,6 +49,9 @@ export const useMusicStore = defineStore('music', {
     setMapRun(value: Map<string, musicMenuRunType>) {
       this.mapRun = Object.fromEntries(value)
     },
+    setPlayer(value: musicSrcType[]) {
+      this.player = value
+    },
     setMusicMenuList(count: number, musicMenuList: musicMenuType[]) {
       this.count = count
       this.musicMenuList = musicMenuList
@@ -55,6 +63,8 @@ export const useMusicStore = defineStore('music', {
     destroy() {
       this.count = 0
       this.musicMenuList = []
+      this.mapRun = {}
+      this.player = []
     }
   }
 })

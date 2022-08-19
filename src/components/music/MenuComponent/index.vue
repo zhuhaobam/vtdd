@@ -6,6 +6,7 @@
     placement="right"
     :trap-focus="false"
     :block-scroll="false"
+    :to="to"
   >
     <n-drawer-content :native-scrollbar="false">
       <template #header>
@@ -24,11 +25,11 @@
           <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
             <div :class="'flex justify-between item ' + stripedClass(index)" @dblclick="handleDoubleClick(item.id)">
               <div flex overflow-hidden flex-1 items-center pr-2>
-                <div v-if="menuRun.get(item.id + '') === 'playing'">
+                <div v-if="menuRun.get(item.id) === 'playing'">
                   <n-icon
                     pr-2
                     size="20"
-                    :component="menuRun.get(item.id + '') === 'playing' ? MusicalNotesOutline : undefined"
+                    :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
                   />
                 </div>
                 <n-avatar size="small" :src="item.al.picUrl" mr-2 />
@@ -73,11 +74,17 @@
 import { MusicalNotesOutline } from '@vicons/ionicons5'
 import { musicMenuRunType, musicMenuListCombinationType } from '@/types/musicType'
 import { useMusicStore } from '@store/music'
+import { useFullscreen } from '@vueuse/core'
+import { useFullStore } from '@store/full'
+const { isFullscreen } = useFullscreen()
 const musicStore = useMusicStore()
+const fullStore = useFullStore()
 
 const emit = defineEmits<{
   (e: 'update:active', active: boolean): void
 }>()
+
+const to = ref()
 
 /**
  * 获取组件传值
@@ -108,6 +115,7 @@ watch(
   () => props.active,
   (newVal, oldVal) => {
     if (newVal === true) {
+      to.value = isFullscreen.value === true && fullStore.getPage === 'inner' ? '#app-main' : undefined
       active.value = true
     }
   }
@@ -121,14 +129,15 @@ const onAfterLeave = () => {
 }
 
 // 双击
-const handleDoubleClick = async (id: number) => {
+const handleDoubleClick = async (id: string) => {
   const menuMap: Map<string, musicMenuRunType> = menuRun.value
-  if (menuMap.get(id + '') === 'none' || menuMap.get(id + '') === 'pause') {
-    menuMap.set(id + '', 'playing')
+  if (menuMap.get(id) === 'none' || menuMap.get(id) === 'pause') {
+    menuMap.set(id, 'playing')
+    musicStore.setMapRun(menuMap)
   } else {
-    menuMap.set(id + '', 'pause')
+    menuMap.set(id, 'pause')
+    musicStore.setMapRun(menuMap)
   }
-  musicStore.setMapRun(menuMap)
 }
 // 点击清空
 const handleRestClick = () => {

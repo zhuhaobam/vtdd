@@ -1,45 +1,40 @@
 import { Howl } from 'howler'
+
 // 菜单类型
 type ar = {
-  id: number
+  id: string
   name: string
 }
 type al = {
-  id: number
+  id: string
   name: string
   picUrl: string
 }
 type musicMenuType = {
-  id: number
+  id: string
   mv: number
   fee: number
   name: string
   dt: number
-  arList: ar[]
+  ar: ar[]
   al: al
 }
 // 歌词类型
 type musicLyricsType = {
-  id: number
+  id: string
+  name: string
   text: string
 }
 
 // 歌曲资源类型
 type musicSrcType = {
-  id: number
-  srcList: string[]
-  formatList: string[]
+  id: string
+  name: string[]
+  src: string[]
+  format: string[]
 }
-
-// howler播放运行状态
-type howlerRunType = {
-  id: number
-  howler?: Howl
-  type: 'none' | 'playing' | 'pause'
-}
-
 /**
- * 显示菜单
+ * 菜单
  */
 type musicMenuListCombinationType = {
   count: number
@@ -50,6 +45,7 @@ type musicStoretCombinationType = {
   count: number
   musicMenuList: musicMenuType[]
   mapRun: { [k: string]: musicMenuRunType }
+  player: musicSrcType[]
 }
 
 /**
@@ -57,12 +53,21 @@ type musicStoretCombinationType = {
  */
 type musicMenuRunType = 'none' | 'playing' | 'pause'
 
+/**
+ * 全局暂存播放器,页面级别暂停
+ */
+type globalHowlPauseType = {
+  howl: Howl
+  howlId: number
+  seek: number
+}
+
 export type {
   musicMenuType,
   musicLyricsType,
   musicSrcType,
   musicMenuListCombinationType,
   musicStoretCombinationType,
-  howlerRunType,
-  musicMenuRunType
+  musicMenuRunType,
+  globalHowlPauseType
 }

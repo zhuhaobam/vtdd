@@ -7,8 +7,6 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
-    AudioComponent: typeof import('./../components/music/AudioComponent/index.vue')['default']
-    HowlerComponent: typeof import('./../components/music/HowlerComponent/index.vue')['default']
     'IAntDesign:arrowRightOutlined': typeof import('~icons/ant-design/arrow-right-outlined')['default']
     'IAntDesign:menuFoldOutlined': typeof import('~icons/ant-design/menu-fold-outlined')['default']
     'IAntDesign:menuUnfoldOutlined': typeof import('~icons/ant-design/menu-unfold-outlined')['default']
@@ -16,9 +14,8 @@ declare module '@vue/runtime-core' {
     'IAntDesign:unlockFilled': typeof import('~icons/ant-design/unlock-filled')['default']
     IAntDesignFullscreenExitOutlined: typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     IAntDesignFullscreenOutlined: typeof import('~icons/ant-design/fullscreen-outlined')['default']
-    LyricByMusic: typeof import('./../components/LyricByMusic/index.vue')['default']
-    LyricComponent: typeof import('./../components/music/LyricComponent/index.vue')['default']
     MenuComponent: typeof import('./../components/music/MenuComponent/index.vue')['default']
+    MusicGlobal: typeof import('./../components/music/MusicGlobal/index.vue')['default']
     NAvatar: typeof import('naive-ui')['NAvatar']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
@@ -45,7 +42,6 @@ declare module '@vue/runtime-core' {
     NMenu: typeof import('naive-ui')['NMenu']
     NResult: typeof import('naive-ui')['NResult']
     NScrollbar: typeof import('naive-ui')['NScrollbar']
-    NSlider: typeof import('naive-ui')['NSlider']
     NSpace: typeof import('naive-ui')['NSpace']
     NSwitch: typeof import('naive-ui')['NSwitch']
     NTable: typeof import('naive-ui')['NTable']
@@ -59,8 +55,6 @@ declare module '@vue/runtime-core' {
     RouterView: typeof import('vue-router')['RouterView']
     ScreenLock: typeof import('./../components/ScreenLock/index.vue')['default']
     Slider: typeof import('./../components/ScreenLock/Slider.vue')['default']
-    SliderBar: typeof import('./../components/SliderBar.vue')['default']
-    SliderProgressComponent: typeof import('./../components/music/SliderProgressComponent/index.vue')['default']
     Starport: typeof import('vue-starport')['Starport']
     StarportCarrier: typeof import('vue-starport')['StarportCarrier']
     StarportComponet: typeof import('./../components/StarportComponet/index.vue')['default']
