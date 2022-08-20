@@ -42,7 +42,7 @@
                   />
                 </div>
                 <n-avatar size="small" :src="item.al.picUrl" mr-6 b-rd-5 />
-                <p class="truncate" style="max-width: 140px">
+                <p truncate style="max-width: 140px">
                   {{ item.name }}
                 </p>
                 <n-tag
@@ -68,10 +68,17 @@
                   VIP
                 </n-tag>
               </div>
-              <p class="w-100 truncate">
+              <p w-100 truncate>
                 {{ formateSongsAuthor(item.ar) }}
               </p>
-              <div pl-2 flex items-center><n-time class="opacity-40" format="mm:ss" :time="item.dt" /></div>
+              <div pl-2 flex items-center>
+                <div flex flex-col items-center justify-center>
+                  <span v-if="(menuSeekRun.get(item.id) ?? '') !== ''" style="color: #18a058; font-size: 0.875rem">
+                    {{ menuSeekRun.get(item.id) }}
+                  </span>
+                  <n-time opacity-40 format="mm:ss" :time="item.dt" />
+                </div>
+              </div>
             </div>
           </DynamicScrollerItem>
         </template>
@@ -107,12 +114,16 @@ const props = withDefaults(
   defineProps<{
     active: boolean
     menuRun: Map<string, musicMenuRunType>
+    menuSeekRun: Map<string, string>
     menuList: musicMenuListCombinationType
   }>(),
   {
     active: false,
     menuRun: () => {
       return new Map<string, musicMenuRunType>()
+    },
+    menuSeekRun: () => {
+      return new Map<string, string>()
     },
     menuList: () => {
       return {
@@ -124,6 +135,7 @@ const props = withDefaults(
 )
 const active = ref<boolean>(false)
 const menuRun = computed(() => props.menuRun)
+const menuSeekRun = computed(() => props.menuSeekRun)
 const menus = computed(() => props.menuList)
 watch(
   () => props.active,

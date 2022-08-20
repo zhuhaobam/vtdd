@@ -14,6 +14,7 @@ export const useMusicStore = defineStore('music', {
       count: 0,
       musicMenuList: [],
       mapRun: {},
+      mapSeekRun: {},
       player: []
     }
   },
@@ -28,6 +29,10 @@ export const useMusicStore = defineStore('music', {
     getMapRun(state): Map<string, musicMenuRunType> {
       const mapRun = new Map(Object.entries(Object.assign({}, state.mapRun)))
       return mapRun
+    },
+    getMapSeekRun(state): Map<string, string> {
+      const mapSeekRun = new Map(Object.entries(Object.assign({}, state.mapSeekRun)))
+      return mapSeekRun
     },
     getPlayer(state): musicSrcType[] {
       return state.player
@@ -49,6 +54,14 @@ export const useMusicStore = defineStore('music', {
     setMapRun(value: Map<string, musicMenuRunType>) {
       this.mapRun = Object.fromEntries(value)
     },
+    setMapSeekRun(value: Map<string, string>) {
+      this.mapSeekRun = Object.fromEntries(value)
+    },
+    setMapSeekRunOne(id: string, seek: string) {
+      const mapSeekRun = new Map(Object.entries(Object.assign({}, this.mapSeekRun)))
+      mapSeekRun.set(id, seek)
+      this.mapSeekRun = Object.fromEntries(mapSeekRun)
+    },
     setPlayer(value: musicSrcType[]) {
       this.player = value
     },
@@ -64,6 +77,7 @@ export const useMusicStore = defineStore('music', {
       this.count = 0
       this.musicMenuList = []
       this.mapRun = {}
+      this.mapSeekRun = {}
       this.player = []
     }
   }

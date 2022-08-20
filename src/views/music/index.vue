@@ -38,7 +38,12 @@
         </div>
       </template>
     </n-card>
-    <menu-component v-model:active="active" v-model:menu-run="menuRun" :menu-list="musicMenuList" />
+    <menu-component
+      v-model:active="active"
+      v-model:menu-run="menuRun"
+      v-model:menu-seek-run="menuSeekRun"
+      :menu-list="musicMenuList"
+    />
   </div>
 </template>
 <script setup lang="ts" name="music">
@@ -53,6 +58,7 @@ const musicStore = useMusicStore()
 const musicMenuList = ref<musicMenuListCombinationType>()
 const active = ref<boolean>(false)
 const menuRun = ref<Map<string, musicMenuRunType>>()
+const menuSeekRun = ref<Map<string, string>>()
 const player = ref<musicSrcType[]>()
 
 const openMenu = () => {
@@ -78,6 +84,10 @@ const changeOneMenu = async () => {
   const menuRunMap = new Map<string, musicMenuRunType>()
   menuRunMap.set(musicMenuListValue[1].id, 'none')
   menuRun.value = menuRunMap
+  // 菜单seek状态
+  const menuSeekRunMap = new Map<string, string>()
+  menuSeekRunMap.set(musicMenuListValue[1].id, '')
+  menuSeekRun.value = menuSeekRunMap
   // 播放资源
   const musicSrcListValue: musicSrcType[] = musicSrcListData() ?? []
   player.value = [musicSrcListValue[1]]
@@ -104,6 +114,12 @@ const changeTwoMenu = async () => {
     menuRunMap.set(v.id, 'none')
   })
   menuRun.value = menuRunMap
+  // 菜单seek状态
+  const menuSeekRunMap = new Map<string, string>()
+  musicMenuListValue.forEach((v: musicMenuType) => {
+    menuSeekRunMap.set(v.id, '')
+  })
+  menuSeekRun.value = menuSeekRunMap
   // 播放资源
   const musicSrcListValue: musicSrcType[] = musicSrcListData() ?? []
   player.value = musicSrcListValue
@@ -140,6 +156,15 @@ watch(
     console.log('改变菜单状态播放显示')
     const menuRunValue: Map<string, musicMenuRunType> = newVal
     menuRun.value = menuRunValue
+  }
+)
+
+watch(
+  () => musicStore.getMapSeekRun,
+  (newVal, oldVal) => {
+    console.log('改变菜单seek状态播放显示', newVal)
+    const menuSeekRunValue: Map<string, string> = newVal
+    menuSeekRun.value = menuSeekRunValue
   }
 )
 

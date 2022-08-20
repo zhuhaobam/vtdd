@@ -45,6 +45,7 @@ type musicStoretCombinationType = {
   count: number
   musicMenuList: musicMenuType[]
   mapRun: { [k: string]: musicMenuRunType }
+  mapSeekRun: { [k: string]: string }
   player: musicSrcType[]
 }
 
