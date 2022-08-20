@@ -41,8 +41,8 @@
                     :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
                   />
                 </div>
-                <n-avatar size="small" :src="item.al.picUrl" mr-6 b-rd-5 />
-                <p truncate style="max-width: 140px">
+                <n-avatar min-w-34 min-h-34 w-34 h-34 mr-4 :src="item.al.picUrl" b-rd-5 />
+                <p truncate max-w-140>
                   {{ item.name }}
                 </p>
                 <n-tag
@@ -68,16 +68,16 @@
                   VIP
                 </n-tag>
               </div>
-              <p w-100 truncate>
+              <p w-100 truncate text-center>
                 {{ formateSongsAuthor(item.ar) }}
               </p>
+              <p w-50 text-center>
+                <span v-if="(menuSeekRun.get(item.id) ?? '') !== ''" colorhex-18a058>
+                  {{ menuSeekRun.get(item.id) }}
+                </span>
+              </p>
               <div pl-2 flex items-center>
-                <div flex flex-col items-center justify-center>
-                  <span v-if="(menuSeekRun.get(item.id) ?? '') !== ''" style="color: #18a058; font-size: 0.875rem">
-                    {{ menuSeekRun.get(item.id) }}
-                  </span>
-                  <n-time opacity-40 format="mm:ss" :time="item.dt" />
-                </div>
+                <n-time opacity-40 format="mm:ss" :time="item.dt" />
               </div>
             </div>
           </DynamicScrollerItem>

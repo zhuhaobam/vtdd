@@ -1,3 +1,4 @@
+<!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <n-layout style="height: calc(100vh - 105px)">
     <n-layout position="absolute" has-sider>
@@ -33,7 +34,7 @@
     </n-layout>
   </n-layout>
 </template>
-<script setup lang="ts" name="vueMd">
+<script setup lang="ts" name="markdown">
 // import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
 import { renderDefaultAssetsIcon } from '@/utils/render'
 import { MenuOption, NIcon } from 'naive-ui'
@@ -109,7 +110,7 @@ function handleComponent(key: string, item: MenuOption) {
 meta:
   breadcrumb: page.md
   icon: file-markdown-filled
-  sort: -1
+  sort: -10
 </route>
 <style lang="scss" scoped>
 // default

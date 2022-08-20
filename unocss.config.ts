@@ -10,7 +10,10 @@ import {
 
 export default defineConfig({
   // 生成CSS实用程序的规则
-  rules: [[/^bc-(.+)$/, ([, color]) => ({ 'border-color': `${color}` })]],
+  rules: [
+    [/^bc-(.+)$/, ([, color]) => ({ 'border-color': `${color}` })],
+    [/^colorhex-(.+)$/, ([, color]) => ({ color: `#${color}` })]
+  ],
   // 预处理选择器的变体，具有重写CSS对象的能力。
   variants: [
     matcher => {

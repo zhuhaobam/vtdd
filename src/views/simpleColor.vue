@@ -53,5 +53,5 @@ extractor.extractColor(getAssetsFile('img_login_bg.png')).then(() => {
 meta:
   breadcrumb: page.color
   icon: i-carbon:color-palette
-  sort: 8000
+  sort: -2
 </route>

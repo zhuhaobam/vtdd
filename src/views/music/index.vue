@@ -9,12 +9,17 @@
       }"
     >
       <template #header-extra>
-        <n-button type="success" @click="openMenu"> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
+        <div v-if="(musicMenuList?.count ?? 0) === 0">
+          <n-button dashed> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
+        </div>
+        <n-badge v-else :value="musicMenuList?.count ?? 0" :max="10">
+          <n-button type="success" @click="openMenu"> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
+        </n-badge>
       </template>
-      <template #action>
+      <template #footer>
         <n-space>
           <n-button type="success" @click="changeOneMenu"> 模拟切换音乐菜单【1首】 </n-button>
-          <n-button type="success" @click="changeTwoMenu"> 模拟切换音乐菜单【2首】 </n-button>
+          <n-button type="success" @click="changeTwoMenu"> 模拟切换音乐菜单【3首】 </n-button>
         </n-space>
         <div pt-20>
           <n-space v-if="(musicMenuList?.count ?? 0) > 0" vertical>
@@ -33,9 +38,33 @@
                 />
               </div>
               {{ item.name }}
+              <span v-if="(menuSeekRun?.get(item.id) ?? '') !== ''" style="font-size: 0.875rem">
+                {{ menuSeekRun?.get(item.id) }}
+              </span>
             </n-button>
           </n-space>
         </div>
+      </template>
+      <template #action>
+        <n-alert title="讲解：本项目只有技术价值😀 " type="default">
+          <template #icon>
+            <n-icon>
+              <alarm-outline />
+            </n-icon>
+          </template>
+          *、
+          最大的特点是我在`router-view`外面包裹了一个自定义组件`music-global`,我可以全局跳转不影响音乐页面的操作和显示，刷新保持增加复杂度尝试了还是不做)
+          <br />
+          #、
+          要点：TypeScript类型的定义，Pinia的状态使用，Persist的使用（为难Persist存储Map数据结构，需要存取各自转换），watch监听store和双向绑定modal（最少的操作对象，要不然你会发现总是在触发），Howler的基本使用,global缓存Howler（不刷新操作的秘密）<br />
+          &、 控制台打印了埋点信息，我调试的时候留下的 <br />
+          %、
+          缺点：1.库的缓存和我自己的缓存以及状态存储，刷新都给清空了。2.多首歌曲播放进度每一秒全部更新了一遍，监听处理的压力比较大，刷新或者切换菜单都给清空了。3.希望有更好的方式
+          <br />
+          1、 点击“模拟切换音乐菜单”按钮，加载新的播放菜单 <br />
+          2、 选择“页面播放列表（防抖一秒）”（单击播放）或者“虚拟滚动条DynamicScroller】音乐菜单”（双击播放）<br />
+          3、 Howler.js支持同时播放多首歌曲，此处按照多首歌曲同时播放来做的【播放、暂停、菜单显示、页面显示、进度显示】
+        </n-alert>
       </template>
     </n-card>
     <menu-component
@@ -47,7 +76,7 @@
   </div>
 </template>
 <script setup lang="ts" name="music">
-import { MusicalNotesOutline } from '@vicons/ionicons5'
+import { MusicalNotesOutline, AlarmOutline } from '@vicons/ionicons5'
 import { musicMenuListData, musicSrcListData } from './songs'
 import { musicMenuListCombinationType, musicMenuType, musicMenuRunType, musicSrcType } from '@/types/musicType'
 import { useMusicStore } from '@store/music'
@@ -212,5 +241,5 @@ onMounted(() => {
 meta:
   breadcrumb: page.music
   icon: file-markdown-filled
-  sort: 20000
+  sort: -20
 </route>

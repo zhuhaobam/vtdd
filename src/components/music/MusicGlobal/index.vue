@@ -42,7 +42,7 @@ const newHowl = (musicSrc: musicSrcType): Howl => {
     src: [...musicSrc.src],
     format: [...musicSrc.format],
     onplay: function () {
-      console.log('onplay')
+      console.log('onplay', howlObj.duration())
       const durationV = Math.round(howlObj.duration() || 0)
       console.log(musicSrc.name[0] + '[' + musicSrc.id + ']时长:' + dayjs(durationV * 1000).format('mm:ss'))
       const stepTimeAssert: number | undefined = mapHowlPauseStepTimeAssert.value.get(musicSrc.id)
@@ -55,6 +55,8 @@ const newHowl = (musicSrc: musicSrcType): Howl => {
     },
     onend: function () {
       const id = musicSrc.id
+      //播放完了跳到0进度，等待下一次唤醒
+      howlObj.seek(0)
       const menuMap: Map<string, musicMenuRunType> = musicStore.getMapRun
       menuMap.set(id, 'none')
       musicStore.setMapRun(menuMap)
@@ -131,11 +133,11 @@ const step = (name: string, id: string, date: number) => {
         const seekV = Math.round(howlOld.seek(howlId) || 0)
         const progressV = dayjs(seekV * 1000).format('mm:ss')
         musicStore.setMapSeekRunOne(id, progressV)
-        const consoleStr = 'progress时间戳【%d】歌名:【%s】歌曲id:【%d】progress:【%s】'
-        console.log(consoleStr, date, name, id, progressV)
+        // const consoleStr = 'progress时间戳【%d】歌名:【%s】歌曲id:【%d】progress:【%s】'
+        // console.log(consoleStr, date, name, id, progressV)
         setTimeout(() => {
           step(name, id, date)
-        }, 5000)
+        }, 1000)
       }
     }
   }
