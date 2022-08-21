@@ -25,7 +25,7 @@
           <n-button text type="primary" @click="handleGoHemeClick"> 去首页发现音乐 </n-button>
         </template>
       </n-empty>
-      <DynamicScroller class="scroller" :items="menus.musicMenuList" :min-item-size="50" key-field="id">
+      <DynamicScroller class="scroller" :items="menus.musicMenuList" :item-size="50" key-field="id">
         <template #default="{ item, index }">
           <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
             <div :class="'flex justify-between item ' + stripedClass(index)" @dblclick="handleDoubleClick(item.id)">
@@ -72,8 +72,8 @@
                 {{ formateSongsAuthor(item.ar) }}
               </p>
               <p w-50 text-center>
-                <span v-if="(menuSeekRun.get(item.id) ?? '') !== ''" colorhex-18a058>
-                  {{ menuSeekRun.get(item.id) }}
+                <span v-if="(menuSeekRun.get(item.id) ?? '0') !== '0'" colorhex-18a058>
+                  {{ dayjs(Number(menuSeekRun.get(item.id)) * 1000).format('mm:ss') }}
                 </span>
               </p>
               <div pl-2 flex items-center>
@@ -93,6 +93,7 @@ import { musicMenuRunType, musicMenuListCombinationType } from '@/types/musicTyp
 import { useMusicStore } from '@store/music'
 import { useFullscreen } from '@vueuse/core'
 import { useFullStore } from '@store/full'
+import dayjs from 'dayjs'
 import { Howler } from 'howler'
 import { createDiscreteApi } from 'naive-ui'
 const { message } = createDiscreteApi(['message'])

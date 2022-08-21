@@ -13,14 +13,14 @@ export function parseLyric(lrc: string): LineItem[] {
       const sec = Number(String(t.match(/:\d*/i)).slice(1))
       const time = min * 60 + sec
       if (content !== '') {
-        lrcObj.push({ time: time, content })
+        lrcObj.push({ id: i, time: time, content })
       }
     }
   }
   return lrcObj
 }
 export function parseRangeLyric(lyricList: LineItem[]) {
-  const map = new Map<number, RangeLyricItem>()
+  const map = new Map<number, LineItem>()
   let currentIndex = 0
   let nextIndex = 1
   // 如果第一项播放时间不为0，则手动插入一个
@@ -33,10 +33,9 @@ export function parseRangeLyric(lyricList: LineItem[]) {
   while (currentIndex !== lyricList.length - 1) {
     const cur = lyricList[currentIndex]
     const next = lyricList[nextIndex]
-    for (let start = cur.time; start < next.time; start++) {
-      map.set(start, {
-        ...cur,
-        index: currentIndex
+    if (cur.time < next.time) {
+      map.set(cur.time, {
+        ...cur
       })
     }
     if (next) {
@@ -45,18 +44,15 @@ export function parseRangeLyric(lyricList: LineItem[]) {
     }
     if (currentIndex === lyricList.length - 1) {
       map.set(next.time, {
-        ...next,
-        index: currentIndex
+        ...next
       })
     }
   }
   return map
 }
 export interface LineItem {
+  id: number
   time: number
   content: string
   translateContent?: string
-}
-export interface RangeLyricItem extends LineItem {
-  index: number
 }

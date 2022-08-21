@@ -14,6 +14,7 @@ declare module '@vue/runtime-core' {
     'IAntDesign:unlockFilled': typeof import('~icons/ant-design/unlock-filled')['default']
     IAntDesignFullscreenExitOutlined: typeof import('~icons/ant-design/fullscreen-exit-outlined')['default']
     IAntDesignFullscreenOutlined: typeof import('~icons/ant-design/fullscreen-outlined')['default']
+    LyricComponent: typeof import('./../components/music/LyricComponent/index.vue')['default']
     MenuComponent: typeof import('./../components/music/MenuComponent/index.vue')['default']
     MusicGlobal: typeof import('./../components/music/MusicGlobal/index.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
