@@ -23,7 +23,7 @@
         </n-space>
         <div pt-20>
           <n-space v-if="(musicMenuList?.count ?? 0) > 0" vertical>
-            <h3>页面播放列表（防抖一秒）</h3>
+            <h3>页面播放列表（防抖一秒，防止误点，歌曲启动稍微有点延迟是音乐资源加载耗时）</h3>
             <n-button
               v-for="(item, index) in musicMenuList?.musicMenuList"
               :key="index"
@@ -38,7 +38,10 @@
                 />
               </div>
               {{ item.name }}
-              <span v-if="(menuSeekRun?.get(item.id) ?? '0') !== '0'" style="font-size: 0.875rem">
+              <span
+                v-if="!['onplay', 'onend', 'onpause', '0'].includes(menuSeekRun?.get(item.id) ?? '0')"
+                style="font-size: 0.875rem"
+              >
                 {{ dayjs(Number(menuSeekRun?.get(item.id)) * 1000).format('mm:ss') }}
               </span>
             </n-button>
@@ -52,6 +55,8 @@
               >
                 <lyric-component
                   :seek-run="seekRunMap?.get(item.id) ?? '0'"
+                  :seek-dt="item.dt"
+                  :seek-id="item.id"
                   tlyric=""
                   :lyric="lyricMap?.get(item.id)"
                 />
@@ -68,7 +73,10 @@
             </n-icon>
           </template>
           *、
-          最大的特点是我在`router-view`外面包裹了一个自定义组件`music-global`,我可以全局跳转不影响音乐页面的操作和显示，刷新保持增加复杂度尝试了还是不做)
+          最大的特点是我在`router-view`外面包裹了一个自定义组件`music-global`,我可以全局跳转不影响音乐页面的操作和显示<br />
+          *、点击刷新按钮组件级别刷新，歌词滚动等做了处理，浏览器级别的刷新就是真正的全部重新加载重置了<br />
+          *、vue-virtual-scroller【歌曲列表（衍生代码ts script全是）、歌词列表（衍生代码ts script全是）】<br />
+          *、howler【歌曲播放（衍生代码ts script全是）】
           <br />
           #、
           要点：TypeScript类型的定义，Pinia的状态使用，Persist的使用（为难Persist存储Map数据结构，需要存取各自转换），watch监听store和双向绑定modal（最少的操作对象，要不然你会发现总是在触发），Howler的基本使用,global缓存Howler（不刷新操作的秘密）<br />
@@ -273,6 +281,13 @@ onMounted(() => {
     // 播放资
     const musicPlayerValue: musicSrcType[] = musicStore.getPlayer
     player.value = musicPlayerValue
+
+    // 歌词
+    const lyricRunMap = new Map<string, string>()
+    musicLyricListData().forEach((v: musicLyricsType) => {
+      lyricRunMap.set(v.id, v.text)
+    })
+    lyricMap.value = lyricRunMap
   }
 })
 </script>

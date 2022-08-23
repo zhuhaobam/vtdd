@@ -11,9 +11,17 @@ export function parseLyric(lrc: string): LineItem[] {
       const t = timeRegExpArr[k]
       const min = Number(String(t.match(/\[\d*/i)).slice(1))
       const sec = Number(String(t.match(/:\d*/i)).slice(1))
-      const time = min * 60 + sec
+      const ww = Number(String(t.match(/\.\d*/i)).slice(1))
+      let numWw = 0
+      if (ww > 0 && ww <= 100) {
+        numWw = Math.round(ww / 100)
+      }
+      if (ww > 100 && ww <= 1000) {
+        numWw = Math.round(ww / 1000)
+      }
+      const time = min * 60 + sec + numWw
       if (content !== '') {
-        lrcObj.push({ id: i, time: time, content })
+        lrcObj.push({ id: i, index: i, time: time, content })
       }
     }
   }
@@ -35,7 +43,8 @@ export function parseRangeLyric(lyricList: LineItem[]) {
     const next = lyricList[nextIndex]
     if (cur.time < next.time) {
       map.set(cur.time, {
-        ...cur
+        ...cur,
+        index: currentIndex
       })
     }
     if (next) {
@@ -53,6 +62,7 @@ export function parseRangeLyric(lyricList: LineItem[]) {
 export interface LineItem {
   id: number
   time: number
+  index: number
   content: string
   translateContent?: string
 }

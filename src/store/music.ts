@@ -4,7 +4,8 @@ import {
   musicStoretCombinationType,
   musicMenuType,
   musicMenuRunType,
-  musicSrcType
+  musicSrcType,
+  musicSeekJoinRunType
 } from '@/types/musicType'
 
 // 导出pinia
@@ -15,12 +16,22 @@ export const useMusicStore = defineStore('music', {
       musicMenuList: [],
       mapRun: {},
       mapSeekRun: {},
+      seekJoinRun: {
+        id: '0',
+        seek: 0,
+        timeStamp: 0
+      },
       player: []
     }
   },
   persist: {
     enabled: true,
-    strategies: [{ storage: localStorage, paths: ['count', 'musicMenuList', 'mapRun', 'player'] }]
+    strategies: [
+      {
+        storage: localStorage,
+        paths: ['count', 'musicMenuList', 'mapRun', 'mapSeekRun', 'mapSeekJoinRun', 'player']
+      }
+    ]
   },
   getters: {
     getCount(state): number {
@@ -33,6 +44,9 @@ export const useMusicStore = defineStore('music', {
     getMapSeekRun(state): Map<string, string> {
       const mapSeekRun = new Map(Object.entries(Object.assign({}, state.mapSeekRun)))
       return mapSeekRun
+    },
+    getSeekJoinRun(state): musicSeekJoinRunType {
+      return state.seekJoinRun
     },
     getPlayer(state): musicSrcType[] {
       return state.player
@@ -62,6 +76,9 @@ export const useMusicStore = defineStore('music', {
       mapSeekRun.set(id, seek)
       this.mapSeekRun = Object.fromEntries(mapSeekRun)
     },
+    setSeekJoinRun(value: musicSeekJoinRunType) {
+      this.seekJoinRun = value
+    },
     setPlayer(value: musicSrcType[]) {
       this.player = value
     },
@@ -78,6 +95,11 @@ export const useMusicStore = defineStore('music', {
       this.musicMenuList = []
       this.mapRun = {}
       this.mapSeekRun = {}
+      this.seekJoinRun = {
+        id: '0',
+        seek: 0,
+        timeStamp: 0
+      }
       this.player = []
     }
   }

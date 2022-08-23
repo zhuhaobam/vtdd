@@ -46,6 +46,7 @@ type musicStoretCombinationType = {
   musicMenuList: musicMenuType[]
   mapRun: { [k: string]: musicMenuRunType }
   mapSeekRun: { [k: string]: string }
+  seekJoinRun: musicSeekJoinRunType
   player: musicSrcType[]
 }
 
@@ -63,6 +64,15 @@ type globalHowlPauseType = {
   seek: number
 }
 
+/**
+ * seek跳转
+ */
+type musicSeekJoinRunType = {
+  id: string
+  seek: number
+  timeStamp: number
+}
+
 export type {
   musicMenuType,
   musicLyricsType,
@@ -70,5 +80,6 @@ export type {
   musicMenuListCombinationType,
   musicStoretCombinationType,
   musicMenuRunType,
+  musicSeekJoinRunType,
   globalHowlPauseType
 }
