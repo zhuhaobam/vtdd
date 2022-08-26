@@ -79,10 +79,10 @@
 
 <script lang="ts" setup name="appHeader">
 import LightDark from './components/LightDark.vue'
-import { useAppStore } from '@store/app'
-import { useFullStore } from '@store/full'
 import HeadCenter from './components/HeadCenter.vue'
 import HeadBreadcrumb from './components/HeadBreadcrumb/index.vue'
+import { useAppStore } from '@store/app'
+import { useFullStore } from '@store/full'
 const props = defineProps({
   collapsed: {
     type: Boolean

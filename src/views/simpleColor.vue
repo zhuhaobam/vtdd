@@ -10,7 +10,7 @@
   </div>
 </template>
 <script setup lang="ts" name="simpleColor">
-import { ColorExtractor } from '@components/ImageMainColor/index'
+import { ColorExtractor } from '@/components/ImageMainColor/index'
 import { prominent } from 'color.js'
 import { getAssetsFile } from '@/plugins/assets-kit'
 const bg1Color = ref<any>('')

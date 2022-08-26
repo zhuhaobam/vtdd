@@ -1,5 +1,5 @@
 import { RouterLink } from 'vue-router'
-import SvgIcon from '@components/SvgIcon/index.vue'
+import SvgIcon from '@/components/SvgIcon/index.vue'
 import { NIcon } from 'naive-ui'
 // 动态联网获取图标
 // http://icon-sets.iconify.design/ant-design/

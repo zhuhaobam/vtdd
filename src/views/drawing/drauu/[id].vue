@@ -83,6 +83,7 @@
   </div>
 </template>
 <script setup lang="ts" name="drawing-drauu-id">
+import Draggable from '@/components/Draggable/index.vue'
 import { getAssetsFile } from '@/plugins/assets-kit'
 import {
   brush,

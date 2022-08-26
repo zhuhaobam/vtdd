@@ -64,12 +64,12 @@
 import AppHeader from './components/header/index.vue'
 import HeadLogo from './components/header/components/HeadLogo.vue'
 import SideBar from './components/sidebar/index.vue'
+import AppMain from './components/AppMain.vue'
+import Tags from './components/tags/index.vue'
 import { useFullStore } from '@store/full'
 import { useThemeStore } from '@store/theme'
 import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
-import AppMain from './components/AppMain.vue'
-import Tags from './components/tags/index.vue'
 import { useFullscreen } from '@vueuse/core'
 const amRef = ref<HTMLElement | null>(null)
 const { toggle, enter, isFullscreen } = useFullscreen(amRef)
