@@ -35,8 +35,7 @@
   </n-layout>
 </template>
 <script setup lang="ts" name="markdown">
-// import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
-import { renderDefaultAssetsIcon } from '@/utils/hFunctionRender'
+import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { MenuOption, NIcon } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
 const { t } = useI18n()
@@ -55,7 +54,7 @@ function madeOptions(levelName: string, level: number, list: Record<string, any>
         onlyOptions.push({
           label: (frontmatter.noi18n ?? 'yes') === 'yes' ? frontmatter.title : frontmatter.trans,
           key: path,
-          icon: renderDefaultAssetsIcon(frontmatter.icon),
+          icon: hFunctionIcon(frontmatter.icon),
           sort: frontmatter.sort,
           noi18n: frontmatter.noi18n ?? 'yes',
           children: onlyMenuOption
@@ -64,7 +63,7 @@ function madeOptions(levelName: string, level: number, list: Record<string, any>
         onlyOptions.push({
           label: (frontmatter.noi18n ?? 'yes') === 'yes' ? frontmatter.title : frontmatter.trans,
           key: path,
-          icon: renderDefaultAssetsIcon(frontmatter.icon),
+          icon: hFunctionIcon(frontmatter.icon),
           sort: frontmatter.sort,
           noi18n: frontmatter.noi18n ?? 'yes'
         })
@@ -96,7 +95,6 @@ function renderMenuLabel(option: MenuOption) {
 }
 
 function renderMenuIcon(option: MenuOption) {
-  // return h(renderSvgIcon('file-markdown-filled'))
   return h(NIcon, option.icon)
 }
 

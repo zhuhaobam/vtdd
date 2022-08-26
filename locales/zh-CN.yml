@@ -63,9 +63,9 @@ page:
   drawing:
     drawing: 画图
     drauu:
-       drauu: 画图drauu
-       list: 画图drauulist
-       id: 画板
+       drauu: drauu画图
+       list: drauu画图列表
+       did: 画板
   axios:
     axios: axios库
     get: get请求

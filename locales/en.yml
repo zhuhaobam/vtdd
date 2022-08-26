@@ -65,7 +65,7 @@ page:
     drauu:
       drauu: drauu
       list: drauulist
-      id: drauu dashboard
+      did:  drauu dashboard
   axios:
     axios: axios
     get: get method

@@ -8,7 +8,8 @@ interface ITagsStore {
   tags: RouteLocationMatched[]
   activeTag: string
 }
-const noTags = ['/404', '/:id', '/login', '/system/user', '/system/setting']
+const noTags = ['/404', '/:id(\\d+)', '/:all(.*)*', '/login', '/system/user', '/system/setting']
+const replaceTags = ['/drawing/drauu/:did(\\d+)']
 // 导出pinia
 export const useTagsStore = defineStore('tags', {
   state: (): ITagsStore => {
@@ -45,26 +46,28 @@ export const useTagsStore = defineStore('tags', {
       this.tags = cloneDeep(tags)
     },
     addTag(tag: RouteLocationMatched) {
-      const path = tag.path
-      let zuHeTag = { ...tag }
-      if (path.endsWith(':id')) {
+      let path = ''
+      if (replaceTags.includes(tag.path)) {
         const messages = Object.fromEntries(
           Object.entries(tag.params).map(([key, value]) => {
             return [key, value]
           })
         )
-        if (isString(messages.id)) {
-          this.setActiveTag(path.replace(':id', messages.id))
-          zuHeTag = {
-            ...tag,
-            path: path.replace(':id', messages.id)
-          }
+        if (isString(messages.did)) {
+          path = tag.path.replace(':did(\\d+)', messages.did)
         }
       } else {
-        this.setActiveTag(path)
+        path = tag.path
       }
-      if (noTags.includes(path) || this.tags.some(item => item.path === zuHeTag.path)) return
-      this.setTags([...this.tags, zuHeTag])
+      if (noTags.includes(tag.path) || this.tags.some(item => item.path === path)) return
+      this.setActiveTag(path)
+      this.setTags([
+        ...this.tags,
+        {
+          ...tag,
+          path: path
+        }
+      ])
     },
     removeOtherTag(path: string) {
       if (path !== this.activeTag) {

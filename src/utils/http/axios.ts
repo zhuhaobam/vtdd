@@ -5,16 +5,16 @@ import axios, {
   AxiosRequestType,
   HttpRequesTypeInterface
 } from 'axios'
-import { createDiscreteApi } from 'naive-ui'
+// import { createDiscreteApi } from 'naive-ui'
 import { AxiosAdapter } from 'axios'
 import cacheAdapterEnhancer from './adapter/cacheAdapterEnhancer'
 import throttleAdapterEnhancer from './adapter/throttleAdapterEnhancer'
 import retryInterceptorsResponse from './interceptors/retryInterceptorsResponse'
 import { axiosGetObj2Params } from './utils/params'
-const { message } = createDiscreteApi(['message'])
-message.info('axios.page')
+// const { message } = createDiscreteApi(['message'])
+// message.info('axios.page')
 const handleCode = (code: any, msg: any) => {
-  console.log('handleCode')
+  console.log('handleCode', code, msg)
 }
 
 class AxiosHttpRequest implements HttpRequesTypeInterface {

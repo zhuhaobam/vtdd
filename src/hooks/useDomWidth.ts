@@ -8,7 +8,6 @@ export function useDomWidth() {
   const domWidth = ref(window.innerWidth)
 
   function resize() {
-    console.log(document.body)
     domWidth.value = document.body.clientWidth
   }
 

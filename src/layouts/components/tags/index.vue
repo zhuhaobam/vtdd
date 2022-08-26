@@ -21,10 +21,10 @@
         @close.stop="tagsStore.removeTag(tag.path)"
         @contextmenu.prevent="handleContextMenu($event, tag)"
       >
-        {{ $t(tag.meta.breadcrumb as string) }}
-        <span v-if="tag.params">{{ tag.params.id ?? '' }}</span>
+        {{ $t(tag.meta.breadcrumb ?? 'noting') }}
+        <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
         <template #icon>
-          <n-icon :component="renderMenuIcon(tag.meta.icon as string)" />
+          <n-icon :component="hFunctionIcon(tag.meta.icon as string)" />
         </template>
       </n-tag>
     </div>
@@ -41,7 +41,7 @@
   />
 </template>
 <script lang="ts" setup>
-import { renderAssetsIcon } from '@/utils/hFunctionRender'
+import { hFunctionIcon } from '@/utils/hFunctionRender'
 import router from '@/router'
 import { useTagsStore } from '@store/tags'
 import { useAppStore } from '@store/app'
@@ -63,9 +63,7 @@ const handleTagClick = (path: any) => {
   tagsStore.setActiveTag(path)
   router.push(path)
 }
-function renderMenuIcon(icon: string) {
-  return h(renderAssetsIcon(icon))
-}
+
 // 右击菜单
 const optionsRef = ref<any[]>([])
 const showDropdownRef = ref(false)

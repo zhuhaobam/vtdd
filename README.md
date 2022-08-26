@@ -5,10 +5,25 @@
 ## 项目在线预览地址
 
 https://zhuhaobam.github.io
+## 请求和tag右键展示
 
-## 截图
+![请求和tag右键展示](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page1.png)
 
-![英文](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page3.png)
+## 提取图片背景色
+
+![提取图片背景色](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page2.png)
+
+## 歌曲兴趣
+
+![歌曲兴趣](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page3.png)
+
+## markdown本地读取目录展示
+
+![markdown本地读取目录展示](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page4.png)
+
+## 绘图截图
+
+![绘图截图](https://raw.githubusercontent.com/zhuhaobam/vtdd/main/docbyexplain/page5.png)
 
 # 项目地址
 

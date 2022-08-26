@@ -29,8 +29,8 @@ import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
 import { useTagsStore } from '@store/tags'
-import { MenuProps, NIcon } from 'naive-ui'
-import { renderAssetsIcon } from '@/utils/hFunctionRender'
+import { MenuProps } from 'naive-ui'
+import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { RouteLocationMatched } from 'vue-router'
 const { t } = useI18n()
 const tagsStore = useTagsStore()
@@ -86,11 +86,6 @@ const filterRoutes = filterHiddenRoutes(routes)
 const primaryRoutes = primaryAdjustment(filterRoutes)
 const menuOptions = ref<any[]>([])
 
-function renderMenuIcon(option: MenuOption) {
-  return h(NIcon, null, {
-    default: () => h(renderAssetsIcon(option.menuRenderIcon as string))
-  })
-}
 // collapsed-icon-size 24 菜单折叠时图标的大小，如果未设定则使用 icon-size 代替
 // collapsed-width 48 折叠后菜单的宽度
 // icon-size 20  菜单未折叠时图标的大小
@@ -118,7 +113,7 @@ const currentRoute = useRoute()
 // 初始化第一个tag
 if (tagsStore.hasEmpty) {
   const tag: RouteLocationMatched = currentRoute.matched[currentRoute.matched.length - 1]
-  if (tag.path.endsWith(':id')) {
+  if (tag.path.indexOf(':') !== -1) {
     tag.params = currentRoute.params
   }
   tagsStore.addTag(tag)
@@ -138,7 +133,7 @@ const getSelectedKeys = computed(() => {
 // 跟随页面路由变化，切换菜单选中状态
 onMounted(() => {
   const tag: RouteLocationMatched = currentRoute.matched[currentRoute.matched.length - 1]
-  if (tag.path.endsWith(':id')) {
+  if (tag.path.indexOf(':') !== -1) {
     tag.params = currentRoute.params
   }
   tagsStore.addTag(tag)
@@ -152,7 +147,7 @@ watch(
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
     const tag: RouteLocationMatched = matched[matched.length - 1]
-    if (tag.path.endsWith(':id')) {
+    if (tag.path.indexOf(':') !== -1) {
       tag.params = currentRoute.params
     }
     tagsStore.addTag(tag)
@@ -182,5 +177,9 @@ function findChildrenLen(key: string) {
     }
   }
   return subRouteChildren.includes(key)
+}
+
+function renderMenuIcon(option: MenuOption) {
+  return h(NIcon, hFunctionIcon(option.menuRenderIcon as string))
 }
 </script>

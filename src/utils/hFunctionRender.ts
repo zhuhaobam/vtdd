@@ -1,64 +1,69 @@
 import { RouterLink } from 'vue-router'
+// 自定义本地svg SvgIcon
 import SvgIcon from '@/components/SvgIcon/index.vue'
+// NIcon首推获取图标
+import { BugOutline } from '@vicons/ionicons5'
+import { Component } from 'vue'
 import { NIcon } from 'naive-ui'
-// 动态联网获取图标
-// http://icon-sets.iconify.design/ant-design/
+// 联网下载图标
 import { Icon } from '@iconify/vue'
-/**
- * render 图标
- * 根据前缀识别加载方式,无size
- * */
-export function renderDefaultAssetsIcon(icon: string) {
-  const len = icon.length
-  if (icon.startsWith('i-carbon') || icon.startsWith('i-ant-design')) {
-    return () => h(Icon, { icon: icon.slice(2, len) })
-  }
-  return () => h(SvgIcon, { name: icon.slice(icon.startsWith('i-myself-') ? 9 : 0, len) })
-}
 
 /**
  * render 图标
  * 根据前缀识别加载方式
  * */
-export function renderAssetsIcon(icon: string, size?: number) {
-  const len = icon.length
-  if (icon.startsWith('i-carbon:') || icon.startsWith('i-ant-design:')) {
-    return h(Icon, { icon: icon.slice(2, len), style: { fontSize: (size ?? 20) + 'px' } })
+export function hFunctionIcon(icon: string, size?: number) {
+  if (icon) {
+    const len = icon.length
+    if (icon.startsWith('i-carbon:') || icon.startsWith('i-ant-design:')) {
+      return renderIconifyByNetWork(icon.slice(2, len), size)
+    }
+    return renderSvgIcon(icon.slice(icon.startsWith('i-myself-') ? 9 : 0, len), size)
   }
+  return renderNIconByNetWork(BugOutline)
+}
+
+/**
+ * NIcon首推获取图标
+ * @param icon  Component
+ * @returns @vicons/ionicons5=>NIcon
+ */
+export const renderNIconByNetWork = (icon: Component) => {
   return () =>
-    h(SvgIcon, {
-      name: icon.slice(icon.startsWith('i-myself-') ? 9 : 0, len),
-      size: size ?? 20
+    h(NIcon, null, {
+      default: () => h(icon)
     })
 }
 
 /**
- * render 图标
- *  SvgIcon
- * */
+ * 自定义本地svg SvgIcon
+ * @param icon string
+ * @param size? number
+ * @returns  SvgIcon
+ */
 export function renderSvgIcon(icon: string, size?: number) {
   return () => h(SvgIcon, { name: icon, size: size ?? 20 })
 }
 
 /**
- * render 图标
  * 联网下载图标
- * */
-export function renderIconifyIconsByNetWork(icon: string, size?: number) {
-  return () => h(Icon, { icon: icon, style: { fontSize: (size ?? 20) + 'px' } })
+ * @param icon  string
+ * @param size? number
+ * @returns  @iconify/vue=>Icon
+ */
+export function renderIconifyByNetWork(icon: string, size?: number) {
+  if ((size ?? 0) > 0) {
+    return () => h(Icon, { icon: icon, style: { fontSize: size + 'px' } })
+  }
+  return () => h(Icon, { icon: icon })
 }
 
 /**
- * render 图标
- * 需要页面提前使用过
- * */
-export function renderNIconByAlready(icon: string, size?: number) {
-  return () => h(NIcon, { size: size ?? 20 }, { default: () => h('div', { class: icon }) })
-}
-
-/**
- * render RouterLink
- * */
+ * 返回 RouterLink
+ * @param name  string
+ * @param label string
+ * @returns  RouterLink
+ */
 export function renderRouterLink(name: string, label: string) {
   return () =>
     h(

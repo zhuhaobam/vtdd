@@ -1,4 +1,4 @@
-import { renderDefaultAssetsIcon } from '@/utils/hFunctionRender'
+import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { cloneDeep } from 'lodash-es'
 import { RouteLocationMatched, RouteRecordRaw } from 'vue-router'
 
@@ -12,7 +12,7 @@ export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: 
         props: item.props ? { default: true } : item.props
       }
       if (item.meta?.icon) {
-        currentMenu.icon = renderDefaultAssetsIcon(item.meta.icon as string)
+        currentMenu.icon = hFunctionIcon(item.meta.icon as string)
       }
       // 是否有子菜单，并递归处理
       if (item.children?.length) {
@@ -38,7 +38,7 @@ export function headBreadcrumbRouteRecordRaw(routerMatched: RouteRecordRaw[], t:
         label: t(item.meta?.breadcrumb as string)
       }
       if (item.meta?.icon) {
-        currentMenu.icon = renderDefaultAssetsIcon(item.meta.icon as string)
+        currentMenu.icon = hFunctionIcon(item.meta.icon as string)
       }
       // 是否有子菜单，并递归处理
       if (item.children?.length) {

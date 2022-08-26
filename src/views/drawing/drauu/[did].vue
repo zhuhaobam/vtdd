@@ -82,9 +82,8 @@
     </Draggable>
   </div>
 </template>
-<script setup lang="ts" name="drawing-drauu-id">
-import Draggable from '@/components/Draggable/index.vue'
-import { getAssetsFile } from '@/plugins/assets-kit'
+<script setup lang="ts" name="drawing-drauu-did">
+import Draggable from '../../../components/Draggable/index.vue'
 import {
   brush,
   brushColors,
@@ -97,17 +96,17 @@ import {
   drawingEnabled,
   drawingMode,
   loadCanvas
-} from './drawings'
+} from '../../../components/Drawings/index'
+import { getAssetsFile } from '@/plugins/assets-kit'
 
 const props = defineProps<{
-  id: String | Number
+  did: String | Number
 }>()
-
 const svg = ref<SVGSVGElement>()
 
 onMounted(() => {
   drauu.mount(svg.value!)
-  changeCurrentPage(Number(props.id))
+  changeCurrentPage(Number(props.did))
   loadCanvas()
 })
 onBeforeUnmount(() => {
@@ -136,7 +135,7 @@ function setBrushColor(color: typeof brush.color) {
 
 <route lang="yaml">
 meta:
-  breadcrumb: page.drawing.drauu.id
+  breadcrumb: page.drawing.drauu.did
   icon: i-carbon:chart-t-sne
   sort: 21
   hidden: true
