@@ -158,7 +158,7 @@ const step = (name: string, id: string, date: number) => {
         // console.log(consoleStr, date, name, id, progressV)
         setTimeout(() => {
           step(name, id, date)
-        }, 1000)
+        }, 200)
       }
     }
   }

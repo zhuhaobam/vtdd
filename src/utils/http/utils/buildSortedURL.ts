@@ -1,6 +1,9 @@
 // @ts-ignore
 import buildURL from 'axios/lib/helpers/buildURL'
 
+/**
+ *  build the index according to the url and params
+ */
 export default function buildSortedURL(...args: any[]) {
   const builtURL = buildURL(...args)
 

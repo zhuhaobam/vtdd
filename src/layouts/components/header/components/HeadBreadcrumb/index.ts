@@ -1,4 +1,5 @@
-import { renderDefaultAssetsIcon } from '@/utils/render'
+import { renderDefaultAssetsIcon } from '@/utils/hFunctionRender'
+import { cloneDeep } from 'lodash-es'
 import { RouteLocationMatched, RouteRecordRaw } from 'vue-router'
 
 export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: any): RouteLocationMatched[] {
@@ -24,6 +25,12 @@ export function headBreadcrumbMatched(routerMatched: RouteLocationMatched[], t: 
 export function headBreadcrumbRouteRecordRaw(routerMatched: RouteRecordRaw[], t: any): RouteRecordRaw[] {
   return routerMatched
     .filter(item => item.name !== undefined)
+    .filter(vx => {
+      const v = cloneDeep(vx)
+      const hasChildren = (v.children?.length ?? 0) > 0
+      const info = hasChildren ? v.children![0] : v
+      return (info.meta?.hidden || false) !== true
+    })
     .map(item => {
       const currentMenu: RouteRecordRaw = {
         ...item,

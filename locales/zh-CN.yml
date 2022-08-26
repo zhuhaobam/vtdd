@@ -13,6 +13,14 @@ notfound:
   title: '404'
   subtitle: 页面不存在
   home: 回到首页
+tag:
+  fresh: 刷新
+  open: 打开
+  close:
+    other: 关闭其它
+    me: 关闭自己
+  full:
+    screen: 内部全屏
 login:
   title: 好酷
   subtitle: 好的开始从不满意开始
@@ -54,7 +62,10 @@ page:
         flower: 花朵
   drawing:
     drawing: 画图
-    drauu: 画图drauu
+    drauu:
+       drauu: 画图drauu
+       list: 画图drauulist
+       id: 画板
   axios:
     axios: axios库
     get: get请求
@@ -73,3 +84,5 @@ page:
   not-found: 没有找到
   music: Howler.js音乐
   tool: Npm工具地址
+md:
+  ioc: IOC容器

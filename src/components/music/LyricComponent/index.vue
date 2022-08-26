@@ -8,7 +8,7 @@
       :item-size="height"
       key-field="id"
       @scroll="handleScroll"
-      @wheel="handleWheel"
+      @wheel.passive="handleWheel"
     >
       <template #default="{ item, index, active }">
         <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
@@ -55,6 +55,7 @@ import { CSSProperties } from 'vue'
 import { useMusicStore } from '@store/music'
 import { musicMenuRunType } from '@/types/musicType'
 import { IdState } from 'vue-virtual-scroller'
+import { cancelRequestAnimationFrame, reqAnimFrame } from '@/utils/requestAnimationFrameGrace'
 const musicStore = useMusicStore()
 // naive-ui样式
 const themeVars = useThemeVars()
@@ -100,6 +101,8 @@ const height = ref<Number>(52)
  * 歌词滑动高亮偏移量
  */
 const offset = ref<Number>(1)
+// rAF触发锁，必须加锁，多次调用raf，会在一帧中多次触发回调
+let ticking = false
 
 /**
  * 获取组件传值
@@ -199,17 +202,25 @@ const handleScroll = (event: Event) => {
   const target = event.target as HTMLElement
   triggerScroll = true
   triggerPlayLyric.value = false
-  const { scrollTop, scrollHeight, clientHeight } = target
-  clearTimeout(timeId)
-  const index = Math.round(scrollTop / Number(height.value)) + Number(offset.value)
-  const newIndex = scrollHeight - scrollTop === clientHeight ? lyricData.value.length - 1 : index
-  idState.value.selectLyricLine = newIndex
-  idState.value.selectLyricLineTime = lyricData.value[newIndex].time
-  timeId = setTimeout(() => {
-    triggerPlayLyric.value = true
-    idState.value.selectLyricLine = 0
-    scrollToItem(currentPlayLine.value)
-  }, 2500)
+  if (!ticking) {
+    // 使用 requestAnimationFrame 节流
+    const rafId = reqAnimFrame(() => {
+      clearTimeout(timeId)
+      const { scrollTop, scrollHeight, clientHeight } = target
+      const index = Math.round(scrollTop / Number(height.value)) + Number(offset.value)
+      const newIndex = scrollHeight - scrollTop === clientHeight ? lyricData.value.length - 1 : index
+      idState.value.selectLyricLine = newIndex
+      idState.value.selectLyricLineTime = lyricData.value[newIndex].time
+      timeId = setTimeout(() => {
+        triggerPlayLyric.value = true
+        idState.value.selectLyricLine = 0
+        scrollToItem(currentPlayLine.value)
+      }, 2500)
+      ticking = false
+      cancelRequestAnimationFrame(rafId)
+    })
+    ticking = true
+  }
 }
 
 const handleWheel = () => {

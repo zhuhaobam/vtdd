@@ -18,6 +18,7 @@ declare module 'vue-router' {
    */
   interface RouteLocationMatched {
     key: string | any
+    params: RouteParams
     icon?:
       | VNode<
           RendererNode,

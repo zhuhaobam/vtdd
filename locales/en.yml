@@ -13,6 +13,14 @@ notfound:
   title: '404'
   subtitle: not found page
   home: back home
+tag:
+  fresh: fresh
+  open: open
+  close:
+    other: close other
+    me: close me
+  full:
+    screen: inside full screen
 login:
   title: HaoKu
   subtitle: A good start is never satisfied
@@ -54,7 +62,10 @@ page:
         flower: flower
   drawing:
     drawing: drawing
-    drauu: drauu
+    drauu:
+      drauu: drauu
+      list: drauulist
+      id: drauu dashboard
   axios:
     axios: axios
     get: get method
@@ -73,3 +84,5 @@ page:
   not-found: not-found
   music: Howler.js music
   tool: Npm tool address
+md:
+  ioc: The IoC Container

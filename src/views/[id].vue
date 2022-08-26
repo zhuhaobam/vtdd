@@ -3,7 +3,7 @@
 </template>
 <script setup lang="ts" name="id">
 const props = defineProps<{
-  id: string | any
+  id: String | Number
 }>()
 </script>
 <route lang="yaml">

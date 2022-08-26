@@ -2,8 +2,7 @@
 import { createRouter, createWebHashHistory, createWebHistory } from 'vue-router'
 import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
-import { primaryKeepAliveAdjustment } from '@/utils/router'
-
+import { primaryKeepAliveAdjustment } from '@/utils/naiveUiRouter'
 const routesLayouts = generatedRoutes.map(v => {
   const currentMenu = v.meta?.layout !== false ? setupLayouts([v])[0] : v
   return currentMenu

@@ -5,15 +5,18 @@ import axios, {
   AxiosRequestType,
   HttpRequesTypeInterface
 } from 'axios'
-// import Qs from 'qs'
 import { createDiscreteApi } from 'naive-ui'
 import { AxiosAdapter } from 'axios'
-// import cacheAdapterEnhancer from './adapter/cacheAdapterEnhancer'
+import cacheAdapterEnhancer from './adapter/cacheAdapterEnhancer'
 import throttleAdapterEnhancer from './adapter/throttleAdapterEnhancer'
-import hotAxiosRetry from './hot/hotAxiosRetry'
-import { axiosGetObj2Params } from '../tool'
+import retryInterceptorsResponse from './interceptors/retryInterceptorsResponse'
+import { axiosGetObj2Params } from './utils/params'
 const { message } = createDiscreteApi(['message'])
 message.info('axios.page')
+const handleCode = (code: any, msg: any) => {
+  console.log('handleCode')
+}
+
 class AxiosHttpRequest implements HttpRequesTypeInterface {
   baseURL: string
   timeout: number
@@ -21,7 +24,9 @@ class AxiosHttpRequest implements HttpRequesTypeInterface {
   constructor() {
     this.baseURL = import.meta.env.VTDD_APP_BASE_API
     this.timeout = 1500
-    this.adapter = throttleAdapterEnhancer(axios.defaults.adapter!)
+    // adapters的模块是处理分派请求并在Promise收到响应后处理返回的模块。
+    // https://github.com/kuitos/axios-extensions
+    this.adapter = throttleAdapterEnhancer(cacheAdapterEnhancer(axios.defaults.adapter!))
   }
 
   // 配置参数
@@ -29,7 +34,7 @@ class AxiosHttpRequest implements HttpRequesTypeInterface {
     return {
       baseURL: this.baseURL,
       timeout: this.timeout,
-      // adapter: this.adapter,
+      adapter: this.adapter,
       headers: {},
       validateStatus: function (status: number) {
         // 使用validateStatusconfig 选项，您可以定义应该引发错误的 HTTP 代码。
@@ -66,6 +71,24 @@ class AxiosHttpRequest implements HttpRequesTypeInterface {
         return Promise.resolve(myData)
       },
       (error: any) => {
+        const { response, message } = error
+        if (error.response && error.response.data) {
+          const { status, data } = response
+          handleCode(status, data.msg || message)
+        } else {
+          let { message } = error
+          if (message === 'Network Error') {
+            message = '后端接口连接异常'
+          }
+          if (message.includes('timeout')) {
+            message = '后端接口请求超时'
+          }
+          if (message.includes('Request failed with status code')) {
+            const code = message.substr(message.length - 3)
+            message = '后端接口' + code + '异常'
+          }
+          console.log(message || `后端接口未知异常`, 'error')
+        }
         return Promise.reject(error)
       }
     )
@@ -79,7 +102,7 @@ class AxiosHttpRequest implements HttpRequesTypeInterface {
   request<U = any>(options: AxiosRequestConfig): AxiosPromise<U> {
     const instance = axios.create()
     options = Object.assign(this.getConfigParams(), options)
-    hotAxiosRetry(instance, {
+    retryInterceptorsResponse(instance, {
       // 失败重试的次数
       retries: 2,
       // 定义是否应在重试之间重置超时（设置为false，后面的重试很可能会被取消）

@@ -4,6 +4,6 @@ import meta from '@yankeeinlondon/meta-builder'
 export default function createMD() {
   return Markdown({
     exposeFrontmatter: true,
-    builders: [meta({ routeProps: ['title', 'breadcrumb', 'icon', 'sort'] })]
+    builders: [meta({ routeProps: ['title', 'noi18n', 'trans', 'icon', 'sort'] })]
   })
 }

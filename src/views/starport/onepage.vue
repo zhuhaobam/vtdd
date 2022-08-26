@@ -7,7 +7,7 @@
       </Starport>
     </div>
     <div overflow-hidden w-full h-full transition-all duration-900 relative select-none>
-      <h1>{{ t('ci2') }}</h1>
+      <h1>{{ $t('ci2') }}</h1>
       <div>北国风光，千里冰封，万里雪飘。</div>
       <div>望长城内外，惟余莽莽；大河上下，顿失滔滔。山舞银蛇，原驰蜡象，欲与天公试比高。</div>
       <div>
@@ -19,7 +19,6 @@
 </template>
 <script setup lang="ts" name="starport-onepage">
 const starportIndex = ref(1)
-const { t } = useI18n()
 </script>
 <route lang="yaml">
 meta:

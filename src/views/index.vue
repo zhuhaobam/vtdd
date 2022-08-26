@@ -3,7 +3,7 @@
 // default
 </script>
 <route lang="yaml">
-redirect: /dashboard/analysis
+redirect: /drawing/drauu/list
 meta:
   breadcrumb: page.index
   sort: 0

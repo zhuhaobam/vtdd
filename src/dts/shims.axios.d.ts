@@ -1,4 +1,3 @@
-export {}
 import 'axios'
 import { AxiosAdapter, AxiosInstance } from 'axios'
 
@@ -21,7 +20,15 @@ declare module 'axios' {
   }
 
   export interface AxiosRequestConfig {
+    /**
+     * cacheAdapterEnhancer
+     * [由于配置了强制更新而发出并缓存的实际请求]
+     */
     forceUpdate?: boolean
+    /**
+     * cacheAdapterEnhancer
+     * [此处是因为cacheFlag为cache]
+     */
     cache?: boolean | ICacheLike<any>
     /**
      * 是否自定义特定异常处理

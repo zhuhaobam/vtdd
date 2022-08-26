@@ -1,6 +1,6 @@
 import { RouteRecordRaw } from 'vue-router'
 import { cloneDeep } from 'lodash-es'
-import { renderRouterLink } from './render'
+import { renderRouterLink } from './hFunctionRender'
 // 浅拷贝 Object.assign({}, this.person)
 // 深拷贝 lodash-es cloneDeep
 
@@ -70,7 +70,7 @@ export function primaryKeepAliveAdjustment(routes: RouteRecordRaw[]): RouteRecor
  */
 export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecordRaw[] {
   routes.sort(sortRoute)
-  return routes.map(vx => {
+  return filterHiddenRoutes(routes).map(vx => {
     const info = cloneDeep(vx)
     const result: RouteRecordRaw = {
       ...info,

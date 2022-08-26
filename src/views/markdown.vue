@@ -36,7 +36,7 @@
 </template>
 <script setup lang="ts" name="markdown">
 // import { renderDefaultAssetsIcon, renderSvgIcon } from '@/utils/render'
-import { renderDefaultAssetsIcon } from '@/utils/render'
+import { renderDefaultAssetsIcon } from '@/utils/hFunctionRender'
 import { MenuOption, NIcon } from 'naive-ui'
 import { NEllipsis } from 'naive-ui'
 const { t } = useI18n()
@@ -53,20 +53,20 @@ function madeOptions(levelName: string, level: number, list: Record<string, any>
       const onlyMenuOption: MenuOption[] = madeOptions(path.slice(0, path.lastIndexOf('.')), level + 1, list)
       if (onlyMenuOption.length > 0) {
         onlyOptions.push({
-          label: frontmatter.title,
+          label: (frontmatter.noi18n ?? 'yes') === 'yes' ? frontmatter.title : frontmatter.trans,
           key: path,
           icon: renderDefaultAssetsIcon(frontmatter.icon),
           sort: frontmatter.sort,
-          noi18n: frontmatter.noi18n ?? false,
+          noi18n: frontmatter.noi18n ?? 'yes',
           children: onlyMenuOption
         })
       } else {
         onlyOptions.push({
-          label: frontmatter.title,
+          label: (frontmatter.noi18n ?? 'yes') === 'yes' ? frontmatter.title : frontmatter.trans,
           key: path,
           icon: renderDefaultAssetsIcon(frontmatter.icon),
           sort: frontmatter.sort,
-          noi18n: frontmatter.noi18n ?? false
+          noi18n: frontmatter.noi18n ?? 'yes'
         })
       }
     }
@@ -79,7 +79,6 @@ function madeOptions(levelName: string, level: number, list: Record<string, any>
 options.value = madeOptions('/src/md', 4, modulesFiles)
 const defaultMd = defaultChildMd(options.value[0])
 defaultMenuOption.value = defaultMd
-
 newComponent.value = modulesFiles[defaultMd.key as string].default
 
 function defaultChildMd(current: MenuOption): MenuOption {

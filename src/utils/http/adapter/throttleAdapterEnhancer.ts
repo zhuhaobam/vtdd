@@ -1,19 +1,13 @@
-import { AxiosAdapter, AxiosPromise, AxiosRequestConfig } from 'axios'
+import { RecordedCache, ThrottleAdapterOptions } from '@class/axiosAdapterClass'
+import { AxiosAdapter, AxiosRequestConfig } from 'axios'
 import LRUCache from 'lru-cache'
-import { ICacheLike } from './cacheAdapterEnhancer'
-import buildSortedURL from './utils/buildSortedURL'
-
-export type RecordedCache = {
-  timestamp: number
-  value?: AxiosPromise
-}
-
-export type Options = {
-  threshold?: number
-  cache?: ICacheLike<RecordedCache>
-}
-
-export default function throttleAdapterEnhancer(adapter: AxiosAdapter, options: Options = {}): AxiosAdapter {
+import buildSortedURL from '../utils/buildSortedURL'
+//threshold临界点number默认值1000	限制请求调用到的毫秒数
+// cache缓存CacheLike	new LRUCache({ max: 10 }) 将用于存储限制请求的 CacheLike 实例
+export default function throttleAdapterEnhancer(
+  adapter: AxiosAdapter,
+  options: ThrottleAdapterOptions = {}
+): AxiosAdapter {
   const { threshold = 1000, cache = new LRUCache<string, RecordedCache>({ max: 2 }) } = options
   const recordCacheWithRequest = (index: string, config: AxiosRequestConfig) => {
     const responsePromise = (async () => {
@@ -48,7 +42,11 @@ export default function throttleAdapterEnhancer(adapter: AxiosAdapter, options: 
         if (responsePromise) {
           /* istanbul ignore next */
           // eslint-disable-next-line no-console
-          console.info(`[axios-extensions] 节流阀适配 --> url: ${index}`)
+          /* istanbul ignore next */
+          if (import.meta.env.VTDD_APP_LOGGER_LEVEL === 'info') {
+            // eslint-disable-next-line no-console
+            console.info(`[axios-extensions] 节流阀适配 --> url: ${index}`)
+          }
 
           return responsePromise
         }

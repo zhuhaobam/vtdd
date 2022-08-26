@@ -34,8 +34,8 @@ import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
 import { darkTheme } from 'naive-ui'
 hljs.registerLanguage('javascript', javascript)
-
 const { t } = useI18n()
+
 const appStore = useAppStore()
 const userStore = useUserStore()
 const { locale, lock } = storeToRefs(appStore)

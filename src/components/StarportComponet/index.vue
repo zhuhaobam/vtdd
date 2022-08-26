@@ -17,13 +17,12 @@
       items-center
       justify-center
     >
-      {{ counter }}{{ t('page.starport.starport') }}
+      {{ counter }}{{ $t('page.starport.starport') }}
     </div>
   </div>
 </template>
 
 <script setup lang="ts">
-const { t } = useI18n()
 type Props = {
   index: number
 }

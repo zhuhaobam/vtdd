@@ -10,5 +10,5 @@ meta:
   breadcrumb: page.me
   layout: false
   icon: i-carbon:link
-  sort: 8000
+  sort: -99
 </route>

@@ -47,7 +47,8 @@ export default defineConfig(({ mode, command }) => {
         { find: '@styles', replacement: pathResolve('src/styles') },
         { find: '@types', replacement: pathResolve('src/types') },
         { find: '@utils', replacement: pathResolve('src/utils') },
-        { find: '@views', replacement: pathResolve('src/views') }
+        { find: '@views', replacement: pathResolve('src/views') },
+        { find: '@class', replacement: pathResolve('src/class') }
       ]
     },
     // 全局scss
