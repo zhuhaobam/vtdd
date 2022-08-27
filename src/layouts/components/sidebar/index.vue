@@ -32,6 +32,7 @@ import { useTagsStore } from '@store/tags'
 import { MenuProps } from 'naive-ui'
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { RouteLocationMatched } from 'vue-router'
+import { NIcon } from 'naive-ui'
 const { t } = useI18n()
 const tagsStore = useTagsStore()
 const themeStore = useThemeStore()
@@ -110,19 +111,10 @@ watch(
 )
 
 const currentRoute = useRoute()
-// 初始化第一个tag
-if (tagsStore.hasEmpty) {
-  const tag: RouteLocationMatched = currentRoute.matched[currentRoute.matched.length - 1]
-  if (tag.path.indexOf(':') !== -1) {
-    tag.params = currentRoute.params
-  }
-  tagsStore.addTag(tag)
-}
-// 获取当前打开的子菜单
-const matched = currentRoute.matched
-// const router = useRouter()
+
+const smatched = currentRoute.matched
 const selectedKeys = ref<string>(currentRoute.name as string)
-const beforeOpenKeys: string[] = matched && matched.length ? matched.map(item => item.name as string) : []
+const beforeOpenKeys: string[] = smatched && smatched.length ? smatched.map(item => item.name as string) : []
 const getOpenKeys = beforeOpenKeys.filter(x => x)
 const state = reactive({
   openKeys: getOpenKeys
@@ -130,9 +122,10 @@ const state = reactive({
 const getSelectedKeys = computed(() => {
   return unref(selectedKeys)
 })
-// 跟随页面路由变化，切换菜单选中状态
+
 onMounted(() => {
-  const tag: RouteLocationMatched = currentRoute.matched[currentRoute.matched.length - 1]
+  const mmatched = currentRoute.matched
+  const tag: RouteLocationMatched = mmatched[mmatched.length - 1]
   if (tag.path.indexOf(':') !== -1) {
     tag.params = currentRoute.params
   }
@@ -142,17 +135,18 @@ onMounted(() => {
 watch(
   () => currentRoute.fullPath,
   () => {
-    const matched = currentRoute.matched
-    state.openKeys = matched.map(item => item.name as string)
+    const wmatched = currentRoute.matched
+    state.openKeys = wmatched.map(item => item.name as string)
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
-    const tag: RouteLocationMatched = matched[matched.length - 1]
+    const tag: RouteLocationMatched = wmatched[wmatched.length - 1]
     if (tag.path.indexOf(':') !== -1) {
       tag.params = currentRoute.params
     }
     tagsStore.addTag(tag)
   }
 )
+
 // 点击菜单(选中菜单的回调，key 是选中菜单项的 key，item 是菜单项原始数据)
 function clickMenuItem(key: string, item: MenuOption) {
   if (/http(s)?:/.test(key)) {

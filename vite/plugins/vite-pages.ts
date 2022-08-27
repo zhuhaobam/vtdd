@@ -11,6 +11,7 @@ export default function createPages() {
     dirs: [{ dir: pathResolve('../../src/views'), baseRoute: '/' }],
     // 异步方式加载路由组件
     importMode: 'async',
+    resolver: 'vue',
     // 遍历路由信息，给默认路由加一个redirect
     extendRoute(route) {
       const path = route.path
@@ -20,8 +21,6 @@ export default function createPages() {
           path: path + '(\\d+)'
         }
       }
-      // 【参考src/views下面index.vue文件】给vite.config.ts中vite-plugin-pages配置Pages下extendRoute重定向首页使用
-      // if (route.path === '/') return { ...route, redirect: '/dashboard/analysis' } 已经在index.vue页面配置了
       return {
         ...route
       }

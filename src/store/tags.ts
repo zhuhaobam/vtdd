@@ -31,6 +31,9 @@ export const useTagsStore = defineStore('tags', {
     },
     getActiveTag(state): string {
       return state.activeTag
+    },
+    getTags(state): RouteLocationMatched[] {
+      return state.tags
     }
   },
   actions: {
@@ -44,6 +47,7 @@ export const useTagsStore = defineStore('tags', {
     setTags(tags: RouteLocationMatched[]) {
       // 涉及到对象循环引用，这里直接深拷贝一下Circular reference
       this.tags = cloneDeep(tags)
+      console.log(cloneDeep(tags).length)
     },
     addTag(tag: RouteLocationMatched) {
       let path = ''
@@ -59,15 +63,9 @@ export const useTagsStore = defineStore('tags', {
       } else {
         path = tag.path
       }
-      if (noTags.includes(tag.path) || this.tags.some(item => item.path === path)) return
       this.setActiveTag(path)
-      this.setTags([
-        ...this.tags,
-        {
-          ...tag,
-          path: path
-        }
-      ])
+      if (noTags.includes(tag.path) || this.tags.some(item => item.path === path)) return
+      this.setTags([...this.tags, { ...tag, path: path }])
     },
     removeOtherTag(path: string) {
       if (path !== this.activeTag) {

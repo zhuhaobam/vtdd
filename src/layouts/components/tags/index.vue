@@ -10,13 +10,13 @@
         <span>{{ $t('tag.full.screen') }}</span>
       </n-tooltip>
       <n-tag
-        v-for="tag in tagsStore.tags"
+        v-for="tag in tagsStore.getTags"
         :key="tag.path"
         mx-3
         cursor-pointer
         hover:color-primary
-        :type="tagsStore.activeTag === tag.path ? 'primary' : 'default'"
-        :closable="tagsStore.tags.length > 1"
+        :type="tagsStore.getActiveTag === tag.path ? 'primary' : 'default'"
+        :closable="tagsStore.getTags.length > 1"
         @click="handleTagClick(tag.path)"
         @close.stop="tagsStore.removeTag(tag.path)"
         @contextmenu.prevent="handleContextMenu($event, tag)"
@@ -24,7 +24,7 @@
         {{ $t(tag.meta.breadcrumb ?? 'noting') }}
         <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
         <template #icon>
-          <n-icon :component="hFunctionIcon(tag.meta.icon as string)" />
+          <n-icon v-if="tag.meta.icon" :component="renderMenuIcon(tag.meta.icon)" />
         </template>
       </n-tag>
     </div>
@@ -60,7 +60,6 @@ const toggleTrigger = () => {
 const tagsStore = useTagsStore()
 const appStore = useAppStore()
 const handleTagClick = (path: any) => {
-  tagsStore.setActiveTag(path)
   router.push(path)
 }
 
@@ -87,7 +86,6 @@ const handleSelect = (key: string | number) => {
       appStore.setReload()
     }
     if (String(key) === 'tag.open') {
-      tagsStore.setActiveTag(tagCurrent.path)
       router.push(tagCurrent.path)
     }
     if (String(key) === 'tag.full.screen') {
@@ -97,11 +95,10 @@ const handleSelect = (key: string | number) => {
 }
 
 const renderIcon = (icon: Component) => {
-  return () => {
-    return h(NIcon, null, {
+  return () =>
+    h(NIcon, null, {
       default: () => h(icon)
     })
-  }
 }
 
 const handleContextMenu = async (e: MouseEvent, tag: RouteLocationMatched) => {
@@ -113,37 +110,41 @@ const handleContextMenu = async (e: MouseEvent, tag: RouteLocationMatched) => {
     yRef.value = e.clientY
   })
   tagRm.value = tag
+  const activeTag = tagsStore.getActiveTag
   optionsRef.value = [
     {
       label: t('tag.open'),
       key: 'tag.open',
-      disabled: tagsStore.activeTag === tag.path,
+      disabled: activeTag === tag.path,
       icon: renderIcon(ArrowUp)
     },
     {
       label: t('tag.fresh'),
       key: 'tag.fresh',
-      disabled: tagsStore.activeTag !== tag.path,
+      disabled: activeTag !== tag.path,
       icon: renderIcon(Refresh)
     },
     {
       label: t('tag.close.other'),
       key: 'tag.close.other',
-      disabled: tagsStore.activeTag !== tag.path || !tagsStore.leastTwo,
+      disabled: activeTag !== tag.path || !tagsStore.leastTwo,
       icon: renderIcon(ArrowBackOutline)
     },
     {
       label: t('tag.close.me'),
       key: 'tag.close.me',
-      disabled: tagsStore.activeTag !== tag.path || !tagsStore.leastTwo,
+      disabled: activeTag !== tag.path || !tagsStore.leastTwo,
       icon: renderIcon(Close)
     },
     {
       label: t('tag.full.screen'),
       key: 'tag.full.screen',
-      disabled: tagsStore.activeTag !== tag.path,
+      disabled: activeTag !== tag.path,
       icon: renderIcon(Expand)
     }
   ]
+}
+function renderMenuIcon(icon: string) {
+  return h(hFunctionIcon(icon))
 }
 </script>
