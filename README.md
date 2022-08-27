@@ -1,3 +1,5 @@
+# 请运行之前清空浏览器的Application下的all Storage
+
 # vtdd 源码检查结果
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/zhuhaobam/vtdd.svg?size=large)](https://www.oscs1024.com/project/zhuhaobam/vtdd?ref=badge_large)
