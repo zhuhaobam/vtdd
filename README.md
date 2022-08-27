@@ -2,6 +2,14 @@
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/zhuhaobam/vtdd.svg?size=large)](https://www.oscs1024.com/project/zhuhaobam/vtdd?ref=badge_large)
 
+## dev、build、preview、lint、prettier、stylelint以及github page均通过
+
+## 目前pnpm一直是最新版本的，依赖包也通过pnpm update最新的
+
+## 提交检验=》控制台先pnpm run  prepare=>再使用git那一系列命令
+
+## 目前已经趟过无数的疑难杂症，上面dev到github page通过不容易啊
+
 ## 项目在线预览地址
 
 https://zhuhaobam.github.io

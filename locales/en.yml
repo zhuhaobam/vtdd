@@ -21,6 +21,7 @@ tag:
     me: close me
   full:
     screen: inside full screen
+  default: noting
 login:
   title: HaoKu
   subtitle: A good start is never satisfied

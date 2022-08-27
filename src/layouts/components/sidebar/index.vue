@@ -28,7 +28,7 @@ import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { useThemeStore } from '@store/theme'
 import { MenuOption } from 'naive-ui'
-import { useTagsStore } from '@store/tags'
+import { TagsType, useTagsStore } from '@store/tags'
 import { MenuProps } from 'naive-ui'
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { RouteLocationMatched } from 'vue-router'
@@ -111,7 +111,6 @@ watch(
 )
 
 const currentRoute = useRoute()
-
 const smatched = currentRoute.matched
 const selectedKeys = ref<string>(currentRoute.name as string)
 const beforeOpenKeys: string[] = smatched && smatched.length ? smatched.map(item => item.name as string) : []
@@ -125,9 +124,12 @@ const getSelectedKeys = computed(() => {
 
 onMounted(() => {
   const mmatched = currentRoute.matched
-  const tag: RouteLocationMatched = mmatched[mmatched.length - 1]
-  if (tag.path.indexOf(':') !== -1) {
-    tag.params = currentRoute.params
+  const lastMatched: RouteLocationMatched = mmatched[mmatched.length - 1]
+  const tag: TagsType = {
+    path: lastMatched.path,
+    params: currentRoute.params,
+    breadcrumb: lastMatched.meta.breadcrumb ?? '',
+    icon: lastMatched.meta.icon ?? ''
   }
   tagsStore.addTag(tag)
 })
@@ -135,13 +137,16 @@ onMounted(() => {
 watch(
   () => currentRoute.fullPath,
   () => {
-    const wmatched = currentRoute.matched
+    const wmatched = toRaw(currentRoute.matched)
     state.openKeys = wmatched.map(item => item.name as string)
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
-    const tag: RouteLocationMatched = wmatched[wmatched.length - 1]
-    if (tag.path.indexOf(':') !== -1) {
-      tag.params = currentRoute.params
+    const lastMatched: RouteLocationMatched = wmatched[wmatched.length - 1]
+    const tag: TagsType = {
+      path: lastMatched.path,
+      params: currentRoute.params,
+      breadcrumb: lastMatched.meta.breadcrumb ?? '',
+      icon: lastMatched.meta.icon ?? ''
     }
     tagsStore.addTag(tag)
   }

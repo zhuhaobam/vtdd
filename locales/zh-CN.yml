@@ -21,6 +21,7 @@ tag:
     me: 关闭自己
   full:
     screen: 内部全屏
+  default: 缺失
 login:
   title: 好酷
   subtitle: 好的开始从不满意开始

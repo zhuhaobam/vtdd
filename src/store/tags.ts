@@ -1,11 +1,16 @@
 import { defineStore } from 'pinia'
-import { RouteLocationMatched } from 'vue-router'
+import { RouteParams } from 'vue-router'
 import router from '@/router'
 import { cloneDeep } from 'lodash-es'
 import { isString } from '@/utils/is'
-
+export type TagsType = {
+  path: string
+  params: RouteParams
+  breadcrumb: string
+  icon: string
+}
 interface ITagsStore {
-  tags: RouteLocationMatched[]
+  tags: TagsType[]
   activeTag: string
 }
 const noTags = ['/404', '/:id(\\d+)', '/:all(.*)*', '/login', '/system/user', '/system/setting']
@@ -32,7 +37,7 @@ export const useTagsStore = defineStore('tags', {
     getActiveTag(state): string {
       return state.activeTag
     },
-    getTags(state): RouteLocationMatched[] {
+    getTags(state): TagsType[] {
       return state.tags
     }
   },
@@ -44,12 +49,11 @@ export const useTagsStore = defineStore('tags', {
     setActiveTag(path: string) {
       this.activeTag = path
     },
-    setTags(tags: RouteLocationMatched[]) {
-      // 涉及到对象循环引用，这里直接深拷贝一下Circular reference
+    async setTags(tags: TagsType[]) {
+      await nextTick()
       this.tags = cloneDeep(tags)
-      console.log(cloneDeep(tags).length)
     },
-    addTag(tag: RouteLocationMatched) {
+    addTag(tag: TagsType) {
       let path = ''
       if (replaceTags.includes(tag.path)) {
         const messages = Object.fromEntries(

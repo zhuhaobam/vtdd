@@ -21,10 +21,10 @@
         @close.stop="tagsStore.removeTag(tag.path)"
         @contextmenu.prevent="handleContextMenu($event, tag)"
       >
-        {{ $t(tag.meta.breadcrumb ?? 'noting') }}
+        {{ $t(tag.breadcrumb ?? 'tag.default') }}
         <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
         <template #icon>
-          <n-icon v-if="tag.meta.icon" :component="renderMenuIcon(tag.meta.icon)" />
+          <n-icon v-if="tag.icon" :component="renderMenuIcon(tag.icon)" />
         </template>
       </n-tag>
     </div>
@@ -43,9 +43,8 @@
 <script lang="ts" setup>
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import router from '@/router'
-import { useTagsStore } from '@store/tags'
+import { TagsType, useTagsStore } from '@store/tags'
 import { useAppStore } from '@store/app'
-import { RouteLocationMatched } from 'vue-router'
 import { NIcon } from 'naive-ui'
 import { Refresh, ArrowBackOutline, Close, Expand, ArrowUp } from '@vicons/ionicons5'
 import { Component } from 'vue'
@@ -68,13 +67,13 @@ const optionsRef = ref<any[]>([])
 const showDropdownRef = ref(false)
 const xRef = ref(0)
 const yRef = ref(0)
-const tagRm = ref<RouteLocationMatched>()
+const tagRm = ref<TagsType>()
 const onClickoutside = () => {
   showDropdownRef.value = false
 }
 const handleSelect = (key: string | number) => {
   showDropdownRef.value = false
-  const tagCurrent: RouteLocationMatched | undefined = tagRm.value
+  const tagCurrent: TagsType | undefined = tagRm.value
   if (tagCurrent) {
     if (String(key) === 'tag.close.other') {
       tagsStore.removeOtherTag(tagCurrent.path)
@@ -101,7 +100,7 @@ const renderIcon = (icon: Component) => {
     })
 }
 
-const handleContextMenu = async (e: MouseEvent, tag: RouteLocationMatched) => {
+const handleContextMenu = async (e: MouseEvent, tag: TagsType) => {
   e.preventDefault()
   showDropdownRef.value = false
   nextTick().then(() => {

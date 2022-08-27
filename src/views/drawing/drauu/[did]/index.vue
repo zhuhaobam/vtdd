@@ -1,7 +1,6 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div :style="'background-image: url(' + getAssetsFile('cafe.png') + ')'">
-    page:{{ props.did }}<br />
     <svg ref="svg" class="w-full" style="height: calc(100vh - 195px)"></svg>
     <Draggable
       flex
