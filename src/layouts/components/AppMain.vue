@@ -1,6 +1,6 @@
 <template>
   <router-view v-slot="{ Component, route }">
-    <div id="app-main" :style="'padding:' + (route.meta?.padding ?? 0) + 'px'">
+    <div id="app-main" :style="'padding:' + (route.meta?.padding ?? 0)">
       <keep-alive :include="keepAliveRouteNames">
         <component :is="Component" v-if="appStore.reload" :key="route.path" />
       </keep-alive>

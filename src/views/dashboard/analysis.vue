@@ -117,5 +117,5 @@ meta:
   breadcrumb: page.dashboard.analysis
   icon: i-ant-design:area-chart-outlined
   sort: 0
-  padding: 40
+  padding: 40px
 </route>

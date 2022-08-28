@@ -6,7 +6,7 @@ const useDrauu = useDrauuStore()
 const currentPage = ref<Number>(1)
 export const brushColors = ['#ff595e', '#ffca3a', '#8ac926', '#1982c4', '#6a4c93', '#ffffff', '#000000']
 export const drawingEnabled = useStorage('slidev-drawing-enabled', false)
-export const drawingPinned = useStorage('slidev-drawing-pinned', false)
+export const drawingPinned = useStorage('slidev-drawing-pinned', true)
 export const canUndo = ref(false)
 export const canRedo = ref(false)
 export const canClear = ref(false)
@@ -14,13 +14,21 @@ export const isDrawing = ref(false)
 // rAF触发锁，必须加锁，多次调用raf，会在一帧中多次触发回调
 const ticking = ref(false)
 
-export const brush = toReactive(
-  useStorage<Brush>('slidev-drawing-brush', {
-    color: brushColors[0],
-    size: 4,
-    mode: 'stylus'
-  })
-)
+export const brush = computed({
+  get() {
+    return (
+      useDrauu.getBrush[String(currentPage.value)] ?? {
+        color: brushColors[0],
+        size: 4,
+        mode: 'stylus',
+        dasharray: undefined
+      }
+    )
+  },
+  set(v: Brush) {
+    useDrauu.setBrush(String(currentPage.value), v)
+  }
+})
 
 let disableDump = false
 
@@ -31,11 +39,17 @@ export const drawingMode = computed({
   set(v: DrawingMode | 'arrow') {
     useDrauu.setDdrawingMode(String(currentPage.value), v)
     if (v === 'arrow') {
-      brush.mode = 'line'
-      brush.arrowEnd = true
+      brush.value = {
+        ...brush.value,
+        mode: 'line',
+        arrowEnd: true
+      }
     } else {
-      brush.mode = v
-      brush.arrowEnd = false
+      brush.value = {
+        ...brush.value,
+        mode: v,
+        arrowEnd: false
+      }
     }
   }
 })
@@ -45,7 +59,11 @@ export const drauuOptions: DrauuOptions = reactive({
   acceptsInputTypes: computed(() => (drawingEnabled.value ? undefined : ['pen' as const])),
   coordinateTransform: false
 })
-export const drauu = markRaw(createDrauu(drauuOptions))
+/**
+ * toRaw，将响应式对象（由 reactive定义的响应式）转换为普通对象。
+ * markRaw，标记一个对象，使其不能成为一个响应式对象。
+ */
+export const drauu = toRaw(createDrauu(drauuOptions))
 
 export function clearDrauu() {
   drauu.clear()
@@ -111,7 +129,7 @@ window.addEventListener(
 
     const noModifier = !e.ctrlKey && !e.altKey && !e.shiftKey && !e.metaKey
     let handled = true
-    if (e.code === 'KeyZ' && (e.ctrlKey || e.metaKey)) {
+    if (e.code === 'KeyZ' && (e.ctrlKey || e.metaKey || e.shiftKey)) {
       if (e.shiftKey) drauu.redo()
       else drauu.undo()
     } else if (e.code === 'Escape') {
@@ -122,6 +140,8 @@ window.addEventListener(
       drawingMode.value = 'arrow'
     } else if (e.code === 'KeyS' && noModifier) {
       drawingMode.value = 'stylus'
+    } else if (e.code === 'KeyD' && noModifier) {
+      drawingMode.value = 'draw'
     } else if (e.code === 'KeyR' && noModifier) {
       drawingMode.value = 'rectangle'
     } else if (e.code === 'KeyE' && noModifier) {
@@ -129,7 +149,10 @@ window.addEventListener(
     } else if (e.code === 'KeyC' && noModifier) {
       clearDrauu()
     } else if (e.code.startsWith('Digit') && noModifier && +e.code[5] <= brushColors.length) {
-      brush.color = brushColors[+e.code[5] - 1]
+      brush.value = {
+        ...brush.value,
+        color: brushColors[+e.code[5] - 1]
+      }
     } else {
       handled = false
     }

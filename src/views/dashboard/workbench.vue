@@ -86,5 +86,5 @@ meta:
   size: 16
   keepAlive: true
   sort: 1
-  padding: 40
+  padding: 40px
 </route>

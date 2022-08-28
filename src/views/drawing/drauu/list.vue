@@ -12,5 +12,5 @@ meta:
   breadcrumb: page.drawing.drauu.list
   icon: i-carbon:chart-t-sne
   sort: 21
-  padding: 40
+  padding: 40px
 </route>
