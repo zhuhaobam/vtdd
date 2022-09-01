@@ -111,8 +111,6 @@ router.beforeEach((to, from, next) => {
     next({ name: 'login' })
   } else if (to.name === 'login' && userStore.getToken !== '') {
     next({ path: '/' })
-  } else if (String(to.name) === 'all' && String(from.path).startsWith('/md/')) {
-    next({ path: from.path, hash: decodeURI(String(to.path).replace('/', '#')) })
   } else {
     next()
   }

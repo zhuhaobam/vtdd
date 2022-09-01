@@ -16,7 +16,7 @@
         :type="'block'"
       >
         <template v-if="tocAndAnchors.length > 0">
-          <toc-anchor-loop :tocs="tocAndAnchors" />
+          <toc-anchor-loop :path="path" :tocs="tocAndAnchors" />
         </template>
       </n-anchor>
     </n-layout-sider>
@@ -39,6 +39,8 @@ type TocAnchorType = {
 const anchorRef = ref<AnchorInst | null>(null)
 const tocAndAnchors = ref<TocAnchorType[]>([])
 const currentRoute = useRoute()
+//  hash模式锚点特殊处理
+const path = ref<string>(import.meta.env.VTDD_APP_ROUTER_HASH === 'true' ? '#' + currentRoute.path + '#' : '#')
 
 const anchorBoundAndTop = (boundV: number, topV: number) => {
   bound.value = boundV
