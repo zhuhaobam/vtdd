@@ -14,6 +14,7 @@
     "esModuleInterop": true,
     "lib": ["esnext", "dom"],
     "skipLibCheck": true,
+    "allowSyntheticDefaultImports": true,
     // 如果指定了types，只有被列出来的包才会被包含进来
     "types": [
       "vite/client",
@@ -44,6 +45,6 @@
       "@class/*": ["src/class/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue"],
+  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue", "vite/plugins/md-naiveui-anchor-toc.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

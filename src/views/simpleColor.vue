@@ -52,6 +52,6 @@ extractor.extractColor(getAssetsFile('img_login_bg.png')).then(() => {
 <route lang="yaml">
 meta:
   breadcrumb: page.color
-  icon: i-carbon:color-palette
+  icon: i-ant-design:bg-colors-outlined
   sort: -2
 </route>

@@ -294,6 +294,6 @@ onMounted(() => {
 <route lang="yaml">
 meta:
   breadcrumb: page.music
-  icon: file-markdown-filled
+  icon: i-carbon:music
   sort: -20
 </route>

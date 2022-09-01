@@ -82,14 +82,16 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
     }
     if (info.children?.length) {
       result.children = keyLabelAdjustment(info.children, t)
-      result.label = t(info.meta?.breadcrumb as string)
+      const label = (info.meta?.noi18n ?? 'no') === 'no' ? t(info.meta?.breadcrumb as string) : info.meta?.title
+      result.label = label
     } else {
       const link = /http(s)?:/.test((info.meta?.link as string) ?? '')
       if (link) {
         result.label = t(info.meta?.breadcrumb as string)
       }
       if (!link) {
-        result.label = renderRouterLink(info.name as string, t(info.meta?.breadcrumb as string))
+        const label = (info.meta?.noi18n ?? 'no') === 'no' ? t(info.meta?.breadcrumb as string) : info.meta?.title
+        result.label = renderRouterLink(info.name as string, label)
       }
       // **菜单那里处理了link
     }

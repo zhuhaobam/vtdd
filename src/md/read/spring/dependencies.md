@@ -1,10 +1,19 @@
 ---
-title: 依赖注入
+title: 依赖
+breadcrumb: md.dependencies
 noi18n: yes
-trans:
 icon: container
 sort: 4
+padding: 0
 ---
+
+<anchor-md-script>
+
+<div style="display: none;">
+
+[TOC]
+
+</div>
 
 # 依赖注入
 
@@ -20,7 +29,7 @@ sort: 4
 
 ### 基于构造函数的 DI 是通过容器调用具有多个参数的构造函数来完成的，每个参数代表一个依赖项。调用 static 带有特定参数的工厂方法来构造 bean 几乎是等价的，<br/>本次讨论将类似地对待构造函数和 static 工厂方法的参数。以下示例显示了一个只能通过构造函数注入进行依赖注入的类：
 
-```
+```java
 public class SimpleMovieLister {
 
     // SimpleMovieLister依赖于MovieFinder
@@ -37,7 +46,7 @@ public class SimpleMovieLister {
 
 ### 构造函数参数名称进行值消歧，可以使用 @ConstructorProperties JDK 注释显式命名构造函数参数。示例类必须如下所示：
 
-```
+```java
 package examples;
 
 public class ExampleBean {
@@ -64,7 +73,7 @@ public class ExampleBean {
 
 ### 以下示例显示了一个只能通过使用纯 setter 注入进行依赖注入的类。这个类是传统的 Java。它是一个 POJO，不依赖于容器特定的接口、基类或注释。
 
-```
+```java
 public class SimpleMovieLister {
 
     // SimpleMovieLister依赖于MovieFinder
@@ -96,3 +105,5 @@ public class SimpleMovieLister {
 ## 循环依赖
 
 ### 一种可能的解决方案是编辑某些类的源代码以由设置器而不是构造器配置。或者，避免构造函数注入并仅使用 setter 注入。<br/>也就是说，虽然不推荐，但是可以通过 setter 注入来配置循环依赖。
+
+</anchor-md-script>

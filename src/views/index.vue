@@ -1,9 +1,8 @@
-<template>给vite.config.ts中vite-plugin-pages配置Pages下extendRoute重定向首页使用</template>
+<template>default</template>
 <script setup lang="ts" name="index">
 // default
 </script>
 <route lang="yaml">
-redirect: /drawing/drauu/list
 meta:
   breadcrumb: page.index
   sort: 0

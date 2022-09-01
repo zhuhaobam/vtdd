@@ -1,10 +1,19 @@
 ---
-title: IoC 容器
+title: IOC容器
+breadcrumb: md.ioc
 noi18n: no
-trans: md.ioc
-icon: container
+icon: file-markdown-filled
 sort: 1
+padding: 0 210px 40px 40px
 ---
+
+<anchor-md-script>
+
+<div style="display: none;">
+
+[TOC]
+
+</div>
 
 # Spring IoC 容器和 bean 简介
 
@@ -20,3 +29,5 @@ org.springframework.beans 和 org.springframework.context 包是 Spring 框架�
 简而言之，它 BeanFactory 提供了配置框架和基本功能，并 ApplicationContext 增加了更多的企业特定功能。是的 ApplicationContext 完整超集，BeanFactory 并且在本章中专门用于描述 Spring 的 IoC 容器。有关使用 BeanFactory 代替的更多信息，ApplicationContext,请参阅涵盖 BeanFactoryAPI 的部分。
 
 在 Spring 中，构成应用程序主干并由 Spring IoC 容器管理的对象称为 bean。bean 是由 Spring IoC 容器实例化、组装和管理的对象。否则，bean 只是应用程序中的众多对象之一。Bean 以及它们之间的依赖关系反映在容器使用的配置元数据中。
+
+</anchor-md-script>

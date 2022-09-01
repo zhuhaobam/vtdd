@@ -30,9 +30,9 @@ import { useAppStore } from '@store/app'
 import { storeToRefs } from 'pinia'
 import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
 import router from './router'
+import { darkTheme } from 'naive-ui'
 import hljs from 'highlight.js/lib/core'
 import javascript from 'highlight.js/lib/languages/javascript'
-import { darkTheme } from 'naive-ui'
 hljs.registerLanguage('javascript', javascript)
 const { t } = useI18n()
 
@@ -101,25 +101,30 @@ onMounted(() => {
   // 校正windows页面在系统进行缩放后导致页面被放大的问题，通常放大比例是125%、150%
   DevicePixelRatio.init()
 })
+
 router.beforeEach((to, from, next) => {
   appStore.setLoadingBarStart()
-  console.log('路由前置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
-  appStore.setTitle(t, to.meta?.breadcrumb as string)
+  // console.log('路由前置守卫[App.vue]', from, to)
+  // console.log('路由前置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
+  appStore.setTitle(t, to.meta?.breadcrumb ?? 'md.md')
   if (to.name !== 'login' && !(userStore.getToken !== '')) {
     next({ name: 'login' })
   } else if (to.name === 'login' && userStore.getToken !== '') {
     next({ path: '/' })
+  } else if (String(to.name) === 'all' && String(from.path).startsWith('/md/')) {
+    next({ path: from.path, hash: decodeURI(String(to.path).replace('/', '#')) })
   } else {
     next()
   }
 })
+
 router.afterEach((to, from, failure) => {
   appStore.setLoadingBarFinish()
-  console.log('路由后置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
+  // console.log('路由后置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
 })
 
 router.beforeResolve(async to => {
-  console.log('解析守卫[App.vue]', 'to:' + to.fullPath)
+  // console.log('解析守卫[App.vue]', 'to:' + to.fullPath)
   // if (to.meta.requiresCamera) {
   //   try {
   //     await askForCameraPermission()

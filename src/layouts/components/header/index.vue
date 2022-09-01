@@ -97,8 +97,9 @@ const { isFullscreen, toggle } = useFullscreen()
 const { availableLocales, locale } = useI18n()
 
 const full = () => {
-  toggle()
-  fullStore.setPage('all')
+  toggle().then(() => {
+    fullStore.setPage(isFullscreen.value ? 'all:true' : 'all:false')
+  })
 }
 
 const toggleLocales = () => {

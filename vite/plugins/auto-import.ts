@@ -14,8 +14,6 @@ export default function createAutoImport() {
       'vue',
       'vue-router',
       'vue-i18n',
-      'vue/macros',
-      '@vueuse/head',
       '@vueuse/core'
       // custom 【自定义】
       // {

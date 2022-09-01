@@ -81,11 +81,14 @@ const { collapsed } = storeToRefs(appStore)
 
 const fullScreenDo = () => {
   if (isFullscreen.value === true) {
-    enter()
+    enter().then(() => {
+      fullStore.setPage(isFullscreen.value ? 'inner:true' : 'inner:false')
+    })
   } else {
-    toggle()
+    toggle().then(() => {
+      fullStore.setPage(isFullscreen.value ? 'inner:true' : 'inner:false')
+    })
   }
-  fullStore.setPage('inner')
 }
 watch(
   collapsed,

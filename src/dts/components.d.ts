@@ -7,6 +7,7 @@ export {}
 
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
+    AnchorMdScript: typeof import('./../components/AnchorMdScript/index.vue')['default']
     Draggable: typeof import('./../components/Draggable/index.vue')['default']
     'IAntDesign:arrowRightOutlined': typeof import('~icons/ant-design/arrow-right-outlined')['default']
     'IAntDesign:menuFoldOutlined': typeof import('~icons/ant-design/menu-fold-outlined')['default']
@@ -19,7 +20,10 @@ declare module '@vue/runtime-core' {
     MenuComponent: typeof import('./../components/music/MenuComponent/index.vue')['default']
     MusicGlobal: typeof import('./../components/music/MusicGlobal/index.vue')['default']
     NAlert: typeof import('naive-ui')['NAlert']
+    NAnchor: typeof import('naive-ui')['NAnchor']
+    NAnchorLink: typeof import('naive-ui')['NAnchorLink']
     NAvatar: typeof import('naive-ui')['NAvatar']
+    NBackTop: typeof import('naive-ui')['NBackTop']
     NBadge: typeof import('naive-ui')['NBadge']
     NBreadcrumb: typeof import('naive-ui')['NBreadcrumb']
     NBreadcrumbItem: typeof import('naive-ui')['NBreadcrumbItem']
@@ -38,7 +42,6 @@ declare module '@vue/runtime-core' {
     NGlobalStyle: typeof import('naive-ui')['NGlobalStyle']
     NH1: typeof import('naive-ui')['NH1']
     NIcon: typeof import('naive-ui')['NIcon']
-    NIconWrapper: typeof import('naive-ui')['NIconWrapper']
     NInput: typeof import('naive-ui')['NInput']
     NLayout: typeof import('naive-ui')['NLayout']
     NLayoutHeader: typeof import('naive-ui')['NLayoutHeader']
@@ -65,5 +68,7 @@ declare module '@vue/runtime-core' {
     StarportCarrier: typeof import('vue-starport')['StarportCarrier']
     StarportComponet: typeof import('./../components/StarportComponet/index.vue')['default']
     SvgIcon: typeof import('./../components/SvgIcon/index.vue')['default']
+    TocAnchorLoop: typeof import('./../components/TocAnchorLoop/index.vue')['default']
+    XlsxTable: typeof import('./../components/XlsxTable/index.vue')['default']
   }
 }

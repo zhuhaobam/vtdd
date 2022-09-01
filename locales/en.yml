@@ -77,6 +77,7 @@ page:
     twopage: two starport
   login: login
   color: color
+  xlsx: Excel
   virtualScroller: virtualScroller
   md: markdown
   link: naiveui.com
@@ -86,4 +87,11 @@ page:
   music: Howler.js music
   tool: Npm tool address
 md:
-  ioc: The IoC Container
+  spring: Spring
+  container: Container
+  dependencies: Dependencies
+  ioc: IOC Container
+  javaconfig: Java Config
+  read: MarkdownRead
+  md: Markdown
+

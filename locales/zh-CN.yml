@@ -77,8 +77,8 @@ page:
     twopage: 星港二
   login: 登录
   color: 颜色
+  xlsx: Excel
   virtualScroller: 虚拟滚动条
-  md: markdown
   link: naiveui.com
   me: zhuhaobam.github.io
   article: 文章
@@ -86,4 +86,11 @@ page:
   music: Howler.js音乐
   tool: Npm工具地址
 md:
+  spring: Spring框架
+  container: 容器
+  dependencies: 依赖
   ioc: IOC容器
+  javaconfig: Java配置
+  read: markdown阅读
+  md: markdown
+

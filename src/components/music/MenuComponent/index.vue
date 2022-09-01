@@ -155,7 +155,7 @@ watch(
   (newVal, oldVal) => {
     if (newVal === true) {
       // 处理tag栏目的那个全屏功能，需要结合查看layouts文件夹下面的tags文件
-      to.value = isFullscreen.value === true && fullStore.getPage === 'inner' ? '#app-main' : undefined
+      to.value = isFullscreen.value === true && fullStore.getPage === 'inner:true' ? '#app-main' : undefined
       active.value = true
     }
   }

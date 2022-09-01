@@ -24,7 +24,7 @@ export default function createVueComponents() {
     ],
     exclude: [/[\\/]node_modules[\\/]/, /[\\/]\.git[\\/]/, /[\\/]\.nuxt[\\/]/],
     // relative paths to the directory to search for components. 【相对路径下的目录搜索组件】
-    dirs: [pathResolve('../../src/components')],
+    // dirs: [pathResolve('../../src/components')],
     // valid file extensions for components. 【组件的有效文件扩展名】
     extensions: ['vue', 'md'],
     // search for subdirectories 【搜索子目录】

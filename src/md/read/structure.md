@@ -1,9 +1,19 @@
 ---
 title: MD结构适配
+breadcrumb: md.md
 noi18n: yes
 icon: file-markdown-filled
 sort: 20
+padding: 0 210px 40px 40px
 ---
+
+<anchor-md-script>
+
+<div style="display: none;">
+
+[TOC]
+
+</div>
 
 ### 首先我的 vue 的路由生成是由这两个组件支配的，所以就参考了展现形式
 
@@ -25,3 +35,5 @@ noi18n: yes
 icon: language-java
 sort: 60
 ```
+
+</anchor-md-script>

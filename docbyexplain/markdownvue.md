@@ -27,7 +27,12 @@
             }}
           </h2>
         </n-layout-header>
-        <n-layout position="absolute" content-style="padding:0 0 0 24px;" style="top: 80px" :native-scrollbar="false">
+        <n-layout
+          position="absolute"
+          content-style="padding:0 24px 24px 24px;"
+          style="top: 68px"
+          :native-scrollbar="false"
+        >
           <component :is="newComponent" />
         </n-layout>
       </n-layout>
@@ -105,10 +110,24 @@ function handleComponent(key: string, item: MenuOption) {
 </script>
 <route lang="yaml">
 meta:
-  breadcrumb: page.md
+  breadcrumb: md.md
   icon: file-markdown-filled
   sort: -10
+  hidden: true
 </route>
 <style lang="scss" scoped>
-// default
+body {
+  scroll-behavior: smooth;
+}
+
+ol {
+  counter-reset: list-item;
+}
+li {
+  display: block;
+  counter-increment: list-item;
+}
+li:before {
+  content: counters(list-item, '.') ' ';
+}
 </style>
