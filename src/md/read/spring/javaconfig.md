@@ -23,6 +23,20 @@ Spring 新的 Java 配置支持中的核心工件是带 @Configuration 注释的
 @Bean 注解用于表示一个方法实例化、配置和初始化一个由 Spring IoC 容器管理的新对象。<br/>
 
 
+### 数学表达式
+$\sqrt{3x-1}+(1+x)^2$
+
+
+### TABLE
+
+|First Header  | Second Header | Third Header | 
+| ------------ | :-----------: | -----------: | 
+|Content       |   **Cell**    |         Cell | 
+|New section   |     More      |         Data | 
+
+
+
+### CODE
 
 ```java
 @Configuration
@@ -34,9 +48,6 @@ public class AppConfig {
     }
 }
 ```
-
->-- AAAAr [a] AAAAAAAAAA  
--- Neil Armstrong (1969, July 21)
 
 </anchor-md-script>
 

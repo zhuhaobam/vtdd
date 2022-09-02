@@ -4,7 +4,8 @@ import link from '@yankeeinlondon/link-builder'
 import meta from '@yankeeinlondon/meta-builder'
 import anchor from 'markdown-it-anchor'
 import toc from 'markdown-it-toc-done-right'
-const attribution = require('markdown-it-attribution')
+const table = require('markdown-it-multimd-table')
+const katex = require('markdown-it-katex')
 const linkAttributes = require('markdown-it-link-attributes')
 import prism from 'markdown-it-prism'
 import { remove } from 'diacritics'
@@ -39,6 +40,7 @@ export default function createMD() {
     markdownItSetup(md) {
       // 将锚链接添加到H[x]标记
       md.use(anchor, { slugify })
+      // 高亮代码块
       md.use(prism, {
         highlightInlineCode: true,
         defaultLanguage: 'java'
@@ -48,12 +50,6 @@ export default function createMD() {
         includeLevel: [1, 2, 3],
         slugify
       })
-      md.use(attribution, {
-        classNameContainer: 'bg-grey',
-        classNameAttribution: 'c-quote__attribution',
-        marker: '--',
-        removeMarker: false
-      })
       // 链接处理
       md.use(linkAttributes, {
         matcher: (link: string) => /^https?:\/\//.test(link),
@@ -62,6 +58,10 @@ export default function createMD() {
           rel: 'noopener'
         }
       })
+      // 表格
+      md.use(table)
+      // 数学表达式
+      md.use(katex, { throwOnError: false, errorColor: ' #cc0000' })
     }
   })
 }
