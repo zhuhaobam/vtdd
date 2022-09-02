@@ -31,6 +31,13 @@ import JsonViewer from 'vue3-json-viewer'
 // 虚拟滚动条
 import VueVirtualScroller from 'vue-virtual-scroller'
 
+import 'prismjs'
+// default(prism.css灰色) dark(prism-dark.css暗红背景紫色突出)funky(prism-funky.css条纹背景)
+// okaidia(prism-okaidia.css蓝色突出) solarizedlight(黄色背景) tomorrow(紫色突出)
+import 'prismjs/themes/prism.css'
+import 'prismjs/components/prism-javascript'
+import 'prismjs/components/prism-java'
+
 import { createApp } from 'vue'
 createApp(App)
   .use(router)
