@@ -1,12 +1,23 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <n-button mb-10 type="success" dashed @click="drawingPinned = !drawingPinned">
+  <n-button type="success" dashed @click="drawingPinned = !drawingPinned">
     <n-icon v-show="drawingPinned" size="18" :component="Pencil" class="transform -rotate-45" />
     <n-icon v-show="!drawingPinned" size="18" :component="Pencil" />
   </n-button>
   <div :style="'background-image: url(' + getAssetsFile('cafe.png') + ')'">
-    <svg ref="svg" class="w-full" style="height: calc(100vh - 195px)"></svg>
+    <svg
+      ref="svg"
+      class="w-full"
+      :style="
+        fullPage === 'inner:true'
+          ? 'height: calc(100vh - 181px);'
+          : fullPage === 'init'
+          ? 'height: calc(100vh - 295px);'
+          : 'height: calc(100vh - 295px);'
+      "
+    ></svg>
     <Draggable
+      :style="screen !== 's' && screen !== 'xs' ? 'width: calc(100vw - 400px)' : 'width: calc(100vw - 0px)'"
       flex
       flex-wrap
       text-xl
@@ -148,7 +159,13 @@ import {
 } from '../../../../components/Drawings/index'
 import { Pin, PinOutline, Pencil } from '@vicons/ionicons5'
 import { getAssetsFile } from '@/plugins/assets-kit'
-
+import { useFullStore } from '@store/full'
+import { ComputedRef } from 'vue'
+const fullStore = useFullStore()
+// 屏幕大小
+const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')
+// 通过fullscreenchange-》EventListener以及两个全屏图标事件串联获得fullPage页面最终全屏状态
+const fullPage = computed(() => fullStore.getPage)
 const props = defineProps<{
   did: String | Number
 }>()

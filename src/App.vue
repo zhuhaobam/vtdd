@@ -1,14 +1,14 @@
 <template>
   <n-config-provider
-    v-if="!lock"
+    v-if="!headerSetting.mLock"
     :hljs="hljs"
     :locale="localeLRef"
     :date-locale="localeLDRef"
     :theme="theme"
     :theme-overrides="themeOverrides"
     inline-theme-disabled
+    preflight-style-disabled
   >
-    <!-- <n-theme-editor> -->
     <n-loading-bar-provider>
       <StarportCarrier>
         <music-global>
@@ -17,17 +17,15 @@
       </StarportCarrier>
     </n-loading-bar-provider>
     <n-global-style />
-    <!-- </n-theme-editor> -->
   </n-config-provider>
-  <ScreenLock :open="lock" />
+  <ScreenLock :open="headerSetting.mLock" />
 </template>
 
 <script setup lang="ts">
-import DevicePixelRatio from '@/plugins/devicePixelRatio'
-import { useThemeStore } from '@store/theme'
 import { useUserStore } from '@store/user'
-import { useAppStore } from '@store/app'
+import { useNewSettingStore } from '@store/new-setting'
 import { storeToRefs } from 'pinia'
+import useBreakpoint from '@/hooks/screen/use-breakpoint'
 import { zhCN, enUS, dateEnUS, dateZhCN, NLocale, NDateLocale, GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
 import router from './router'
 import { darkTheme } from 'naive-ui'
@@ -37,78 +35,57 @@ import java from 'highlight.js/lib/languages/java'
 hljs.registerLanguage('javascript', javascript)
 hljs.registerLanguage('java', java)
 const { t } = useI18n()
-
-const appStore = useAppStore()
+provide('provide-screen', useBreakpoint())
+const newSettingStore = useNewSettingStore()
 const userStore = useUserStore()
-const { locale, lock } = storeToRefs(appStore)
-const localeMap: {
-  [key: string]: {
-    l: NLocale
-    dl: NDateLocale
-  }
-} = {
-  en: {
-    l: enUS,
-    dl: dateEnUS
-  },
-  'zh-CN': {
-    l: zhCN,
-    dl: dateZhCN
-  }
-}
 
+// naiveui组件库
+const { headerSetting } = storeToRefs(newSettingStore)
 const localeLRef = ref<NLocale>()
 const localeLDRef = ref<NDateLocale>()
 watch(
-  locale,
+  () => newSettingStore.getMLocal,
   (newVal, oldVal) => {
-    const localeT = localeMap[newVal]
-    localeLRef.value = localeT?.l
-    localeLDRef.value = localeT?.dl
-    if ((oldVal ?? true) !== true) {
-      appStore.freshTitle(t)
+    if (newVal === 'zh-CN') {
+      localeLRef.value = zhCN
+      localeLDRef.value = dateZhCN
+    } else if (newVal === 'en') {
+      localeLRef.value = enUS
+      localeLDRef.value = dateEnUS
+    }
+    const titleProject = '-' + t(import.meta.env.VTDD_APP_TITLE)
+    const breadcrumb = newSettingStore.headerSetting.title
+    newSettingStore.settingDocumentTitle(breadcrumb !== '' ? t(breadcrumb) + titleProject : '^_^' + titleProject)
+  },
+  { immediate: true, deep: true }
+)
+
+// naiveui组件库主题更新
+const theme = ref<GlobalTheme | null>(headerSetting.value.mTheme)
+const themeOverrides = ref<GlobalThemeOverrides | null>(headerSetting.value.mThemeOverrides)
+
+watch(
+  () => newSettingStore.getMTheme,
+  (newVal, oldVal) => {
+    if (newVal === null) {
+      theme.value = null
+      themeOverrides.value = null
+    } else {
+      theme.value = darkTheme
+      themeOverrides.value = headerSetting.value.mThemeOverrides
     }
   },
   { immediate: true, deep: true }
 )
 
-const themeStore = useThemeStore()
-const theme = ref<GlobalTheme | null>(null)
-const themeOverrides = ref<GlobalThemeOverrides | null>(null)
-const themeOverridesTomplate = {
-  common: {
-    primaryColor: '#18a058',
-    primaryColorSuppl: '#18a058',
-    primaryColorHover: 'blue',
-    successColorHover: '#f0a020',
-    successColorSuppl: '#f0a020'
-  }
-}
-if (themeStore.isNullTheme) {
-  themeStore.setTheme(null)
-  themeStore.setThemeOverrides(null)
-} else {
-  themeStore.setTheme(darkTheme)
-  themeStore.setThemeOverrides(themeOverridesTomplate)
-}
-watch(
-  () => themeStore.theme,
-  (newVal, oldVal) => {
-    theme.value = newVal
-    themeOverrides.value = themeOverridesTomplate
-  },
-  { immediate: true, deep: true }
-)
-onMounted(() => {
-  // 校正windows页面在系统进行缩放后导致页面被放大的问题，通常放大比例是125%、150%
-  DevicePixelRatio.init()
-})
-
 router.beforeEach((to, from, next) => {
-  appStore.setLoadingBarStart()
+  newSettingStore.loadingBarStart()
   // console.log('路由前置守卫[App.vue]', from, to)
   // console.log('路由前置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
-  appStore.setTitle(t, to.meta?.breadcrumb ?? 'md.md')
+  const breadcrumb = to.meta?.breadcrumb ?? ''
+  const titleProject = '-' + t(import.meta.env.VTDD_APP_TITLE)
+  newSettingStore.settingTitle(breadcrumb ?? '')
+  newSettingStore.settingDocumentTitle(breadcrumb !== '' ? t(breadcrumb) + titleProject : '^_^' + titleProject)
   if (to.name !== 'login' && !(userStore.getToken !== '')) {
     next({ name: 'login' })
   } else if (to.name === 'login' && userStore.getToken !== '') {
@@ -119,7 +96,7 @@ router.beforeEach((to, from, next) => {
 })
 
 router.afterEach((to, from, failure) => {
-  appStore.setLoadingBarFinish()
+  newSettingStore.loadingBarFinish()
   // console.log('路由后置守卫[App.vue]', 'from:' + from.fullPath, 'to:' + to.fullPath)
 })
 

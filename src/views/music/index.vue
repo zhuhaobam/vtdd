@@ -296,4 +296,5 @@ meta:
   breadcrumb: page.music
   icon: i-carbon:music
   sort: -20
+  padding: 0px
 </route>

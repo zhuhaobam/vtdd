@@ -1,20 +1,22 @@
 <template>
-  <n-breadcrumb>
-    <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
-      <n-breadcrumb-item>
-        <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
-          <div flex items-center justify-center>
+  <div>
+    <n-breadcrumb>
+      <template v-for="routeItem in breadcrumbList" :key="routeItem.name">
+        <n-breadcrumb-item>
+          <n-dropdown v-if="routeItem.children.length" :options="routeItem.children" @select="dropdownSelect">
+            <div flex items-center justify-center>
+              <component :is="routeItem?.icon" v-if="routeItem?.icon" />
+              {{ $t(routeItem.meta?.breadcrumb as string) }}
+            </div>
+          </n-dropdown>
+          <div v-else flex items-center justify-center>
             <component :is="routeItem?.icon" v-if="routeItem?.icon" />
             {{ $t(routeItem.meta?.breadcrumb as string) }}
           </div>
-        </n-dropdown>
-        <div v-else flex items-center justify-center>
-          <component :is="routeItem?.icon" v-if="routeItem?.icon" />
-          {{ $t(routeItem.meta?.breadcrumb as string) }}
-        </div>
-      </n-breadcrumb-item>
-    </template>
-  </n-breadcrumb>
+        </n-breadcrumb-item>
+      </template>
+    </n-breadcrumb>
+  </div>
 </template>
 
 <script lang="ts" setup name="HeadBreadcrumb">

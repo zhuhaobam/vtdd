@@ -1,34 +1,36 @@
 <template>
-  <n-scrollbar x-scrollable>
-    <div pt-5 pb7 pl-5 flex flex-nowrap>
-      <n-tooltip placement="bottom">
-        <template #trigger>
-          <n-icon size="18" mx-3 my-4 cursor-pointer hover:color-primary @click="toggleTrigger()">
-            <i-ant-design-fullscreen-outlined />
-          </n-icon>
-        </template>
-        <span>{{ $t('tag.full.screen') }}</span>
-      </n-tooltip>
-      <n-tag
-        v-for="tag in tagsStore.getTags"
-        :key="tag.path"
-        mx-3
-        cursor-pointer
-        hover:color-primary
-        :type="tagsStore.getActiveTag === tag.path ? 'primary' : 'default'"
-        :closable="tagsStore.getTags.length > 1"
-        @click="handleTagClick(tag.path)"
-        @close.stop="tagsStore.removeTag(tag.path)"
-        @contextmenu.prevent="handleContextMenu($event, tag)"
-      >
-        {{ $t(tag.breadcrumb ?? 'tag.default') }}
-        <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
-        <template #icon>
-          <n-icon v-if="tag.icon" :component="renderMenuIcon(tag.icon)" />
-        </template>
-      </n-tag>
-    </div>
-  </n-scrollbar>
+  <div :style="screen !== 'xs' && screen !== 's' ? '' : 'margin: 11px 20px'">
+    <n-scrollbar style="width(100vw - 40px)" x-scrollable>
+      <div flex items-center flex-nowrap>
+        <n-tooltip v-if="screen !== 'xs' && screen !== 's'" placement="bottom">
+          <template #trigger>
+            <n-icon size="18" mx-3 my-4 cursor-pointer hover:color-primary @click="toggleTrigger()">
+              <i-ant-design-fullscreen-outlined />
+            </n-icon>
+          </template>
+          <span>{{ $t('tag.full.screen') }}</span>
+        </n-tooltip>
+        <n-tag
+          v-for="tag in tagsStore.getTags"
+          :key="tag.path"
+          mx-3
+          cursor-pointer
+          hover:color-primary
+          :type="tagsStore.getActiveTag === tag.path ? 'primary' : 'default'"
+          :closable="tagsStore.getTags.length > 1"
+          @click="handleTagClick(tag.path)"
+          @close.stop="tagsStore.removeTag(tag.path)"
+          @contextmenu.prevent="handleContextMenu($event, tag)"
+        >
+          {{ $t(tag.breadcrumb ?? 'tag.default') }}
+          <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
+          <template #icon>
+            <n-icon v-if="tag.icon" :component="renderMenuIcon(tag.icon)" />
+          </template>
+        </n-tag>
+      </div>
+    </n-scrollbar>
+  </div>
   <n-dropdown
     placement="bottom-start"
     trigger="manual"
@@ -44,20 +46,28 @@
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import router from '@/router'
 import { TagsType, useTagsStore } from '@store/tags'
-import { useAppStore } from '@store/app'
+import { useNewSettingStore } from '@store/new-setting'
 import { NIcon } from 'naive-ui'
 import { Refresh, ArrowBackOutline, Close, Expand, ArrowUp } from '@vicons/ionicons5'
 import { Component } from 'vue'
 const { t } = useI18n()
+
+type Props = {
+  screen: string
+}
+withDefaults(defineProps<Props>(), {
+  screen: ''
+})
+
 const emit = defineEmits<{
-  (e: 'fullScreenDo'): void
+  (e: 'full-screen-do'): void
 }>()
 
 const toggleTrigger = () => {
-  emit('fullScreenDo')
+  emit('full-screen-do')
 }
 const tagsStore = useTagsStore()
-const appStore = useAppStore()
+const newSettingStore = useNewSettingStore()
 const handleTagClick = (path: any) => {
   router.push(path)
 }
@@ -82,7 +92,7 @@ const handleSelect = (key: string | number) => {
       tagsStore.removeTag(tagCurrent.path)
     }
     if (String(key) === 'tag.fresh') {
-      appStore.setReload()
+      newSettingStore.settingReload()
     }
     if (String(key) === 'tag.open') {
       router.push(tagCurrent.path)

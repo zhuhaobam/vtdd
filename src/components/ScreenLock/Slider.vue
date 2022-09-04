@@ -14,10 +14,10 @@
 </template>
 
 <script setup lang="ts" name="Slider">
-import { useAppStore } from '@store/app'
-const appStore = useAppStore()
+import { useNewSettingStore } from '@store/new-setting'
+const newSettingStore = useNewSettingStore()
 const emitLockOpen = (value: boolean) => {
-  appStore.setLock(value)
+  newSettingStore.settingMLock(value)
 }
 
 const props = defineProps({

@@ -4,8 +4,7 @@
  **/
 import { App } from 'vue'
 import { createI18n } from 'vue-i18n'
-import { useAppStore } from '@store/app'
-import { storeToRefs } from 'pinia'
+import { useNewSettingStore } from '@store/new-setting'
 
 const localPathPrefix = '../../locales/'
 // import i18n resources
@@ -28,12 +27,11 @@ export function loadLang() {
 }
 
 const install = (app: App) => {
-  const appStore = useAppStore()
-  const { locale } = storeToRefs(appStore)
+  const newSettingStore = useNewSettingStore()
   const i18n = createI18n({
     // legacy: false,
     globalInjection: true,
-    locale: locale.value,
+    locale: unref(newSettingStore.headerSetting.mLocal),
     fallbackLocale: 'zh-CN',
     messages: loadLang()
   })

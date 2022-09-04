@@ -309,10 +309,6 @@ watch(isHoverMainRef, val => {
   scrollbar-width: none; /* Firefox */
 }
 
-::-webkit-scrollbar {
-  display: none; /* Chrome Safari */
-}
-
 .page-main {
   position: relative;
   height: 208px;

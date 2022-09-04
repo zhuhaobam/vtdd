@@ -22,16 +22,16 @@
 import { useDark, useToggle } from '@vueuse/core'
 import { CSSProperties } from 'vue'
 import { darkTheme } from 'naive-ui'
-import { useThemeStore } from '@store/theme'
-const themeStore = useThemeStore()
+import { useNewSettingStore } from '@store/new-setting'
+const newSettingStore = useNewSettingStore()
 const isDark = useDark()
 const toggleDark = useToggle(isDark)
-const themebool = ref<boolean>(themeStore.getTheme === null)
+const themebool = ref<boolean>(unref(newSettingStore.headerSetting.mTheme) === null)
 function handleChange(value: boolean) {
   if ((value === false && isDark.value === false) || (value === true && isDark.value === true)) {
     toggleDark()
   }
-  themeStore.setTheme(value ? null : darkTheme)
+  newSettingStore.settingMTheme(value ? null : darkTheme)
 }
 
 const railStyle = ({ focused, checked }: { focused: boolean; checked: boolean }) => {

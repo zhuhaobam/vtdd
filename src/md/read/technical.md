@@ -4,7 +4,7 @@ breadcrumb: md.md
 noi18n: yes
 icon: file-markdown-filled
 sort: 35
-padding: 0 210px 40px 40px
+padding: 40px
 ---
 
 <anchor-md-script>
@@ -124,5 +124,4 @@ padding: 0 210px 40px 40px
 千万不要觉得引用文章会让人觉得你只是在观点抄袭，事实上只要你有提出新鲜的观点、论据甚至只是更规范地总结了一篇文章，你的读者也会非常感激你的。
 
 同时引用丰富的链接还可以帮助搜索引擎确定你的权威性——你不光文章写出来了，还指向了靠谱的参考文献，因此搜索引擎也会觉得你这篇文章的靠谱程度很高。
-  <n-back-top :bottom="50" :visibility-height="300" />
 </anchor-md-script>
