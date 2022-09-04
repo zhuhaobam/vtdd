@@ -1,4 +1,4 @@
-# 请运行之前清空浏览器的Application下的all Storage
+# 请运行之前清空浏览器的Application下的all Storage 【重构代码，会对pinia 本地存储数据有影响，比如几个刷新后还保持原样效果的展示】
 
 # vtdd 源码检查结果
 
