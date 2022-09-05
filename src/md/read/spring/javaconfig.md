@@ -22,19 +22,16 @@ padding: 0 210px 40px 40px
 Spring 新的 Java 配置支持中的核心工件是带 @Configuration 注释的类和带@Bean 注释的方法。<br/>
 @Bean 注解用于表示一个方法实例化、配置和初始化一个由 Spring IoC 容器管理的新对象。<br/>
 
-
 ### 数学表达式
-$\sqrt{3x-1}+(1+x)^2$
 
+$\sqrt{3x-1}+(1+x)^2$
 
 ### TABLE
 
-|First Header  | Second Header | Third Header | 
-| ------------ | :-----------: | -----------: | 
-|Content       |   **Cell**    |         Cell | 
-|New section   |     More      |         Data | 
-
-
+| First Header | Second Header | Third Header |
+| ------------ | :-----------: | -----------: |
+| Content      |   **Cell**    |         Cell |
+| New section  |     More      |         Data |
 
 ### CODE
 
@@ -50,4 +47,3 @@ public class AppConfig {
 ```
 
 </anchor-md-script>
-

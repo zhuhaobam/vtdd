@@ -25,7 +25,7 @@
         <n-layout
           ref="contentRef"
           embedded
-          content-style="padding:  24px;"
+          :content-style="'padding:  ' + (screen !== 'xs' && screen !== 's' ? 24 : 12) + 'px;'"
           style="height: calc(100vh - 114px)"
           :native-scrollbar="false"
         >
@@ -97,5 +97,3 @@ onBeforeUnmount(() => {
   document.removeEventListener('fullscreenchange', fullscreenchangeCurrent)
 })
 </script>
-
-<style lang="scss" scoped></style>

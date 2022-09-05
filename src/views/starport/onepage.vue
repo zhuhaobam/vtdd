@@ -25,4 +25,5 @@ meta:
   breadcrumb: page.starport.onepage
   icon: i-carbon:condition-point
   sort: 61
+  padding: 40px
 </route>

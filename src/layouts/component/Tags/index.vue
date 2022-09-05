@@ -1,6 +1,6 @@
 <template>
   <div :style="screen !== 'xs' && screen !== 's' ? '' : 'margin: 11px 20px'">
-    <n-scrollbar style="width(100vw - 40px)" x-scrollable>
+    <n-scrollbar style="width: calc(100vw - 40px)" x-scrollable>
       <div flex items-center flex-nowrap>
         <n-tooltip v-if="screen !== 'xs' && screen !== 's'" placement="bottom">
           <template #trigger>
@@ -45,19 +45,37 @@
 <script lang="ts" setup>
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import router from '@/router'
-import { TagsType, useTagsStore } from '@store/tags'
+import { useTagsStore } from '@store/tags'
 import { useNewSettingStore } from '@store/new-setting'
 import { NIcon } from 'naive-ui'
 import { Refresh, ArrowBackOutline, Close, Expand, ArrowUp } from '@vicons/ionicons5'
-import { Component } from 'vue'
+import { Component, ComputedRef } from 'vue'
+import { tagsType } from '@/types/tagsType'
+import { RouteLocationMatched } from 'vue-router'
 const { t } = useI18n()
 
 type Props = {
   screen: string
 }
 withDefaults(defineProps<Props>(), {
-  screen: ''
+  screen: 'xl'
 })
+// 路由处理
+const currentRoute = useRoute()
+onMounted(() => {
+  const mmatched = currentRoute.matched
+  const lastMatched: RouteLocationMatched = mmatched[mmatched.length - 1]
+  const tag: tagsType = {
+    path: lastMatched.path,
+    params: currentRoute.params,
+    breadcrumb: lastMatched.meta.breadcrumb ?? '',
+    icon: lastMatched.meta.icon ?? ''
+  }
+  tagsStore.addTag(tag)
+})
+
+// 屏幕大小
+const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')
 
 const emit = defineEmits<{
   (e: 'full-screen-do'): void
@@ -66,6 +84,7 @@ const emit = defineEmits<{
 const toggleTrigger = () => {
   emit('full-screen-do')
 }
+
 const tagsStore = useTagsStore()
 const newSettingStore = useNewSettingStore()
 const handleTagClick = (path: any) => {
@@ -77,13 +96,13 @@ const optionsRef = ref<any[]>([])
 const showDropdownRef = ref(false)
 const xRef = ref(0)
 const yRef = ref(0)
-const tagRm = ref<TagsType>()
+const tagRm = ref<tagsType>()
 const onClickoutside = () => {
   showDropdownRef.value = false
 }
 const handleSelect = (key: string | number) => {
   showDropdownRef.value = false
-  const tagCurrent: TagsType | undefined = tagRm.value
+  const tagCurrent: tagsType | undefined = tagRm.value
   if (tagCurrent) {
     if (String(key) === 'tag.close.other') {
       tagsStore.removeOtherTag(tagCurrent.path)
@@ -110,7 +129,7 @@ const renderIcon = (icon: Component) => {
     })
 }
 
-const handleContextMenu = async (e: MouseEvent, tag: TagsType) => {
+const handleContextMenu = async (e: MouseEvent, tag: tagsType) => {
   e.preventDefault()
   showDropdownRef.value = false
   nextTick().then(() => {
@@ -120,7 +139,7 @@ const handleContextMenu = async (e: MouseEvent, tag: TagsType) => {
   })
   tagRm.value = tag
   const activeTag = tagsStore.getActiveTag
-  optionsRef.value = [
+  const options = [
     {
       label: t('tag.open'),
       key: 'tag.open',
@@ -144,14 +163,17 @@ const handleContextMenu = async (e: MouseEvent, tag: TagsType) => {
       key: 'tag.close.me',
       disabled: activeTag !== tag.path || !tagsStore.leastTwo,
       icon: renderIcon(Close)
-    },
-    {
+    }
+  ]
+  if (screen?.value !== 'xs' && screen?.value !== 's') {
+    options.push({
       label: t('tag.full.screen'),
       key: 'tag.full.screen',
       disabled: activeTag !== tag.path,
       icon: renderIcon(Expand)
-    }
-  ]
+    })
+  }
+  optionsRef.value = options
 }
 function renderMenuIcon(icon: string) {
   return h(hFunctionIcon(icon))

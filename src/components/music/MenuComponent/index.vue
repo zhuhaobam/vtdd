@@ -2,7 +2,7 @@
   <n-drawer
     v-model:show="active"
     :on-after-leave="onAfterLeave"
-    :width="450"
+    :width="screen !== 'xs' && screen !== 's' ? 450 : 280"
     placement="right"
     :trap-focus="false"
     :block-scroll="false"
@@ -15,7 +15,10 @@
   >
     <n-drawer-content :native-scrollbar="false">
       <template #header>
-        <div class="flex justify-between odd:" style="width: 400px">
+        <div
+          class="flex justify-between odd:"
+          :style="'width:' + (screen !== 'xs' && screen !== 's' ? 400 : 230) + 'px'"
+        >
           <span class="opacity-50" style="font-size: 0.875rem">共 {{ menus.count }} 首 </span>
           <n-button type="primary" text @click="handleRestClick"> 清空列表 </n-button>
         </div>
@@ -34,60 +37,40 @@
       >
         <template #default="{ item, index }">
           <DynamicScrollerItem :item="item" :active="active" :size-dependencies="[item.message]" :data-index="index">
-            <div :class="'flex justify-between item ' + stripedClass(index)" @dblclick="handleDoubleClick(item.id)">
-              <div flex overflow-hidden flex-1 items-center pr-2>
-                <div v-if="menuRun.get(item.id) === 'playing'">
-                  <n-icon
-                    mr-4
-                    flex
-                    justify-center
-                    items-center
-                    size="20"
-                    color="#18a058"
-                    :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
-                  />
-                </div>
-                <n-avatar min-w-34 min-h-34 w-34 h-34 mr-4 :src="item.al.picUrl" b-rd-5 />
-                <p truncate max-w-140>
+            <div h13 cursor-pointer flex :class="stripedClass(index)" @dblclick="handleDoubleClick(item.id)">
+              <n-grid x-gap="12" :cols="24" flex items-center>
+                <n-gi span="3">
+                  <div v-if="menuRun.get(item.id) === 'playing'" pl-4 flex items-center>
+                    <n-icon
+                      size="18"
+                      color="#18a058"
+                      :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
+                    />
+                  </div>
+                </n-gi>
+                <n-gi span="4" flex items-center>
+                  <n-avatar size="small" :src="item.al.picUrl" b-rd-1 />
+                </n-gi>
+                <n-gi span="6" truncate>
                   {{ item.name }}
-                </p>
-                <n-tag
-                  v-if="item.mv !== 0"
-                  size="small"
-                  :color="{
-                    textColor: '#63e2b7',
-                    borderColor: '#63e2b7'
-                  }"
-                  ml-10
+                </n-gi>
+                <n-gi span="5" truncate>
+                  {{ formateSongsAuthor(item.ar) }}
+                </n-gi>
+                <n-gi
+                  span="6"
+                  flex
+                  :class="screen !== 'xs' && screen !== 's' ? 'flex-row justify-around' : 'flex-col '"
                 >
-                  MV
-                </n-tag>
-                <n-tag
-                  v-if="item.fee === 1"
-                  size="small"
-                  :color="{
-                    textColor: '#63e2b7',
-                    borderColor: '#63e2b7'
-                  }"
-                  ml-10
-                >
-                  VIP
-                </n-tag>
-              </div>
-              <p w-100 truncate text-center>
-                {{ formateSongsAuthor(item.ar) }}
-              </p>
-              <p w-50 text-center>
-                <span
-                  v-if="!['onplay', 'onend', 'onpause', '0'].includes(menuSeekRun?.get(item.id) ?? '0')"
-                  colorhex-18a058
-                >
-                  {{ dayjs(Number(menuSeekRun.get(item.id)) * 1000).format('mm:ss') }}
-                </span>
-              </p>
-              <div pl-2 flex items-center>
-                <n-time opacity-40 format="mm:ss" :time="item.dt" />
-              </div>
+                  <span
+                    v-if="!['onplay', 'onend', 'onpause', '0'].includes(menuSeekRun?.get(item.id) ?? '0')"
+                    colorhex-18a058
+                  >
+                    {{ dayjs(Number(menuSeekRun.get(item.id)) * 1000).format('mm:ss') }}
+                  </span>
+                  <n-time opacity-40 format="mm:ss" :time="item.dt" />
+                </n-gi>
+              </n-grid>
             </div>
           </DynamicScrollerItem>
         </template>
@@ -105,7 +88,14 @@ import { useFullStore } from '@store/full'
 import dayjs from 'dayjs'
 import { Howler } from 'howler'
 import { createDiscreteApi } from 'naive-ui'
+import { ComputedRef } from 'vue'
 const { message } = createDiscreteApi(['message'])
+
+// 屏幕大小
+const screen = computed(() => {
+  return inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')?.value
+})
+
 /**
  * 每列高度
  */
@@ -187,7 +177,7 @@ const handleRestClick = () => {
   // 卸载播放器
   Howler.unload()
   // 清空存储
-  musicStore.destroy()
+  musicStore.init()
 }
 const handleGoHemeClick = () => {
   message.info('点一点模拟切换按钮再来看看')
@@ -233,11 +223,6 @@ const stripedClass = (index: number) => {
   background-color: transparent;
   opacity: 0;
   pointer-events: none;
-}
-
-.item {
-  padding: 0 20px;
-  cursor: pointer;
 }
 
 :deep(.n-drawer-body-content-wrapper) {

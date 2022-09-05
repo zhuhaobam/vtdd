@@ -1,15 +1,10 @@
+import { drauuSvgType } from '@/types/drauuType'
 import { Brush, DrawingMode } from 'drauu'
 import { defineStore } from 'pinia'
 
-type drauuType = {
-  drauuDump: Record<string, string>
-  drawingMode: Record<string, DrawingMode | 'arrow'>
-  brush: Record<string, Brush>
-}
-
 // 导出pinia
 export const useDrauuStore = defineStore('drauu', {
-  state: (): drauuType => {
+  state: (): drauuSvgType => {
     return {
       drauuDump: {},
       drawingMode: {},
@@ -51,6 +46,12 @@ export const useDrauuStore = defineStore('drauu', {
       const modules = this.brush
       modules[key] = value
       this.brush = modules
+    },
+    // 清除
+    init() {
+      this.drauuDump = {}
+      this.drawingMode = {}
+      this.brush = {}
     }
   }
 })

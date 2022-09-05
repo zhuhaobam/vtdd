@@ -1,8 +1,6 @@
 import { GlobalTheme, GlobalThemeOverrides } from 'naive-ui'
 
 type settingProjectType = {
-  // 导航模式 vertical 左侧菜单模式 horizontal 顶部菜单模式
-  navMode: string
   // 顶部
   headerSetting: headerSettingType
   // 进度条

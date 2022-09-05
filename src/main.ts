@@ -5,7 +5,7 @@ import 'normalize.css'
 import 'uno.css'
 import 'vue-virtual-scroller/dist/vue-virtual-scroller.css'
 import '@/styles/index.scss'
-// import '@/styles/github-markdown.css'
+import '@/styles/markdown.css'
 
 // 路由准备的svg，当然其ta页面也可以使用
 import 'virtual:svg-icons-register'

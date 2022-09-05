@@ -2,11 +2,11 @@
   <div>图片颜色主颜色提取设置为背景</div>
   <div>color.js</div>
   <div flex flex-row justify-center items-center :style="'background-color:' + bg1Color">
-    <img object-cover block w-200 h-200 py-100 :src="getAssetsFile('img_login_bg.png')" />
+    <img object-cover block w-50 h-50 py-10 :src="getAssetsFile('img_login_bg.png')" />
   </div>
   <div>image-color-extraction</div>
   <div flex flex-row justify-center items-center :style="'background-color:' + bg2Color">
-    <img object-cover block w-200 h-200 py-100 :src="getAssetsFile('img_login_bg.png')" />
+    <img object-cover block w-50 h-50 py-10 :src="getAssetsFile('img_login_bg.png')" />
   </div>
 </template>
 <script setup lang="ts" name="simpleColor">
@@ -54,4 +54,5 @@ meta:
   breadcrumb: page.color
   icon: i-ant-design:bg-colors-outlined
   sort: -2
+  padding: 10px
 </route>

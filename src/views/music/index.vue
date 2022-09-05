@@ -1,72 +1,63 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div>
-    <n-card
-      title="DIV 基于howler的播放器"
-      :segmented="{
-        content: true,
-        footer: 'soft'
-      }"
-    >
-      <template #header-extra>
-        <div v-if="(musicMenuList?.count ?? 0) === 0">
-          <n-button dashed> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
-        </div>
-        <n-badge v-else :value="musicMenuList?.count ?? 0" :max="10">
-          <n-button type="success" @click="openMenu"> 【虚拟滚动条DynamicScroller】音乐菜单 </n-button>
-        </n-badge>
-      </template>
+    <n-card title="DIV 基于howler的播放器" content-style="padding: 0 ;" :bordered="false">
+      <template #header-extra> play </template>
       <template #footer>
         <n-space>
+          <div v-if="(musicMenuList?.count ?? 0) === 0">
+            <n-button dashed> 【DynamicScroller】菜单 </n-button>
+          </div>
+          <n-badge v-else :value="musicMenuList?.count ?? 0" :max="10">
+            <n-button type="success" @click="openMenu"> 【DynamicScroller】菜单 </n-button>
+          </n-badge>
           <n-button type="success" @click="changeOneMenu"> 模拟切换音乐菜单【1首】 </n-button>
           <n-button type="success" @click="changeTwoMenu"> 模拟切换音乐菜单【2首】 </n-button>
         </n-space>
-        <div pt-20>
-          <n-space v-if="(musicMenuList?.count ?? 0) > 0" vertical>
-            <h3>页面播放列表（防抖一秒，防止误点，歌曲启动稍微有点延迟是音乐资源加载耗时）</h3>
-            <n-button
+        <n-space v-if="(musicMenuList?.count ?? 0) > 0" vertical>
+          <h3>页面播放列表（防抖一秒，防止误点，歌曲启动稍微有点延迟是音乐资源加载耗时）</h3>
+          <n-button
+            v-for="(item, index) in musicMenuList?.musicMenuList"
+            :key="index"
+            type="success"
+            @click="handleClick(item.id)"
+          >
+            <div v-if="menuRun?.get(item.id) === 'playing'">
+              <n-icon
+                pr-2
+                size="20"
+                :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
+              />
+            </div>
+            {{ item.name }}
+            <span
+              v-if="!['onplay', 'onend', 'onpause', '0'].includes(menuSeekRun?.get(item.id) ?? '0')"
+              style="font-size: 0.875rem"
+            >
+              {{ dayjs(Number(menuSeekRun?.get(item.id)) * 1000).format('mm:ss') }}
+            </span>
+          </n-button>
+          <n-space vertical>
+            <n-card
               v-for="(item, index) in musicMenuList?.musicMenuList"
               :key="index"
-              type="success"
-              @click="handleClick(item.id)"
+              :bordered="false"
+              :title="item.name + '歌词'"
+              content-style="padding: 0 ;"
             >
-              <div v-if="menuRun?.get(item.id) === 'playing'">
-                <n-icon
-                  pr-2
-                  size="20"
-                  :component="menuRun.get(item.id) === 'playing' ? MusicalNotesOutline : undefined"
-                />
-              </div>
-              {{ item.name }}
-              <span
-                v-if="!['onplay', 'onend', 'onpause', '0'].includes(menuSeekRun?.get(item.id) ?? '0')"
-                style="font-size: 0.875rem"
-              >
-                {{ dayjs(Number(menuSeekRun?.get(item.id)) * 1000).format('mm:ss') }}
-              </span>
-            </n-button>
-            <div flex flex-row>
-              <n-card
-                v-for="(item, index) in musicMenuList?.musicMenuList"
-                :key="index"
-                :title="item.name + '歌词'"
-                hoverable
-                style="width: 500px"
-              >
-                <lyric-component
-                  :seek-run="seekRunMap?.get(item.id) ?? '0'"
-                  :seek-dt="item.dt"
-                  :seek-id="item.id"
-                  tlyric=""
-                  :lyric="lyricMap?.get(item.id)"
-                />
-              </n-card>
-            </div>
+              <lyric-component
+                :seek-run="seekRunMap?.get(item.id) ?? '0'"
+                :seek-dt="item.dt"
+                :seek-id="item.id"
+                tlyric=""
+                :lyric="lyricMap?.get(item.id)"
+              />
+            </n-card>
           </n-space>
-        </div>
+        </n-space>
       </template>
       <template #action>
-        <n-alert title="讲解：本项目只有技术价值😀 " type="default">
+        <n-alert title="讲解：😀 " type="default" :bordered="false">
           <template #icon>
             <n-icon>
               <alarm-outline />
@@ -81,9 +72,6 @@
           #、
           要点：TypeScript类型的定义，Pinia的状态使用，Persist的使用（为难Persist存储Map数据结构，需要存取各自转换），watch监听store和双向绑定modal（最少的操作对象，要不然你会发现总是在触发），Howler的基本使用,global缓存Howler（不刷新操作的秘密）<br />
           &、 控制台打印了埋点信息，我调试的时候留下的 <br />
-          %、
-          缺点：1.库的缓存和我自己的缓存以及状态存储，刷新都给清空了。2.多首歌曲播放进度每一秒全部更新了一遍，监听处理的压力比较大，刷新或者切换菜单都给清空了。3.希望有更好的方式
-          <br />
           1、 点击“模拟切换音乐菜单”按钮，加载新的播放菜单 <br />
           2、 选择“页面播放列表（防抖一秒）”（单击播放）或者“虚拟滚动条DynamicScroller】音乐菜单”（双击播放）<br />
           3、 Howler.js支持同时播放多首歌曲，此处按照多首歌曲同时播放来做的【播放、暂停、菜单显示、页面显示、进度显示】
@@ -133,7 +121,7 @@ const changeOneMenu = async () => {
   // 卸载播放器
   Howler.unload()
   // 清空存储
-  musicStore.destroy()
+  musicStore.init()
   await nextTick()
   // 菜单
   const musicMenuListValue: musicMenuType[] = musicMenuListData() ?? []
@@ -168,7 +156,7 @@ const changeTwoMenu = async () => {
   // 卸载播放器
   Howler.unload()
   // 清空存储
-  musicStore.destroy()
+  musicStore.init()
   await nextTick()
   // 菜单
   const musicMenuListValue: musicMenuType[] = musicMenuListData() ?? []

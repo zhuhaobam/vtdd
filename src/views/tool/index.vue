@@ -1,6 +1,10 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
-  <n-descriptions label-placement="left" bordered>
+  <n-descriptions
+    :label-placement="screen !== 's' && screen !== 'xs' ? 'left' : undefined"
+    bordered
+    :column="screen !== 's' && screen !== 'xs' ? 2 : 1"
+  >
     <n-descriptions-item>
       <template #label> xicons from '@vicons/ionicons5'<br />naiveui推荐图标地址 </template>
       https://www.xicons.org/#/
@@ -40,6 +44,10 @@
   </n-descriptions>
 </template>
 <script setup lang="ts" name="tool">
+import { ComputedRef } from 'vue'
+
+// 屏幕大小
+const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')
 // test
 </script>
 <route lang="yaml">

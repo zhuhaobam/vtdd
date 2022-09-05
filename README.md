@@ -1,16 +1,16 @@
-# 请运行之前清空浏览器的Application下的all Storage 【重构代码，会对pinia 本地存储数据有影响，比如几个刷新后还保持原样效果的展示】
+# 请运行之前清空浏览器的 Application 下的 all Storage 【重构代码，会对 pinia 本地存储数据有影响，比如几个刷新后还保持原样效果的展示】
 
 # vtdd 源码检查结果
 
 [![OSCS Status](https://www.oscs1024.com/platform/badge/zhuhaobam/vtdd.svg?size=large)](https://www.oscs1024.com/project/zhuhaobam/vtdd?ref=badge_large)
 
-## dev、build、preview、lint、prettier、stylelint以及github page均通过
+## dev、build、preview、lint、prettier、stylelint 以及 github page 均通过
 
-## 目前pnpm一直是最新版本的，依赖包也通过pnpm update最新的
+## 目前 pnpm 一直是最新版本的，依赖包也通过 pnpm update 最新的
 
-## 提交检验=》控制台先pnpm run  prepare=>再使用git那一系列命令
+## 提交检验=》控制台先 pnpm run prepare=>再使用 git 那一系列命令
 
-## 目前已经趟过无数的疑难杂症，上面dev到github page通过不容易啊
+## 目前已经趟过无数的疑难杂症，上面 dev 到 github page 通过不容易啊
 
 ## 项目在线预览地址
 

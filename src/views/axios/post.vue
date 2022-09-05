@@ -53,4 +53,5 @@ meta:
   breadcrumb: page.axios.post
   icon: i-ant-design:build-filled
   sort: 71
+  padding: 40px
 </route>

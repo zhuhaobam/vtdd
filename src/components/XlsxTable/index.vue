@@ -1,9 +1,9 @@
 <template>
   <div class="overflow-auto">
-    <table cellspacing="1">
+    <table cellspacing="0">
       <thead>
         <tr>
-          <th v-for="item in props.headers" :key="item" fw6 bg-green px-30>
+          <th v-for="item in props.headers" :key="item" fw6 bg-gray>
             {{ item }}
           </th>
         </tr>
@@ -15,7 +15,7 @@
           text-center
           :data-qa-name="props.dataQaName ? props.dataQaName + '-' + idx : undefined"
         >
-          <slot name="items" :ty="'color-lightBlue border-lightBlue border-1'" :row="row" />
+          <slot name="items" :ty="'color-lightBlue border-lightBlue border-1 px-5'" :row="row" />
         </tr>
       </tbody>
     </table>

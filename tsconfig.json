@@ -45,6 +45,14 @@
       "@class/*": ["src/class/*"]
     }
   },
-  "include": ["src/**/*.ts", "src/**/*.js", "src/**/*.d.ts", "src/**/*.tsx", "src/**/*.jsx", "src/**/*.vue", "vite/plugins/md-naiveui-anchor-toc.ts"],
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.js",
+    "src/**/*.d.ts",
+    "src/**/*.tsx",
+    "src/**/*.jsx",
+    "src/**/*.vue",
+    "vite/plugins/md-naiveui-anchor-toc.ts"
+  ],
   "references": [{ "path": "./tsconfig.node.json" }]
 }

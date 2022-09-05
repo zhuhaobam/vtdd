@@ -22,11 +22,12 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import generatedRoutes from 'virtual:generated-pages'
 import { keyLabelAdjustment, primaryAdjustment, filterHiddenRoutes } from '@/utils/naiveUiRouter'
 import { MenuGroupOption, MenuOption } from 'naive-ui'
-import { TagsType, useTagsStore } from '@store/tags'
+import { useTagsStore } from '@store/tags'
 import { hFunctionIcon } from '@/utils/hFunctionRender'
 import { RouteLocationMatched } from 'vue-router'
 import { NIcon } from 'naive-ui'
 import { useNewSettingStore } from '@store/new-setting'
+import { tagsType } from '@/types/tagsType'
 const { t } = useI18n()
 const newSettingStore = useNewSettingStore()
 const tagsStore = useTagsStore()
@@ -38,7 +39,7 @@ type Props = {
 withDefaults(defineProps<Props>(), {
   collapsed: false,
   inverted: false,
-  screen: ''
+  screen: 'xl'
 })
 
 // import { MenuProps } from 'naive-ui'
@@ -81,18 +82,6 @@ const getSelectedKeys = computed(() => {
   return unref(selectedKeys)
 })
 
-onMounted(() => {
-  const mmatched = currentRoute.matched
-  const lastMatched: RouteLocationMatched = mmatched[mmatched.length - 1]
-  const tag: TagsType = {
-    path: lastMatched.path,
-    params: currentRoute.params,
-    breadcrumb: lastMatched.meta.breadcrumb ?? '',
-    icon: lastMatched.meta.icon ?? ''
-  }
-  tagsStore.addTag(tag)
-})
-
 watch(
   () => currentRoute.fullPath,
   () => {
@@ -101,7 +90,7 @@ watch(
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
     const lastMatched: RouteLocationMatched = wmatched[wmatched.length - 1]
-    const tag: TagsType = {
+    const tag: tagsType = {
       path: lastMatched.path,
       params: currentRoute.params,
       breadcrumb: lastMatched.meta.breadcrumb ?? '',

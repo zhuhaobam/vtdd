@@ -13,7 +13,7 @@ const mapHowlPause = ref<Map<string, globalHowlPauseType>>(new Map<string, globa
 const mapHowlPauseStepTimeAssert = ref<Map<string, number>>(new Map<string, number>())
 onMounted(() => {
   Howler.unload()
-  musicStore.destroy()
+  musicStore.init()
 })
 watch(
   () => musicStore.getMapRun,

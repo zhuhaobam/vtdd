@@ -2,10 +2,10 @@
   <n-text
     tag="div"
     class="ui-logo"
-    :style="showName ? 'padding-left:16px;' : 'width:64px;padding-left:16px;'"
+    :style="showName ? 'padding-left:16px;' : 'width:64px;padding-left:0px;'"
     :depth="1"
   >
-    <img :src="getAssetsFile('cafe.png')" />
+    <img :src="getAssetsFile('logo.png')" />
     <n-ellipsis v-if="showName" text-center w-full>
       {{ $t('project.title') }}
     </n-ellipsis>
@@ -28,12 +28,13 @@ withDefaults(
 </script>
 <style lang="scss" scoped>
 .ui-logo {
-  cursor: pointer;
   display: flex;
+  cursor: pointer;
   font-size: 18px;
 }
+
 .ui-logo > img {
+  width: 71px;
   height: 32px;
-  width: 32px;
 }
 </style>

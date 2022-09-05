@@ -99,4 +99,5 @@ meta:
   breadcrumb: page.xlsx
   icon: i-ant-design:file-excel-filled
   sort: -2
+  padding: 40px
 </route>

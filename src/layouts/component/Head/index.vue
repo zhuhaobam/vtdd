@@ -160,8 +160,8 @@ const toggleLocales = () => {
 <style lang="scss" scoped>
 .nav {
   display: grid;
-  grid-template-rows: calc(var(--header-height) - 1px);
   align-items: center;
   padding: 0 var(--side-padding);
+  grid-template-rows: calc(var(--header-height) - 1px);
 }
 </style>

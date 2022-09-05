@@ -53,4 +53,5 @@ meta:
   breadcrumb: page.axios.get
   icon: i-ant-design:build-outlined
   sort: 70
+  padding: 40px
 </route>

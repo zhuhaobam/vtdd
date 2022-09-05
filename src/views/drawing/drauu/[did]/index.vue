@@ -10,10 +10,10 @@
       class="w-full"
       :style="
         fullPage === 'inner:true'
-          ? 'height: calc(100vh - 181px);'
+          ? 'height: calc(100vh - ' + (screen !== 's' && screen !== 'xs' ? 191 : 167) + 'px);'
           : fullPage === 'init'
-          ? 'height: calc(100vh - 295px);'
-          : 'height: calc(100vh - 295px);'
+          ? 'height: calc(100vh - ' + (screen !== 's' && screen !== 'xs' ? 205 : 181) + 'px);'
+          : 'height: calc(100vh - ' + (screen !== 's' && screen !== 'xs' ? 205 : 181) + 'px);'
       "
     ></svg>
     <Draggable
@@ -236,5 +236,5 @@ meta:
   icon: i-carbon:chart-t-sne
   sort: 21
   hidden: true
-  padding: 10px 40px 40px 40px
+  padding: 0px
 </route>

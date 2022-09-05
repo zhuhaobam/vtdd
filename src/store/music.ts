@@ -90,7 +90,8 @@ export const useMusicStore = defineStore('music', {
       this.count = mml.count
       this.musicMenuList = mml.musicMenuList
     },
-    destroy() {
+    // 清除
+    init() {
       this.count = 0
       this.musicMenuList = []
       this.mapRun = {}

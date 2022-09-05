@@ -1,23 +1,12 @@
 import { defineStore } from 'pinia'
-import { RouteParams } from 'vue-router'
 import router from '@/router'
 import { cloneDeep } from 'lodash-es'
 import { isString } from '@/utils/is'
-export type TagsType = {
-  path: string
-  params: RouteParams
-  breadcrumb: string
-  icon: string
-}
-interface ITagsStore {
-  tags: TagsType[]
-  activeTag: string
-}
-const noTags = ['/404', '/:id(\\d+)', '/:all(.*)*', '/login', '/system/user', '/system/setting']
-const replaceTags = ['/drawing/drauu/:did(\\d+)']
+import { noTags, replaceTags, tagsType, tgsactiveType } from '@/types/tagsType'
+
 // 导出pinia
 export const useTagsStore = defineStore('tags', {
-  state: (): ITagsStore => {
+  state: (): tgsactiveType => {
     return {
       tags: [],
       activeTag: ''
@@ -37,23 +26,19 @@ export const useTagsStore = defineStore('tags', {
     getActiveTag(state): string {
       return state.activeTag
     },
-    getTags(state): TagsType[] {
+    getTags(state): tagsType[] {
       return state.tags
     }
   },
   actions: {
-    clear() {
-      this.activeTag = ''
-      this.tags = []
-    },
     setActiveTag(path: string) {
       this.activeTag = path
     },
-    async setTags(tags: TagsType[]) {
+    async setTags(tags: tagsType[]) {
       await nextTick()
       this.tags = cloneDeep(tags)
     },
-    addTag(tag: TagsType) {
+    addTag(tag: tagsType) {
       let path = ''
       if (replaceTags.includes(tag.path)) {
         const messages = Object.fromEntries(
@@ -87,6 +72,11 @@ export const useTagsStore = defineStore('tags', {
         }
       }
       this.setTags(this.tags.filter(tag => tag.path !== path))
+    },
+    // 清除
+    init() {
+      this.activeTag = ''
+      this.tags = []
     }
   }
 })

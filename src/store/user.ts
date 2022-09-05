@@ -1,17 +1,9 @@
+import { userInfo } from '@/types/userType'
 import { defineStore } from 'pinia'
-
-export interface IUserState {
-  token: string
-  username: string
-  welcome: string
-  avatar: string
-  permissions: string[]
-  info: any
-}
 
 // 导出pinia
 export const useUserStore = defineStore('user', {
-  state: (): IUserState => {
+  state: (): userInfo => {
     return {
       token: '',
       username: '',

@@ -13,7 +13,7 @@ overrides:
   - files:
       - '*.vue'
       - '**/*.vue'
-    rules: { unit-allowed-list: [em, rem, px, s, %, vh, deg] }
+    rules: { unit-allowed-list: [em, rem, px, s, %, vh, vw, deg] }
 rules:
   selector-class-pattern:
     ['^([a-z][_a-z--0-9__]*)(-[_a-z--0-9__]+)*$', { 'message': 'Expected class selector to be kebab-case' }]

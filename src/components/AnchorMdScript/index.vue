@@ -1,10 +1,11 @@
 <template>
-  <n-layout position="absolute" has-sider style="min-height: calc(100vh - 162px)">
+  <n-layout position="absolute" :has-sider="screen !== 'xs' ? true : false" style="min-height: calc(100vh - 162px)">
     <n-layout content-style="padding: 0 24px;" :native-scrollbar="false">
       <slot />
       <n-back-top :right="220" :visibility-height="300" />
     </n-layout>
     <n-layout-sider
+      v-if="screen !== 'xs'"
       width="180px"
       :content-style="'margin-top:' + (fullPage === 'inner:true' ? 8 : 18) + 'px;padding-right:20px;'"
       :native-scrollbar="false"
@@ -30,9 +31,13 @@
 <script setup lang="ts" name="anchorMdScript">
 import { AnchorInst } from 'naive-ui'
 import { useFullStore } from '@store/full'
+import { ComputedRef } from 'vue'
 const fullStore = useFullStore()
 // 通过fullscreenchange-》EventListener以及两个全屏图标事件串联获得fullPage页面最终全屏状态
 const fullPage = computed(() => fullStore.getPage)
+// 屏幕大小
+const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')
+
 type TocAnchorType = {
   i: number
   href: string
@@ -88,4 +93,3 @@ function ch(childrenLi: NodeListOf<ChildNode>, i: number): TocAnchorType[] {
   return tocAndAnchor
 }
 </script>
-<style lang="scss" scoped></style>

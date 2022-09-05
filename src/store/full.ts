@@ -1,11 +1,9 @@
+import { fullScreenType } from '@/types/fullType'
 import { defineStore } from 'pinia'
-interface IFullStore {
-  page: 'all:true' | 'inner:true' | 'all:false' | 'inner:false' | 'init'
-}
 
 // 导出pinia
 export const useFullStore = defineStore('full', {
-  state: (): IFullStore => {
+  state: (): fullScreenType => {
     return {
       page: 'init'
     }
