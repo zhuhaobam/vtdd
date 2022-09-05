@@ -10,7 +10,9 @@
     :style="
       'background-image: url(' +
       getAssetsFile('music-bg.webp') +
-      ');background-position:center;background-repeat:no-repeat;background-position: bottom right;background-size: auto 240px;'
+      ');background-position:center;background-repeat:no-repeat;background-position: bottom right;background-size: auto ' +
+      (screen !== 'xs' && screen !== 's' ? 240 : 149) +
+      'px;'
     "
   >
     <n-drawer-content :native-scrollbar="false">
@@ -145,7 +147,7 @@ watch(
   (newVal, oldVal) => {
     if (newVal === true) {
       // 处理tag栏目的那个全屏功能，需要结合查看layouts文件夹下面的tags文件
-      to.value = isFullscreen.value === true && fullStore.getPage === 'inner:true' ? '#app-main' : undefined
+      to.value = isFullscreen.value === true && fullStore.getPage === 'inner:true' ? '#body-main' : undefined
       active.value = true
     }
   }

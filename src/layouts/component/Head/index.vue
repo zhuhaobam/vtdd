@@ -1,7 +1,7 @@
 <template>
   <n-layout-header position="absolute" class="nav" bordered :style="style" :inverted="inverted">
     <Logo :show-name="screen !== 'xs' && screen !== 's' && !collapsed" />
-    <div flex items-center>
+    <div flex items-center :class="collapsed ? 'pl7' : ''">
       <!-- 折叠切换 -->
       <div v-if="screen !== 'xs' && screen !== 's'" flex items-center @click="collapsedToggle()">
         <n-tooltip placement="bottom">

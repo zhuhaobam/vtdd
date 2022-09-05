@@ -83,7 +83,6 @@ onDeactivated(() => {
 meta:
   breadcrumb: page.dashboard.workbench
   icon: i-ant-design:appstore-outlined
-  size: 16
   keepAlive: true
   sort: 1
   padding: 40px

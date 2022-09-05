@@ -7,30 +7,32 @@
       @before-leave="handleBeforeLeave"
       @after-enter="handleAfterEnter"
     >
-      <n-card content-style="padding:  0px;">
-        <div
-          id="app-main"
-          :style="
-            (fullPage === 'inner:true'
-              ? 'min-height: calc(100vh - ' +
-                heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 56 : 32) +
-                ');'
-              : fullPage === 'init'
-              ? 'min-height: calc(100vh - ' +
-                heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 170 : 146) +
-                ');'
-              : 'min-height: calc(100vh - ' +
-                heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 170 : 146) +
-                ');') +
-            'padding:' +
-            (route.meta?.padding ?? 0 + 'px')
-          "
-        >
-          <keep-alive :include="keepAliveRouteNames">
-            <component :is="Component" v-if="newSettingStore.headerSetting.mReload" :key="route.fullPath" />
-          </keep-alive>
-        </div>
-      </n-card>
+      <div id="body-main">
+        <n-card content-style="padding:  0px;">
+          <div
+            id="app-main"
+            :style="
+              (fullPage === 'inner:true'
+                ? 'min-height: calc(100vh - ' +
+                  heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 56 : 32) +
+                  ');'
+                : fullPage === 'init'
+                ? 'min-height: calc(100vh - ' +
+                  heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 170 : 146) +
+                  ');'
+                : 'min-height: calc(100vh - ' +
+                  heightComputed(route.meta, screen !== 'xs' && screen !== 's' ? 170 : 146) +
+                  ');') +
+              'padding:' +
+              (route.meta?.padding ?? 0 + 'px')
+            "
+          >
+            <keep-alive :include="keepAliveRouteNames">
+              <component :is="Component" v-if="newSettingStore.headerSetting.mReload" :key="route.fullPath" />
+            </keep-alive>
+          </div>
+        </n-card>
+      </div>
     </transition>
   </router-view>
   <n-back-top :visibility-height="300" />
