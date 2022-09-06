@@ -14,7 +14,7 @@
         距离电池充满需要：{{ calcChargingTime }}
       </span>
     </div>
-    <slider mt-50 />
+    <slider mt-6 />
   </div>
 </template>
 
@@ -50,12 +50,12 @@ const { battery, calcDischargingTime, calcChargingTime, batteryStatus } = toRefs
 
 <style lang="scss" scoped>
 .container {
-  position: absolute;
+  position: relative;
 
   .number {
     position: absolute;
     z-index: 10;
-    top: 20%;
+    top: 100px;
     width: 300px;
     color: #fff;
     font-size: 32px;

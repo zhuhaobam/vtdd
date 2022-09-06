@@ -8,6 +8,6 @@
 <route lang="yaml">
 meta:
   breadcrumb: page.dashboard.dashboard
-  sort: 2
+  sort: -102
   icon: i-ant-design:dashboard-filled
 </route>

@@ -1,6 +1,6 @@
 ---
 title: IOC容器
-breadcrumb: md.ioc
+breadcrumb: md.md
 noi18n: no
 icon: file-markdown-filled
 sort: 1

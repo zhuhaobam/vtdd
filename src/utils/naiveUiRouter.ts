@@ -72,6 +72,10 @@ export function keyLabelAdjustment(routes: RouteRecordRaw[], t: any): RouteRecor
   routes.sort(sortRoute)
   return filterHiddenRoutes(routes).map(vx => {
     const info = cloneDeep(vx)
+    // 这种路由传参默认为对应的params,但此处不需要
+    if (info.props === true) {
+      info.props = {}
+    }
     const result: RouteRecordRaw = {
       ...info,
       key: info.meta?.link ? info.meta?.link : info.name

@@ -22,7 +22,8 @@
           @close.stop="tagsStore.removeTag(tag.path)"
           @contextmenu.prevent="handleContextMenu($event, tag)"
         >
-          {{ $t(tag.breadcrumb ?? 'tag.default') }}
+          <span v-if="tag.noi18n === 'no'">{{ $t(tag.breadcrumb ?? 'tag.default') }}</span>
+          <span v-else>{{ tag.title ?? $t('tag.default') }}</span>
           <span v-if="tag.params && tag.params.did">({{ tag.params.did ?? '' }})</span>
           <template #icon>
             <n-icon v-if="tag.icon" :component="renderMenuIcon(tag.icon)" />
@@ -51,7 +52,7 @@ import { NIcon } from 'naive-ui'
 import { Refresh, ArrowBackOutline, Close, Expand, ArrowUp } from '@vicons/ionicons5'
 import { Component, ComputedRef } from 'vue'
 import { tagsType } from '@/types/tagsType'
-import { RouteLocationMatched } from 'vue-router'
+import { RouteLocationMatched, RouteMeta } from 'vue-router'
 const { t } = useI18n()
 
 type Props = {
@@ -65,11 +66,14 @@ const currentRoute = useRoute()
 onMounted(() => {
   const mmatched = currentRoute.matched
   const lastMatched: RouteLocationMatched = mmatched[mmatched.length - 1]
+  const meta: RouteMeta = lastMatched.meta
   const tag: tagsType = {
     path: lastMatched.path,
     params: currentRoute.params,
-    breadcrumb: lastMatched.meta.breadcrumb ?? '',
-    icon: lastMatched.meta.icon ?? ''
+    breadcrumb: meta?.breadcrumb ?? '',
+    noi18n: (meta?.noi18n ?? 'no') as string,
+    title: (meta?.title ?? '') as string,
+    icon: meta?.icon ?? ''
   }
   tagsStore.addTag(tag)
 })

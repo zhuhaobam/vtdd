@@ -2,11 +2,11 @@
   <n-layout position="absolute" :has-sider="screen !== 'xs' ? true : false" style="min-height: calc(100vh - 162px)">
     <n-layout content-style="padding: 0 24px;" :native-scrollbar="false">
       <slot />
-      <n-back-top :right="220" :visibility-height="300" />
+      <n-back-top :right="360" :visibility-height="300" />
     </n-layout>
     <n-layout-sider
       v-if="screen !== 'xs'"
-      width="180px"
+      width="300px"
       :content-style="'margin-top:' + (fullPage === 'inner:true' ? 8 : 18) + 'px;padding-right:20px;'"
       :native-scrollbar="false"
     >

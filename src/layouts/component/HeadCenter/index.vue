@@ -17,8 +17,8 @@
     ]"
     @select="avatarSelect"
   >
-    <div class="avatar">
-      <n-avatar round :src="getAssetsFile('cafe.png')"> Z </n-avatar>
+    <div flex items-center>
+      <n-avatar round :src="getAssetsFile('cafe.png')"></n-avatar>
       <n-ellipsis style="width: 50px">
         {{ $t('project.default') }}
       </n-ellipsis>
@@ -48,10 +48,3 @@ const avatarSelect = (key: number) => {
   }
 }
 </script>
-<style lang="scss" scoped>
-.avatar {
-  display: flex;
-  height: 64px;
-  align-items: center;
-}
-</style>

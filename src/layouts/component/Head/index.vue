@@ -31,8 +31,31 @@
       <HeadBreadcrumb v-if="screen !== 'xs' && screen !== 's'" flex items-center />
     </div>
     <div flex items-center>
+      <!--切换全屏-->
+      <div v-if="screen !== 'xs' && screen !== 's'" pr-5>
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon :size="16" flex @click="fullClick">
+              <i-ant-design-fullscreen-exit-outlined v-if="isFullscreen" />
+              <i-ant-design-fullscreen-outlined v-else />
+            </n-icon>
+          </template>
+          <span>{{ $t(isFullscreen ? 'project.exitscreen' : 'project.fullscreen') }}</span>
+        </n-tooltip>
+      </div>
+      <!--锁屏-->
+      <div pr-5 :class="screen === 'xs' || screen === 's' ? 'pb-2' : 'pb-1'">
+        <n-tooltip placement="bottom">
+          <template #trigger>
+            <n-icon :size="screen === 'xs' || screen === 's' ? 20 : 16" flex @click="lockClick()">
+              <div class="i-ant-design:lock-filled" />
+            </n-icon>
+          </template>
+          <span>{{ $t('project.lock-screen') }}</span>
+        </n-tooltip>
+      </div>
       <!--切换国际化-->
-      <div pr-5>
+      <div pr-2>
         <n-tooltip placement="bottom">
           <template #trigger>
             <n-icon :size="screen === 'xs' || screen === 's' ? 20 : 16" flex items-center @click="toggleLocales()">
@@ -42,30 +65,7 @@
           <span>{{ $t('project.toggle_langs') }}</span>
         </n-tooltip>
       </div>
-      <!--切换全屏-->
-      <div v-if="screen !== 'xs' && screen !== 's'" pr-5>
-        <n-tooltip placement="bottom">
-          <template #trigger>
-            <n-icon :size="screen === 'xs' || screen === 's' ? 30 : 16" flex @click="fullClick">
-              <i-ant-design-fullscreen-exit-outlined v-if="isFullscreen" />
-              <i-ant-design-fullscreen-outlined v-else />
-            </n-icon>
-          </template>
-          <span>{{ $t(isFullscreen ? 'project.exitscreen' : 'project.fullscreen') }}</span>
-        </n-tooltip>
-      </div>
-      <!--锁屏-->
-      <div v-if="screen !== 'xs' && screen !== 's'" pr-5>
-        <n-tooltip placement="bottom">
-          <template #trigger>
-            <n-icon :size="screen === 'xs' || screen === 's' ? 30 : 16" flex @click="lockClick()">
-              <div class="i-ant-design:lock-filled" />
-            </n-icon>
-          </template>
-          <span>{{ $t('project.lock-screen') }}</span>
-        </n-tooltip>
-      </div>
-      <div pr-5>
+      <div pr-2>
         <LightDark />
       </div>
       <HeadCenter />

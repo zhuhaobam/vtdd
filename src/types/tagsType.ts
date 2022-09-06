@@ -4,6 +4,8 @@ type tagsType = {
   path: string
   params: RouteParams
   breadcrumb: string
+  noi18n: string
+  title: string
   icon: string
 }
 type tgsactiveType = {

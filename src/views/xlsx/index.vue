@@ -57,7 +57,7 @@ interface Sssss {
   rows: Seller[]
 }
 const good = async () => {
-  const invoiceFile = await fetch('./invoice.xlsx').then(r => r.blob())
+  const invoiceFile = await fetch('./src/assets/invoice.xlsx').then(r => r.blob())
   const reader = new FileReader()
   reader.readAsArrayBuffer(invoiceFile)
   reader.addEventListener('loadend', async () => {

@@ -38,7 +38,7 @@ export default function createPages() {
       if (path === '/') {
         return {
           ...route,
-          redirect: '/drawing/drauu/list'
+          redirect: '/dashboard/analysis'
         }
       }
       return {

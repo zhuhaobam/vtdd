@@ -1,6 +1,11 @@
 <template>
   <transition enter-active-class="screen-locker-lock" leave-active-class="screen-locker-unlock">
-    <div v-if="props.open" class="screen-locker">
+    <div v-if="props.open" class="screen-locker" flex justify-evenly items-center flex-col>
+      <div class="local-time" :class="screen !== 'xs' && screen !== 's' ? 'absolute left-20 bottom-20' : ''">
+        <div class="time">{{ hour }}:{{ minute }}:{{ second }}</div>
+        <div class="date">{{ month }}月{{ day }}号，星期{{ week }}</div>
+        <div class="mg">{{ message }}</div>
+      </div>
       <!--充电-->
       <recharge
         :battery="battery"
@@ -8,11 +13,6 @@
         :calc-discharging-time="calcDischargingTime"
         :calc-charging-time="calcChargingTime"
       />
-      <div class="local-time">
-        <div class="time">{{ hour }}:{{ minute }}:{{ second }}</div>
-        <div class="date">{{ month }}月{{ day }}号，星期{{ week }}</div>
-        <div class="mg">{{ message }}</div>
-      </div>
     </div>
   </transition>
 </template>
@@ -20,6 +20,9 @@
 <script setup lang="ts">
 import { useTime } from '@hooks/useTime'
 import { useBattery } from '@hooks/useBattery'
+import { ComputedRef } from 'vue'
+// 屏幕大小
+const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provide-screen')
 const { month, day, hour, minute, second, week, message } = useTime()
 const { battery, batteryStatus, calcDischargingTime, calcChargingTime } = useBattery()
 const props = defineProps({
@@ -38,10 +41,6 @@ const props = defineProps({
   right: 0;
   bottom: 0;
   left: 0;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
   backdrop-filter: blur(10px);
   background: #000;
   box-shadow: 0 0 20px 5px #0000000f;
@@ -97,16 +96,13 @@ const props = defineProps({
 // -------
 
 .local-time {
-  position: absolute;
-  bottom: 60px;
-  left: 60px;
-
   .time {
-    font-size: 70px;
+    font-size: 50px;
   }
 
   .date {
-    font-size: 40px;
+    font-size: 25px;
+    text-align: center;
   }
 
   .mg {

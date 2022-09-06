@@ -283,6 +283,6 @@ onMounted(() => {
 meta:
   breadcrumb: page.music
   icon: i-carbon:music
-  sort: -20
+  sort: -98
   padding: 0px
 </route>

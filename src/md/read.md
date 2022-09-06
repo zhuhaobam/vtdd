@@ -1,9 +1,9 @@
 ---
 title: Markdown阅读
 breadcrumb: md.read
-noi18n: yes
+noi18n: no
 icon: i-ant-design:read-filled
-sort: -99
+sort: -100
 ---
 
  <RouterView />

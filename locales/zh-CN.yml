@@ -73,11 +73,6 @@ page:
   music: Howler.js音乐
   tool: Npm工具地址
 md:
-  spring: Spring框架
-  container: 容器
-  dependencies: 依赖
-  ioc: IOC容器
-  javaconfig: Java配置
   read: markdown阅读
   md: markdown
 

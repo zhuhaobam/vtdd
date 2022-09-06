@@ -101,7 +101,11 @@ router.afterEach((to, from, failure) => {
 })
 
 router.beforeResolve(async to => {
-  // console.log('解析守卫[App.vue]', 'to:' + to.fullPath)
+  // console.log('解析守卫[App.vue]', 'to:', to)
+  if (to.hash) {
+    // hash路径后面连接其他路径就会返回null
+    return to.hash.split('#')[1].indexOf('/') === -1
+  }
   // if (to.meta.requiresCamera) {
   //   try {
   //     await askForCameraPermission()

@@ -28,7 +28,7 @@ export function useTime() {
     second.value =
       (date.getSeconds() + '')?.padStart(2, '0') ||
       new Intl.NumberFormat(undefined, { minimumIntegerDigits: 2 }).format(date.getSeconds())
-    message.value = [8, 9, 10, 11, 2, 3, 4, 5, 6].includes(date.getHours()) ? '' : '你可能需要去休息一会了'
+    message.value = [8, 9, 10, 11, 13, 14, 15, 16, 17, 18].includes(date.getHours()) ? '' : '你可能需要去休息一会了'
   }
 
   updateTime()

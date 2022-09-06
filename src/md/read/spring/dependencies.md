@@ -1,8 +1,8 @@
 ---
 title: 依赖
-breadcrumb: md.dependencies
+breadcrumb: md.md
 noi18n: yes
-icon: container
+icon: file-markdown-filled
 sort: 4
 padding: 0
 ---

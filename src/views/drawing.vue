@@ -8,6 +8,6 @@
 <route lang="yaml">
 meta:
   breadcrumb: page.drawing.drawing
-  sort: -100
+  sort: -97
   icon: i-carbon:draw
 </route>

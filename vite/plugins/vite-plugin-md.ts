@@ -5,7 +5,6 @@ import meta from '@yankeeinlondon/meta-builder'
 import anchor from 'markdown-it-anchor'
 import toc from 'markdown-it-toc-done-right'
 const table = require('markdown-it-multimd-table')
-const katex = require('markdown-it-katex')
 const linkAttributes = require('markdown-it-link-attributes')
 import prism from 'markdown-it-prism'
 import { remove } from 'diacritics'
@@ -60,8 +59,6 @@ export default function createMD() {
       })
       // 表格
       md.use(table)
-      // 数学表达式
-      md.use(katex, { throwOnError: false, errorColor: ' #cc0000' })
     }
   })
 }

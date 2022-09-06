@@ -2,7 +2,14 @@
 <template>
   <div ref="slider" class="screen-slider">
     <div class="screen-locker-placeholder">{{ $t('project.sliding-unlocking') }}</div>
-    <div ref="sliderButton" class="screen-slider-button" @mousedown="onMousedown">
+    <div
+      ref="sliderButton"
+      class="screen-slider-button"
+      @mousedown="onMousedown"
+      @touchstart="touchstart"
+      @touchend="touchend"
+      @touchmove="touchmove"
+    >
       <n-icon v-if="isTrigger" size="25">
         <i-ant-design:unlock-filled />
       </n-icon>
@@ -43,6 +50,58 @@ watch(
     }
   }
 )
+
+function touchstart(e: TouchEvent) {
+  e.preventDefault()
+  const touchS = e.targetTouches[0]
+  const sliderDom = slider.value as HTMLElement
+  const sliderButtonDom = sliderButton.value as HTMLElement
+  distance = 0
+  maxDistance = 0
+  minDistance = 0
+  isTrigger.value = false
+  sliderButtonDom.style.transition = ''
+  startX = touchS.pageX
+  maxDistance = sliderDom.clientWidth - sliderButtonDom.clientWidth - 10
+}
+function touchmove(e: TouchEvent) {
+  const touchEnd = e.changedTouches[0]
+  distance = touchEnd.pageX - startX
+  if (isTrigger.value) {
+    distance = maxDistance
+  }
+  if (distance <= minDistance) {
+    distance = minDistance
+  }
+  if (distance >= maxDistance) {
+    distance = maxDistance
+    if (!isTrigger.value) {
+      isTrigger.value = true
+      setTimeout(() => {
+        emitLockOpen(false)
+      }, 500)
+    }
+  }
+  if (!props.open) {
+    const sliderButtonDom = sliderButton.value as HTMLElement
+    sliderButtonDom.style.transform = `translateX(${distance}px)`
+  }
+}
+
+function touchend(e: TouchEvent) {
+  if (!isTrigger.value) {
+    // 恢复原始状态
+    distance = 0
+    maxDistance = 0
+    minDistance = 0
+    isTrigger.value = false
+    if (!props.open) {
+      const sliderButtonDom = sliderButton.value as HTMLElement
+      sliderButtonDom.style.transition = 'all 0.4s'
+      sliderButtonDom.style.transform = `translateX(${distance}px)`
+    }
+  }
+}
 
 function onMousedown(e: MouseEvent) {
   const sliderDom = slider.value as HTMLElement

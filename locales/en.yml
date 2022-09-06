@@ -74,11 +74,6 @@ page:
   music: Howler.js music
   tool: Npm tool address
 md:
-  spring: Spring
-  container: Container
-  dependencies: Dependencies
-  ioc: IOC Container
-  javaconfig: Java Config
   read: MarkdownRead
   md: Markdown
 

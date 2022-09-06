@@ -24,7 +24,7 @@ import { keyLabelAdjustment, primaryAdjustment, filterHiddenRoutes } from '@/uti
 import { MenuGroupOption, MenuOption } from 'naive-ui'
 import { useTagsStore } from '@store/tags'
 import { hFunctionIcon } from '@/utils/hFunctionRender'
-import { RouteLocationMatched } from 'vue-router'
+import { RouteLocationMatched, RouteMeta } from 'vue-router'
 import { NIcon } from 'naive-ui'
 import { useNewSettingStore } from '@store/new-setting'
 import { tagsType } from '@/types/tagsType'
@@ -90,11 +90,14 @@ watch(
     const activeMenu: string = (currentRoute.meta?.activeMenu as string) || ''
     selectedKeys.value = activeMenu ? (activeMenu as string) : (currentRoute.name as string)
     const lastMatched: RouteLocationMatched = wmatched[wmatched.length - 1]
+    const meta: RouteMeta = lastMatched.meta
     const tag: tagsType = {
       path: lastMatched.path,
       params: currentRoute.params,
-      breadcrumb: lastMatched.meta.breadcrumb ?? '',
-      icon: lastMatched.meta.icon ?? ''
+      breadcrumb: meta.breadcrumb ?? '',
+      noi18n: (meta?.noi18n ?? 'no') as string,
+      title: (meta?.title ?? '') as string,
+      icon: meta.icon ?? ''
     }
     tagsStore.addTag(tag)
   }
