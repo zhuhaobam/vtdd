@@ -53,6 +53,6 @@ const screen = inject<ComputedRef<'s' | 'xs' | 'm' | 'l' | 'xl' | '2xl'>>('provi
 <route lang="yaml">
 meta:
   breadcrumb: page.tool
-  icon: bonfire-sharp
+  icon: i-ant-design:read-filled
   sort: -15
 </route>

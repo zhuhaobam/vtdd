@@ -21,6 +21,7 @@
 <script setup lang="ts" name="xlsx">
 import { Workbook } from 'exceljs'
 import { Importer } from 'xlsx-import/lib/Importer'
+import { getAssetsDirFile } from '@/plugins/assets-kit'
 const getInvoiceConfig = () => ({
   seller: {
     worksheet: 'Invoice',
@@ -57,7 +58,7 @@ interface Sssss {
   rows: Seller[]
 }
 const good = async () => {
-  const invoiceFile = await fetch('./src/assets/invoice.xlsx').then(r => r.blob())
+  const invoiceFile = await fetch(getAssetsDirFile('xlsx/invoice.xlsx')).then(r => r.blob())
   const reader = new FileReader()
   reader.readAsArrayBuffer(invoiceFile)
   reader.addEventListener('loadend', async () => {

@@ -64,7 +64,8 @@ page:
     twopage: 星港二
   login: 登录
   color: 颜色
-  xlsx: Excel
+  xlsx: Excel文档
+  form: 表单
   virtualScroller: 虚拟滚动条
   link: naiveui.com
   me: zhuhaobam.github.io

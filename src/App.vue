@@ -10,11 +10,13 @@
     preflight-style-disabled
   >
     <n-loading-bar-provider>
-      <StarportCarrier>
-        <music-global>
-          <router-view />
-        </music-global>
-      </StarportCarrier>
+      <n-message-provider>
+        <StarportCarrier>
+          <music-global>
+            <router-view />
+          </music-global>
+        </StarportCarrier>
+      </n-message-provider>
     </n-loading-bar-provider>
     <n-global-style />
   </n-config-provider>

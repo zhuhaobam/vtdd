@@ -2,7 +2,7 @@ import { getAssetsDirFile } from '@/plugins/assets-kit'
 import { musicMenuType, musicLyricsType, musicSrcType } from '@/types/musicType'
 /**
  *
- * @returns 歌曲列表
+ * @returns 歌曲信息列表
  */
 const musicMenuListData = (): musicMenuType[] => {
   return [
@@ -56,20 +56,20 @@ const musicLyricListData = (): musicLyricsType[] => {
 
 /**
  *
- * @returns 歌词列表
+ * @returns 歌曲列表
  */
 const musicSrcListData = (): musicSrcType[] => {
   return [
     {
       id: '1901371647',
       name: ['孤勇者'],
-      src: [getAssetsDirFile('along.mp3')],
+      src: [getAssetsDirFile('mp3/along.mp3')],
       format: ['mp3']
     },
     {
       id: '333750',
       name: ['好运来'],
-      src: [getAssetsDirFile('luckly.mp3')],
+      src: [getAssetsDirFile('mp3/luckly.mp3')],
       format: ['mp3']
     }
   ]
