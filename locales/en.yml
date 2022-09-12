@@ -66,10 +66,13 @@ page:
   color: color
   xlsx: Excel
   form: form
+  ui: ui
+  cal: cal
   virtualScroller: virtualScroller
   md: markdown
-  link: naiveui.com
   me: zhuhaobam.github.io
+  github: github.com/zhuhaobam/vtdd
+  gitee: gitee.com/zhline/vtdd
   article: article
   not-found: not-found
   music: Howler.js music

@@ -66,9 +66,12 @@ page:
   color: 颜色
   xlsx: Excel文档
   form: 表单
+  ui: ui
+  cal: 日历
   virtualScroller: 虚拟滚动条
-  link: naiveui.com
   me: zhuhaobam.github.io
+  github: github.com/zhuhaobam/vtdd
+  gitee: gitee.com/zhline/vtdd
   article: 文章
   not-found: 没有找到
   music: Howler.js音乐

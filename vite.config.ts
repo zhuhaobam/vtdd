@@ -30,7 +30,7 @@ export default defineConfig(({ mode, command }) => {
     ],
     // 选项可以选择需要或不需要进行预编译的依赖的名称，Vite 则会根据该选项来确定是否对该依赖进行预编译。
     optimizeDeps: {
-      include: ['vue', 'vue-router', 'pinia', 'axios', '@vueuse/core', 'drauu']
+      include: ['vue', 'vue-router', 'pinia', 'axios', '@vueuse/core', 'drauu', 'ajv-i18n']
     },
     resolve: {
       alias: [
